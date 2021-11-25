@@ -3,6 +3,10 @@
     {{question}}
   </div>
   <Bars v-bind:data="data"/>
+  This is the result of your poll
+  <br>
+  You have succeded
+  {{data}}
 </template>
 
 <script>
