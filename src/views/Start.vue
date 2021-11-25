@@ -1,24 +1,26 @@
 <template>
   <body>
-    <img src=https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg alt="id">
+    <!-- <img src=https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg alt="id">
+   -->
     <div id="nav">
       <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
     </div>
      
-    <div class="wrapper">
-    <button> kanop 1</button>
-     <button> kanop 2</button>
-     </div>
+     <div class="wrapper"> 
+
       <div id="createPoll">
           <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
       </div>
-      <h6 id="titleText"> QUIZCUZ</h6>
+      <div id="titleBox">
+      <h6> QUIZCUZ</h6>
+      </div>
       <div id="partPoll">
       <label>
         Write poll id: 
         <input type="text" v-model="id">
       </label>
       <router-link v-bind:to="'/poll/'+id" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
+      </div>
       </div>
     
   </body>
@@ -55,38 +57,44 @@ export default {
 }
 </script>
 <style>
-body{
+template{
   margin: 0px;
 }
-.wrapper {
+body{
+  background-image: url(https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center;
+  background-attachment: fixed;
   margin: 0px;
-  top: 50px;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding-left: 5%;
-    display: grid;
-    grid-gap: 29%;
-    grid-template-columns: 33% 33%;
+  padding: 0px;
+  border: 1px solid rgb(0, 0, 0);
+  height: 1320px;
+}
+.wrapper {
+   margin: 0px;
+   width: 95%;
+   height: 95%;
+   padding-left: 5%;
+   display: grid;
+   grid-gap: 5px;
+   grid-template-columns: 33% 33% 33%;
+   align-items: center;
   }
   .wrapper button{
     height: 5%;
     width: 80%;
   }
 
-body > img {
-  width: 100%;
-  height:auto ;
-  position: relative;
-}
 #createPoll{
    border: 1px solid rgb(0, 0, 0);
-   width: 18%;
-   height: 10%;
-   /*position: absolute;/*/
-   top: 55%;
-   left: 15%;
+   width: 50%;
+   height: 20%;
    background-color: wheat;
+   grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 #nav button{
   width: 150px;
@@ -105,20 +113,24 @@ body > img {
 h6{
   font-size: 70px;
 }
-#titleText{
-  position: absolute;
-  top: 600px;
-  text-align: center;
+#titleBox{
+  grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 #partPoll{
+  grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
    border: 1px solid rgb(0, 0, 0);
-   width: 18%;
-   height: 10%;
-   position: absolute;
-   top: 55%;
-   left: 67%;
+   width: 50%;
+   height: 20%;
+   /*position: absolute;/*/
    background-color: wheat;
-   text-align: center;
+   align-content: center;
+
 }
 
 </style>
