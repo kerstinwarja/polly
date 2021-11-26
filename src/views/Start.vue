@@ -1,34 +1,35 @@
 <template>
   <body>
-        <header>
-            <br>
-            Header
-            <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-        </header>
-        <div id="boxLeft">
-            <div id="createPoll">
-                <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
+    <div id="nav">
+      <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+    </div>
+    <header>
+      <h1>Quizcus</h1>
+    </header>
+     <div class="wrapper">
+        <!--Create Poll button-->
+        <router-link v-bind:to="'/create/'+lang">
+            <button>{{uiLabels.createPoll}}</button>
+        </router-link>
+
+        <!--Participate in Poll button-->
+        <!--Skapa en ny vy flr sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
+        <router-link v-bind:to="'/polllibrary'">
+            <button>{{uiLabels.participatePoll}}</button>
+        </router-link>
+
+        <!-- ORGINALKOD TA INTE BORT FÖR FAN div
+          <div id="partPoll">
+            <label>
+              Write poll id:
+              <input type="text" v-model="id">
+            </label>
+            <router-link v-bind:to="'/poll/+id'" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
             </div>
+          </div-->
+
         </div>
-        <div id="boxMid">
-            <div id="titleBox">
-                <h6> QUIZCUZ</h6>
-            </div>
-        </div>
-        <div id="boxRight">
-            <div id="partPoll">
-                <label>
-                  Write poll id: 
-                  <input type="text" v-model="id">
-                </label>
-                <router-link v-bind:to="'/poll/'+id" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
-                </div>
-        </div>
-        <footer>
-            Footers
-        </footer>
-         
-    </body>
+  </body>
 </template>
 
 
@@ -65,65 +66,59 @@ export default {
 template{
   margin: 0px;
 }
-span{
-}
 body{
+  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: bottom;
+  background-attachment: fixed;
+  margin: 0px;
+  padding: 0px;
+}
+
+button{
+    border-radius: 8px;
+}
+
+.wrapper {
+   margin: 0px;
    width: 95%;
-   height: 100%;
-   padding-left: 5%;
-   background-image: url(https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg);
-   background-repeat: no-repeat;
-   background-size: cover;
-   overflow: hidden;
+   height: 95%;
+   display: grid;
+   grid-gap: 5px;
+   grid-template-columns: 50% 50%;
+   align-items: center;
+  }
+
+.wrapper button{
+  width: 50%;
+  height: 50px;
+  background-color: wheat;
+  text-transform: uppercase;
 }
-header{
-   width: 100%;
-   height: 10%;
-   
+
+button:hover {
+  cursor: pointer;
 }
-#boxLeft{
-   width: 25%;
-   height: 80%;
-   float: left;
-   margin-top: 30%;
+
+
+#nav button{
+  width: 150px;
+  height: 50px;
+  top: 7%;
+  left: 7%;
+  background-color: wheat;
+  position: absolute;
 }
-#boxMid{
-   width: 45%;
-   height: 80%;
-   float: left;
+
+header {
+  font-size: 50pt;
+  text-align: center;
+  padding-top: 50px;
+  margin: 0;
+  color: white;
+  text-shadow: 3px 3px #990000;
 }
-#boxRight{
-   width: 25%;
-   height: 80%;
-   float: left;
-   margin-top: 30%;
-}
-footer{
-   bottom: 10%;
-   height: 10%;
-   width: 100%;
-   clear: left;
-}
-#titleBox{
-   color: hotpink;
-   text-align: center;
-}
-h6{
-   font-size: 70px;
-   
-   text-shadow: -8px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-#partPoll{
-   border: 1px solid rgb(0, 0, 0);
-   width: 50%;
-   height: 20%;
-   background-color: wheat;
-   float: right;
-}
-   #createPoll{
-      border: 1px solid rgb(0, 0, 0);
-      width: 50%;
-      height: 20%;
-      background-color: wheat;
-   }
-      </style>
+
+
+</style>
