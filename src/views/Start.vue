@@ -7,12 +7,7 @@
         </header>
         <div id="boxLeft">
             <div id="createPoll">
-                <button>
-    <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
-    </button>
-
-
-
+                <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
             </div>
         </div>
         <div id="boxMid">
@@ -26,7 +21,7 @@
                   Write poll id: 
                   <input type="text" v-model="id">
                 </label>
-                <router-link v-bind:to="'/poll/'+id"><br>{{uiLabels.participatePoll}}</router-link>
+                <router-link v-bind:to="'/poll/'+id" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
                 </div>
         </div>
         <footer>
