@@ -8,7 +8,7 @@
      
      <div class="wrapper"> 
 
-      <div id="createPoll">
+      <div id="createPoll"> 
           <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
       </div>
       <div id="titleBox">
@@ -52,6 +52,9 @@ export default {
       else
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
+    },
+    create: function(){
+      
     }
   }
 }
@@ -81,10 +84,7 @@ body{
    grid-template-columns: 33% 33% 33%;
    align-items: center;
   }
-  .wrapper button{
-    height: 5%;
-    width: 80%;
-  }
+ 
 
 #createPoll{
    border: 1px solid rgb(0, 0, 0);
