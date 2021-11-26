@@ -1,29 +1,39 @@
 <template>
   <body>
-    <!-- <img src=https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg alt="id">
-   -->
-    <div id="nav">
-      <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    </div>
-     
-     <div class="wrapper"> 
+        <header>
+            <br>
+            Header
+            <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+        </header>
+        <div id="boxLeft">
+            <div id="createPoll">
+                <button>
+    <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
+    </button>
 
-      <div id="createPoll">
-          <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
-      </div>
-      <div id="titleBox">
-      <h6> QUIZCUZ</h6>
-      </div>
-      <div id="partPoll">
-      <label>
-        Write poll id: 
-        <input type="text" v-model="id">
-      </label>
-      <router-link v-bind:to="'/poll/'+id" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
-      </div>
-      </div>
-    
-  </body>
+
+
+            </div>
+        </div>
+        <div id="boxMid">
+            <div id="titleBox">
+                <h6> QUIZCUZ</h6>
+            </div>
+        </div>
+        <div id="boxRight">
+            <div id="partPoll">
+                <label>
+                  Write poll id: 
+                  <input type="text" v-model="id">
+                </label>
+                <router-link v-bind:to="'/poll/'+id"><br>{{uiLabels.participatePoll}}</router-link>
+                </div>
+        </div>
+        <footer>
+            Footers
+        </footer>
+         
+    </body>
 </template>
 
 
@@ -60,77 +70,65 @@ export default {
 template{
   margin: 0px;
 }
+span{
+}
 body{
-  background-image: url(https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg);
-  background-repeat: no-repeat;
-  background-size:cover;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0px;
-  padding: 0px;
-  border: 1px solid rgb(0, 0, 0);
-  height: 1320px;
-}
-.wrapper {
-   margin: 0px;
    width: 95%;
-   height: 95%;
+   height: 100%;
    padding-left: 5%;
-   display: grid;
-   grid-gap: 5px;
-   grid-template-columns: 33% 33% 33%;
-   align-items: center;
-  }
-  .wrapper button{
-    height: 5%;
-    width: 80%;
-  }
-
-#createPoll{
-   border: 1px solid rgb(0, 0, 0);
-   width: 50%;
-   height: 20%;
-   background-color: wheat;
-   grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
+   background-image: url(https://ae01.alicdn.com/kf/H4f714299b1b8412f8e1548736541f7afd/7x5FT-Retro-Vintage-Carnival-Circus-Spotlight-Circo-Stage-Custom-Photo-Studio-Backdrop-Background-Vinyl-220cm-X.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   overflow: hidden;
 }
-#nav button{
-  width: 150px;
-  height: 50px;
-  top: 7%;
-  left: 7%;
-  background-color: wheat;
-  position: absolute;
+header{
+   width: 100%;
+   height: 10%;
+   
 }
-  
-/*#createPoll:hover{
-   box-shadow: 14px 14px 9px black;
-   transform : scale(1.06, 1.06);
-   transition: all 0.2s ease-in-out;
-}*/
-h6{
-  font-size: 70px;
+#boxLeft{
+   width: 25%;
+   height: 80%;
+   float: left;
+   margin-top: 30%;
+}
+#boxMid{
+   width: 45%;
+   height: 80%;
+   float: left;
+}
+#boxRight{
+   width: 25%;
+   height: 80%;
+   float: left;
+   margin-top: 30%;
+}
+footer{
+   bottom: 10%;
+   height: 10%;
+   width: 100%;
+   clear: left;
 }
 #titleBox{
-  grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
+   color: hotpink;
+   text-align: center;
+}
+h6{
+   font-size: 70px;
+   
+   text-shadow: -8px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 #partPoll{
-  grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
    border: 1px solid rgb(0, 0, 0);
    width: 50%;
    height: 20%;
-   /*position: absolute;/*/
    background-color: wheat;
-   align-content: center;
-
+   float: right;
 }
-
-</style>
+   #createPoll{
+      border: 1px solid rgb(0, 0, 0);
+      width: 50%;
+      height: 20%;
+      background-color: wheat;
+   }
+      </style>
