@@ -1,0 +1,5 @@
+<template>
+  <div>
+    {{This is where we keep out PollLibrary}}
+  </div>
+</template>
