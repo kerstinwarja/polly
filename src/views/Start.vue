@@ -8,17 +8,20 @@
     </header>
      <div class="wrapper">
         <!--Create Poll button-->
-        <router-link v-bind:to="'/create/'+lang">
+        <router-link v-bind:to="'/initialize/'+lang">
             <button>{{uiLabels.createPoll}}</button>
         </router-link>
 
         <!--Participate in Poll button-->
-        <!--Skapa en ny vy flr sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
+        <!--Skapa en ny vy för sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
         <router-link v-bind:to="'/polllibrary'">
             <button>{{uiLabels.participatePoll}}</button>
         </router-link>
 
-        <!-- ORGINALKOD TA INTE BORT FÖR FAN div
+        <!-- ORGINALKOD TA INTE BORT FÖR SNÄLLA div
+        <router-link v-bind:to="'/create/'+lang">
+            <button>{{uiLabels.createPoll}}</button>
+        </router-link>
           <div id="partPoll">
             <label>
               Write poll id:
