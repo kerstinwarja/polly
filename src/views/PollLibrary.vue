@@ -11,12 +11,9 @@
   </h2>
 
 
-
-
     <div id="partPoll">
-
       <label>
-        Write poll id: <br>
+        Insert poll ID: <br>
         <input type="text" v-model="id">
       </label>
       <div class="buttonLink">
@@ -26,8 +23,6 @@
       </router-link>
     </div>
     </div>
-
-
 
 
 </template>
@@ -51,10 +46,10 @@ export default {
 #partPoll {
   width: 30%;
   display: grid;
-  border: #990000 solid;
+  border: navy solid;
   background-color: wheat;
   color: navy;
-  text-shadow: 1px 1px #990000;
+  text-shadow: 2px 2px white;
   margin-left: 35%;
   font-size: 25pt;
 }
@@ -69,6 +64,8 @@ export default {
   background-color: #ffd11a;
   text-transform: uppercase;
   font-size: 13pt;
+  color: navy;
+  text-shadow: 1px 1px white;
 }
 
 #partPoll input {
@@ -82,15 +79,10 @@ export default {
 }
 
 
-
-#inside {
-
-}
-
 .pollLabHeader {
   font-size: 30pt;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 5%;
   margin: 0;
   color: white;
   text-shadow: 3px 3px #990000;
@@ -101,7 +93,8 @@ h2 {
   margin: 5%;
   text-align: center;
   color: white;
-  text-shadow: 1px 1px #990000;
+  text-shadow: 2px 2px #990000;
+  font-size: 25pt;
 
 }
 
