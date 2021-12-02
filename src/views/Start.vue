@@ -99,8 +99,11 @@ button{
 .wrapper button{
   width: 50%;
   height: 50px;
-  background-color: wheat;
+  background-color: #fbf1e0;
   text-transform: uppercase;
+  font-size: 22pt;
+  color: navy;
+  border: 2px navy solid;
 }
 
 button:hover {
@@ -109,12 +112,16 @@ button:hover {
 
 
 #nav button{
-  width: 150px;
-  height: 50px;
+  width: 130px;
+  height: 40px;
   top: 7%;
   left: 7%;
-  background-color: wheat;
+  background-color: #fbf1e0;
   position: absolute;
+  font-size: 9pt;
+  color: navy;
+  border: 2px navy solid;
+  text-transform: uppercase;
 }
 
 header {
