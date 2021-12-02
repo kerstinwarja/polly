@@ -13,10 +13,16 @@
         <!--button v-on:click="createPoll">
           Create poll
         </button-->
-        <button type="submit">
-          <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
-          <span>Import music</span>
-        </button>
+        <div class="wrap3">
+          <button type="submit">
+            <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
+            <span>Import picture</span>
+          </button>
+          <button type="submit">
+            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
+            <span>Import music</span>
+          </button>
+        </div>
       </div>
     </div>
     <router-link v-bind:to="'/create/'+lang">
@@ -81,19 +87,6 @@ body textarea{
   border: 2px solid;
 }
 
-.wrap2 button{
-  width: 50%;
-  background-color: wheat;
-  text-transform: uppercase;
-  text-align:center;
-  align-items: middle;
-}
-.wrap2 span{
-
-  text-align: center;
-  line-height: 1em;
-}
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
@@ -126,10 +119,21 @@ h3{
    align-items: center;
   }
 
-/*#guide{
-  display:inline-block;
-  background-color: Wheat;
-  padding: 0px 10px 0px;
-  border: 2px solid;
-}*/
+.wrap3 {
+   margin: 0px;
+   padding: 5% 0% 5% 8%;
+   grid-gap: 4%;
+   width: 80%;
+   display: grid;
+   grid-template-columns: 50% 50%;
+   align-items: center;
+  }
+
+  .wrap3 button{
+    background-color: wheat;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+    font-size:80%;
+  }
+
 </style>
