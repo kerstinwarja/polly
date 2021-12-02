@@ -4,19 +4,34 @@
       <h1>It's time to create your quiz!</h1>
     </header>
     <div class="wrap2">
-      <div id="preview">Preview</div>
+      <div id="preview">
+        <div id="previewTitle">
+        <p id="as">Preview</p>
+        </div>
+        <div id="previewDesc">
+          <p id="pdes">Preview desc</p>
+        </div>
+        <div id="previewPic">
+      </div>
+      </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
-        <textarea type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
+        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDes" placeholder="Add a short description of your quiz..."></textarea>
         <!--button v-on:click="createPoll">
           Create poll
         </button-->
-        <button type="submit">
-          <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
-          <span>Import music</span>
-        </button>
+        <div class="wrap3">
+          <button type="submit" v-on:click="PicChoose()">
+            <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
+            <span>Import picture</span>
+          </button>
+          <button type="submit">
+            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
+            <span>Import music</span>
+          </button>
+        </div>
       </div>
     </div>
     <router-link v-bind:to="'/create/'+lang">
@@ -56,8 +71,21 @@ export default {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
+    PicChoose(){
+      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+    if (person != null || person != "") {
+        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+    }
+    //THis is the code fro updating title and description
+    var c1 = document.getElementById('quizTitle').value;
+    var d1 = document.getElementById('as');
+    d1.innerHTML = c1;
+    var c2 = document.getElementById('desIptBox').value;
+    var d2 = document.getElementById('pdes');
+    d2.innerHTML = c2;
   }
-}
+    },
+  }
 </script>
 
 <style>
@@ -81,19 +109,6 @@ body textarea{
   border: 2px solid;
 }
 
-.wrap2 button{
-  width: 50%;
-  background-color: wheat;
-  text-transform: uppercase;
-  text-align:center;
-  align-items: middle;
-}
-.wrap2 span{
-
-  text-align: center;
-  line-height: 1em;
-}
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
@@ -105,6 +120,25 @@ h3{
   background-color:Black;
   color:Grey;
   height: 100%;
+}
+#previewTitle{
+  font-size: 25px;
+  color: aliceblue;
+  height: 15%;
+}
+#previewDesc{
+  width: 40%;
+  height: 70%;
+  float: left;
+  color: aliceblue;
+  line-break: auto;
+}
+#previewPic{
+  width: 50%;
+  height: 70%;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 #desIptBox{
@@ -126,10 +160,21 @@ h3{
    align-items: center;
   }
 
-/*#guide{
-  display:inline-block;
-  background-color: Wheat;
-  padding: 0px 10px 0px;
-  border: 2px solid;
-}*/
+.wrap3 {
+   margin: 0px;
+   padding: 5% 0% 5% 8%;
+   grid-gap: 4%;
+   width: 80%;
+   display: grid;
+   grid-template-columns: 50% 50%;
+   align-items: center;
+  }
+
+  .wrap3 button{
+    background-color: wheat;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+    font-size:80%;
+  }
+
 </style>
