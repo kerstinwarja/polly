@@ -17,8 +17,8 @@
         <input type="text" v-model="id">
       </label>
       <div class="buttonLink">
-      <router-link v-bind:to="'/poll/+id'" tag="button"><br>
-        <!--{{uiLabels.participatePoll}}-->
+      <router-link v-bind:to="/poll/+id" tag="button"><br>
+        {{uiLabels.participatePoll}}
         <button> Participate in poll!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
       </router-link>
     </div>
@@ -51,7 +51,8 @@ export default {
   color: navy;
   text-shadow: 2px 2px white;
   margin-left: 35%;
-  font-size: 25pt;
+  font-size: 22pt;
+  text-transform: uppercase;
 }
 #partPoll label {
   padding-top: 10%;
@@ -61,7 +62,7 @@ export default {
 #partPoll button{
   width: 60%;
   height: 50%;
-  background-color: #ffd11a;
+  background-color: #ffcc00;
   text-transform: uppercase;
   font-size: 13pt;
   color: navy;
@@ -72,6 +73,9 @@ export default {
   height: 50%;
   width: 50%;
   font-size: 20pt;
+  background-color: #fbf1e0;
+  color: navy;
+  border: 2px navy solid;
 }
 
 .buttonLink {
