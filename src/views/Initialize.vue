@@ -124,12 +124,14 @@ h3{
 #previewTitle{
   font-size: 25px;
   color: aliceblue;
+  height: 15%;
 }
 #previewDesc{
   width: 40%;
   height: 70%;
   float: left;
   color: aliceblue;
+  line-break: auto;
 }
 #previewPic{
   width: 50%;
