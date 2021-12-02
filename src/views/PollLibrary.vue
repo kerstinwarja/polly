@@ -1,31 +1,104 @@
 <template>
-  <body>
-   <div id="partPoll">
-            <label>
-              Write poll id:
-              <input type="text" v-model="id">
-            </label>
-            <router-link v-bind:to="'/poll/+id'" tag="button"><br>{{uiLabels.participatePoll}}hej</router-link>
-            </div>
-  </body>
+
+  <header class="pollLabHeader">
+    <h1>Participate in poll</h1>
+  </header>
+
+
+  <h2>
+    On this page you can participate in a poll with your friends. <br>
+    Insert your group's shared poll ID to participate in the poll.
+  </h2>
+
+
+
+
+    <div id="partPoll">
+
+      <label>
+        Write poll id: <br>
+        <input type="text" v-model="id">
+      </label>
+      <div class="buttonLink">
+      <router-link v-bind:to="'/poll/+id'" tag="button"><br>
+        <!--{{uiLabels.participatePoll}}-->
+        <button> Participate in poll!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
+      </router-link>
+    </div>
+    </div>
+
+
+
+
 </template>
+
 <script>
-  export default {
-    name: 'PollLibrary',
-    data: function () {
-      return {
-        uiLabels:{},
-        id: "",
-        lang: "en"
-      }
+export default {
+  name: 'Start',
+  data: function () {
+    return {
+      uiLabels: {},
+      id: "",
+      lang: "en"
     }
-  }
+  },
+}
+
 </script>
+
 <style>
 
-  #partPoll{
-    background-color: wheat;
-    width: 30%
-  }
+#partPoll {
+  width: 30%;
+  display: grid;
+  border: #990000 solid;
+  background-color: wheat;
+  color: navy;
+  text-shadow: 1px 1px #990000;
+  margin-left: 35%;
+  font-size: 25pt;
+}
+#partPoll label {
+  padding-top: 10%;
+
+}
+
+#partPoll button{
+  width: 60%;
+  height: 50%;
+  background-color: #ffd11a;
+  text-transform: uppercase;
+  font-size: 13pt;
+}
+
+#partPoll input {
+  height: 50%;
+  width: 50%;
+  font-size: 20pt;
+}
+
+.buttonLink {
+  padding-bottom: 15%;
+}
+
+
+
+.pollLabHeader {
+  font-size: 30pt;
+  text-align: center;
+  padding-top: 5%;
+  margin: 0;
+  color: white;
+  text-shadow: 3px 3px #990000;
+
+}
+
+h2 {
+  margin: 5%;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px #990000;
+
+}
 
 </style>
