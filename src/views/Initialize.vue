@@ -9,7 +9,7 @@
         <p id="as">Preview</p>
         </div>
         <div id="previewDesc">
-          <p id="pdes">Preview desc</p>
+          <span id="pdes" style="background-color: black">Preview desc</span>
         </div>
         <div id="previewPic">
       </div>
@@ -32,6 +32,9 @@
             <span>Import music</span>
           </button>
         </div>
+        <button type="submit" id="updatePre" v-on:click="updatePreview()">
+          Update preview
+        </button>
       </div>
     </div>
     <router-link v-bind:to="'/create/'+lang">
@@ -75,16 +78,20 @@ export default {
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
     if (person != null || person != "") {
         document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+        document.getElementById("previewPic").style.visibility= "hidden";
     }
-    //THis is the code fro updating title and description
-    var c1 = document.getElementById('quizTitle').value;
-    var d1 = document.getElementById('as');
-    d1.innerHTML = c1;
-    var c2 = document.getElementById('desIptBox').value;
-    var d2 = document.getElementById('pdes');
-    d2.innerHTML = c2;
-  }
-    },
+  },
+    updatePreview(){
+      //THis is the code fro updating title and description
+      var c1 = document.getElementById('quizTitle').value;
+      var d1 = document.getElementById('as');
+      d1.innerHTML = c1;
+      var c2 = document.getElementById('desIptBox').value;
+      var d2 = document.getElementById('pdes');
+      d2.innerHTML = c2;
+      document.getElementById("previewPic").style.visibility= "visible";
+  },
+    }
   }
 </script>
 
@@ -117,20 +124,32 @@ h3{
 }
 
 #preview{
-  background-color:Black;
-  color:Grey;
+  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
+  background-size: cover;
+  max-height: 100%;
+  background-position: bottom;
+  color: Grey;
   height: 100%;
+  border: 5px black solid;
 }
 #previewTitle{
-  font-size: 25px;
-  color: aliceblue;
+  font-size: 30px;
+  text-shadow: 3px 3px navy;
+  color: white;
   height: 15%;
+  line-break: auto;
+  max-height: 15%;
 }
+#as{
+  margin: 10px 0px 0px;
+}
+
 #previewDesc{
   width: 40%;
   height: 70%;
   float: left;
   color: aliceblue;
+  font-family: "Times New Roman";
   line-break: auto;
 }
 #previewPic{
@@ -149,9 +168,15 @@ h3{
   color:Navy;
 }
 
+#updatePre{
+  width: 84%;
+  background-color: rgb(135, 175, 111);
+  margin-bottom: 4%;
+}
+
 .wrap2 {
    margin: 0px;
-   padding-left:4%;
+   padding-left: 4%;
    width: 95%;
    height: 95%;
    display: grid;
@@ -170,11 +195,11 @@ h3{
    align-items: center;
   }
 
-  .wrap3 button{
-    background-color: wheat;
-    text-transform: uppercase;
-    padding-bottom: 1%;
-    font-size:80%;
-  }
+.wrap2 button{
+  background-color: wheat;
+  text-transform: uppercase;
+  padding-bottom: 1%;
+  font-size:80%;
+}
 
 </style>
