@@ -19,9 +19,6 @@
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDes" placeholder="Add a short description of your quiz..."></textarea>
-        <!--button v-on:click="createPoll">
-          Create poll
-        </button-->
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
@@ -31,6 +28,8 @@
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
           </button>
+          <div id="pointerLink">
+          </div>
         </div>
       </div>
     </div>
@@ -98,7 +97,14 @@ header {
   background-color: wheat;
   width: 100%;
 }
+#pointerLink{
+  background-image:url("./FingerRight.png") repeat 0 0;
+  visibility:visible;
+  width: 100px;
+  height: 80px;
+  border: 1px solid black;
 
+}
 body textarea{
   width: 80%;
   background-color: wheat;
@@ -124,6 +130,11 @@ h3{
 #previewTitle{
   font-size: 25px;
   color: aliceblue;
+<<<<<<< Updated upstream
+=======
+  height: 15%;
+  line-break: auto;
+>>>>>>> Stashed changes
 }
 #previewDesc{
   width: 40%;
