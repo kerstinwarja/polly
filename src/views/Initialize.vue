@@ -13,6 +13,8 @@
         </div>
         <div id="previewPic">
       </div>
+      <div id="audio">
+      </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
@@ -27,11 +29,19 @@
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
-          <button type="submit">
+           <!-- v-on:click="MusicChoose()" -->
+          <select type="submit" v-model="music" id="music">
+            <option disabled value=""> select music </option>
+                   <option>Brass</option>
+                   <option>Ragtime</option>
+                   <option>Strings</option>
+                   <option>Techno</option>
+                   <option>Trap</option>
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
-          </button>
+          </select>
         </div>
+        
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
         </button>
@@ -62,7 +72,8 @@ export default {
       pollId: "",
       data: {},
       uiLabels: {},
-      pollDes: ""
+      pollDes: "",
+      music: ""
     }
   },
   created: function () {
@@ -82,14 +93,30 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
     PicChoose(){
-      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
-    if (person != null || person != "") {
-        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+      let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+    if (pict != null || pict != "") {
+        document.getElementById("previewPic").style.backgroundImage = "url(" + pict+")";
         document.getElementById("previewPic").style.visibility= "hidden";
     }
   },
+  MusicChoose(){
+    var t1 = " type="+ '"audio/ogg"'+">";
+    var t2 = " type="+ '"audio/mpeg"'+">";
+    var song = "circus"+this.music+".mp3";
+    var songPath = "../music/"
+    var songsongPath = songPath + song;
+    var s1 = "<p>"+ songsongPath +"</p>" +" <audio controls autoplay>"+"<source src=\""+songsongPath +"\"" + t2 +' <source src="'+songsongPath +"\"" +  t1 + " Your browser does not support the audio element. </audio>";
+    console.log(s1);
+    document.getElementById('audio').innerHTML = s1;
+    var audio = new Audio(require(songsongPath))
+    audio.play();
+}
+  
+  },
+  
     updatePreview(){
       //THis is the code fro updating title and description
+      
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;
@@ -97,8 +124,9 @@ export default {
       var d2 = document.getElementById('pdes');
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
+      this.MusicChoose();
   },
-    }
+    
   }
 </script>
 
