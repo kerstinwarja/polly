@@ -1,9 +1,8 @@
 <template>
-  <div>
-    {{pollId}}
-    <Question v-bind:question="question"
-              v-on:answer="submitAnswer"/>
-  </div>
+  <!--{{pollId}}-->
+  <Question v-bind:question="question"
+            v-on:answer="submitAnswer"/>
+  
 </template>
 
 <script>

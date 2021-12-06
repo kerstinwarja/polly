@@ -8,17 +8,20 @@
     </header>
      <div class="wrapper">
         <!--Create Poll button-->
-        <router-link v-bind:to="'/create/'+lang">
+        <router-link v-bind:to="'/initialize/'+lang">
             <button>{{uiLabels.createPoll}}</button>
         </router-link>
 
         <!--Participate in Poll button-->
-        <!--Skapa en ny vy flr sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
+        <!--Skapa en ny vy för sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
         <router-link v-bind:to="'/polllibrary'">
             <button>{{uiLabels.participatePoll}}</button>
         </router-link>
 
-        <!-- ORGINALKOD TA INTE BORT FÖR FAN div
+        <!-- ORGINALKOD TA INTE BORT FÖR SNÄLLA div
+        <router-link v-bind:to="'/create/'+lang">
+            <button>{{uiLabels.createPoll}}</button>
+        </router-link>
           <div id="partPoll">
             <label>
               Write poll id:
@@ -58,6 +61,9 @@ export default {
       else
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
+    },
+    create: function(){
+      
     }
   }
 }
@@ -93,8 +99,11 @@ button{
 .wrapper button{
   width: 50%;
   height: 50px;
-  background-color: wheat;
+  background-color: #fbf1e0;
   text-transform: uppercase;
+  font-size: 22pt;
+  color: navy;
+  border: 2px navy solid;
 }
 
 button:hover {
@@ -103,12 +112,16 @@ button:hover {
 
 
 #nav button{
-  width: 150px;
-  height: 50px;
+  width: 130px;
+  height: 40px;
   top: 7%;
   left: 7%;
-  background-color: wheat;
+  background-color: #fbf1e0;
   position: absolute;
+  font-size: 9pt;
+  color: navy;
+  border: 2px navy solid;
+  text-transform: uppercase;
 }
 
 header {
