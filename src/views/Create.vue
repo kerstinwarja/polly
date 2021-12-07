@@ -11,13 +11,19 @@
   <div id="previewTitle">
     <p id="as">Preview</p>
   </div>
+  <div id="answers">
+    <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." readonly></textarea>
+  </div>
 </div>
 
 <div class="createWindow">
+  <div id="createDiv">
   <h3> {{uiLabels.question}}: </h3> <br>
   <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
   <h3>Answer:</h3> <br>
-  <textarea id="desIptBox" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..."></textarea>
+  <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+</div>
+  <div id="buttonDiv">
   <button id="addQuestionButton" v-on:click="addAnswer">
     Add answer
   </button>
@@ -25,6 +31,7 @@
   <button type="submit" id="updatePre" v-on:click="updatePreview()">
     Update preview
   </button>
+</div>
 </div>
 
 
@@ -83,7 +90,8 @@ export default {
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      counter:2
     }
   },
   created: function () {
@@ -106,7 +114,10 @@ export default {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     addAnswer: function () {
-      this.answers.push("");
+      this.counter++;
+      if(this.counter<7) {
+        this.answers.push("");
+      }
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
@@ -143,6 +154,8 @@ h3{
 .createWindow{
   background-color: wheat;
   width: 100%;
+  min-height: 110%;
+  position: relative;
 }
 
 .wrap2 {
@@ -154,6 +167,7 @@ h3{
   grid-gap: 5%;
   grid-template-columns: 61% 31%;
   align-items: center;
+
 }
 
 body textarea{
@@ -174,6 +188,9 @@ body textarea{
   color: Grey;
   height: 100%;
   border: 5px black solid;
+  overflow: hidden;
+  resize: none;
+padding-bottom: 5%;
 }
 
 #previewTitle{
@@ -186,9 +203,55 @@ body textarea{
 }
 
 #addQuestionButton {
-  height: 10%;
-  width: 20%;
+  height: 100%;
+  width: 25%;
   background-color: #ffcc00;
+}
+
+#updatePre {
+  height: 100%;
+  width: 25%;
+  background-color: #ffcc00;
+
+}
+
+#answers{
+  display:grid;
+  height: 200px;
+  width: 90%;
+  grid-template-columns: repeat(2, 1fr); /*default*/
+  gap: 25px;
+  align-items: center;
+  margin-left:5%;
+  margin-right: 5%;
+  margin-top: 20%;
+
+}
+
+#answerBox{
+  height:85%;
+  width:100%;
+  background-color: greenyellow;
+  font-size:3vh;
+  border-radius: 20px;
+  text-size-adjust: auto;
+}
+
+#ansAlt {
+
+}
+
+#createDiv {
+  min-height: 85%;
+}
+
+#buttonDiv {
+  height: 10%;
+  width: 100%;
+  position: absolute;
+  padding-bottom: 5%;
+  bottom: 0px;
+
 }
 
 </style>
