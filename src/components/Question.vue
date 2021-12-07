@@ -3,45 +3,34 @@
   <p>{{question.q}}</p>
 </div>
 <div id="ans">
-  <button v-for="a in question.a"  v-bind:key="a" v-on:click="answer(a)">
-    {{ a }}   
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:correct=isCorrect v-bind:class="'ans'+index" v-on:click="answer(a)">
+    {{ a }}
+    {{isCorrect}}
   </button>
 </div>
 
-  <!--<button id="ans1" v-if="question.a[0]">
-    {{ question.a[0]}} 
-  </button>
-  <button id="ans2" v-if="question.a[1]">
-    {{ question.a[1]}} 
-  </button>
-  <button id="ans3" v-if="question.a[2]">
-    {{ question.a[2]}} 
-  </button>
-  <button id="ans4" v-if="question.a[3]">
-    {{ question.a[3]}} 
-  </button>
-  <button id="ans5" v-if="question.a[4]">
-    {{ question.a[4]}} 
-  </button>
-  <button id="ans6" v-if="question.a[5]">
-    {{ question.a[5]}} 
-  </button> -->
 
-
-  <!--{{question.a[0]}} -->
 
 </template>
 <script>
 export default {
   name: 'Bars',
   props: {
-    question: Object
+    question: Object,
+    
   },
-  counter:0,
+  
+  data: function () {
+    return {
+      isCorrect:true,
+    }
+  },
+ 
   
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
+      this.isCorrect=false;
     } 
   }
 }
@@ -77,15 +66,26 @@ export default {
     font-size:30pt;
     
   }
-  #ans1{
-    background-color: blue;
+  .ans0{
+
+    background-color:yellow;
   }
-   #ans2{
+  .ans1{
+      background-color:green;
+  }
+   .ans2{
     background-color:red;
   }
-   #ans3{
-    background-color:green;
+   .ans3{
+    background-color:blue;
   }
+  .ans4{
+    background-color:blue;
+  }
+  .ans5{
+    background-color:blue;
+  }
+
 
 
 </style>

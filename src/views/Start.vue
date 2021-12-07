@@ -14,7 +14,7 @@
 
         <!--Participate in Poll button-->
         <!--Skapa en ny vy för sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
-        <router-link v-bind:to="'/polllibrary'">
+        <router-link v-bind:to="'/polllibrary/'+lang">
             <button>{{uiLabels.participatePoll}}</button>
         </router-link>
 
