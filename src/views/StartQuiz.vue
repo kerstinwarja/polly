@@ -1,8 +1,8 @@
 <template>
-   <body>   
+   <body>
         <div id="preview">
             <div id="previewTitle">
-                <p id="as">Preview</p>
+                <p id="as">{{this.pollId}}</p>
             </div>
             <div id="previewDesc">
                 <span id="pdes" style="background-color: black">Preview desc</span>
@@ -13,26 +13,45 @@
     </body>
 </template>
 
+<script>
+import io from 'socket.io-client';
+const socket = io();
+export default {
+  name: 'StartQuiz',
+
+  data: function () {
+    return {
+      uiLabels: {},
+      pollId: "",
+      lang: "en"
+    }
+  },
+  created: function () {
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
+  },
+  methods: {
+    created: function () {
+      this.lang = this.$route.params.lang;
+      socket.emit("pageLoaded", this.lang);
+      socket.on("init", (labels) => {
+        console.log(labels)
+        this.uiLabels = labels
+      })
+      console.log(this.pollId)
+    },
+    }
+  }
+
+</script>
+
 <style>
 header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
 }
 
-.createWindow{
-  background-color: wheat;
-  width: 100%;
-}
-
-body textarea{
-  width: 80%;
-  background-color: wheat;
-  color: Navy;
-  resize:none;
-  padding: 5px 5px 5px;
-  font-family: sans-serif;
-  border: 2px solid;
-}
 
 h3{
   margin:0px;
@@ -41,15 +60,6 @@ h3{
   color: Navy;
 }
 
-#preview{
-  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
-  background-size: cover;
-  max-height: 100%;
-  background-position: bottom;
-  color: Grey;
-  height: 100%;
-  border: 5px black solid;
-}
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -57,9 +67,6 @@ h3{
   height: 15%;
   line-break: auto;
   max-height: 15%;
-}
-#as{
-  margin: 10px 0px 0px;
 }
 
 #previewDesc{

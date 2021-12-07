@@ -16,9 +16,12 @@
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
-        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
+        <textarea id="pollName" type="text" v-model="pollName" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDes" placeholder="Add a short description of your quiz..."></textarea>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
+        Poll link:
+        <input type="text" v-model="pollId">
+
         <!--button v-on:click="createPoll">
           Create poll
         </button-->
@@ -52,10 +55,11 @@ export default {
   data: function () {
     return {
       lang: "",
-      pollId: "",
+    //  pollName: "",
+      pollDesc:"",
+      pollImg:"",
       data: {},
       uiLabels: {},
-      pollDes: ""
     }
   },
   created: function () {
@@ -72,7 +76,9 @@ export default {
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      console.log("pollName är "+this.pollName),
+      console.log("pollDSes är "+this.pollDesc),
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollName: this.pollName})
     },
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
@@ -83,7 +89,7 @@ export default {
   },
     updatePreview(){
       //THis is the code fro updating title and description
-      var c1 = document.getElementById('quizTitle').value;
+      var c1 = document.getElementById('pollName').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
