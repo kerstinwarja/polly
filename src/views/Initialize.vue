@@ -14,6 +14,11 @@
         <div id="previewPic">
       </div>
       <div id="audio">
+        <audio controls id="preAudio">
+          <source :src= "SONG"
+           type="audio/mpeg">
+          Your browser does not support the audio element.
+          </audio>
       </div>
       </div>
       <div class="createWindow">
@@ -73,7 +78,8 @@ export default {
       data: {},
       uiLabels: {},
       pollDes: "",
-      music: ""
+      music: "",
+      SONG: ""
     }
   },
   created: function () {
@@ -100,23 +106,22 @@ export default {
     }
   },
   MusicChoose(){
-    var t1 = " type="+ '"audio/ogg"'+">";
-    var t2 = " type="+ '"audio/mpeg"'+">";
+    //var t1 = " type="+ '"audio/ogg"'+">";
+    //var t2 = " type="+ '"audio/mpeg"'+">";
     var song = "circus"+this.music+".mp3";
     var songPath = "../music/"
     var songsongPath = songPath + song;
-    var s1 = "<p>"+ songsongPath +"</p>" +" <audio controls autoplay>"+"<source src=\""+songsongPath +"\"" + t2 +' <source src="'+songsongPath +"\"" +  t1 + " Your browser does not support the audio element. </audio>";
-    console.log(s1);
-    document.getElementById('audio').innerHTML = s1;
-    var audio = new Audio(require(songsongPath))
-    audio.play();
-}
-  
-  },
-  
-    updatePreview(){
+    this.SONG = "https://static1.squarespace.com/static/59dcec2112abd985b7417cbd/5df232a2b0e08d47327b0ae0/5df232e8b0e08d47327b0ffc/1576154087962/EOTG+-+Strings+-+320bit.mp3";
+    //var s1 = "<p>"+ songsongPath +"</p>" +" <audio controls autoplay>"+"<source src=\""+songsongPath +"\"" + t2 +' <source src="'+songsongPath +"\"" +  t1 + " Your browser does not support the audio element. </audio>";
+    //console.log(s1);
+    //document.getElementById('audio').innerHTML = s1;
+    //var audio = new Audio(require(songsongPath))
+    document.getElementById("preAudio").setAttribute('src', songsongPath);
+    console.log(songsongPath);
+    //audio.play();
+},
+     updatePreview(){
       //THis is the code fro updating title and description
-      
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;
@@ -127,7 +132,7 @@ export default {
       this.MusicChoose();
   },
     
-  }
+  }}
 </script>
 
 <style>
