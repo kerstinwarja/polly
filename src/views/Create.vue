@@ -211,7 +211,7 @@ padding-bottom: 5%;
 #updatePre {
   height: 100%;
   width: 25%;
-  background-color: #ffcc00;
+  background-color: rgb(135, 175, 111);
 
 }
 
