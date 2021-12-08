@@ -31,6 +31,12 @@
   <button type="submit" id="updatePre" v-on:click="updatePreview()">
     Update preview
   </button>
+  <router-link v-bind:to="'/initialize/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+    <router-link v-bind:to="'/polllibrary/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    </router-link>
 </div>
 </div>
 
@@ -72,6 +78,12 @@
     {{data}}
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
   </div>
+  <router-link v-bind:to="'/initialize/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+    <router-link v-bind:to="'/polllibrary/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    </router-link>
 
 </body>
 </template>
@@ -253,6 +265,22 @@ padding-bottom: 5%;
   padding-bottom: 5%;
   bottom: 0px;
 
+}
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 2%;
+  float: left;
+}
+
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 2%;
+  float: right;
+  transform: scaleX(-1);
 }
 
 </style>
