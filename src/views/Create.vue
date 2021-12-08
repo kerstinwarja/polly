@@ -1,45 +1,45 @@
 <template>
 <body>
-
 <header>
-  <h1> <!-- Add questions and answers to your quiz! --> {{pollId}}</h1>
+  <h1>Add questions and answers to your quiz!</h1>
 </header>
 
-
-<div class="wrap2">
-<div id="preview">
-  <div id="previewTitle">
-    <p id="as">Preview</p>
+  <div class="wrap2">
+  <div id="preview">
+    <div id="previewTitle">
+      <p id="as">Preview</p>
+    </div>
+    <div id="answers">
+      <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." readonly></textarea>
+    </div>
   </div>
-  <div id="answers">
-    <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." readonly></textarea>
-  </div>
-</div>
 
-<div class="createWindow">
-  <div id="createDiv">
-  <h3> {{uiLabels.question}}: </h3> <br>
-  <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
-  <h3>Answer:</h3> <br>
-  <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
-</div>
-  <div id="buttonDiv">
-    <button id="addQuestionButton" v-on:click="addAnswer">
-      Add answer
-    </button>
-    <button type="submit" id="updatePre" v-on:click="updatePreview()">
-      Update preview
-    </button>
-    <button id="addQues" v-on:click="addQuestion">
-      Add question
-    </button>
-    <button id="importPic" type="submit" v-on:click="PicChoose()">
-      <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-      <span>Import picture</span>
-    </button>
+  <div class="createWindow">
+    <div id="createDiv">
+      <h3> {{uiLabels.question}}: </h3> <br>
+      <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
+      <h3 style="float: left"> Answer: </h3>
+      <button type="submit" id="removeQues" v-on:click="removeAnswer()">
+        Remove answer
+      </button>
+      <button id="addQuestionButton" v-on:click="addAnswer">
+        Add answer
+      </button><br>
+      <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+    </div>
+    <div id="buttonDiv">
+      <button type="submit" id="updatePre" v-on:click="updatePreview()">
+        Update preview
+      </button>
+      <button id="addQues" v-on:click="addQuestion">
+        Add question
+      </button>
+      <button id="importPic" type="submit" v-on:click="PicChoose()">
+        <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
+        <span>Import picture</span>
+      </button>
+    </div>
   </div>
-</div>
-
 
 </div>
 
@@ -105,6 +105,7 @@ export default {
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    this.pollId = this.$route.params.id;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -124,13 +125,26 @@ export default {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     addAnswer: function () {
-      this.counter++;
-      if(this.counter<7) {
+      if(this.counter<6) {
         this.answers.push("");
+        this.counter++;
+      }
+    },
+    removeAnswer: function () {
+      if(this.counter>3) {
+        this.counter--;
+        this.answers.pop();
       }
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+    PicChoose(){
+      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+      if (person != null || person != "") {
+        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+        document.getElementById("previewPic").style.visibility= "hidden";
+      }
     },
     updatePreview(){
       //THis is the code for updating title and description
@@ -152,6 +166,7 @@ export default {
 header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
+  margin-bottom: 5%;
 }
 
 h3{
@@ -159,6 +174,14 @@ h3{
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
+}
+
+#answer {
+  margin:0px;
+  padding: 2% 10% 1%;
+  text-align: left;
+  color: Navy;
+  font-weight: bold;
 }
 
 .createWindow{
@@ -192,7 +215,7 @@ body textarea{
 }
 
 #preview{
-  background-color: black;
+  background-color: rgb(100, 5, 5);
   background-size: cover;
   max-height: 100%;
   background-position: bottom;
@@ -221,20 +244,28 @@ body textarea{
 
 #updatePre {
   height: 100%;
-  width: 15%;
+  width: 20%;
   background-color: rgb(135, 175, 111);
 }
 
 #addQues {
   height: 100%;
+  width: 20%;
+  background-color: rgb(100, 155, 36);
+  margin: 0 2%;
+}
+
+#removeQues {
+  height: 100%;
   width: 15%;
-  background-color: rgb(100, 155, 36)
+  background-color: rgb(255, 0, 0);
+  margin-bottom: 1%;
 }
 
 #importPic {
   height: 100%;
-  width: 15%;
-  background-color: rgb(200, 255, 136)
+  width: 20%;
+  background-color: wheat;
 }
 
 #answers{
@@ -265,7 +296,7 @@ body textarea{
   height: 10%;
   width: 100%;
   position: absolute;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
   bottom: 0px;
 
 }

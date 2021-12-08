@@ -37,15 +37,13 @@
         </button>
       </div>
     </div>
-    <router-link v-bind:to="'/create/'+lang">
+    <!--router-link v-bind:to="'/create/'+lang">
       <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-    </router-link>
-        <router-link v-bind:to="'/'">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
-    </router-link>
-    <router-link v-bind:to="'/create/'+lang" v-on:click="createPoll">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-    </router-link>
+    </router-link-->
+      <router-link v-bind:to="'/'">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      </router-link>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
   </body>
 </template>
 
@@ -79,6 +77,7 @@ export default {
   methods: {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDes: this.pollDes })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang } })
     },
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
@@ -199,6 +198,10 @@ h3{
   margin-top: 2%;
   float: right;
   transform: scaleX(-1);
+}
+
+#forwardButton:hover {
+  cursor: pointer;
 }
 
 .wrap2 {
