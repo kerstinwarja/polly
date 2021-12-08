@@ -40,6 +40,12 @@
     <router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
+        <router-link v-bind:to="'/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+    <router-link v-bind:to="'/create/'+lang">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    </router-link>
   </body>
 </template>
 
@@ -172,6 +178,22 @@ h3{
   width: 84%;
   background-color: rgb(135, 175, 111);
   margin-bottom: 4%;
+}
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 2%;
+  float: left;
+}
+
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 2%;
+  float: right;
+  transform: scaleX(-1);
 }
 
 .wrap2 {
