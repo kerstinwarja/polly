@@ -12,7 +12,7 @@
           <span id="pdes" style="background-color: black">Preview desc</span>
         </div>
         <div id="previewPic">
-      </div>
+        </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
@@ -39,7 +39,7 @@
         </button>
       </div>
     </div>
-    <router-link v-bind:to="'/create/'+lang">
+    <!--<router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
         <router-link v-bind:to="'/'">
@@ -47,7 +47,14 @@
     </router-link>
     <router-link v-bind:to="'/create/'+lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-    </router-link>
+    </router-link>-->
+    <!--router-link v-bind:to="'/create/'+lang">
+      <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+    </router-link-->
+      <router-link v-bind:to="'/'">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      </router-link>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
   </body>
 </template>
 
@@ -85,7 +92,8 @@ export default {
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollName:this.pollName, pollDesc:this.polldesc})
+     // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDes: this.pollDes })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang } })
     },
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
@@ -95,12 +103,15 @@ export default {
     }
   },
     updatePreview(){
-      //THis is the code fro updating title and description
+      //THis is the code for updating title and description
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
+      this.pollId = c1;
+
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
       var d2 = document.getElementById('pdes');
+      this.pollDes = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
   },
@@ -117,6 +128,7 @@ header {
 .createWindow{
   background-color: wheat;
   width: 100%;
+  border: 3px navy solid;
 }
 body textarea{
   width: 80%;
@@ -161,6 +173,7 @@ h3{
   font-family: "Times New Roman";
   line-break: auto;
 }
+
 #previewPic{
   width: 50%;
   height: 70%;
@@ -194,6 +207,11 @@ h3{
   float: right;
   transform: scaleX(-1);
 }
+
+#forwardButton:hover {
+  cursor: pointer;
+}
+
 .wrap2 {
    margin: 0px;
    padding-left: 4%;
