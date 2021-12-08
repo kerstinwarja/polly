@@ -2,7 +2,7 @@
    <body>   
         <div id="preview">
             <div id="previewTitle">
-                <p id="as">Preview</p>
+                <p id="as">{{pollName}}</p>
             </div>
             <div id="previewDesc">
                 <span id="pdes" style="background-color: black">Preview desc</span>
@@ -12,18 +12,52 @@
         </div>
     </body>
 </template>
-
+<script>
+import io from 'socket.io-client';
+const socket = io();
+export default {
+  name: 'StartQuiz',
+  data: function () {
+    return {
+      lang: "",
+      pollId: "",
+      pollName:"",
+      pollDesc:"",
+    }
+  },
+  created: function () {
+    this.pollId = this.$route.params.id;
+    //this.lang = this.$route.params.lang;
+    this.pollId = this.$route.params.id;
+    
+    //socket.emit("pageLoaded", this.lang);
+    //socket.on("init", (labels) => {
+     // this.uiLabels = labels
+    //})
+    socket.on("dataUpdate", (data) =>
+      this.data = data
+    )
+    socket.on("pollCreated", (data) =>
+      this.data = data)
+  },
+  methods: {
+    createPoll: function () {
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang})
+    },
+    
+  }
+  
+}
+</script>
 <style>
 header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
 }
-
 .createWindow{
   background-color: wheat;
   width: 100%;
 }
-
 body textarea{
   width: 80%;
   background-color: wheat;
@@ -33,14 +67,12 @@ body textarea{
   font-family: sans-serif;
   border: 2px solid;
 }
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
 }
-
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -61,7 +93,6 @@ h3{
 #as{
   margin: 10px 0px 0px;
 }
-
 #previewDesc{
   width: 40%;
   height: 70%;
@@ -77,21 +108,17 @@ h3{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-
 #desIptBox{
   height: 20em;
 }
-
 ::placeholder{
   color:Navy;
 }
-
 #updatePre{
   width: 84%;
   background-color: rgb(135, 175, 111);
   margin-bottom: 4%;
 }
-
 .wrap2 {
    margin: 0px;
    padding-left: 4%;
@@ -102,7 +129,6 @@ h3{
    grid-template-columns: 61% 31%;
    align-items: center;
   }
-
 .wrap3 {
    margin: 0px;
    padding: 5% 0% 5% 8%;
@@ -112,12 +138,10 @@ h3{
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-
 .wrap2 button{
   background-color: wheat;
   text-transform: uppercase;
   padding-bottom: 1%;
   font-size:80%;
 }
-
 </style>
