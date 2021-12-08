@@ -2,7 +2,7 @@
 <body>
 
 <header>
-  <h1>Add questions and answers to your quiz!</h1>
+  <h1> <!-- Add questions and answers to your quiz! --> {{pollId}}</h1>
 </header>
 
 
@@ -24,20 +24,20 @@
   <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
 </div>
   <div id="buttonDiv">
-  <button id="addQuestionButton" v-on:click="addAnswer">
-    Add answer
-  </button>
-
-  <button type="submit" id="updatePre" v-on:click="updatePreview()">
-    Update preview
-  </button>
-  <router-link v-bind:to="'/initialize/'">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
-    </router-link>
-    <router-link v-bind:to="'/polllibrary/'">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-    </router-link>
-</div>
+    <button id="addQuestionButton" v-on:click="addAnswer">
+      Add answer
+    </button>
+    <button type="submit" id="updatePre" v-on:click="updatePreview()">
+      Update preview
+    </button>
+    <button id="addQues" v-on:click="addQuestion">
+      Add question
+    </button>
+    <button id="importPic" type="submit" v-on:click="PicChoose()">
+      <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
+      <span>Import picture</span>
+    </button>
+  </div>
 </div>
 
 
@@ -68,20 +68,17 @@
       </div>
     </div>-->
 
-    <button v-on:click="addQuestion">
-      Add question
-    </button>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
-    <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+    <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
   </div>
-  <router-link v-bind:to="'/initialize/'">
+  <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
-    <router-link v-bind:to="'/polllibrary/'">
+    <router-link v-bind:to="'/polllibrary/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
     </router-link>
 
@@ -97,7 +94,7 @@ export default {
   data: function () {
     return {
       lang: "",
-      pollId: "", //remove to not overwrite from initialize?
+      //pollId: "", //remove to not overwrite from initialize?
       question: "",
       answers: ["", ""],
       questionNumber: 0,
@@ -116,7 +113,8 @@ export default {
       this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data)
+      this.data = data
+    )
   },
   methods: {
     /*createPoll: function () {
@@ -135,7 +133,7 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
     updatePreview(){
-      //THis is the code fro updating title and description
+      //THis is the code for updating title and description
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;
@@ -167,7 +165,7 @@ h3{
   background-color: wheat;
   width: 100%;
   border: 3px navy solid;
-  min-height: 110%;
+  min-height: 120%;
   position: relative;
 }
 
@@ -203,7 +201,7 @@ body textarea{
   border: 5px black solid;
   overflow: hidden;
   resize: none;
-padding-bottom: 5%;
+  padding-bottom: 5%;
 }
 
 #previewTitle{
@@ -217,15 +215,26 @@ padding-bottom: 5%;
 
 #addQuestionButton {
   height: 100%;
-  width: 25%;
+  width: 15%;
   background-color: #ffcc00;
 }
 
 #updatePre {
   height: 100%;
-  width: 25%;
+  width: 15%;
   background-color: rgb(135, 175, 111);
+}
 
+#addQues {
+  height: 100%;
+  width: 15%;
+  background-color: rgb(100, 155, 36)
+}
+
+#importPic {
+  height: 100%;
+  width: 15%;
+  background-color: rgb(200, 255, 136)
 }
 
 #answers{
@@ -238,7 +247,6 @@ padding-bottom: 5%;
   margin-left:5%;
   margin-right: 5%;
   margin-top: 20%;
-
 }
 
 #answerBox{
@@ -247,11 +255,6 @@ padding-bottom: 5%;
   background-color: greenyellow;
   font-size:3vh;
   border-radius: 20px;
-  text-size-adjust: auto;
-}
-
-#ansAlt {
-
 }
 
 #createDiv {
@@ -262,7 +265,7 @@ padding-bottom: 5%;
   height: 10%;
   width: 100%;
   position: absolute;
-  padding-bottom: 5%;
+  padding-bottom: 10%;
   bottom: 0px;
 
 }
