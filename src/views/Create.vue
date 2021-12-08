@@ -91,7 +91,7 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      counter:2
+      counter: 2
     }
   },
   created: function () {
@@ -107,9 +107,9 @@ export default {
       this.data = data)
   },
   methods: {
-    createPoll: function () {
+    /*createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-    },
+    },*/
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
@@ -154,6 +154,7 @@ h3{
 .createWindow{
   background-color: wheat;
   width: 100%;
+  border: 3px navy solid;
   min-height: 110%;
   position: relative;
 }

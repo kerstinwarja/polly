@@ -12,7 +12,7 @@
           <span id="pdes" style="background-color: black">Preview desc</span>
         </div>
         <div id="previewPic">
-      </div>
+        </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <router-link v-bind:to="'/create/'+lang">
-        <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+      <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
   </body>
 </template>
@@ -104,6 +104,7 @@ header {
 .createWindow{
   background-color: wheat;
   width: 100%;
+  border: 3px navy solid;
 }
 
 body textarea{
