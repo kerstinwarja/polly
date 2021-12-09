@@ -13,6 +13,23 @@
         </div>
         <div id="previewPic">
         </div>
+        <div id="audio">
+       <audio controls v-if="SONG == 'Brass'">
+          <source src="../music/circusBrass.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Trap'">
+          <source src="../music/circusTrap.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Strings'">
+          <source src="../music/circusStrings.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Techno'">
+          <source src="../music/circusTechno.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Ragtime'">
+          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+        </audio>
+      </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
@@ -27,10 +44,14 @@
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
-          <button type="submit">
-            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
-            <span>Import music</span>
-          </button>
+          <select type="submit" v-model="music" id="music">
+            <option disabled value=""> select music </option>
+                   <option>Brass</option>
+                   <option>Ragtime</option>
+                   <option>Strings</option>
+                   <option>Techno</option>
+                   <option>Trap</option>
+          </select>
         </div>
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
@@ -59,7 +80,8 @@ export default {
       pollId: "",
       data: {},
       uiLabels: {},
-      pollDes: ""
+      pollDes: "",
+      SONG:""
     }
   },
   created: function () {
@@ -86,6 +108,10 @@ export default {
         document.getElementById("previewPic").style.visibility= "hidden";
     }
   },
+  MusicChoose(){
+     this.SONG = this.music;
+
+},
     updatePreview(){
       //THis is the code for updating title and description
       var c1 = document.getElementById('quizTitle').value;
@@ -98,6 +124,7 @@ export default {
       this.pollDes = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
+      this.MusicChoose();
   },
     }
   }
