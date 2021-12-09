@@ -12,6 +12,23 @@
           <span id="pdes" style="background-color: black">Preview desc</span>
         </div>
         <div id="previewPic">
+        </div>
+        <div id="audio">
+       <audio controls v-if="SONG == 'Brass'">
+          <source src="../music/circusBrass.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Trap'">
+          <source src="../music/circusTrap.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Strings'">
+          <source src="../music/circusStrings.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Techno'">
+          <source src="../music/circusTechno.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Ragtime'">
+          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+        </audio>
       </div>
       </div>
       <div class="createWindow">
@@ -30,19 +47,27 @@
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
-          <button type="submit">
-            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
-            <span>Import music</span>
-          </button>
+          <select type="submit" v-model="music" id="music">
+            <option disabled value=""> select music </option>
+                   <option>Brass</option>
+                   <option>Ragtime</option>
+                   <option>Strings</option>
+                   <option>Techno</option>
+                   <option>Trap</option>
+          </select>
         </div>
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
         </button>
       </div>
     </div>
-    <router-link v-bind:to="'/create/'+lang">
-        <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-    </router-link>
+    <!--router-link v-bind:to="'/create/'+lang">
+      <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+    </router-link-->
+      <router-link v-bind:to="'/'">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      </router-link>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
   </body>
 </template>
 
@@ -60,6 +85,8 @@ export default {
       pollImg:"",
       data: {},
       uiLabels: {},
+      pollDes: "",
+      SONG:""
     }
   },
   created: function () {
@@ -76,9 +103,8 @@ export default {
   },
   methods: {
     createPoll: function () {
-      console.log("pollName är "+this.pollName),
-      console.log("pollDSes är "+this.pollDesc),
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollName: this.pollName})
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDes: this.pollDes })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang } })
     },
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
@@ -87,15 +113,23 @@ export default {
         document.getElementById("previewPic").style.visibility= "hidden";
     }
   },
+  MusicChoose(){
+     this.SONG = this.music;
+
+},
     updatePreview(){
-      //THis is the code fro updating title and description
-      var c1 = document.getElementById('pollName').value;
+      //THis is the code for updating title and description
+      var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
+      this.pollId = c1;
+
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
       var d2 = document.getElementById('pdes');
+      this.pollDes = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
+      this.MusicChoose();
   },
     }
   }
@@ -110,6 +144,7 @@ header {
 .createWindow{
   background-color: wheat;
   width: 100%;
+  border: 3px navy solid;
 }
 
 body textarea{
@@ -158,6 +193,7 @@ h3{
   font-family: "Times New Roman";
   line-break: auto;
 }
+
 #previewPic{
   width: 50%;
   height: 70%;
@@ -178,6 +214,26 @@ h3{
   width: 84%;
   background-color: rgb(135, 175, 111);
   margin-bottom: 4%;
+}
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 2%;
+  float: left;
+}
+
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 2%;
+  float: right;
+  transform: scaleX(-1);
+}
+
+#forwardButton:hover {
+  cursor: pointer;
 }
 
 .wrap2 {
