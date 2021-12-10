@@ -9,11 +9,12 @@
     <div id="previewTitle">
       <p id="as">Preview</p>
     </div>
+    <div id="previewPic">
+    </div>
     <div id="answers">
       <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." readonly></textarea>
     </div>
   </div>
-
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
@@ -34,6 +35,7 @@
       <button id="addQues" v-on:click="addQuestion">
         Add question
       </button>
+
       <button id="importPic" type="submit" v-on:click="PicChoose()">
         <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
         <span>Import picture</span>
@@ -131,7 +133,7 @@ export default {
       }
     },
     removeAnswer: function () {
-      if(this.counter>3) {
+      if(this.counter>2) {
         this.counter--;
         this.answers.pop();
       }
@@ -143,7 +145,7 @@ export default {
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       if (person != null || person != "") {
         document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
-        document.getElementById("previewPic").style.visibility= "hidden";
+        document.getElementById("previewPic").style.visibility= "visible";
       }
     },
     updatePreview(){
@@ -174,14 +176,6 @@ h3{
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
-}
-
-#answer {
-  margin:0px;
-  padding: 2% 10% 1%;
-  text-align: left;
-  color: Navy;
-  font-weight: bold;
 }
 
 .createWindow{
@@ -224,16 +218,15 @@ body textarea{
   border: 5px black solid;
   overflow: hidden;
   resize: none;
-  padding-bottom: 5%;
+  position: relative;
+  padding-bottom: 0;
 }
 
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
   color: white;
-  height: 15%;
   line-break: auto;
-  max-height: 15%;
 }
 
 #addQuestionButton {
@@ -268,24 +261,34 @@ body textarea{
   background-color: wheat;
 }
 
+#previewPic{
+  width: 25%;
+  height: 35%;
+  position: absolute;
+  left: 37.5%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 #answers{
   display:grid;
-  height: 200px;
+  height: 150px;
   width: 90%;
   grid-template-columns: repeat(2, 1fr); /*default*/
   gap: 25px;
   align-items: center;
   margin-left:5%;
   margin-right: 5%;
-  margin-top: 20%;
+  margin-top: 25%;
+  clear: left;
 }
 
 #answerBox{
   height:85%;
   width:100%;
   background-color: greenyellow;
-  font-size:3vh;
-  border-radius: 20px;
+  font-size:2vh;
+  border-radius: 12px;
 }
 
 #createDiv {
