@@ -18,13 +18,13 @@ Data.prototype.getUILabels = function (lang = "en") {
   return ui;
 }
 
-Data.prototype.createPoll = function(pollId, lang="en",pollName,pollDesc) {
+Data.prototype.createPoll = function(pollId, lang="en",pollDesc) {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
     poll.lang = lang;
     poll.questions = [];
     poll.answers = [];
-    poll.pollName=pollName;
+    //poll.pollName=pollName;
     poll.pollDesc=pollDesc;
     poll.currentQuestion = 0;              
     //poll.pollDes = [];
@@ -32,6 +32,7 @@ Data.prototype.createPoll = function(pollId, lang="en",pollName,pollDesc) {
     console.log("poll created", pollId, poll);
   }
   return this.polls[pollId];
+  
 }
 
 Data.prototype.addQuestion = function(pollId, q) {
@@ -41,7 +42,18 @@ Data.prototype.addQuestion = function(pollId, q) {
     poll.questions.push(q);
   }
 }
+//här testar jag
 
+Data.prototype.getDescription = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("description requested for", pollId);
+  if (typeof poll !== 'undefined') {
+    
+    return poll.pollDesc;
+  }
+  return ""
+}
+//här slutar jag 
 Data.prototype.getQuestion = function(pollId, qId=null) {
   const poll = this.polls[pollId];
   console.log("question requested for ", pollId, qId);

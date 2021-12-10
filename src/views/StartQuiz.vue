@@ -2,10 +2,10 @@
    <body>   
         <div id="preview">
             <div id="previewTitle">
-                <p id="as">{{pollName}}</p>
+                <p id="as">{{pollId}}</p>
             </div>
             <div id="previewDesc">
-                <span id="pdes" style="background-color: black">Preview desc</span>
+                <span id="pdes" style="background-color: black">INFO:{{pollDesc}}</span>
             </div>
             <div id="previewPic">
             </div>
@@ -17,35 +17,49 @@ import io from 'socket.io-client';
 const socket = io();
 export default {
   name: 'StartQuiz',
+ 
   data: function () {
+    
     return {
       lang: "",
       pollId: "",
-      pollName:"",
+      //pollName:""
       pollDesc:"",
+      //data: {},
+      //uiLabels: {},
+      //pollDes: [],
+      //question: "",
+      //answers: ["", ""],
+      //questionNumber: 0,
+       question: {
+        q: "",
+        a: []
+      },
     }
+    
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    //this.lang = this.$route.params.lang;
-    this.pollId = this.$route.params.id;
     
-    //socket.emit("pageLoaded", this.lang);
-    //socket.on("init", (labels) => {
-     // this.uiLabels = labels
-    //})
-    socket.on("dataUpdate", (data) =>
-      this.data = data
+     
+    //emittar join poll
+    socket.emit('joinPoll',this.pollId)
+    //lyssnar på frågor, kanske ta bort
+    socket.on("newQuestion", q =>
+      this.question = q
     )
-    socket.on("pollCreated", (data) =>
+    //lyssnar på description i socket.js i join poll
+    socket.on("description", desc =>
+      this.pollDesc = desc
+    )
+
+    socket.on("createPoll", (data) =>
       this.data = data)
+
   },
-  methods: {
-    createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang})
-    },
-    
-  }
+  
+   
+  
   
 }
 </script>

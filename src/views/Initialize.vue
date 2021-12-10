@@ -16,7 +16,7 @@
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
-        <textarea id="quizTitle" type="text" v-model="pollName" placeholder="Pick a name for your quiz..."></textarea>
+        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
         <!--button v-on:click="createPoll">
@@ -31,8 +31,8 @@
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
           </button>
-          Poll link:
-          <input type="text" v-model="pollId">
+          <!--Poll link:
+          <input type="text" v-model="pollId">-->
         </div>
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
@@ -67,11 +67,11 @@ export default {
     return {
       lang: "",
       pollId: "",
-      pollName:"",
+      //pollName:""
       pollDesc:"",
       data: {},
       uiLabels: {},
-      pollDes: "",
+      pollDes: [],
       question: "",
       answers: ["", ""],
       questionNumber: 0,
@@ -80,7 +80,6 @@ export default {
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
-    //socket.emit("titleLoadded",this.pollName)
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -89,12 +88,17 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
+      
   },
   methods: {
     createPoll: function () {
-     // socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDes: this.pollDes })
-      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang } })
+      //Skickar pollDesc till servern.
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+      
     },
+  
+    
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
     if (person != null || person != "") {
@@ -115,6 +119,7 @@ export default {
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
   },
+  
   
     }
   }
