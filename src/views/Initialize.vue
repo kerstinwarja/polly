@@ -33,12 +33,9 @@
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
-        <textarea id="pollName" type="text" v-model="pollName" placeholder="Pick a name for your quiz..."></textarea>
+        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
-        Poll link:
-        <input type="text" v-model="pollId">
-
         <!--button v-on:click="createPoll">
           Create poll
         </button-->
@@ -61,6 +58,15 @@
         </button>
       </div>
     </div>
+    <!--<router-link v-bind:to="'/create/'+lang">
+        <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+    </router-link>
+        <router-link v-bind:to="'/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+    <router-link v-bind:to="'/create/'+lang">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    </router-link>-->
     <!--router-link v-bind:to="'/create/'+lang">
       <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link-->
@@ -74,18 +80,22 @@
 <script>
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Initialize',
   data: function () {
     return {
       lang: "",
-    //  pollName: "",
+      pollId: "",
+      //pollName:""
       pollDesc:"",
       pollImg:"",
       data: {},
       uiLabels: {},
-      pollDes: "",
+      //pollDes: [],
+      question: "",
+      answers: ["", ""],
+      questionNumber: 0,
+
       SONG:""
     }
   },
@@ -100,18 +110,26 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
+
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDes: this.pollDes })
-      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang } })
+      //Skickar pollDesc till servern.
+      console.log("in createPoll "+this.pollImg)
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+
     },
+
+
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
     if (person != null || person != "") {
         document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
         document.getElementById("previewPic").style.visibility= "hidden";
     }
+    this.pollImg = person;
+    console.log(this.pollImg)
   },
   MusicChoose(){
      this.SONG = this.music;
@@ -131,6 +149,8 @@ export default {
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
   },
+
+
     }
   }
 </script>
@@ -140,13 +160,11 @@ header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
 }
-
 .createWindow{
   background-color: wheat;
   width: 100%;
   border: 3px navy solid;
 }
-
 body textarea{
   width: 80%;
   background-color: wheat;
@@ -156,14 +174,12 @@ body textarea{
   font-family: sans-serif;
   border: 2px solid;
 }
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
 }
-
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -184,7 +200,6 @@ h3{
 #as{
   margin: 10px 0px 0px;
 }
-
 #previewDesc{
   width: 40%;
   height: 70%;
@@ -201,15 +216,12 @@ h3{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-
 #desIptBox{
   height: 20em;
 }
-
 ::placeholder{
   color:Navy;
 }
-
 #updatePre{
   width: 84%;
   background-color: rgb(135, 175, 111);
@@ -222,7 +234,6 @@ h3{
   margin-top: 2%;
   float: left;
 }
-
 #forwardButton{
   height: 5%;
   width: 8%;
@@ -246,7 +257,6 @@ h3{
    grid-template-columns: 61% 31%;
    align-items: center;
   }
-
 .wrap3 {
    margin: 0px;
    padding: 5% 0% 5% 8%;
@@ -256,12 +266,10 @@ h3{
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-
 .wrap2 button{
   background-color: wheat;
   text-transform: uppercase;
   padding-bottom: 1%;
   font-size:80%;
 }
-
 </style>

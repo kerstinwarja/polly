@@ -17,19 +17,23 @@ Data.prototype.getUILabels = function (lang = "en") {
   const ui = require("./data/labels-" + lang + ".json");
   return ui;
 }
-
-Data.prototype.createPoll = function(pollId, lang="en") {
+//Lägg till en poll.img = pollImg
+Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg) {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
     poll.lang = lang;
     poll.questions = [];
     poll.answers = [];
+    //poll.pollName=pollName;
+    poll.pollDesc=pollDesc;
+    poll.pollImg=pollImg;
     poll.currentQuestion = 0;
-    poll.pollDes = [];
+    //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
   return this.polls[pollId];
+
 }
 
 Data.prototype.addQuestion = function(pollId, q) {
@@ -39,6 +43,30 @@ Data.prototype.addQuestion = function(pollId, q) {
     poll.questions.push(q);
   }
 }
+//här testar jag
+
+Data.prototype.getDescription = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("description requested for", pollId);
+  if (typeof poll !== 'undefined') {
+
+    return poll.pollDesc;
+  }
+  return ""
+}
+
+//här slutar jag . Här lägger jag in en ny funktion
+
+Data.prototype.getImage = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("image requested for", pollId);
+  if (typeof poll !== 'undefined') {
+
+    return poll.pollImg;
+  }
+  return ""
+}
+
 
 Data.prototype.getQuestion = function(pollId, qId=null) {
   const poll = this.polls[pollId];
@@ -80,4 +108,5 @@ Data.prototype.getAnswers = function(pollId) {
   }
   return {}
 }
+
 module.exports = Data;

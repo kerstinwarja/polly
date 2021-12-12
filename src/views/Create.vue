@@ -287,8 +287,8 @@ body textarea{
   height:85%;
   width:100%;
   background-color: greenyellow;
-  font-size:3vh;
-  border-radius: 20px;
+  font-size:2vh;
+  border-radius: 12px;
 }
 
 #createDiv {
