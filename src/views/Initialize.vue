@@ -94,7 +94,7 @@ export default {
       question: "",
       answers: ["", ""],
       questionNumber: 0,
-      
+
       SONG:""
     }
   },
@@ -109,17 +109,17 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
-      
+
   },
   methods: {
     createPoll: function () {
       //Skickar pollDesc till servern.
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
-      
+
     },
-  
-    
+
+
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
     if (person != null || person != "") {
@@ -145,13 +145,13 @@ export default {
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
   },
-  
-  
+
+
     }
   }
 </script>
 
-<style>
+<style scoped>
 header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
