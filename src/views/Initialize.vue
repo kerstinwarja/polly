@@ -13,6 +13,23 @@
           <span id="pdes" style="background-color: black">Preview desc</span>
         </div>
         <div id="previewPic">
+        </div>
+        <div id="audio">
+       <audio controls v-if="SONG == 'Brass'">
+          <source src="../music/circusBrass.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Trap'">
+          <source src="../music/circusTrap.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Strings'">
+          <source src="../music/circusStrings.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Techno'">
+          <source src="../music/circusTechno.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="SONG == 'Ragtime'">
+          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+        </audio>
       </div>
       <div id="audio">
          </div>
@@ -51,36 +68,48 @@
         </button>
       </div>
     </div>
-    <router-link v-bind:to="'/create/'+lang">
+    
+    <!--<router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
-    <router-link v-bind:to="'/'">
+        <router-link v-bind:to="'/'">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
-    <router-link v-bind:to="'/'">
+    <router-link v-bind:to="'/create/'+lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-    </router-link>
-    
+    </router-link>-->
+    <!--router-link v-bind:to="'/create/'+lang">
+      <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+    </router-link-->
+      <router-link v-bind:to="'/'">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      </router-link>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
   </body>
 </template>
 
 <script>
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Initialize',
   data: function () {
     return {
       lang: "",
       pollId: "",
+      //pollName:""
+      pollDesc:"",
+      pollImg:"",
       data: {},
       uiLabels: {},
       pollDes: "",
       SONG:"",
       //timerKOD ska flyttas v 
       timerCount: 30,
-      timerEnabled: true
+      timerEnabled: true,
+      question: "",
+      answers: ["", ""],
+      questionNumber: 0
     }
   },
   watch: {
@@ -113,26 +142,41 @@ export default {
     )
     socket.on("pollCreated", (data) =>
       this.data = data)
+
   },
   methods: {
     createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      //Skickar pollDesc till servern.
+      console.log("in createPoll "+this.pollImg)
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg })
+      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+
     },
+
+
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
     if (pict != null || pict != "") {
         document.getElementById("previewPic").style.backgroundImage = "url(" + pict+")";
         document.getElementById("previewPic").style.visibility= "hidden";
     }
+    this.pollImg = pict;
+    console.log(this.pollImg)
   },
   MusicChoose(){
-},  
-     updatePreview(){
+     this.SONG = this.music;
+
+},
+    updatePreview(){
+      //THis is the code for updating title and description
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
+      this.pollId = c1;
+
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
       var d2 = document.getElementById('pdes');
+      this.pollDes = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
@@ -144,17 +188,16 @@ export default {
   }}
 </script>
 
-<style>
+<style scoped>
 header {
   font-size: 20pt;
   text-shadow: 3px 3px navy;
 }
-
 .createWindow{
   background-color: wheat;
   width: 100%;
+  border: 3px navy solid;
 }
-
 body textarea{
   width: 80%;
   background-color: wheat;
@@ -164,7 +207,6 @@ body textarea{
   font-family: sans-serif;
   border: 2px solid;
 }
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
@@ -208,7 +250,6 @@ h3{
 #as{
   margin: 10px 0px 0px;
 }
-
 #previewDesc{
   width: 40%;
   height: 70%;
@@ -217,6 +258,7 @@ h3{
   font-family: "Times New Roman";
   line-break: auto;
 }
+
 #previewPic{
   width: 50%;
   height: 70%;
@@ -224,19 +266,35 @@ h3{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-
 #desIptBox{
   height: 20em;
 }
-
 ::placeholder{
   color:Navy;
 }
-
 #updatePre{
   width: 84%;
   background-color: rgb(135, 175, 111);
   margin-bottom: 4%;
+}
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 2%;
+  float: left;
+}
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 2%;
+  float: right;
+  transform: scaleX(-1);
+}
+
+#forwardButton:hover {
+  cursor: pointer;
 }
 
 .wrap2 {
@@ -249,7 +307,6 @@ h3{
    grid-template-columns: 61% 31%;
    align-items: center;
   }
-
 .wrap3 {
    margin: 0px;
    padding: 5% 0% 5% 8%;
@@ -259,12 +316,10 @@ h3{
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-
 .wrap2 button{
   background-color: wheat;
   text-transform: uppercase;
   padding-bottom: 1%;
   font-size:80%;
 }
-
 </style>

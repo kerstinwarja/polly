@@ -1,63 +1,63 @@
 <template>
 <body>
-
 <header>
-  <h1> Add questions and answers to your quiz!  {{pollId}}</h1>
+  <h1>Add questions and answers to your quiz!</h1>
 </header>
 
-
-<div class="wrap2">
-<div id="preview">
-  <div id="previewTitle">
-    <p id="as">Preview</p>
-  </div>
-  <div id="answers">
-    <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
-
+  <div class="wrap2">
+  <div id="preview">
+    <div id="previewTitle">
+      <p id="as">Preview</p>
+    </div>
+    <div id="previewPic">
+    </div>
+    <div id="answers">
+      <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
     </textarea>
   </div>
-</div>
+  <div class="createWindow">
+    <div id="createDiv">
+      <h3> {{uiLabels.question}}: </h3> <br>
+      <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
+      <h3 style="float: left"> Answer: </h3>
+      <button type="submit" id="removeQues" v-on:click="removeAnswer()">
+        Remove answer
+      </button>
+      <button id="addQuestionButton" v-on:click="addAnswer">
+        Add answer
+      </button><br>
+      <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+    </div>
+    <div id="buttonDiv">
+      <button type="submit" id="updatePre" v-on:click="updatePreview()">
+        Update preview
+      </button>
+      <button id="addQues" v-on:click="addQuestion">
+        Add question
+      </button>
 
-<div class="createWindow">
-  <div id="createDiv">
-  <h3> {{uiLabels.question}}: </h3> <br>
-  <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
-  <h3>Answer:</h3> <br>
-  <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ...">
-  </textarea>
-  
-</div>
-<div id="checkboxDiv">
-<input type="checkbox" id="corr" name="isCorrect" value="coding" v-for="(_,i) in answers" v-bind:key ="'corrAns'+i">
-</div>
-  <div id="buttonDiv">
-    <button id="addQuestionButton" v-on:click="addAnswer">
-      Add answer
-    </button>
-    <button type="submit" id="updatePre" v-on:click="updatePreview()">
-      Update preview
-    </button>
-    <button id="addQues" v-on:click="addQuestion">
-      Add question
-    </button>
-    <button id="importPic" type="submit" v-on:click="PicChoose()">
-      <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-      <span>Import picture</span>
-    </button>
+      <button id="importPic" type="submit" v-on:click="PicChoose()">
+        <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
+        <span>Import picture</span>
+      </button>
+    </div>
   </div>
-</div>
-
 
 </div>
 
   <div>
+    <!--
     Poll link:
     <input type="text" v-model="pollId">
     <button v-on:click="createPoll">
       Create poll
     </button>
-    <div>
-      {{uiLabels.question}}:
+    -->
+
+
+<!--    <div>
+
+      <h3> {{uiLabels.question}}: </h3>
       <input type="text" v-model="question">
       <div>
         Answers:
@@ -68,17 +68,22 @@
           Add answer alternative
         </button>
       </div>
-    </div>
-    <button v-on:click="addQuestion">
-      Add question
-    </button>
+    </div>-->
+
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
-    <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+    <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
   </div>
+  <router-link v-bind:to="'/initialize/'+ lang">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+    <router-link v-bind:to="'/polllibrary/'+ lang">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    </router-link>
+
 </body>
 </template>
 
@@ -91,16 +96,18 @@ export default {
   data: function () {
     return {
       lang: "",
-      pollId: "", //remove to not overwrite from initialize?
+      //pollId: "", //remove to not overwrite from initialize?
       question: "",
       answers: ["", ""],
       questionNumber: 0,
       data: {},
-      uiLabels: {}
+      uiLabels: {},
+      counter: 2
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    this.pollId = this.$route.params.id;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -109,27 +116,54 @@ export default {
       this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data)
+      this.data = data
+    )
   },
   methods: {
-    createPoll: function () {
+    /*createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-    },
+    },*/
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
     },
     addAnswer: function () {
-      this.answers.push("");
+      if(this.counter<6) {
+        this.answers.push("");
+        this.counter++;
+      }
+    },
+    removeAnswer: function () {
+      if(this.counter>2) {
+        this.counter--;
+        this.answers.pop();
+      }
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+    PicChoose(){
+      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+      if (person != null || person != "") {
+        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+        document.getElementById("previewPic").style.visibility= "visible";
+      }
+    },
+    updatePreview(){
+      //THis is the code for updating title and description
+      var c1 = document.getElementById('quizTitle').value;
+      var d1 = document.getElementById('as');
+      d1.innerHTML = c1;
+      var c2 = document.getElementById('desIptBox').value;
+      var d2 = document.getElementById('pdes');
+      d2.innerHTML = c2;
+      document.getElementById("previewPic").style.visibility= "visible";
     }
   }
 }
 </script>
 
 
-<style>
+<style scoped>
 
 header {
   font-size: 20pt;
@@ -175,7 +209,7 @@ body textarea{
 }
 
 #preview{
-  background-color: black;
+  background-color: rgb(100, 5, 5);
   background-size: cover;
   max-height: 100%;
   background-position: bottom;
@@ -184,16 +218,15 @@ body textarea{
   border: 5px black solid;
   overflow: hidden;
   resize: none;
-  padding-bottom: 5%;
+  position: relative;
+  padding-bottom: 0;
 }
 
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
   color: white;
-  height: 15%;
   line-break: auto;
-  max-height: 15%;
 }
 
 #addQuestionButton {
@@ -204,82 +237,72 @@ body textarea{
 
 #updatePre {
   height: 100%;
-  width: 15%;
+  width: 20%;
   background-color: rgb(135, 175, 111);
 }
 
 #addQues {
   height: 100%;
+  width: 20%;
+  background-color: rgb(100, 155, 36);
+  margin: 0 2%;
+}
+
+#removeQues {
+  height: 100%;
   width: 15%;
-  background-color: rgb(100, 155, 36)
+  background-color: rgb(255, 0, 0);
+  margin-bottom: 1%;
 }
 
 #importPic {
   height: 100%;
-  width: 15%;
-  background-color: rgb(200, 255, 136)
+  width: 20%;
+  background-color: wheat;
+}
+
+#previewPic{
+  width: 25%;
+  height: 35%;
+  position: absolute;
+  left: 37.5%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 #answers{
   display:grid;
-  height: 200px;
+  height: 150px;
   width: 90%;
   grid-template-columns: repeat(2, 1fr); /*default*/
   gap: 25px;
   align-items: center;
   margin-left:5%;
   margin-right: 5%;
-  margin-top: 20%;
+  margin-top: 25%;
+  clear: left;
 }
 
 #answerBox{
   height:85%;
   width:100%;
-  font-size:3vh;
-  border-radius: 20px;
+  background-color: greenyellow;
+  font-size:2vh;
+  border-radius: 12px;
 }
 
 #createDiv {
   min-height: 85%;
-  width: 88%;
-  float: left;
 }
 
 #buttonDiv {
   height: 10%;
   width: 100%;
   position: absolute;
-  padding-bottom: 10%;
+  padding-bottom: 5%;
   bottom: 0px;
+
 }
-#checkboxDiv{
-  min-height: 70%;
-  width: 10%;
-  float: left;
-  padding-top: 35%;
-}
-
-
-/* Create a custom checkbox */
-#corr {
-  margin-top: 30%;
-  height: 4vh;
-  width: 80%;
-  background-color: rgb(255, 255, 255);
-  vertical-align: middle;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 #backButton{
   height: 5%;
   width: 8%;
