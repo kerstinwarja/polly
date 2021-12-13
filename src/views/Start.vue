@@ -30,7 +30,7 @@
             <router-link v-bind:to="'/poll/+id'" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
             </div>
           </div-->
-
+          <img src="FingerRight.png">
         </div>
   </body>
 </template>
@@ -73,7 +73,7 @@ template{
   margin: 0px;
 }
 body{
-  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
+  background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
   background-size:cover;
   background-position: bottom;

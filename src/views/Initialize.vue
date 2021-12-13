@@ -2,6 +2,7 @@
   <body>
     <header>
       <h1>It's time to create your quiz!</h1>
+      {{ timerCount }}
     </header>
     <div class="wrap2">
       <div id="preview">
@@ -34,34 +35,48 @@
           <source src="../music/circusRagtime.mp3" type="audio/mpeg">
         </audio>
       </div>
+      <div id="audio">
+         </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
-        <!--button v-on:click="createPoll">
-          Create poll
-        </button-->
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
           <select type="submit" v-model="music" id="music">
-            <option disabled value="" > select music </option>
+            <!--gör selected hidden nått mer än att ta bort "selected music"?-->
+            <option disabled value="" selected hidden> select music </option>
                    <option>Brass</option>
                    <option>Ragtime</option>
                    <option>Strings</option>
                    <option>Techno</option>
                    <option>Trap</option>
+            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
+            <span>Import music</span>
+          </select>
+
+
+          <!-- timerKOD ska flyttas-->
+          <select type="submit" v-model="time" id="time">
+            <option disabled value=""> select time </option>
+                   <option>15</option>
+                   <option>30</option>
+                   <option>45</option>
           </select>
         </div>
+
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
         </button>
       </div>
     </div>
+
+
     <!--<router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
@@ -91,18 +106,38 @@ export default {
       lang: "",
       pollId: "",
       //pollName:""
-      pollDesc:"",
+      pollDesc:"", // vi använder bara pollDesc inte pollDes :)
       pollImg:"",
       data: {},
       uiLabels: {},
-      //pollDes: [],
+      SONG:"",
+      //timerKOD ska flyttas v
+      timerCount: 30,
+      timerEnabled: true,
       question: "",
       answers: ["", ""],
-      questionNumber: 0,
-
-      SONG:""
+      questionNumber: 0
     }
   },
+  watch: {
+
+            timerCount: {
+                handler(value) {
+
+                    if (value > 0 && this.timerEnabled) {
+                        setTimeout(() => {
+                            this.timerCount--;
+                        }, 1000);
+                    }
+                    else{
+                      this.timerCount = "SLUT"
+                    }
+
+                },
+            }
+
+        },
+        //timerKOD ska flyttas ^
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -127,12 +162,12 @@ export default {
 
 
     PicChoose(){
-      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
-    if (person != null || person != "") {
-        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
+      let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+    if (pict != null || pict != "") {
+        document.getElementById("previewPic").style.backgroundImage = "url(" + pict+")";
         document.getElementById("previewPic").style.visibility= "hidden";
     }
-    this.pollImg = person;
+    this.pollImg = pict;
     console.log(this.pollImg)
   },
   MusicChoose(){
@@ -149,15 +184,16 @@ export default {
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
       var d2 = document.getElementById('pdes');
-      this.pollDes = c2;
+      this.pollDesc = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
+      //timerKOD ska flyttas
+      this.timerCount = this.time;
+      this.timerEnabled = true;
   },
 
-
-    }
-  }
+  }}
 </script>
 
 <style scoped>
@@ -185,6 +221,23 @@ h3{
   text-align: left;
   color: Navy;
 }
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 2%;
+  float: left;
+}
+
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 2%;
+  float: right;
+  transform: scaleX(-1);
+}
+
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
