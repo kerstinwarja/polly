@@ -8,13 +8,16 @@
   <div id="preview">
     <div id="previewTitle">
       <p id="as">Preview</p>
+      {{ timerCount }}
     </div>
     <div id="previewPic">
     </div>
     <div id="answers">
       <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
     </textarea>
+    </div>
   </div>
+  
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
@@ -40,12 +43,19 @@
         <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
         <span>Import picture</span>
       </button>
+      <!-- timerKOD  -->
+      Timer
+          <select type="submit" v-model="time" id="time">
+            <option disabled value=""> select time </option>
+                   <option>15</option>
+                   <option>30</option>
+                   <option>45</option>
+          </select>
     </div>
   </div>
-  
 
 </div>
-</div>
+
   <div>
     <!--
     Poll link:
@@ -103,9 +113,30 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      counter: 2
+      counter: 2,
+      timerCount: 30,
+      timerEnabled: true
     }
   },
+  watch: {
+
+            timerCount: {
+                handler(value) {
+
+                    if (value > 0 && this.timerEnabled) {
+                        setTimeout(() => {
+                            this.timerCount--;
+                        }, 1000);
+                    }
+                    else{
+                      this.timerCount = "SLUT"
+                    }
+
+                },
+            }
+
+        },
+        //timerKOD 
   created: function () {
     this.lang = this.$route.params.lang;
     this.pollId = this.$route.params.id;
@@ -154,10 +185,8 @@ export default {
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;
-      var c2 = document.getElementById('desIptBox').value;
-      var d2 = document.getElementById('pdes');
-      d2.innerHTML = c2;
-      document.getElementById("previewPic").style.visibility= "visible";
+      this.timerCount = this.time;
+      this.timerEnabled = true;
     }
   }
 }
@@ -196,7 +225,6 @@ h3{
   grid-gap: 5%;
   grid-template-columns: 61% 31%;
   align-items: center;
-
 }
 
 body textarea{
@@ -287,7 +315,6 @@ body textarea{
 #answerBox{
   height:85%;
   width:100%;
-  background-color: greenyellow;
   font-size:2vh;
   border-radius: 12px;
 }
@@ -321,7 +348,6 @@ body textarea{
   transform: scaleX(-1);
 }
 .answer0{
-
     background-color:yellow;
   }
   .answer1{

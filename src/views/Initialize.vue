@@ -54,6 +54,8 @@
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
           </select>
+
+          
           <!-- timerKOD ska flyttas-->
           <select type="submit" v-model="time" id="time">
             <option disabled value=""> select time </option>
