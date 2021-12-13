@@ -6,12 +6,16 @@
     <div class="wrap2">
       <div id="preview">
         <div id="previewTitle">
-        <p id="as">Preview</p>
+          <p id="as">Preview</p>
         </div>
-        <div id="previewDesc">
-          <span id="pdes" style="background-color: black">Preview desc</span>
-        </div>
-        <div id="previewPic">
+        <div class="wrap4">
+          <div id="previewDesc">
+            <span id="pdes" style="background-color: black">Preview desc</span>
+          </div>
+          <div id="previewPic">
+          </div>
+          <div id="previewPartis">This is where your participants will be listed
+          </div>
         </div>
         <div id="audio">
        <audio controls v-if="SONG == 'Brass'">
@@ -45,7 +49,7 @@
             <span>Import picture</span>
           </button>
           <select type="submit" v-model="music" id="music">
-            <option disabled value=""> select music </option>
+            <option disabled value="" > select music </option>
                    <option>Brass</option>
                    <option>Ragtime</option>
                    <option>Strings</option>
@@ -116,7 +120,7 @@ export default {
     createPoll: function () {
       //Skickar pollDesc till servern.
       console.log("in createPoll "+this.pollImg)
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg })
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 
     },
@@ -133,6 +137,7 @@ export default {
   },
   MusicChoose(){
      this.SONG = this.music;
+     console.log("this.song "+this.SONG)
 
 },
     updatePreview(){
@@ -201,21 +206,23 @@ h3{
   margin: 10px 0px 0px;
 }
 #previewDesc{
-  width: 40%;
+  /*width: 33%;
   height: 70%;
-  float: left;
+  float: left;*/
   color: aliceblue;
   font-family: "Times New Roman";
   line-break: auto;
 }
 
 #previewPic{
-  width: 50%;
-  height: 70%;
-  float: left;
+  background-size: contain;
+  /*float: left;*/
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
 }
+
+
 #desIptBox{
   height: 20em;
 }
@@ -257,6 +264,14 @@ h3{
    grid-template-columns: 61% 31%;
    align-items: center;
   }
+
+  .wrap2 button{
+    background-color: wheat;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+    font-size:80%;
+  }
+
 .wrap3 {
    margin: 0px;
    padding: 5% 0% 5% 8%;
@@ -266,10 +281,14 @@ h3{
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-.wrap2 button{
-  background-color: wheat;
-  text-transform: uppercase;
-  padding-bottom: 1%;
-  font-size:80%;
+.wrap4{
+  margin: 0px;
+  padding: 5% 0% 5% 0%;
+  grid-gap: 1%;
+  width: 100%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: 33% 33% 32%;
+  align-items: center;
 }
 </style>
