@@ -2,6 +2,7 @@
   <body>
     <header>
       <h1>It's time to create your quiz!</h1>
+      {{ timerCount }}
     </header>
     <div class="wrap2">
       <div id="preview">
@@ -36,7 +37,7 @@
           </button>
            <!-- v-on:click="MusicChoose()" -->
           <select type="submit" v-model="music" id="music">
-            <option disabled value=""> select music </option>
+            <option disabled value="" selected hidden> select music </option>
                    <option>Brass</option>
                    <option>Ragtime</option>
                    <option>Strings</option>
@@ -44,6 +45,13 @@
                    <option>Trap</option>
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
+          </select>
+          <!-- timerKOD ska flyttas-->
+          <select type="submit" v-model="time" id="time">
+            <option disabled value=""> select time </option>
+                   <option>15</option>
+                   <option>30</option>
+                   <option>45</option>
           </select>
         </div>
         
@@ -78,10 +86,36 @@ export default {
       data: {},
       uiLabels: {},
       pollDes: "",
+<<<<<<< Updated upstream
       music: "",
       SONG: ""
+=======
+      SONG:"",
+      //timerKOD ska flyttas v 
+      timerCount: 30,
+      timerEnabled: true
+>>>>>>> Stashed changes
     }
   },
+  watch: {
+
+            timerCount: {
+                handler(value) {
+
+                    if (value > 0 && this.timerEnabled) {
+                        setTimeout(() => {
+                            this.timerCount--;
+                        }, 1000);
+                    }
+                    else{
+                      this.timerCount = "SLUT"
+                    }
+
+                },
+            }
+
+        },
+        //timerKOD ska flyttas ^
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -133,6 +167,9 @@ export default {
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
+      //timerKOD ska flyttas
+      this.timerCount = this.time;
+      this.timerEnabled = true;
   },
     
   }}
