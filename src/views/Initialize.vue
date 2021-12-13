@@ -7,10 +7,10 @@
     <div class="wrap2">
       <div id="preview">
         <div id="previewTitle">
-        <p id="as">Preview</p>
+        <p id="as"> Preview </p>
         </div>
         <div id="previewDesc">
-          <span id="pdes" style="background-color: black">Preview desc</span>
+          <span id="pdes" style="background-color: black"> Preview desc</span>
         </div>
         <div id="previewPic">
         </div>
@@ -68,6 +68,7 @@
         </button>
       </div>
     </div>
+    
     
     <!--<router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
