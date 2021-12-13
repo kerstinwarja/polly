@@ -15,27 +15,18 @@
         <div id="previewPic">
       </div>
       <div id="audio">
-        <audio controls id="preAudio" preload v-if="SONG">>
-          <source :src="SONG"
-           type="audio/mpeg">
-          Your browser does not support the audio element.
-          </audio>
-      </div>
+         </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
         <textarea id="desIptBox" type="text" v-model="pollDes" placeholder="Add a short description of your quiz..."></textarea>
-        <!--button v-on:click="createPoll">
-          Create poll
-        </button-->
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
-           <!-- v-on:click="MusicChoose()" -->
           <select type="submit" v-model="music" id="music">
             <option disabled value="" selected hidden> select music </option>
                    <option>Brass</option>
@@ -86,15 +77,10 @@ export default {
       data: {},
       uiLabels: {},
       pollDes: "",
-<<<<<<< Updated upstream
-      music: "",
-      SONG: ""
-=======
       SONG:"",
       //timerKOD ska flyttas v 
       timerCount: 30,
       timerEnabled: true
->>>>>>> Stashed changes
     }
   },
   watch: {
@@ -140,25 +126,8 @@ export default {
     }
   },
   MusicChoose(){
-    //var t1 = " type="+ '"audio/ogg"'+">";
-    //var t2 = " type="+ '"audio/mpeg"'+">";
-    var song = "circus"+this.music+".mp3";
-    var songPath = "../music/"
-    var songsongPath = songPath + song;
-
-    //var s1 = "<p>"+ songsongPath +"</p>" +" <audio controls autoplay>"+"<source src=\""+songsongPath +"\"" + t2 +' <source src="'+songsongPath +"\"" +  t1 + " Your browser does not support the audio element. </audio>";
-    //console.log(s1);
-    //document.getElementById('audio').innerHTML = s1;
-    
-    this.SONG = url.format(songsongPath);
-    console.log(songsongPath);
-    const audio = new Audio(process.env.BASE_URL + songsongPath);
-    audio.play();
-    var d1 = document.getElementById('as');
-    d1.innerHTML = this.SONG;
 },  
      updatePreview(){
-      //THis is the code fro updating title and description
       var c1 = document.getElementById('quizTitle').value;
       var d1 = document.getElementById('as');
       d1.innerHTML = c1;

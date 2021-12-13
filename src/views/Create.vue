@@ -5,27 +5,14 @@
   <h1> Add questions and answers to your quiz!  {{pollId}}</h1>
 </header>
 
-<<<<<<< Updated upstream
 
 <div class="wrap2">
 <div id="preview">
   <div id="previewTitle">
     <p id="as">Preview</p>
-=======
-  <div class="wrap2">
-  <div id="preview">
-    <div id="previewTitle">
-      <p id="as">Preview</p>
-    </div>
-    <div id="previewPic">
-    </div>
-    <div id="answers">
-      <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." v-bind:class="'answer'+i" readonly></textarea>
-    </div>
->>>>>>> Stashed changes
   </div>
   <div id="answers">
-    <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i" placeholder="Add an answer ..." readonly>
+    <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
 
     </textarea>
   </div>
