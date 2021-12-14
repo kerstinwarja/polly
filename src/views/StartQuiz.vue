@@ -5,13 +5,14 @@
         <header>{{pollId}}</header>
       </div>
       <div id="wrap">
-        <div id="description">
-            <span id="pdes" style="background-color: black">{{pollDesc}}</span>
+        <div class="infoBoards" id="description">
+            <span id="pdes" >{{pollDesc}}</span>
         </div>
         <div id="picture">
           <img v-bind:src="pollImg">
         </div>
-        <div id="participants">Här kommer alla participants vara
+        <div class="infoBoards" >
+          <span id="partText">Här kommer alla participants vara</span>
         </div>
       </div>
         <div id="audio">
@@ -113,11 +114,22 @@ h4{
   max-height: 15%;
 }
 
-#description{
-  float: left;
-  color: aliceblue;
+.infoBoards{
+  color: navy;
   font-family: "Times New Roman";
   line-break: auto;
+  height: 100%;
+  width: 90%;
+  background-color: wheat;
+  border-radius: 2%;
+  border: navy 2px solid;
+
+  font-size: 1.5em;
+}
+
+span {
+  position: relative;
+  top: 10%;
 }
 
 #wrap img{
@@ -125,6 +137,7 @@ h4{
   max-width:100%;
   height:auto;
   width: auto;
+
 }
 
 #startButton {
@@ -141,12 +154,17 @@ h4{
    width: 100%;
    display: grid;
    grid-template-columns: 33% 33% 33%;
-   align-items: center;
-   
+  align-items: center;
   }
 
 #audio {
   display:none;
 }
+
+#description {
+  margin: 10%;
+}
+
+
 
 </style>
