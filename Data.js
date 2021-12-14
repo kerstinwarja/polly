@@ -18,7 +18,7 @@ Data.prototype.getUILabels = function (lang = "en") {
   return ui;
 }
 //Lägg till en poll.img = pollImg
-Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg) {
+Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG) {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
     poll.lang = lang;
@@ -27,6 +27,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg) {
     //poll.pollName=pollName;
     poll.pollDesc=pollDesc;
     poll.pollImg=pollImg;
+    poll.SONG=SONG;
     poll.currentQuestion = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
@@ -63,6 +64,17 @@ Data.prototype.getImage = function(pollId) {
   if (typeof poll !== 'undefined') {
 
     return poll.pollImg;
+  }
+  return ""
+}
+
+
+Data.prototype.getMusic = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("music requested for", pollId);
+  if (typeof poll !== 'undefined') {
+
+    return poll.SONG;
   }
   return ""
 }

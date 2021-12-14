@@ -7,12 +7,16 @@
     <div class="wrap2">
       <div id="preview">
         <div id="previewTitle">
-        <p id="as"> Preview </p>
+          <p id="as">Preview</p>
         </div>
-        <div id="previewDesc">
-          <span id="pdes" style="background-color: black"> Preview desc</span>
-        </div>
-        <div id="previewPic">
+        <div class="wrap4">
+          <div id="previewDesc">
+            <span id="pdes" style="background-color: black">Preview desc</span>
+          </div>
+          <div id="previewPic">
+          </div>
+          <div id="previewPartis">This is where your participants will be listed
+          </div>
         </div>
         <div id="audio">
        <audio controls v-if="SONG == 'Brass'">
@@ -38,13 +42,14 @@
         <h3> Quiz name: </h3>
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDes" placeholder="Add a short description of your quiz..."></textarea>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
           <select type="submit" v-model="music" id="music">
+            <!--gör selected hidden nått mer än att ta bort "selected music"?-->
             <option disabled value="" selected hidden> select music </option>
                    <option>Brass</option>
                    <option>Ragtime</option>
@@ -55,7 +60,7 @@
             <span>Import music</span>
           </select>
 
-          
+
           <!-- timerKOD ska flyttas-->
           <select type="submit" v-model="time" id="time">
             <option disabled value=""> select time </option>
@@ -64,14 +69,14 @@
                    <option>45</option>
           </select>
         </div>
-        
+
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
           Update preview
         </button>
       </div>
     </div>
-    
-    
+
+
     <!--<router-link v-bind:to="'/create/'+lang">
         <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link>
@@ -101,13 +106,12 @@ export default {
       lang: "",
       pollId: "",
       //pollName:""
-      pollDesc:"",
+      pollDesc:"", // vi använder bara pollDesc inte pollDes :)
       pollImg:"",
       data: {},
       uiLabels: {},
-      pollDes: "",
       SONG:"",
-      //timerKOD ska flyttas v 
+      //timerKOD ska flyttas v
       timerCount: 30,
       timerEnabled: true,
       question: "",
@@ -151,7 +155,7 @@ export default {
     createPoll: function () {
       //Skickar pollDesc till servern.
       console.log("in createPoll "+this.pollImg)
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg })
+      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 
     },
@@ -168,6 +172,7 @@ export default {
   },
   MusicChoose(){
      this.SONG = this.music;
+     console.log("this.song "+this.SONG)
 
 },
     updatePreview(){
@@ -179,7 +184,7 @@ export default {
       d1.innerHTML = c1;
       var c2 = document.getElementById('desIptBox').value;
       var d2 = document.getElementById('pdes');
-      this.pollDes = c2;
+      this.pollDesc = c2;
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
@@ -187,7 +192,7 @@ export default {
       this.timerCount = this.time;
       this.timerEnabled = true;
   },
-    
+
   }}
 </script>
 
@@ -254,21 +259,23 @@ h3{
   margin: 10px 0px 0px;
 }
 #previewDesc{
-  width: 40%;
+  /*width: 33%;
   height: 70%;
-  float: left;
+  float: left;*/
   color: aliceblue;
   font-family: "Times New Roman";
   line-break: auto;
 }
 
 #previewPic{
-  width: 50%;
-  height: 70%;
-  float: left;
+  background-size: contain;
+  /*float: left;*/
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
 }
+
+
 #desIptBox{
   height: 20em;
 }
@@ -310,6 +317,14 @@ h3{
    grid-template-columns: 61% 31%;
    align-items: center;
   }
+
+  .wrap2 button{
+    background-color: wheat;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+    font-size:80%;
+  }
+
 .wrap3 {
    margin: 0px;
    padding: 5% 0% 5% 8%;
@@ -319,10 +334,14 @@ h3{
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-.wrap2 button{
-  background-color: wheat;
-  text-transform: uppercase;
-  padding-bottom: 1%;
-  font-size:80%;
+.wrap4{
+  margin: 0px;
+  padding: 5% 0% 5% 0%;
+  grid-gap: 1%;
+  width: 100%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: 33% 33% 32%;
+  align-items: center;
 }
 </style>

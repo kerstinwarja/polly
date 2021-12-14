@@ -9,9 +9,29 @@
             <span id="pdes" style="background-color: black">{{pollDesc}}</span>
         </div>
         <div id="picture">
-          <img v-bind:src="this.pollImg" style="height:100%;">
+          <img v-bind:src="pollImg">
+        </div>
+        <div id="participants">Här kommer alla participants vara
         </div>
       </div>
+        <div id="audio">
+       <audio controls loop v-if="SONG == 'Brass'"> <!--remember to add autoplay-->
+          <source src="../music/circusBrass.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+          <source src="../music/circusTrap.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+          <source src="../music/circusStrings.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+          <source src="../music/circusTechno.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
         <router-link v-bind:to="'/poll/'+ this.pollId">
           <button id="startButton">START QUIZ</button>
         </router-link>
@@ -31,6 +51,7 @@ export default {
       //pollName:""
       pollDesc:"",
       pollImg:"",
+      SONG:"",
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -62,10 +83,14 @@ export default {
     socket.on("imageAddress", imag =>
       this.pollImg = imag
     )
-    console.log("image"+this.pollImg)
+
+    socket.on("musicSelection", SONG =>
+      this.SONG = SONG
+    )
 
     socket.on("createPoll", (data) =>
-      this.data = data)
+      this.data = data
+    )
   },
 
 }
@@ -73,10 +98,12 @@ export default {
 <style scoped>
 
 header{
-  padding-top:0px;
-  padding-bottom:5%;
+padding-top:0%;
 }
 
+h4{
+  margin: 3% 0% 3% 0%;
+}
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -87,38 +114,39 @@ header{
 }
 
 #description{
-  width: 50%;
-  height: 70%;
   float: left;
   color: aliceblue;
   font-family: "Times New Roman";
   line-break: auto;
 }
-#picture{
-  width: 40%;
-  height: 70%;
-  float: left;
-  text-align: right;
-  /*background-repeat: no-repeat;
-  background-size: 100% 100%;*/
+
+#wrap img{
+  max-height: 15em;
+  max-width:100%;
+  height:auto;
+  width: auto;
 }
 
 #startButton {
-  height: 3em;
-  width: 10%;
+  height: 5em;
+  width: 15%;
   background-color: rgb(100, 155, 36);
-  margin: 2% 2%;
+  margin-bottom:5%;
 }
 
 #wrap {
    margin: 0px;
-   padding: 5% 0% 5% 8%;
-   grid-gap: 4%;
-   width: 80%;
+   padding: 3% 0% 3% 0%;
+   /*grid-gap: 1%;*/
+   width: 100%;
    display: grid;
-   grid-template-columns: 50% 50%;
+   grid-template-columns: 33% 33% 33%;
    align-items: center;
    
   }
+
+#audio {
+  display:none;
+}
 
 </style>

@@ -12,7 +12,7 @@ function sockets(io, socket, data) {
 //Lägg till d.img här
   socket.on('createPoll', function(d) {
     console.log("in data"+d.pollImg);
-    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.pollDesc, d.pollImg));
+    socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.pollDesc, d.pollImg, d.SONG));
     //här lägger vi till beskrivningen
   });
 
@@ -30,11 +30,11 @@ function sockets(io, socket, data) {
     socket.join(pollId);
     socket.emit('newQuestion', data.getQuestion(pollId));
     socket.emit('dataUpdate', data.getAnswers(pollId));
-    console.log("HÄEEÄEÄEÄE");
     //HÄR TESTAR JAG. Skapa en socket.emit med getImg här
     socket.emit('description', data.getDescription(pollId));
-    socket.emit('imageAddress', data.getImage(pollId))
-    //console.log(d)
+    socket.emit('imageAddress', data.getImage(pollId));
+    socket.emit('musicSelection', data.getMusic(pollId));
+
   });
 
   socket.on('runQuestion', function(d) {
