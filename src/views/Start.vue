@@ -130,7 +130,8 @@ header {
   padding-top: 50px;
   margin: 0;
   color: white;
-  text-shadow: 3px 3px #990000;
+
+  text-shadow: -2px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
 
 

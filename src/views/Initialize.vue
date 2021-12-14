@@ -201,7 +201,7 @@ export default {
 <style scoped>
 header {
   font-size: 20pt;
-  text-shadow: 3px 3px navy;
+  text-shadow: -1px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
 .createWindow{
   background-color: wheat;
@@ -226,10 +226,9 @@ h3{
 
 h4 {
   margin: 3% 0% 3% 0%;
-
   text-align: center;
   color: white;
-  text-shadow: 2px 2px #990000;
+  text-shadow: -1px 0 #990000, 0 3px #990000, 3px 0 #990000, 0 -1px #990000;
   font-size: 18pt;
 }
 
@@ -261,7 +260,7 @@ h4 {
 }
 #previewTitle{
   font-size: 30px;
-  text-shadow: 3px 3px navy;
+  text-shadow: -1px 0 navy, 0 3px navy, 3px 0 navy, 0 -1px navy;
   color: white;
 
   line-break: auto;

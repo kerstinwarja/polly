@@ -29,6 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
+    poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
@@ -37,11 +38,12 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
 
 }
 
-Data.prototype.addQuestion = function(pollId, q) {
+Data.prototype.addQuestion = function(pollId, q, qId) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q);
+  console.log("question added to", pollId, q, qId);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
+    poll.questions.push(qId);
   }
 }
 //här testar jag
@@ -80,7 +82,7 @@ Data.prototype.getMusic = function(pollId) {
 }
 
 
-Data.prototype.getQuestion = function(pollId, qId=null) {
+Data.prototype.getQuestion = function(pollId, qId) {
   const poll = this.polls[pollId];
   console.log("question requested for ", pollId, qId);
   if (typeof poll !== 'undefined') {

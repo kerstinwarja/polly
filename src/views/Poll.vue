@@ -20,9 +20,10 @@ export default {
     return {
       question: {
         q: "",
-        a: []
+        a: [],
+        questionNumber: 0
       },
-      pollId: "inactive poll"
+      pollId: "inactive poll",
     }
   },
   created: function () {
@@ -33,8 +34,10 @@ export default {
     //console.log("steg2")
     socket.on("newQuestion", q =>
       this.question = q
+        /* this.questionNumber = qId */
     )
-    console.log("steg3")
+
+    console.log("this is q"+this.question)
   },
   methods: {
     submitAnswer: function (answer) {
