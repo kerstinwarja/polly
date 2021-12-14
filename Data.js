@@ -42,7 +42,7 @@ Data.prototype.addQuestion = function(pollId, q) {
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
   }
-}
+} 
 //här testar jag
 
 Data.prototype.getDescription = function(pollId) {

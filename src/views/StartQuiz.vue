@@ -110,7 +110,7 @@ header{
   margin: 2% 2%;
 }
 
-.wrap {
+#wrap {
    margin: 0px;
    padding: 5% 0% 5% 8%;
    grid-gap: 4%;
@@ -118,6 +118,7 @@ header{
    display: grid;
    grid-template-columns: 50% 50%;
    align-items: center;
+   
   }
 
 </style>
