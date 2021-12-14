@@ -6,16 +6,18 @@
     </header>
     <div class="wrap2">
       <div id="preview">
+        <h4> It's time to play</h4>
         <div id="previewTitle">
           <p id="as">Preview</p>
         </div>
         <div class="wrap4">
-          <div id="previewDesc">
-            <span id="pdes" style="background-color: black">Preview desc</span>
+          <div class="infoBoards" id="previewDesc">
+            <span id="pdes">Preview desc</span>
           </div>
           <div id="previewPic">
           </div>
-          <div id="previewPartis">This is where your participants will be listed
+          <div class="infoBoards" id="previewPartis">
+            <span>This is where your participants will be listed </span>
           </div>
         </div>
         <div id="audio">
@@ -221,6 +223,16 @@ h3{
   text-align: left;
   color: Navy;
 }
+
+h4 {
+  margin: 3% 0% 3% 0%;
+
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px #990000;
+  font-size: 18pt;
+}
+
 #backButton{
   height: 5%;
   width: 8%;
@@ -244,27 +256,34 @@ h3{
   max-height: 100%;
   background-position: bottom;
   color: Grey;
-  height: 100%;
+  height: 80%;
   border: 5px black solid;
 }
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
   color: white;
-  height: 15%;
+
   line-break: auto;
   max-height: 15%;
 }
 #as{
   margin: 10px 0px 0px;
 }
-#previewDesc{
-  /*width: 33%;
-  height: 70%;
-  float: left;*/
-  color: aliceblue;
+.infoBoards{
+  color: navy;
   font-family: "Times New Roman";
   line-break: auto;
+  height: 100%;
+  width: 90%;
+  background-color: wheat;
+  border-radius: 2%;
+  border: navy 2px solid;
+  font-size: 1.5em;
+}
+
+#previewDesc {
+  margin: 10%;
 }
 
 #previewPic{
@@ -274,7 +293,6 @@ h3{
   width: 100%;
   height: 100%;
 }
-
 
 #desIptBox{
   height: 20em;
@@ -315,7 +333,7 @@ h3{
    display: grid;
    grid-gap: 5%;
    grid-template-columns: 61% 31%;
-   align-items: center;
+   align-items: top;
   }
 
   .wrap2 button{
