@@ -33,7 +33,7 @@ export default {
       //timerEnabled: true,
       pollId: "inactive poll",
      // nextactivated : true,
-      
+       
     }
   },/*
 
