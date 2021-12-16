@@ -9,7 +9,7 @@
             <span id="pdes" style="background-color: black">{{pollDesc}}</span>
         </div>
         <div id="picture">
-          <img v-bind:src="this.pollImg" style="height:100%;">
+          <img v-bind:src="this.pollImg" id="impPic">
         </div>
       </div>
         <router-link v-bind:to="'/poll/'+ this.pollId">
@@ -75,6 +75,10 @@ export default {
 header{
   padding-top:0px;
   padding-bottom:5%;
+}
+#impPic{
+  height: 30%;
+  width: 35%;
 }
 
 #previewTitle{

@@ -21,7 +21,7 @@
         <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
       </label>
       <div class="buttonLink">
-        <router-link v-bind:to="/startquiz/+id" tag="button"><br>
+        <router-link  v-bind:to="/startquiz/+id"  tag="button"><br>
           <button>{{uiLabels.participatePoll}}!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
         </router-link>
       </div>

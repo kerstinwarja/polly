@@ -47,9 +47,9 @@
       Timer
           <select type="submit" v-model="time" id="time">
             <option disabled value=""> select time </option>
-                   <option>15</option>
-                   <option>30</option>
-                   <option>45</option>
+                   <option>3</option>
+                   <option>7</option>
+                   <option>9</option>
           </select>
     </div>
   </div>
@@ -156,7 +156,7 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time } )
     },
     addAnswer: function () {
       if(this.counter<6) {

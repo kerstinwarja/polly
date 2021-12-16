@@ -23,8 +23,11 @@ export default {
   data: function () {
     return {
       isCorrect:true,
+      timerCount: this.question.t,
+      timerEnabled: true,
     }
   },
+  
  
   
   methods: {
