@@ -36,6 +36,19 @@ export default {
       
     }
   },/*
+
+var a = new Date()
+
+
+intervalId = setInterval(()=>{
+    console.log(Math.round((new Date() - a)/1000))
+}, 1000)
+
+
+clearInterval(intervalId)
+
+
+  GAMMAL TIMER UNDER, NY HET TIMER ÖVER
   watch: {
 
             timerCount: {
