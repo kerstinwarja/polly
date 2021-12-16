@@ -16,19 +16,19 @@
         </div>
       </div>
         <div id="audio">
-       <audio controls loop v-if="SONG == 'Brass'"> <!--remember to add autoplay-->
+       <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
           <source src="../music/circusBrass.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
           <source src="../music/circusTrap.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
           <source src="../music/circusStrings.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
           <source src="../music/circusTechno.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
           <source src="../music/circusRagtime.mp3" type="audio/mpeg">
         </audio>
       </div>
@@ -53,6 +53,7 @@ export default {
       pollDesc:"",
       pollImg:"",
       SONG:"",
+      name: [],
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -79,6 +80,9 @@ export default {
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
+    )
+    socket.on("name", myName =>
+      this.name.push(myName)
     )
 
     socket.on("imageAddress", imag =>

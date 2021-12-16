@@ -75,7 +75,7 @@ export default {
         /* this.questionNumber = qId */
     )
     console.log("heere BAJS")
-    this.timerCount = this.question.t
+    //this.timerCount = this.question.t
     console.log("this is q"+this.question)
   },
   methods: {
