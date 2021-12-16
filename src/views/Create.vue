@@ -60,14 +60,14 @@
 
 </div>
 
-  <!--div>
+  <div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div-->
+  </div>
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>

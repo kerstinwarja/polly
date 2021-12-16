@@ -2,8 +2,8 @@
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
-   {{timerCount}}
-  <!-- {{this.question.t}}-->
+   <!--{{timerCount}}
+   {{this.question.t}} -->
 
   <!-- <button v-on:click="nextQue()">
           NExt
@@ -29,10 +29,10 @@ export default {
         t:"",
         questionNumber: 0,
       },
-      timerCount : 45,
-      timerEnabled: true,
+      //timerCount : 45,
+      //timerEnabled: true,
       pollId: "inactive poll",
-      nextactivated : true,
+     // nextactivated : true,
       
     }
   },/*
@@ -41,23 +41,13 @@ export default {
             timerCount: {
                 handler(time) {
                   console.log(this.question.t)
-                      if(this.nextactivated){
-                         this.timerCount = this.question.t
-                         this.nextactivated = false
-                          this.timerCount--
-                      }
-                      
-                    else if (time > 0 && this.timerEnabled) {
+                     if (time > 0 && this.timerEnabled) {
                         setTimeout(() => {
                             this.timerCount--;
                         }, 1000);
                     }
-                    else if(time < 1 && time>-1 && this.timerEnabled){
-                        this.timerEnabled = true;
-                       // this.timerCount = "Slut"
-                    }
                     else{
-                      this.timerCount = this.question.t;
+                      this.timerCount = "SLUT";
                     }
                 },
                 immediate: true
@@ -74,7 +64,7 @@ export default {
       this.question = q
     )
     console.log("heere BAJS")
-    //this.timerCount = this.question.t
+    this.timerCount = this.question.t
     console.log("this is q"+this.question)
   },
   methods: {
@@ -85,8 +75,8 @@ export default {
       console.log("next pressed")
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber+1})
       this.questionNumber++
-      this.timerCount = this.question.t
-      this.nextactivated = true
+      //this.timerCount = this.question.t
+      //this.nextactivated = true
     },
   }
 }

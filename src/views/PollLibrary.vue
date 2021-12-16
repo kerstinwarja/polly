@@ -62,6 +62,7 @@ export default {
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
+        socket.emit()
       this.pollId = this.id
       this.$router.push({ name: 'StartQuiz', params: { id: this.pollId} })
       }
