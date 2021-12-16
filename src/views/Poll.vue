@@ -2,7 +2,6 @@
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
-  
 </template>
 
 <script>
@@ -34,10 +33,9 @@ export default {
     //console.log("steg2")
     socket.on("newQuestion", q =>
       this.question = q
-        /* this.questionNumber = qId */
     )
+    //socket.emit('runQuestion', {pollId: this.pollId, questionNumber: this.question.questionNumber})
 
-    console.log("this is q"+this.question)
   },
   methods: {
     submitAnswer: function (answer) {

@@ -69,13 +69,12 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
 
-
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
-    //lyssnar på frågor, kanske ta bort
+    /*lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
       this.question = q
-    )
+    )*/
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
