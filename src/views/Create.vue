@@ -156,7 +156,7 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time } )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, qID: this.questionNumber } )
     },
     addAnswer: function () {
       if(this.counter<6) {

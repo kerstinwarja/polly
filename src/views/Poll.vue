@@ -26,12 +26,12 @@ export default {
       question: {
         q: "",
         a: [],
-        t:""
+        t:"",
+        questionNumber: 0,
       },
       timerCount : 45,
       timerEnabled: true,
       pollId: "inactive poll",
-      questionNumber: 0,
       nextactivated : true,
       
     }
@@ -72,10 +72,11 @@ export default {
     //console.log("steg2")
     socket.on("newQuestion", q =>
       this.question = q
+        /* this.questionNumber = qId */
     )
     console.log("heere BAJS")
     this.timerCount = this.question.t
-    console.log("steg3")
+    console.log("this is q"+this.question)
   },
   methods: {
     submitAnswer: function (answer) {
