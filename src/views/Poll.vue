@@ -72,7 +72,6 @@ export default {
     //console.log("steg2")
     socket.on("newQuestion", q =>
       this.question = q
-        /* this.questionNumber = qId */
     )
     console.log("heere BAJS")
     //this.timerCount = this.question.t

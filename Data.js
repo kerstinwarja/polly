@@ -29,7 +29,6 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
-    poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
@@ -38,12 +37,11 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
 
 }
 
-Data.prototype.addQuestion = function(pollId, q, qId) {
+Data.prototype.addQuestion = function(pollId, q) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q, qId);
+  console.log("question added to", pollId, q);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
-    poll.questions.push(qId);
   }
 }
 //här testar jag
@@ -82,17 +80,33 @@ Data.prototype.getMusic = function(pollId) {
 }
 
 
-Data.prototype.getQuestion = function(pollId, qId) {
+Data.prototype.getQuestion = function(pollId, currentQuestion) {
   const poll = this.polls[pollId];
-  console.log("question requested for ", pollId, qId);
+  console.log("question requested for ", pollId, currentQuestion);
   if (typeof poll !== 'undefined') {
-    if (qId !== null) {
-      poll.currentQuestion = qId;
-    }
+    /*if (questionNumber !== null) {
+      console.log("qnr " + questionNumber)
+      poll.currentQuestion = questionNumber;
+      console.log("cQ " + poll.currentQuestion)
+    }*/
     return poll.questions[poll.currentQuestion];
   }
   return []
 }
+
+/*Data.prototype.getQuestion = function(pollId, questionNumber) {
+  const poll = this.polls[pollId];
+  console.log("question requested for ", pollId, questionNumber);
+  if (typeof poll !== 'undefined') {
+    if (questionNumber !== null) {
+      console.log("qnr " + questionNumber)
+      poll.currentQuestion = questionNumber;
+      console.log("cQ " + poll.currentQuestion)
+    }
+    return poll.questions[poll.currentQuestion];
+  }
+  return []
+}*/
 
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];
