@@ -156,7 +156,6 @@ export default {
   methods: {
     createPoll: function () {
       //Skickar pollDesc till servern.
-      console.log("in createPoll "+this.pollImg)
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 
@@ -174,7 +173,6 @@ export default {
   },
   MusicChoose(){
      this.SONG = this.music;
-     console.log("this.song "+this.SONG)
 
 },
     updatePreview(){
@@ -201,7 +199,7 @@ export default {
 <style scoped>
 header {
   font-size: 20pt;
-  text-shadow: 3px 3px navy;
+  text-shadow: -1px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
 .createWindow{
   background-color: wheat;
@@ -223,16 +221,13 @@ h3{
   text-align: left;
   color: Navy;
 }
-
 h4 {
   margin: 3% 0% 3% 0%;
-
   text-align: center;
   color: white;
-  text-shadow: 2px 2px #990000;
+  text-shadow: -1px 0 #990000, 0 3px #990000, 3px 0 #990000, 0 -1px #990000;
   font-size: 18pt;
 }
-
 #backButton{
   height: 5%;
   width: 8%;
@@ -256,14 +251,14 @@ h4 {
   max-height: 100%;
   background-position: bottom;
   color: Grey;
-  height: 80%;
+  height: 100%;
   border: 5px black solid;
 }
 #previewTitle{
   font-size: 30px;
-  text-shadow: 3px 3px navy;
+  text-shadow: -1px 0 navy, 0 3px navy, 3px 0 navy, 0 -1px navy;
   color: white;
-
+  height: 15%;
   line-break: auto;
   max-height: 15%;
 }
@@ -279,9 +274,8 @@ h4 {
   background-color: wheat;
   border-radius: 2%;
   border: navy 2px solid;
-  font-size: 1.5em;
+  font-size: 1em;
 }
-
 #previewDesc {
   margin: 10%;
 }
@@ -293,6 +287,7 @@ h4 {
   width: 100%;
   height: 100%;
 }
+
 
 #desIptBox{
   height: 20em;
@@ -333,7 +328,7 @@ h4 {
    display: grid;
    grid-gap: 5%;
    grid-template-columns: 61% 31%;
-   align-items: top;
+   align-items: center;
   }
 
   .wrap2 button{
@@ -352,14 +347,14 @@ h4 {
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-.wrap4{
-  margin: 0px;
-  padding: 5% 0% 5% 0%;
-  grid-gap: 1%;
-  width: 100%;
-  height: 40%;
-  display: grid;
-  grid-template-columns: 33% 33% 32%;
-  align-items: center;
-}
+  .wrap4{
+    margin: 0px;
+    padding: 5% 0% 5% 0%;
+    grid-gap: 1%;
+    width: 100%;
+    height: 40%;
+    display: grid;
+    grid-template-columns: 33% 33% 32%;
+    align-items: center;
+  }
 </style>

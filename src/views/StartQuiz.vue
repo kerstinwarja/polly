@@ -69,13 +69,12 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
 
-
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
-    //lyssnar på frågor, kanske ta bort
+    /*lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
       this.question = q
-    )
+    )*/
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
@@ -99,11 +98,13 @@ export default {
 <style scoped>
 
 header{
-padding-top:0%;
+  padding-top:0%;
+  text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
 }
 
 h4{
   margin: 3% 0% 3% 0%;
+  text-shadow: -0.01em 0 #990000, 0 0.05em #990000, 0.05em 0 #990000, 0 -0.01em #990000;
 }
 #previewTitle{
   font-size: 30px;

@@ -2,7 +2,6 @@
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
-  
 </template>
 
 <script>
@@ -20,9 +19,10 @@ export default {
     return {
       question: {
         q: "",
-        a: []
+        a: [],
+        questionNumber: 0
       },
-      pollId: "inactive poll"
+      pollId: "inactive poll",
     }
   },
   created: function () {
@@ -34,7 +34,12 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
+<<<<<<< HEAD
     
+=======
+    //socket.emit('runQuestion', {pollId: this.pollId, questionNumber: this.question.questionNumber})
+
+>>>>>>> 5c72c684b4fcf06b924323cdd629f43504b2bc85
   },
   methods: {
     submitAnswer: function (answer) {

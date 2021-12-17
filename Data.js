@@ -90,17 +90,33 @@ Data.prototype.getQuestionArray = function(pollId) {
 }
 
 
-Data.prototype.getQuestion = function(pollId, qId=null) {
+Data.prototype.getQuestion = function(pollId, currentQuestion) {
   const poll = this.polls[pollId];
-  console.log("question requested for ", pollId, qId);
+  console.log("question requested for ", pollId, currentQuestion);
   if (typeof poll !== 'undefined') {
-    if (qId !== null) {
-      poll.currentQuestion = qId;
-    }
+    /*if (questionNumber !== null) {
+      console.log("qnr " + questionNumber)
+      poll.currentQuestion = questionNumber;
+      console.log("cQ " + poll.currentQuestion)
+    }*/
     return poll.questions[poll.currentQuestion];
   }
   return []
 }
+
+/*Data.prototype.getQuestion = function(pollId, questionNumber) {
+  const poll = this.polls[pollId];
+  console.log("question requested for ", pollId, questionNumber);
+  if (typeof poll !== 'undefined') {
+    if (questionNumber !== null) {
+      console.log("qnr " + questionNumber)
+      poll.currentQuestion = questionNumber;
+      console.log("cQ " + poll.currentQuestion)
+    }
+    return poll.questions[poll.currentQuestion];
+  }
+  return []
+}*/
 
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];

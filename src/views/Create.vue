@@ -7,17 +7,17 @@
   <div class="wrap2">
   <div id="preview">
     <div id="previewTitle">
-      <p id="as">Preview</p>
-      {{ timerCount }}
+      <p id="timer">{{ timerCount }}</p>
+      <span id="as">Preview</span>
     </div>
     <div id="previewPic">
     </div>
     <div id="answers">
       <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
-    </textarea>
+      </textarea>
     </div>
   </div>
-  
+
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
@@ -29,7 +29,11 @@
       <button id="addQuestionButton" v-on:click="addAnswer">
         Add answer
       </button><br>
-      <textarea id="ansAlt" type="text" v-for="(_, i) in answers" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+      <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
+        <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+        <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+        {{isCorrect[i]}}
+      </div>
     </div>
     <div id="buttonDiv">
       <button type="submit" id="updatePre" v-on:click="updatePreview()">
@@ -56,38 +60,14 @@
 
 </div>
 
-  <div>
-    <!--
-    Poll link:
-    <input type="text" v-model="pollId">
-    <button v-on:click="createPoll">
-      Create poll
-    </button>
-    -->
-
-
-<!--    <div>
-
-      <h3> {{uiLabels.question}}: </h3>
-      <input type="text" v-model="question">
-      <div>
-        Answers:
-        <input v-for="(_, i) in answers"
-               v-model="answers[i]"
-               v-bind:key="'answer'+i">
-        <button v-on:click="addAnswer">
-          Add answer alternative
-        </button>
-      </div>
-    </div>-->
-
+  <!--div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div>
+  </div-->
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
@@ -115,7 +95,8 @@ export default {
       uiLabels: {},
       counter: 2,
       timerCount: 30,
-      timerEnabled: true
+      timerEnabled: true,
+      isCorrect:[]
     }
   },
   watch: {
@@ -136,7 +117,7 @@ export default {
             }
 
         },
-        //timerKOD 
+        //timerKOD
   created: function () {
     this.lang = this.$route.params.lang;
     this.pollId = this.$route.params.id;
@@ -156,7 +137,13 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
+<<<<<<< HEAD
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers })
+=======
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, questionNumber: this.questionNumber} )
+      this.questionNumber ++
+
+>>>>>>> 5c72c684b4fcf06b924323cdd629f43504b2bc85
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -212,7 +199,7 @@ h3{
   background-color: wheat;
   width: 100%;
   border: 3px navy solid;
-  min-height: 120%;
+  height: 120%;
   position: relative;
 }
 
@@ -224,7 +211,7 @@ h3{
   display: grid;
   grid-gap: 5%;
   grid-template-columns: 61% 31%;
-  align-items: center;
+  align-items: top;
 }
 
 body textarea{
@@ -237,18 +224,22 @@ body textarea{
   border: 2px solid;
 }
 
+::placeholder{
+  color:navy;
+}
+
 #preview{
-  background-color: rgb(100, 5, 5);
+  background-color: wheat;
   background-size: cover;
   max-height: 100%;
   background-position: bottom;
-  color: Grey;
-  height: 100%;
+  color: Black;
+  height: 72vh;
   border: 5px black solid;
   overflow: hidden;
   resize: none;
   position: relative;
-  padding-bottom: 0;
+  padding-bottom: 2%;
 }
 
 #previewTitle{
@@ -256,6 +247,7 @@ body textarea{
   text-shadow: 3px 3px navy;
   color: white;
   line-break: auto;
+  text-align:center;
 }
 
 #addQuestionButton {
@@ -317,6 +309,7 @@ body textarea{
   width:100%;
   font-size:2vh;
   border-radius: 12px;
+  color:black;
 }
 
 #createDiv {
@@ -335,34 +328,39 @@ body textarea{
   height: 5%;
   width: 8%;
   margin-left: 4%;
-  margin-top: 2%;
+  margin-top: 10%;
   float: left;
+
 }
 
 #forwardButton{
   height: 5%;
   width: 8%;
   margin-right: 4%;
-  margin-top: 2%;
+  margin-top: 10%;
   float: right;
   transform: scaleX(-1);
 }
+
+#timer{
+  margin: 0%;
+}
 .answer0{
-    background-color:yellow;
+  background-color:#628579;
   }
-  .answer1{
-      background-color:green;
+.answer1{
+  background-color:#536CB0;
   }
-   .answer2{
-    background-color:red;
+.answer2{
+  background-color:#CF903A;
   }
-   .answer3{
-    background-color:blue;
+.answer3{
+   background-color:#A3493E;
   }
-  .answer4{
-    background-color:blue;
+.answer4{
+  background-color:#D8A1A9;
   }
-  .answer5{
-    background-color:blue;
+.answer5{
+  background-color:#633D41;
   }
 </style>
