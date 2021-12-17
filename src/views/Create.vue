@@ -108,7 +108,7 @@ export default {
     return {
       lang: "",
       //pollId: "", //remove to not overwrite from initialize?
-      question: "",
+      question: [""],
       answers: ["", ""],
       questionNumber: 0,
       data: {},
@@ -156,7 +156,7 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers })
     },
     addAnswer: function () {
       if(this.counter<6) {

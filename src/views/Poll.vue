@@ -34,7 +34,7 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
-    console.log("steg3")
+    
   },
   methods: {
     submitAnswer: function (answer) {

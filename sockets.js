@@ -17,7 +17,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a});
+    data.addQuestion(d.pollId, {q: d.q, a: d.a},d.index);
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
   });
   //används inte nu men ha kvar som inspo för framtiden :)
@@ -34,6 +34,7 @@ function sockets(io, socket, data) {
     socket.emit('description', data.getDescription(pollId));
     socket.emit('imageAddress', data.getImage(pollId));
     socket.emit('musicSelection', data.getMusic(pollId));
+    socket.emit("allQuestionsArray", data.getQuestionArray(pollId));
 
   });
 

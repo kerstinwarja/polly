@@ -71,16 +71,21 @@ export default {
 <style>
 template{
   margin: 0px;
+  
 }
 body{
-  background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
+  background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
   background-size:cover;
   background-position: bottom;
   background-attachment: fixed;
   margin: 0px;
   padding: 0px;
+  
 }
+
+
+
 
 button{
     border-radius: 8px;
