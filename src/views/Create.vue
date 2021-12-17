@@ -31,9 +31,11 @@
       </button><br>
       <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
         <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
-        <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+        <input type="checkbox" v-model="isCorrect[i]">
         {{isCorrect[i]}}
       </div>
+      {{isCorrect}}
+      {{answers}}
     </div>
     <div id="buttonDiv">
       <button type="submit" id="updatePre" v-on:click="updatePreview()">
@@ -60,19 +62,19 @@
 
 </div>
 
-  <!--div>
+  <div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div-->
+  </div>
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
-    <router-link v-bind:to="'/polllibrary/'+ lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+    <router-link v-bind:to="'/polllibrary/'+ lang" v-on:click=saveQuiz()>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton">
     </router-link>
 
 </body>
@@ -96,7 +98,7 @@ export default {
       counter: 2,
       timerCount: 30,
       timerEnabled: true,
-      isCorrect:[]
+      isCorrect:[false, false],
     }
   },
   watch: {
@@ -137,9 +139,11 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, questionNumber: this.questionNumber} )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, isCorrect: this.isCorrect, questionNumber: this.questionNumber} )
+      console.log(this.isCorrect)
       this.questionNumber ++
-
+      //empy all textareas when the question has been added
+      //document.getElementById('quizTitle').reset();
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -151,6 +155,7 @@ export default {
       if(this.counter>2) {
         this.counter--;
         this.answers.pop();
+
       }
     },
     runQuestion: function () {
@@ -170,6 +175,13 @@ export default {
       d1.innerHTML = c1;
       this.timerCount = this.time;
       this.timerEnabled = true;
+    },
+    saveQuiz(){
+      var c1 = document.getElementById('quizTitle').value;
+      if(c1!=null){
+        this.addQuestion()
+      }
+      console.log("ADDED!")
     }
   }
 }

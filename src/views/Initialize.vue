@@ -61,15 +61,6 @@
             <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
             <span>Import music</span>
           </select>
-
-
-          <!-- timerKOD ska flyttas-->
-          <select type="submit" v-model="time" id="time">
-            <option disabled value=""> select time </option>
-                   <option>15</option>
-                   <option>30</option>
-                   <option>45</option>
-          </select>
         </div>
 
         <button type="submit" id="updatePre" v-on:click="updatePreview()">
@@ -113,33 +104,12 @@ export default {
       data: {},
       uiLabels: {},
       SONG:"",
-      //timerKOD ska flyttas v
-      timerCount: 30,
-      timerEnabled: true,
       question: "",
       answers: ["", ""],
       questionNumber: 0
     }
   },
-  watch: {
 
-            timerCount: {
-                handler(value) {
-
-                    if (value > 0 && this.timerEnabled) {
-                        setTimeout(() => {
-                            this.timerCount--;
-                        }, 1000);
-                    }
-                    else{
-                      this.timerCount = "SLUT"
-                    }
-
-                },
-            }
-
-        },
-        //timerKOD ska flyttas ^
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -156,6 +126,7 @@ export default {
   methods: {
     createPoll: function () {
       //Skickar pollDesc till servern.
+      this.MusicChoose()
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 
@@ -169,7 +140,6 @@ export default {
         document.getElementById("previewPic").style.visibility= "hidden";
     }
     this.pollImg = pict;
-    console.log(this.pollImg)
   },
   MusicChoose(){
      this.SONG = this.music;
@@ -188,9 +158,6 @@ export default {
       d2.innerHTML = c2;
       document.getElementById("previewPic").style.visibility= "visible";
       this.MusicChoose();
-      //timerKOD ska flyttas
-      this.timerCount = this.time;
-      this.timerEnabled = true;
   },
 
   }}

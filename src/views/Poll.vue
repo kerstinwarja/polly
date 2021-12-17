@@ -20,7 +20,8 @@ export default {
       question: {
         q: "",
         a: [],
-        questionNumber: 0
+        isCorrect:[],
+        questionNumber:0
       },
       pollId: "inactive poll",
     }
@@ -34,8 +35,6 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
-    //socket.emit('runQuestion', {pollId: this.pollId, questionNumber: this.question.questionNumber})
-
   },
   methods: {
     submitAnswer: function (answer) {
