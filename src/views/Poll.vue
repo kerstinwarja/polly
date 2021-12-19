@@ -1,7 +1,9 @@
 <template>
   <!--{{pollId}}-->
+
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
+           
    <!--{{timerCount}}
    {{this.question.t}} -->
 
@@ -28,6 +30,7 @@ export default {
         a: [],
         t:"",
         questionNumber: 0,
+        questionImg: ""
       },
       //timerCount : 45,
       //timerEnabled: true,
@@ -74,10 +77,13 @@ clearInterval(intervalId)
     socket.emit('joinPoll', this.pollId)
     //console.log("steg2")
     socket.on("newQuestion", q =>
-      this.question = q
+      this.question = q,
+      // this.timerCount = this.question.t,
+       
     )
     console.log("heere BAJS")
-    this.timerCount = this.question.t
+    this.questionImg = this.question.questionImg
+   
     console.log("this is q"+this.question)
   },
   methods: {

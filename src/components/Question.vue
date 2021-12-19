@@ -2,6 +2,7 @@
 <div id="quest">
   <p>{{question.q}}</p>
   <p>{{question.questionNumber}}</p>
+  {{question.questionImg}}
 </div>
 <div id="ans">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index"  v-bind:class="'ans'+index" v-on:click="answer(a)"> <!--v-bind:correct=isCorrect-->

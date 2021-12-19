@@ -17,7 +17,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a, t: d.t, questionNumber: d.questionNumber});
+    data.addQuestion(d.pollId, {q: d.q, a: d.a, t: d.t, questionNumber: d.questionNumber, questionImg: d.questionImg});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
 
   });
@@ -53,7 +53,6 @@ function sockets(io, socket, data) {
     data = new Data();
     data.initializeData();
   })
-
 }
 
 module.exports = sockets;

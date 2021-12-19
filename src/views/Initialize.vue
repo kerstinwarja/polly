@@ -2,7 +2,6 @@
   <body>
     <header>
       <h1>It's time to create your quiz!</h1>
-      {{ timerCount }}
     </header>
     <div class="wrap2">
       <div id="preview">
@@ -63,18 +62,8 @@
           </select>
 
 
-          <!-- timerKOD ska flyttas-->
-          <select type="submit" v-model="time" id="time">
-            <option disabled value=""> select time </option>
-                   <option>15</option>
-                   <option>30</option>
-                   <option>45</option>
-          </select>
+       
         </div>
-
-        <button type="submit" id="updatePre" v-on:click="updatePreview()">
-          Update preview
-        </button>
       </div>
     </div>
 
@@ -114,32 +103,11 @@ export default {
       uiLabels: {},
       SONG:"",
       music:"",
-      //timerKOD ska flyttas v
-      timerCount: 30,
-      timerEnabled: true,
       question: "",
       answers: ["", ""],
       questionNumber: 0
     }
   },
-  watch: {
-
-            timerCount: {
-                handler(value) {
-
-                    if (value > 0 && this.timerEnabled) {
-                        setTimeout(() => {
-                            this.timerCount--;
-                        }, 1000);
-                    }
-                    else{
-                      this.timerCount = "SLUT"
-                    }
-
-                },
-            }
-
-        },
         //timerKOD ska flyttas ^
   created: function () {
     this.lang = this.$route.params.lang;
@@ -156,6 +124,7 @@ export default {
   },
   methods: {
     createPoll: function () {
+      this.timerCount = this.time;
        this.SONG = this.music;
       //Skickar pollDesc till servern.
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
@@ -168,17 +137,6 @@ export default {
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.pollImg = pict;
        console.log(this.pollImg)
-  },
-  MusicChoose(){
-    
-
-},
-    updatePreview(){
-      //THis is the code for updating title and description
-      this.MusicChoose();
-      //timerKOD ska flyttas
-      this.timerCount = this.time;
-      this.timerEnabled = true;
   },
 
   }}
