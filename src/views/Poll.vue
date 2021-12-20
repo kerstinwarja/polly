@@ -83,7 +83,7 @@ clearInterval(intervalId)
     )
     console.log("heere BAJS")
     this.questionImg = this.question.questionImg
-
+    this.isCorrect = this.question.iC
     console.log("this is q"+this.question)
   },
   methods: {

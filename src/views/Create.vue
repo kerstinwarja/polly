@@ -126,6 +126,7 @@ export default {
     addAnswer: function () {
       if(this.counter<6) {
         this.answers.push("");
+        this.isCorrect.push(false);
         this.counter++;
       }
     },
@@ -133,6 +134,7 @@ export default {
       if(this.counter>2) {
         this.counter--;
         this.answers.pop();
+        this.isCorrect.pop();
       }
     },
     runQuestion: function () {
