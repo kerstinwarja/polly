@@ -17,7 +17,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a, iC: d.isCorrect, questionNumber: d.questionNumber});
+    data.addQuestion(d.pollId, {q: d.q, a: d.a, t: d.t, questionNumber: d.questionNumber, questionImg: d.questionImg, iC: d.isCorrect});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
 
   });
@@ -33,6 +33,7 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(pollId));
     //HÄR TESTAR JAG. Skapa en socket.emit med getImg här
     socket.emit('description', data.getDescription(pollId));
+   // socket.emit('name', data.getName(pollId));
     socket.emit('imageAddress', data.getImage(pollId));
     socket.emit('musicSelection', data.getMusic(pollId));
 
@@ -52,7 +53,6 @@ function sockets(io, socket, data) {
     data = new Data();
     data.initializeData();
   })
-
 }
 
 module.exports = sockets;

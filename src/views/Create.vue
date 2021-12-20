@@ -7,10 +7,10 @@
   <div class="wrap2">
   <div id="preview">
     <div id="previewTitle">
-      <p id="timer">{{ timerCount }}</p>
-      <span id="as">Preview</span>
+      <span id="as">{{question}}</span>
     </div>
     <div id="previewPic">
+      <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
     </div>
     <div id="answers">
       <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
@@ -49,11 +49,11 @@
       </button>
       <!-- timerKOD  -->
       Timer
-          <select type="submit" v-model="time" id="time">
+          <select type="submit" v-model="time">
             <option disabled value=""> select time </option>
-                   <option>15</option>
-                   <option>30</option>
-                   <option>45</option>
+                   <option>3</option>
+                   <option>7</option>
+                   <option>9</option>
           </select>
     </div>
   </div>
@@ -91,33 +91,15 @@ export default {
       question: "",
       answers: ["", ""],
       questionNumber: 0,
+      questionImg: "",
       data: {},
       uiLabels: {},
       counter: 2,
-      timerCount: 30,
+      timerCount: "",
       timerEnabled: true,
       isCorrect:[false, false],
     }
   },
-  watch: {
-
-            timerCount: {
-                handler(value) {
-
-                    if (value > 0 && this.timerEnabled) {
-                        setTimeout(() => {
-                            this.timerCount--;
-                        }, 1000);
-                    }
-                    else{
-                      this.timerCount = "SLUT"
-                    }
-
-                },
-            }
-
-        },
-        //timerKOD
   created: function () {
     this.lang = this.$route.params.lang;
     this.pollId = this.$route.params.id;
@@ -137,8 +119,7 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, isCorrect: this.isCorrect, questionNumber: this.questionNumber} )
-      console.log(this.isCorrect)
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
       this.questionNumber ++
       //empy all textareas when the question has been added
       //document.getElementById('quizTitle').reset();
@@ -163,16 +144,11 @@ export default {
     },
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
-      if (person != null || person != "") {
-        document.getElementById("previewPic").style.backgroundImage = "url(" + person+")";
-        document.getElementById("previewPic").style.visibility= "visible";
-      }
-    },
+      this.questionImg = person;
+      },
+
     updatePreview(){
       //THis is the code for updating title and description
-      var c1 = document.getElementById('quizTitle').value;
-      var d1 = document.getElementById('as');
-      d1.innerHTML = c1;
       this.timerCount = this.time;
       this.timerEnabled = true;
     },
@@ -183,8 +159,9 @@ export default {
       }
       console.log("ADDED!")
     }
+    },
   }
-}
+
 </script>
 
 
@@ -340,7 +317,10 @@ body textarea{
   float: left;
 
 }
-
+#previewPic img{
+  width: 100%;
+  object-fit: contain;
+}
 #forwardButton{
   height: 5%;
   width: 8%;

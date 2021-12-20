@@ -2,40 +2,41 @@
   <body>
     <header>
       <h1>It's time to create your quiz!</h1>
-      {{ timerCount }}
     </header>
     <div class="wrap2">
       <div id="preview">
         <h4> It's time to play</h4>
         <div id="previewTitle">
-          <p id="as">Preview</p>
+          <p> {{pollId}} </p>
         </div>
         <div class="wrap4">
           <div class="infoBoards" id="previewDesc">
-            <span id="pdes">Preview desc</span>
+            <span id="pdes">{{pollDesc}}</span>
           </div>
           <div id="previewPic">
+            <img v-if="pollImg" v-bind:src="pollImg" id="prePic">
           </div>
           <div class="infoBoards" id="previewPartis">
             <span>This is where your participants will be listed </span>
           </div>
         </div>
         <div id="audio">
-       <audio controls v-if="SONG == 'Brass'">
+       <audio controls v-if="music == 'Brass'">
           <source src="../music/circusBrass.mp3" type="audio/mpeg">
         </audio>
-        <audio controls v-if="SONG == 'Trap'">
+        <audio controls v-if="music == 'Trap'">
           <source src="../music/circusTrap.mp3" type="audio/mpeg">
         </audio>
-        <audio controls v-if="SONG == 'Strings'">
+        <audio controls v-if="music == 'Strings'">
           <source src="../music/circusStrings.mp3" type="audio/mpeg">
         </audio>
-        <audio controls v-if="SONG == 'Techno'">
+        <audio controls v-if="music == 'Techno'">
           <source src="../music/circusTechno.mp3" type="audio/mpeg">
         </audio>
-        <audio controls v-if="SONG == 'Ragtime'">
+        <audio controls v-if="music == 'Ragtime'">
           <source src="../music/circusRagtime.mp3" type="audio/mpeg">
         </audio>
+        {{music}}
       </div>
       <div id="audio">
          </div>
@@ -50,22 +51,16 @@
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>Import picture</span>
           </button>
-          <select type="submit" v-model="music" id="music">
+          <select v-model="music" id="music">
             <!--gör selected hidden nått mer än att ta bort "selected music"?-->
-            <option disabled value="" selected hidden> select music </option>
+           <!-- <option disabled value="" selected hidden> select music </option> -->
                    <option>Brass</option>
                    <option>Ragtime</option>
                    <option>Strings</option>
                    <option>Techno</option>
                    <option>Trap</option>
-            <img src="http://assets.stickpng.com/thumbs/5a02cab818e87004f1ca43d9.png" style = "height:1.5em;">
-            <span>Import music</span>
           </select>
         </div>
-
-        <button type="submit" id="updatePre" v-on:click="updatePreview()">
-          Update preview
-        </button>
       </div>
     </div>
 
@@ -104,6 +99,7 @@ export default {
       data: {},
       uiLabels: {},
       SONG:"",
+      music:"",
       question: "",
       answers: ["", ""],
       questionNumber: 0
@@ -125,6 +121,8 @@ export default {
   },
   methods: {
     createPoll: function () {
+      this.timerCount = this.time;
+       this.SONG = this.music;
       //Skickar pollDesc till servern.
       this.MusicChoose()
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
@@ -135,29 +133,8 @@ export default {
 
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
-    if (pict != null || pict != "") {
-        document.getElementById("previewPic").style.backgroundImage = "url(" + pict+")";
-        document.getElementById("previewPic").style.visibility= "hidden";
-    }
-    this.pollImg = pict;
-  },
-  MusicChoose(){
-     this.SONG = this.music;
-
-},
-    updatePreview(){
-      //THis is the code for updating title and description
-      var c1 = document.getElementById('quizTitle').value;
-      var d1 = document.getElementById('as');
-      this.pollId = c1;
-
-      d1.innerHTML = c1;
-      var c2 = document.getElementById('desIptBox').value;
-      var d2 = document.getElementById('pdes');
-      this.pollDesc = c2;
-      d2.innerHTML = c2;
-      document.getElementById("previewPic").style.visibility= "visible";
-      this.MusicChoose();
+      this.pollImg = pict;
+       console.log(this.pollImg)
   },
 
   }}
@@ -211,7 +188,10 @@ h4 {
   float: right;
   transform: scaleX(-1);
 }
-
+#previewPic img{
+  width: 100%;
+  object-fit: contain;
+}
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -245,14 +225,6 @@ h4 {
 }
 #previewDesc {
   margin: 10%;
-}
-
-#previewPic{
-  background-size: contain;
-  /*float: left;*/
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
 }
 
 

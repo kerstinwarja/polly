@@ -2,7 +2,8 @@
 <div id="quest">
   <p>{{question.q}}</p>
   <p>{{question.questionNumber}}</p>
-  <p>{{question.isCorrect}}</p>
+  {{question.questionImg}}
+    <p>{{question.isCorrect}}</p>
 </div>
 <div id="ans">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a)"> <!--v-bind:correct=isCorrect-->
@@ -22,11 +23,14 @@ export default {
 
   },
 
-/*  data: function () {
+  data: function () {
     return {
-      isCorrect:
+      timerCount: this.question.t,
+      timerEnabled: true,
+      isCorrect: false,
     }
-  },*/
+  },
+
 
 
   methods: {
