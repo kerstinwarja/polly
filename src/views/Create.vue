@@ -60,14 +60,14 @@
 
 </div>
 
-  <!--div>
+  <div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div-->
+  </div>
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
@@ -96,7 +96,7 @@ export default {
       counter: 2,
       timerCount: 30,
       timerEnabled: true,
-      isCorrect:[]
+      isCorrect: []
     }
   },
   watch: {
@@ -137,13 +137,9 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-<<<<<<< HEAD
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers })
-=======
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, questionNumber: this.questionNumber} )
+      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers,isCorrect: this.isCorrect, questionNumber: this.questionNumber} )
       this.questionNumber ++
 
->>>>>>> 5c72c684b4fcf06b924323cdd629f43504b2bc85
     },
     addAnswer: function () {
       if(this.counter<6) {

@@ -34,12 +34,8 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
-<<<<<<< HEAD
-    
-=======
     //socket.emit('runQuestion', {pollId: this.pollId, questionNumber: this.question.questionNumber})
 
->>>>>>> 5c72c684b4fcf06b924323cdd629f43504b2bc85
   },
   methods: {
     submitAnswer: function (answer) {

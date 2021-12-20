@@ -17,11 +17,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-<<<<<<< HEAD
-    data.addQuestion(d.pollId, {q: d.q, a: d.a},d.index);
-=======
     data.addQuestion(d.pollId, {q: d.q, a: d.a, questionNumber: d.questionNumber});
->>>>>>> 5c72c684b4fcf06b924323cdd629f43504b2bc85
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
 
   });
