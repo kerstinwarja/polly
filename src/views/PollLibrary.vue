@@ -20,10 +20,12 @@
         Insert nickname: <br>
         <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
       </label>
+      here{{this.nickname}}
       <div class="buttonLink">
-        <router-link v-bind:to="/startquiz/+id" tag="button"><br>
-          <button>{{uiLabels.participatePoll}}!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
-        </router-link>
+        
+         <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
+          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
+        <!-- </router-link> -->
       </div>
     </div>
     
@@ -41,7 +43,10 @@ export default {
     return {
       uiLabels: {},
       id: "",
-      lang: ""
+      lang: "",
+      pollId: "",
+      myName:""
+
     }
   },
   created: function () {
@@ -53,6 +58,19 @@ export default {
     })
     
   },
+  methods:{
+    startquiz: function() {
+      if(this.nickname != "" && this.nickname!= undefined){
+        this.myName = this.nickname
+        socket.emit()
+      this.pollId = this.id
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId} })
+      }
+      else {
+        alert("YOU NEED A NICKNAME")
+      }
+  }
+}
 }
 
 </script>

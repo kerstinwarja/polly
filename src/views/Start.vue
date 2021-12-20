@@ -30,7 +30,6 @@
             <router-link v-bind:to="'/poll/+id'" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
             </div>
           </div-->
-          <img src="FingerRight.png">
         </div>
   </body>
 </template>

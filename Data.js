@@ -29,6 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
+    poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
@@ -37,11 +38,12 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
 
 }
 
-Data.prototype.addQuestion = function(pollId, q) {
+Data.prototype.addQuestion = function(pollId, q, qId) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q);
+  console.log("question added to", pollId, q, qId);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
+    poll.questions.push(qId);
   }
 } 
 //här testar jag
@@ -55,7 +57,16 @@ Data.prototype.getDescription = function(pollId) {
   }
   return ""
 }
+/*Data.prototype.getName = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("Name requested for", pollId);
+  if (typeof poll !== 'undefined') {
 
+    return poll.myName;
+  }
+  return ""
+}
+*/
 //här slutar jag . Här lägger jag in en ny funktion
 
 Data.prototype.getImage = function(pollId) {
@@ -89,20 +100,6 @@ Data.prototype.getQuestionArray = function(pollId) {
   return []
 }
 
-
-/*Data.prototype.getQuestion = function(pollId, currentQuestion) {
-  const poll = this.polls[pollId];
-  console.log("question requested for ", pollId, currentQuestion);
-  if (typeof poll !== 'undefined') {
-    if (questionNumber !== null) {
-      console.log("qnr " + questionNumber)
-      poll.currentQuestion = questionNumber;
-      console.log("cQ " + poll.currentQuestion)
-    }
-    return poll.questions[poll.currentQuestion];
-  }
-  return []
-}*/
 
 Data.prototype.getQuestion = function(pollId, questionNumber) {
   const poll = this.polls[pollId];

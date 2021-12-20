@@ -16,25 +16,25 @@
         </div>
       </div>
         <div id="audio">
-       <audio controls loop v-if="SONG == 'Brass'"> <!--remember to add autoplay-->
+       <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
           <source src="../music/circusBrass.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
           <source src="../music/circusTrap.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
           <source src="../music/circusStrings.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
           <source src="../music/circusTechno.mp3" type="audio/mpeg">
         </audio>
-        <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
           <source src="../music/circusRagtime.mp3" type="audio/mpeg">
         </audio>
       </div>
 
         <router-link v-bind:to="'/poll/'+ this.pollId">
-          <button id="startButton">START QUIZ</button>
+          <button id="startButton"> START QUIZ</button>
         </router-link>
     </body>
 </template>
@@ -53,6 +53,7 @@ export default {
       pollDesc:"",
       pollImg:"",
       SONG:"",
+      name: [],
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -71,13 +72,16 @@ export default {
 
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
-    /*lyssnar på frågor, kanske ta bort
+    //lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
       this.question = q
-    )*/
+    )
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
+    )
+    socket.on("name", myName =>
+      this.name.push(myName)
     )
 
     socket.on("imageAddress", imag =>
@@ -91,7 +95,7 @@ export default {
     socket.on("createPoll", (data) =>
       this.data = data
     )
-  },
+  }
 
 }
 </script>
@@ -100,6 +104,10 @@ export default {
 header{
   padding-top:0%;
   text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
+}
+#impPic{
+  height: 30%;
+  width: 35%;
 }
 
 h4{
