@@ -29,7 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
-    poll.questionNumber = 0;
+    //poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);

@@ -2,7 +2,7 @@
 <div id="quest">
   <p>{{question.q}}</p>
   <p>{{question.questionNumber}}</p>
-  {{question.questionImg}}
+  <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
     <p>{{question.isCorrect}}</p>
 </div>
 <div id="ans">
@@ -30,9 +30,7 @@ export default {
       isCorrect: false,
     }
   },
-
-
-
+  
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
@@ -60,7 +58,7 @@ export default {
     align-items: center;
     margin-left:5%;
     margin-right: 5%;
-    margin-top: 20%;
+    margin-top: 0%;
 
   }
 
@@ -70,6 +68,10 @@ export default {
     background-color: greenyellow;
     font-size:30pt;
 
+  }
+  #prePic{
+    width: 30%;
+  object-fit: contain;
   }
   .ans0{
     background-color:#628579;
