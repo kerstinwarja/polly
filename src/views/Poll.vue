@@ -29,12 +29,14 @@ export default {
   created: function () {
     //sockets, server, data, console.log osv
     this.pollId = this.$route.params.id
-    //console.log("steg1")
     socket.emit('joinPoll', this.pollId)
     //console.log("steg2")
     socket.on("newQuestion", q =>
-      this.question = q
+      this.question = q,
+      //är det rätt att lägga den här
+      //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
     )
+
   },
   methods: {
     submitAnswer: function (answer) {

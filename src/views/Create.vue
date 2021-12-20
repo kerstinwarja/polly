@@ -34,8 +34,6 @@
         <input type="checkbox" v-model="isCorrect[i]">
         {{isCorrect[i]}}
       </div>
-      {{isCorrect}}
-      {{answers}}
     </div>
     <div id="buttonDiv">
       <button type="submit" id="updatePre" v-on:click="updatePreview()">
@@ -148,6 +146,7 @@ export default {
     addAnswer: function () {
       if(this.counter<6) {
         this.answers.push("");
+        this.isCorrect.push(false);
         this.counter++;
       }
     },
@@ -155,6 +154,7 @@ export default {
       if(this.counter>2) {
         this.counter--;
         this.answers.pop();
+        this.isCorrect.pop();
 
       }
     },
@@ -178,7 +178,7 @@ export default {
     },
     saveQuiz(){
       var c1 = document.getElementById('quizTitle').value;
-      if(c1!=null){
+      if(c1!=""){
         this.addQuestion()
       }
       console.log("ADDED!")

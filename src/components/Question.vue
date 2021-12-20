@@ -2,11 +2,11 @@
 <div id="quest">
   <p>{{question.q}}</p>
   <p>{{question.questionNumber}}</p>
+  <p>{{question.isCorrect}}</p>
 </div>
 <div id="ans">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a)"> <!--v-bind:correct=isCorrect-->
     {{ a }}
-    {{isCorrect[index]}}
   </button>
 </div>
 
@@ -22,17 +22,16 @@ export default {
 
   },
 
-  data: function () {
+/*  data: function () {
     return {
-      /*isCorrect:
+      isCorrect:
     }
-  },
+  },*/
 
 
   methods: {
     answer: function (answer) {
       this.$emit("answer", answer);
-      /*this.isCorrect=false;*/
     }
   }
 }

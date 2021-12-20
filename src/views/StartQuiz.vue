@@ -34,7 +34,7 @@
       </div>
 
         <router-link v-bind:to="'/poll/'+ this.pollId">
-          <button id="startButton">START QUIZ</button>
+          <button id="startButton"> START QUIZ</button>
         </router-link>
     </body>
 </template>
@@ -71,10 +71,10 @@ export default {
 
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
-    /*lyssnar på frågor, kanske ta bort
+    //lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
       this.question = q
-    )*/
+    )
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
@@ -91,7 +91,7 @@ export default {
     socket.on("createPoll", (data) =>
       this.data = data
     )
-  },
+  }
 
 }
 </script>
