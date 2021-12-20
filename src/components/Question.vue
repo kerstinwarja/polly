@@ -27,7 +27,7 @@ export default {
     return {
       timerCount: this.question.t,
       timerEnabled: true,
-      isCorrect: false,
+      //isCorrect: [],
     }
   },
 
