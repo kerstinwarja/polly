@@ -124,7 +124,7 @@ export default {
       this.timerCount = this.time;
        this.SONG = this.music;
       //Skickar pollDesc till servern.
-      this.MusicChoose()
+      
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 

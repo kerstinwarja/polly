@@ -97,11 +97,7 @@ export default {
       counter: 2,
       timerCount: "",
       timerEnabled: true,
-<<<<<<< HEAD
-      isCorrect: []
-=======
       isCorrect:[false, false],
->>>>>>> 26bfa4a7bd7fd85cca32b953441308ba5e9591e3
     }
   },
   created: function () {
@@ -123,11 +119,7 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
     addQuestion: function () {
-<<<<<<< HEAD
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers,isCorrect: this.isCorrect, questionNumber: this.questionNumber} )
-=======
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
->>>>>>> 26bfa4a7bd7fd85cca32b953441308ba5e9591e3
       this.questionNumber ++
       //empy all textareas when the question has been added
       //document.getElementById('quizTitle').reset();
