@@ -123,13 +123,11 @@ export default {
     createPoll: function () {
       this.timerCount = this.time;
        this.SONG = this.music;
-      //Skickar pollDesc till servern.
-      
+      //Skickar pollDesc till servern
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
 
     },
-
 
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");

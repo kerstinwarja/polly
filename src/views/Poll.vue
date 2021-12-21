@@ -79,12 +79,14 @@ clearInterval(intervalId)
     socket.on("newQuestion", q =>
       this.question = q,
       // this.timerCount = this.question.t,
-             //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
+      //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
     )
     console.log("heere BAJS")
     this.questionImg = this.question.questionImg
-
-    console.log("this is q"+this.question)
+    this.isCorrect = this.question.isCorrect
+    this.questionNumber = this.question.questionNumber
+    console.log("IC "+this.isCorrect)
+    console.log("this is qnr "+this.question.questionNumber)
   },
   methods: {
     submitAnswer: function (answer) {

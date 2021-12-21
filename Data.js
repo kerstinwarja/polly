@@ -29,7 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
-    poll.questionNumber = 0;
+    //poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
@@ -38,12 +38,12 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
 
 }
 
-Data.prototype.addQuestion = function(pollId, q, qId) {
+Data.prototype.addQuestion = function(pollId, q) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q, qId);
+  console.log("question added to", pollId, q);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
-    poll.questions.push(qId);
+    //poll.questions.push(qId);
   }
 } 
 //här testar jag

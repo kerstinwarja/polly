@@ -2,11 +2,11 @@
 <div id="quest">
   <p>{{question.q}}</p>
   <p>{{question.questionNumber}}</p>
-  {{question.questionImg}}
-    <p>{{question.isCorrect}}</p>
+  <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
+    <p>fds {{question.isCorrect}}</p>
 </div>
 <div id="ans">
-  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a)"> <!--v-bind:correct=isCorrect-->
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a, index)">
     {{ a }}
   </button>
 </div>
@@ -27,15 +27,21 @@ export default {
     return {
       timerCount: this.question.t,
       timerEnabled: true,
-      isCorrect: false,
+      clicked:false
+      //isCorrect: [],
     }
   },
 
-
-
   methods: {
-    answer: function (answer) {
+    answer: function (answer, index) {
       this.$emit("answer", answer);
+      this.clicked=true;
+      if(this.question.isCorrect[index]){
+        console.log("CORRECT!");
+
+      }else{
+        console.log("INCORRECT!");
+      }
     }
   }
 }
@@ -60,7 +66,7 @@ export default {
     align-items: center;
     margin-left:5%;
     margin-right: 5%;
-    margin-top: 20%;
+    margin-top: 0%;
 
   }
 
@@ -70,6 +76,10 @@ export default {
     background-color: greenyellow;
     font-size:30pt;
 
+  }
+  #prePic{
+    width: 30%;
+  object-fit: contain;
   }
   .ans0{
     background-color:#628579;
