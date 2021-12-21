@@ -90,7 +90,7 @@ Data.prototype.getMusic = function(pollId) {
 }
 
 
-Data.prototype.getQuestion = function(pollId, questionNumber=0) {
+Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   const poll = this.polls[pollId];
   console.log("question requested for ", pollId, questionNumber);
   if (typeof poll !== 'undefined') {

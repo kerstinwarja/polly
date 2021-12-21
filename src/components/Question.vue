@@ -1,7 +1,7 @@
 <template>
 <div id="quest">
   <div id="timer">
-    {{this.question.t}}
+    {{this.question.t - this.timerCount}}
   </div>
   <p>{{question.q}}</p>
   <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
@@ -30,24 +30,37 @@ export default {
 
   },
 
+  emits:["answer"],
+
   data: function () {
     return {
-      timerCount: this.question.t,
+      timerCount: 0,
+      timerEvent:null,
       timerEnabled: true,
       clicked:false,
       ansCorrect:false
     }
   },
-
+  watch:{
+    timerCount: function(timeNow){
+      if(timeNow==this.question.t){
+            clearInterval(this.timerEvent)
+      }
+    }
+  },
   //Timer
 
+  created:function(){
+    var a = new Date()
+    //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
+    this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
+    //console.log(intervalId)
+
+
+  },
+
   methods: {
-    created:function(){
-      var a = new Date()
-      //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
-      this.timerCount = setInterval(()=>{this.timerCount - Math.round((new Date() - a)/1000)}, 1000)
-      //console.log(intervalId)
-    },
+
     answer: function (answer, index) {
       this.$emit("answer", answer);
       this.clicked=true;

@@ -3,7 +3,7 @@
 
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
-{{SONG}}hät
+{{SONG}}här
       <div id="audio">
      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
         <source src="../music/circusBrass.mp3" type="audio/mpeg">
