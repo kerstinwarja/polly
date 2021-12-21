@@ -1,17 +1,24 @@
 <template>
 <div id="quest">
+  <div id="timer">
+    {{this.question.t}}
+  </div>
   <p>{{question.q}}</p>
-  <p>{{question.questionNumber}}</p>
   <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
-    <p>fds {{question.isCorrect}}</p>
 </div>
 <div id="ans">
+<template v-if="!clicked">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a, index)">
     {{ a }}
   </button>
+</template>
+<template v-if="clicked">
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]" v-on:click="answer(a, index)">
+    {{ a }}
+  </button>
+</template>
+
 </div>
-
-
 
 </template>
 <script>
@@ -27,17 +34,26 @@ export default {
     return {
       timerCount: this.question.t,
       timerEnabled: true,
-      clicked:false
-      //isCorrect: [],
+      clicked:false,
+      ansCorrect:false
     }
   },
 
+  //Timer
+
   methods: {
+    created:function(){
+      var a = new Date()
+      //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
+      this.timerCount = setInterval(()=>{this.timerCount - Math.round((new Date() - a)/1000)}, 1000)
+      //console.log(intervalId)
+    },
     answer: function (answer, index) {
       this.$emit("answer", answer);
       this.clicked=true;
       if(this.question.isCorrect[index]){
         console.log("CORRECT!");
+        this.ansCorrect=true;
 
       }else{
         console.log("INCORRECT!");
@@ -99,7 +115,12 @@ export default {
   .ans5{
     background-color:#633D41;
     }
-
-
+    .anstrue{
+  background-color: green;
+}
+.ansfalse{
+  background-color: gray;
+  opacity: 0.3;
+}
 
 </style>

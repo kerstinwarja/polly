@@ -72,7 +72,7 @@
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="saveQuiz" >
     </router-link>
 
 </body>
@@ -121,6 +121,8 @@ export default {
     addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
       this.questionNumber ++
+      this.question=""
+      this.answers= ["", ""]
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -148,6 +150,11 @@ export default {
       //THis is the code for updating title and description
       this.timerCount = this.time;
       this.timerEnabled = true;
+    },
+    saveQuiz(){
+      if(this.question!==""){
+        this.addQuestion();
+      }
     }
     },
   }
