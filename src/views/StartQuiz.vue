@@ -1,7 +1,8 @@
 <template>
    <body>
       <div id="previewTitle">
-        <h4> It's time to play</h4>
+        <h4> It's time to play </h4>
+        <h4 v-if="isHost"> You are the host {{this.isHost}}</h4>
         <header>{{pollId}}</header>
       </div>
       <div id="wrap">
@@ -15,29 +16,32 @@
           <span id="partText">Här kommer alla participants vara</span>
         </div>
       </div>
-        <div id="audio">
-       <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+      <div id="audio">
+       <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
           <source src="../music/circusBrass.mp3" type="audio/mpeg">
         </audio>
-        <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
           <source src="../music/circusTrap.mp3" type="audio/mpeg">
         </audio>
-        <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
           <source src="../music/circusStrings.mp3" type="audio/mpeg">
         </audio>
-        <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
           <source src="../music/circusTechno.mp3" type="audio/mpeg">
         </audio>
-        <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
           <source src="../music/circusRagtime.mp3" type="audio/mpeg">
         </audio>
       </div>
-
+      <div v-show="isHost">
+        {{isHost}}
         <router-link v-bind:to="'/poll/'+ this.pollId">
           <button id="startButton"> START QUIZ</button>
         </router-link>
+      </div>
     </body>
 </template>
+
 <script>
 import io from 'socket.io-client';
 const socket = io();
@@ -52,6 +56,7 @@ export default {
       //pollName:""
       pollDesc:"",
       pollImg:"",
+      isHost: false,
       SONG:"",
       name: [],
       //data: {},
@@ -69,6 +74,7 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id;
+    this.isHost = this.$route.params.isHost==="false"?false:true;
 
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
@@ -95,7 +101,17 @@ export default {
     socket.on("createPoll", (data) =>
       this.data = data
     )
-  }
+  },
+  /*methods:{
+    isHidden: function(){
+      if(isHost==false){
+        style.visibility= "hidden"
+      }
+
+
+    }
+  }*/
+
 
 }
 </script>

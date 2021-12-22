@@ -24,7 +24,8 @@
       <div class="buttonLink">
         
          <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
-          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button> <!-- Här vill vi koppla till vårt json, hur gör vi? -->
+          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button> 
+          <button v-on:click="hostQuiz">Host!</button> 
         <!-- </router-link> -->
       </div>
     </div>
@@ -45,7 +46,8 @@ export default {
       id: "",
       lang: "",
       pollId: "",
-      myName:""
+      myName:"",
+      isHost:false
 
     }
   },
@@ -64,11 +66,19 @@ export default {
         this.myName = this.nickname
         socket.emit()
       this.pollId = this.id
-      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId} })
+      this.isHost=false
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
       }
       else {
         alert("YOU NEED A NICKNAME")
       }
+  },
+  hostQuiz: function(){
+    this.isHost=true;
+    this.pollId = this.id
+    socket.emit()
+    this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+
   }
 }
 }
