@@ -3,6 +3,24 @@
 
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
+{{SONG}}här
+      <div id="audio">
+     <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+        <source src="../music/circusBrass.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <source src="../music/circusTrap.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <source src="../music/circusStrings.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <source src="../music/circusTechno.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+      </audio>
+    </div>
 
    <!--{{timerCount}}
    {{this.question.t}} -->
@@ -25,6 +43,7 @@ export default {
   },
   data: function () {
     return {
+      SONG:"",
       question: {
         q: "",
         a: [],
@@ -38,8 +57,10 @@ export default {
       pollId: "inactive poll",
      // nextactivated : true,
 
+
     }
-  },/*
+  },
+  /*
 
 var a = new Date()
 
@@ -72,22 +93,25 @@ clearInterval(intervalId)
 
         },*/
   created: function () {
-    //sockets, server, data, console.log osv
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    //console.log("steg2")
+
+    socket.on("musicSelection", SONG =>
+      this.SONG = SONG
+    ),
+
     socket.on("newQuestion", q =>
       this.question = q,
-      // this.timerCount = this.question.t,
       //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
-    )
-    console.log("heere BAJS")
+    ),
+
+    this.timerCount = this.question.t
     this.questionImg = this.question.questionImg
     this.isCorrect = this.question.isCorrect
     this.questionNumber = this.question.questionNumber
-    console.log("IC "+this.isCorrect)
-    console.log("this is qnr "+this.question.questionNumber)
+
   },
+
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
@@ -102,3 +126,10 @@ clearInterval(intervalId)
   }
 }
 </script>
+
+<style>
+#audio {
+  /*display:none;*/
+}
+
+</style>

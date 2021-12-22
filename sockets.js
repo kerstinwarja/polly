@@ -45,6 +45,11 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
 
+  socket.on('startQuiz', function(d) {
+    io.to(d.pollId).emit('sendToPoll', data.begin(d.pollId, d.isHost))
+    console.log('-----------sendToPoll------------');
+  });
+
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));

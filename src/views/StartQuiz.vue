@@ -1,8 +1,8 @@
 <template>
    <body>
       <div id="previewTitle">
-        <h4> It's time to play </h4>
-        <h4 v-if="isHost"> You are the host {{this.isHost}}</h4>
+        <h4 v-if="isHost">You are the host</h4>
+        <h4 v-else> It's time to play </h4>
         <header>{{pollId}}</header>
       </div>
       <div id="wrap">
@@ -13,7 +13,7 @@
           <img v-bind:src="pollImg">
         </div>
         <div class="infoBoards" >
-          <span id="partText">Här kommer alla participants vara</span>
+          <span id="partText">{{name}}</span>
         </div>
       </div>
       <div id="audio">
@@ -34,10 +34,9 @@
         </audio>
       </div>
       <div v-show="isHost">
-        {{isHost}}
-        <router-link v-bind:to="'/poll/'+ this.pollId">
-          <button id="startButton"> START QUIZ</button>
-        </router-link>
+        <!--router-link v-bind:to="'/poll/'+ this.pollId"-->
+          <button v-on:click="letsGo" id="startButton"> START QUIZ</button>
+        <!--/router-link-->
       </div>
     </body>
 </template>
@@ -78,7 +77,11 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.isHost = this.$route.params.isHost==="true"?true:false;
+<<<<<<< HEAD
     
+=======
+    socket.on()
+>>>>>>> c2fa76b8650df9e0d1ffc7c68f43f9ca7d33a623
 
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
@@ -86,12 +89,17 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
+    socket.on("sendToPoll", isHost =>
+      this.isHost = isHost)
+      console.log('----------stp------------');
+
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
     )
-    socket.on("name", myName =>
+    socket.on("name", myName => {
       this.name.push(myName)
+      console.log('--------------myName------------------')}
     )
     console.log(name)
 
@@ -109,18 +117,15 @@ export default {
     
     
   },
-  /*methods:{
-    isHidden: function(){
-      if(isHost==false){
-        style.visibility= "hidden"
-      }
-
-
+  methods:{
+    letsGo: function() {
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
+        console.log('lets GO!');
     }
-  }*/
-
-
+  }
 }
+
 </script>
 <style scoped>
 
@@ -128,6 +133,7 @@ header{
   padding-top:0%;
   text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
 }
+
 #impPic{
   height: 30%;
   width: 35%;
@@ -137,6 +143,7 @@ h4{
   margin: 3% 0% 3% 0%;
   text-shadow: -0.01em 0 #990000, 0 0.05em #990000, 0.05em 0 #990000, 0 -0.01em #990000;
 }
+
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -196,7 +203,5 @@ span {
 #description {
   margin: 10%;
 }
-
-
 
 </style>
