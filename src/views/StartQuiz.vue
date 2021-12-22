@@ -47,6 +47,7 @@ import io from 'socket.io-client';
 const socket = io();
 export default {
   name: 'StartQuiz',
+  
 
   data: function () {
 
@@ -59,6 +60,7 @@ export default {
       isHost: false,
       SONG:"",
       name: [],
+      
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -69,12 +71,14 @@ export default {
         q: "",
         a: []
       },
+      
     }
 
   },
   created: function () {
     this.pollId = this.$route.params.id;
-    this.isHost = this.$route.params.isHost==="false"?false:true;
+    this.isHost = this.$route.params.isHost==="true"?true:false;
+    
 
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
@@ -89,6 +93,7 @@ export default {
     socket.on("name", myName =>
       this.name.push(myName)
     )
+    console.log(name)
 
     socket.on("imageAddress", imag =>
       this.pollImg = imag
@@ -101,6 +106,8 @@ export default {
     socket.on("createPoll", (data) =>
       this.data = data
     )
+    
+    
   },
   /*methods:{
     isHidden: function(){
