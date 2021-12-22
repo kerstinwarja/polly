@@ -22,14 +22,14 @@
       </label>
       here{{this.nickname}}
       <div class="buttonLink">
-        
+
          <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
-          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button> 
-          <button v-on:click="hostQuiz">Host!</button> 
+          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
+          <button v-on:click="hostQuiz">Host!</button>
         <!-- </router-link> -->
       </div>
     </div>
-    
+
 
 
 </template>
@@ -58,7 +58,7 @@ export default {
       console.log(labels)
       this.uiLabels = labels
     })
-    
+
   },
   methods:{
     startquiz: function() {
@@ -66,18 +66,19 @@ export default {
         this.myName = this.nickname
         socket.emit()
       this.pollId = this.id
-      this.isHost=false
-      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+      this.isHost= false
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost, nickname: this.myName} })
       }
       else {
         alert("YOU NEED A NICKNAME")
       }
   },
+
   hostQuiz: function(){
-    this.isHost=true;
+    this.isHost= true;
     this.pollId = this.id
     socket.emit()
-    this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+    this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
 
   }
 }
@@ -86,7 +87,7 @@ export default {
 </script>
 
 <style>
-  
+
 #partPoll {
   width: 30%;
   height:auto;
@@ -98,7 +99,7 @@ export default {
   margin-left: 35%;
   font-size: 15pt;
   text-transform: uppercase;
-  
+
 }
 #partPoll label {
   padding-top: 10%;
