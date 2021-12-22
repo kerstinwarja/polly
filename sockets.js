@@ -46,9 +46,10 @@ function sockets(io, socket, data) {
   });
 
   socket.on('startQuiz', function(d) {
-    io.to(d.pollId).emit('sendToPoll', data.begin(d.pollId, d.isHost))
+    io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
   });
+  
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);

@@ -46,10 +46,7 @@ import io from 'socket.io-client';
 const socket = io();
 export default {
   name: 'StartQuiz',
-  
-
   data: function () {
-
     return {
       lang: "",
       pollId: "",
@@ -59,7 +56,6 @@ export default {
       isHost: false,
       SONG:"",
       name: [],
-      
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -70,29 +66,22 @@ export default {
         q: "",
         a: []
       },
-      
     }
-
   },
   created: function () {
     this.pollId = this.$route.params.id;
     this.isHost = this.$route.params.isHost==="true"?true:false;
-<<<<<<< HEAD
-    
-=======
     socket.on()
->>>>>>> c2fa76b8650df9e0d1ffc7c68f43f9ca7d33a623
-
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
     //lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
       this.question = q
     )
-    socket.on("sendToPoll", isHost =>
-      this.isHost = isHost)
-      console.log('----------stp------------');
-
+    socket.on("sendToPoll",() =>
+       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+    )
+      
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
@@ -101,49 +90,39 @@ export default {
       this.name.push(myName)
       console.log('--------------myName------------------')}
     )
-    console.log(name)
-
     socket.on("imageAddress", imag =>
       this.pollImg = imag
     )
-
     socket.on("musicSelection", SONG =>
       this.SONG = SONG
     )
-
     socket.on("createPoll", (data) =>
       this.data = data
     )
-    
-    
   },
   methods:{
     letsGo: function() {
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      
       socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
         console.log('lets GO!');
+     this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     }
   }
 }
-
 </script>
 <style scoped>
-
 header{
   padding-top:0%;
   text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
 }
-
 #impPic{
   height: 30%;
   width: 35%;
 }
-
 h4{
   margin: 3% 0% 3% 0%;
   text-shadow: -0.01em 0 #990000, 0 0.05em #990000, 0.05em 0 #990000, 0 -0.01em #990000;
 }
-
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -152,7 +131,6 @@ h4{
   line-break: auto;
   max-height: 15%;
 }
-
 .infoBoards{
   color: navy;
   font-family: "Times New Roman";
@@ -162,30 +140,25 @@ h4{
   background-color: wheat;
   border-radius: 2%;
   border: navy 2px solid;
-
   font-size: 1.5em;
 }
-
 span {
   position: relative;
   top: 10%;
 }
-
 #wrap img{
   max-height: 15em;
   max-width:100%;
   height:auto;
   width: auto;
-
 }
-
 #startButton {
   height: 5em;
   width: 15%;
   background-color: rgb(100, 155, 36);
   margin-bottom:5%;
+  
 }
-
 #wrap {
    margin: 0px;
    padding: 3% 0% 3% 0%;
@@ -195,13 +168,10 @@ span {
    grid-template-columns: 33% 33% 33%;
   align-items: center;
   }
-
 #audio {
   display:none;
 }
-
 #description {
   margin: 10%;
 }
-
 </style>

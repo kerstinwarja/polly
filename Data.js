@@ -99,15 +99,7 @@ Data.prototype.getQuestionArray = function(pollId) {
   return []
 }
 
-Data.prototype.begin = function(pollId, isHost){
-  const poll = this.polls[pollId];
-  console.log("host requested for ", pollId, isHost);
-  if (typeof poll !== 'undefined'){
-    if (isHost == true) {
-      console.log('-------------hej-----------')
-    }
-  }
-}
+
 
 Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   const poll = this.polls[pollId];
