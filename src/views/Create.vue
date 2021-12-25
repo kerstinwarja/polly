@@ -32,13 +32,12 @@
       <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
         <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
         <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
-        {{isCorrect[i]}}
       </div>
     </div>
     <div id="buttonDiv">
-      <button type="submit" id="updatePre" v-on:click="updatePreview()">
+      <!--button type="submit" id="updatePre" v-on:click="updatePreview()">
         Update preview
-      </button>
+      </button-->
       <button id="addQues" v-on:click="addQuestion">
         Add question
       </button>
@@ -123,6 +122,7 @@ export default {
       this.questionNumber ++
       this.question=""
       this.answers= ["", ""]
+      this.questionImg=""
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -146,11 +146,11 @@ export default {
       this.questionImg = person;
       },
 
-    updatePreview(){
+    /*updatePreview(){
       //THis is the code for updating title and description
       this.timerCount = this.time;
       this.timerEnabled = true;
-    },
+    },*/
     saveQuiz(){
       if(this.question!==""){
         this.addQuestion();

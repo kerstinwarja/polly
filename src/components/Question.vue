@@ -6,6 +6,9 @@
   <p>{{question.q}}</p>
   <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
 </div>
+<!--template  v-if="myAnswer!==''">
+  <h3> My answer is: {{this.myAnswer}}</h3>
+</template-->
 <div id="ans">
 <template v-if="!clicked">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a, index)">
@@ -13,7 +16,7 @@
   </button>
 </template>
 <template v-if="clicked">
-  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]" v-on:click="answer(a, index)">
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]" >
     {{ a }}
   </button>
 </template>
@@ -38,13 +41,14 @@ export default {
       timerEvent:null,
       timerEnabled: true,
       clicked:false,
-      ansCorrect:false
+      myAnswer:false
     }
   },
   watch:{
     timerCount: function(timeNow){
       if(timeNow==this.question.t){
             clearInterval(this.timerEvent)
+            this.clicked=true;
       }
     }
   },
@@ -63,10 +67,11 @@ export default {
 
     answer: function (answer, index) {
       this.$emit("answer", answer);
-      this.clicked=true;
+      //this.clicked=true;
+      this.myAnswer=answer;
       if(this.question.isCorrect[index]){
         console.log("CORRECT!");
-        this.ansCorrect=true;
+        //this.ansCorrect=true;
 
       }else{
         console.log("INCORRECT!");
@@ -128,12 +133,17 @@ export default {
   .ans5{
     background-color:#633D41;
     }
-    .anstrue{
-  background-color: green;
-}
-.ansfalse{
-  background-color: gray;
-  opacity: 0.3;
-}
+  .anstrue{
+    background-color: green;
+    }
+  .ansfalse{
+    background-color: gray;
+    opacity: 0.3;
+    }
 
+  h3{
+    font-size: 20pt;
+    color: white;
+    text-shadow: 3px 3px #990000;
+    }
 </style>
