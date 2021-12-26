@@ -6,17 +6,19 @@
   <p>{{question.q}}</p>
   <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
 </div>
-<!--template  v-if="myAnswer!==''">
+<!--Dethär skulle behöva bytas ut mot att alternativet man klickar på får en tjock border-->
+<template  v-if="myAnswer!==''">
   <h3> My answer is: {{this.myAnswer}}</h3>
-</template-->
+</template>
+<!--fram till hit-->
 <div id="ans">
-<template v-if="!clicked">
-  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="answer(a, index)">
+<template v-if="!timesUp">
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="this.myAnswer =='' && (answer(a, index))"> <!--id="{clicked ? 'isChosen': ''}"-->
     {{ a }}
   </button>
 </template>
-<template v-if="clicked">
-  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]" >
+<template v-if="timesUp">
+  <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
     {{ a }}
   </button>
 </template>
@@ -32,7 +34,6 @@ export default {
     question: Object,
 
   },
-
   emits:["answer"],
 
   data: function () {
@@ -40,15 +41,16 @@ export default {
       timerCount: 0,
       timerEvent:null,
       timerEnabled: true,
+      timesUp:false,
+      myAnswer:"",
       clicked:false,
-      myAnswer:false
     }
   },
   watch:{
     timerCount: function(timeNow){
       if(timeNow==this.question.t){
             clearInterval(this.timerEvent)
-            this.clicked=true;
+            this.timesUp=true;
       }
     }
   },
@@ -59,16 +61,15 @@ export default {
     //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
     this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
     //console.log(intervalId)
-
-
   },
 
   methods: {
 
     answer: function (answer, index) {
       this.$emit("answer", answer);
-      //this.clicked=true;
+      //this.timesUp=true;
       this.myAnswer=answer;
+      this.clicked=true;
       if(this.question.isCorrect[index]){
         console.log("CORRECT!");
         //this.ansCorrect=true;
@@ -146,4 +147,8 @@ export default {
     color: white;
     text-shadow: 3px 3px #990000;
     }
+  #isChosen{
+  border: 5px black solid;
+  background-color: black;
+  }
 </style>

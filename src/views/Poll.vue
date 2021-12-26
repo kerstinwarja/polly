@@ -3,7 +3,6 @@
 
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
-{{SONG}}här
       <div id="audio">
      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
         <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -56,8 +55,6 @@ export default {
       //timerEnabled: true,
       pollId: "inactive poll",
      // nextactivated : true,
-
-
     }
   },
   /*
@@ -131,5 +128,12 @@ clearInterval(intervalId)
 /*#audio {
   /*display:none;
 }*/
+
+#startButton {
+  height: 5em;
+  width: 15%;
+  background-color: rgb(100, 155, 36);
+  margin-bottom:5%;
+}
 
 </style>
