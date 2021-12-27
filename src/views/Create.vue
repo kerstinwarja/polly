@@ -2,6 +2,7 @@
 <body>
 <header>
   <h1>Add questions and answers to your quiz!</h1>
+ here {{this.allQimg}}
 </header>
 
   <div class="wrap2">
@@ -145,7 +146,18 @@ export default {
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
       },
+<<<<<<< Updated upstream
 
+=======
+    accessQuestion: function (i){
+      this.question = this.allQuestions[i]
+      this.isCorrect = this.allisCorr[i]
+      this.questionImg = this.allQimg[i]
+      //console.log("qimg "+this.allQImg)
+      //this.answers = this.allAnswers[i]
+      //this.time = this.allTime[i]
+    }
+>>>>>>> Stashed changes
     /*updatePreview(){
       //THis is the code for updating title and description
       this.timerCount = this.time;
