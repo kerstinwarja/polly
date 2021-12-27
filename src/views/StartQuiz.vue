@@ -81,7 +81,7 @@ export default {
     socket.on("sendToPoll",() =>
        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )
-      
+
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
@@ -157,7 +157,7 @@ span {
   width: 15%;
   background-color: rgb(100, 155, 36);
   margin-bottom:5%;
-  
+
 }
 #wrap {
    margin: 0px;
