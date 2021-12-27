@@ -43,8 +43,8 @@
       </div>
     </div>
     <div id="buttonDiv">
-      <button type="submit" v-on:click="setTime()">
-        <span>Set timer</span>
+      <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
+        <span>Set <br> timer</span>
       </button>
       <!--select type="submit" v-model="time">
         <option disabled value=""> Select time </option>
@@ -52,17 +52,17 @@
                <option>10</option>
                <option>15</option>
       </select-->
-      <button type="submit" v-on:click="PicChoose()">
+      <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
         <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
         <span>Import picture</span>
       </button>
-      <button  v-if="!this.isEditing" v-on:click="addQuestion()">
+      <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
         Add question
       </button>
       <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
         Save changes
       </button>
-      <button type="submit" v-on:click="sendQuiz()">
+      <button type="submit" v-on:click="sendQuiz()" style="background-color: red">
         Delete question
       </button>
     </div>
@@ -320,7 +320,7 @@ body textarea{
 #addAnswerButton {
   height: 100%;
   width: 15%;
-  background-color: #ffcc00;
+  background-color: rgb(135, 175, 111);
 }
 
 #buttonDiv button {
