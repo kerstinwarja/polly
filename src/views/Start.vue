@@ -67,11 +67,12 @@ export default {
   }
 }
 </script>
+
 <style>
 template{
   margin: 0px;
-  
 }
+
 body{
   background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
@@ -80,9 +81,7 @@ body{
   background-attachment: fixed;
   margin: 0px;
   padding: 0px;
-
 }
-
 
 button{
     border-radius: 8px;
@@ -112,7 +111,6 @@ button:hover {
   cursor: pointer;
 }
 
-
 #nav button{
   width: 130px;
   height: 40px;
@@ -132,9 +130,7 @@ header {
   padding-top: 5%;
   margin: 0;
   color: white;
-
   text-shadow: -2px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
-
 
 </style>
