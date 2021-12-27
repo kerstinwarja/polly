@@ -1,7 +1,7 @@
 <template>
 <body>
 <header>
-  <h1>Add questions and answers to your quiz!</h1>
+  <h1>Add questions and answers to your quiz! </h1>
 </header>
 
   <div class="wrap2">
@@ -58,6 +58,9 @@
       </button>
       <button  v-if="!this.isEditing" v-on:click="addQuestion()">
         Add question
+      </button>
+      <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)">
+        Remove question
       </button>
       <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
         Save changes
@@ -161,8 +164,9 @@ export default {
     clearFields: function(){
       this.question=""
       this.answers= ["", ""]
+      this.counter = 2;
       this.questionImg=""
-      this.isCorrect=false
+      this.isCorrect=[false,false]
       this.time=""
     },
     addQuestion: function(){
@@ -172,6 +176,16 @@ export default {
       this.allAnswers.push(this.answers)
       this.allisCorr.push(this.isCorrect)
       this.clearFields()
+    },
+    removeQuestion(i){
+        this.allQuestions.splice(i,1);
+         this.allQimg.splice(i,1);
+        this.allTime.splice(i,1);
+        this.allAnswers.splice(i,1);
+        this.allisCorr.splice(i,1);
+        this.isEditing = false;
+        this.clearFields();
+         
     },
     addAnswer: function () {
       if(this.counter<6) {
