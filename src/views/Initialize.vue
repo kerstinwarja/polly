@@ -197,7 +197,7 @@ h4 {
   background-position: bottom;
   color: Grey;
   height: 100%;
-  border: 5px black solid;
+  border: 5px #0b074d solid;
 }
 #previewTitle{
   font-size: 30px;
@@ -266,6 +266,7 @@ h4 {
    grid-gap: 5%;
    grid-template-columns: 61% 31%;
    align-items: center;
+
   }
 
   .wrap2 button{
