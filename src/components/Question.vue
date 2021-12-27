@@ -12,11 +12,27 @@
 </template>
 <!--fram till hit-->
 <div id="ans">
-<template v-if="!timesUp">
+<template v-if="!timesUp && !this.clicked">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="this.myAnswer =='' && (answer(a, index))"> <!--id="{clicked ? 'isChosen': ''}"-->
     {{ a }}
   </button>
 </template>
+<!--Jag gjorde en variant här men lite krånglig egentligen, funkar dock fast byter färg också. //Pelle -->
+<template v-if="!timesUp && this.clicked">
+
+  <button v-for="(a,index) in cloneStartAns" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index"> <!--id="{clicked ? 'isChosen': ''}"-->
+    {{ a }}
+  </button>
+
+  <button  v-bind:key="this.question.a[this.pickedIndex]" v-bind:index="index" v-bind:class="'ans'+'Pick'" > <!--id="{clicked ? 'isChosen': ''}"-->
+    {{ this.question.a[this.pickedIndex] }}
+  </button>
+
+  <button v-for="(a,index) in cloneAnsArray" v-bind:key="a" v-bind:index="index+this.pickedIndex" v-bind:class="'ans'+(index+this.pickedIndex+1)" > <!--id="{clicked ? 'isChosen': ''}"-->
+    {{ a }}
+  </button>
+</template>
+
 <template v-if="timesUp">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
     {{ a }}
@@ -44,6 +60,9 @@ export default {
       timesUp:false,
       myAnswer:"",
       clicked:false,
+      pickedIndex:"",
+      cloneAnsArray:[],
+      cloneStartAns:[]
     }
   },
   watch:{
@@ -70,6 +89,7 @@ export default {
       //this.timesUp=true;
       this.myAnswer=answer;
       this.clicked=true;
+      this.findPickedAnswer(this.myAnswer);
       if(this.question.isCorrect[index]){
         console.log("CORRECT!");
         //this.ansCorrect=true;
@@ -77,7 +97,14 @@ export default {
       }else{
         console.log("INCORRECT!");
       }
+    },
+    findPickedAnswer(myAnswer){
+      var array = this.question.a
+      this.pickedIndex = array.indexOf(myAnswer)
+      this.cloneAnsArray = array.slice(this.pickedIndex+1)
+      this.cloneStartAns = array.slice(0, this.pickedIndex)
     }
+    
   }
 }
 </script>
@@ -140,6 +167,10 @@ export default {
   .ansfalse{
     background-color: gray;
     opacity: 0.3;
+    }
+    .ansPick{
+      background-color:#99e5cb;
+    border: black 8px solid;
     }
 
   h3{
