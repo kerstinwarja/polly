@@ -1,6 +1,6 @@
 <template>
 <div id="quest">
-  <div id="timer">
+  <div id="timer" v-if="this.question.t != ''">
     {{this.question.t - this.timerCount}}
   </div>
   <p>{{question.q}}</p>
@@ -36,6 +36,7 @@
 <template v-if="timesUp">
   <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
     {{ a }}
+    {{this.question.isCorrect[index]}}
   </button>
 </template>
 
@@ -70,6 +71,7 @@ export default {
       if(timeNow==this.question.t){
             clearInterval(this.timerEvent)
             this.timesUp=true;
+            console.log("timesUp" + this.timesUp)
       }
     }
   },
@@ -104,7 +106,7 @@ export default {
       this.cloneAnsArray = array.slice(this.pickedIndex+1)
       this.cloneStartAns = array.slice(0, this.pickedIndex)
     }
-    
+
   }
 }
 </script>
@@ -141,8 +143,8 @@ export default {
   }
   #prePic{
     width: 30%;
-  object-fit: contain;
-  }
+    object-fit: contain;
+    }
   .ans0{
     background-color:#628579;
     }
@@ -168,8 +170,8 @@ export default {
     background-color: gray;
     opacity: 0.3;
     }
-    .ansPick{
-      background-color:#99e5cb;
+  .ansPick{
+    background-color:#99e5cb;
     border: black 8px solid;
     }
 
@@ -178,8 +180,5 @@ export default {
     color: white;
     text-shadow: 3px 3px #990000;
     }
-  #isChosen{
-  border: 5px black solid;
-  background-color: black;
-  }
+
 </style>

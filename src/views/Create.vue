@@ -26,7 +26,7 @@
       <button type="submit" id="removeQues" v-on:click="removeAnswer()">
         Remove answer
       </button>
-      <button id="addQuestionButton" v-on:click="addAnswer">
+      <button id="addAnswerButton" v-on:click="addAnswer">
         Add answer
       </button><br>
       <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
@@ -35,10 +35,10 @@
       </div>
     </div>
     <div id="buttonDiv">
-      <!--button type="submit" id="updatePre" v-on:click="updatePreview()">
+      <button type="submit" id="updatePre" v-on:click="sendQuiz()">
         Update preview
-      </button-->
-      <button id="addQues" v-on:click="addQuestion">
+      </button>
+      <button id="addQues" v-on:click="addQuestion()">
         Add question
       </button>
 
@@ -49,7 +49,7 @@
       <!-- timerKOD  -->
       Timer
           <select type="submit" v-model="time">
-            <option disabled value=""> select time </option>
+            <option disabled value=""> Select time </option>
                    <option>5</option>
                    <option>10</option>
                    <option>15</option>
@@ -67,13 +67,19 @@
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
   </div>
+
+<div id="questionMenu">
+  <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)">
+    {{ q }}{{i}}
+  </button>
+</div>
+
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="saveQuiz" >
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="sendQuiz" >
     </router-link>
-
 </body>
 </template>
 
@@ -87,16 +93,23 @@ export default {
     return {
       lang: "",
       //pollId: "", //remove to not overwrite from initialize?
-      question: [""],
+      question: "",
+      allQuestions:[],
       answers: ["", ""],
-      questionNumber: 0,
+      allAnswers:[],
+      //questionNumber: 0,
+      //allQnr:[],
       questionImg: "",
+      allQimg:[],
+      isCorrect:[false, false],
+      allisCorr:[],
+      allTime:[],
       data: {},
       uiLabels: {},
       counter: 2,
       timerCount: "",
       timerEnabled: true,
-      isCorrect:[false, false],
+      time:""
     }
   },
   created: function () {
@@ -117,12 +130,40 @@ export default {
     /*createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
-    addQuestion: function () {
+    /*addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
       this.questionNumber ++
       this.question=""
       this.answers= ["", ""]
       this.questionImg=""
+    },*/
+
+    sendQuiz: function(){
+      if(this.question!==""){
+        this.addQuestion();
+      }
+      for (let i = 0; i < this.allQuestions.length; i++) {
+        this.question= this.allQuestions[i]
+        this.answers= this.allAnswers[i]
+        this.questionImg = this.allQimg[i]
+        this.time = this.allTime[i]
+        this.isCorrect = this.allisCorr[i]
+        socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: i ,questionImg: this.questionImg, isCorrect: this.isCorrect} )
+
+      }
+    },
+
+    addQuestion: function(){
+      this.allQuestions.push(this.question)
+      this.allQimg.push(this.questionImg)
+      this.allTime.push(this.time)
+      this.allAnswers.push(this.answers)
+      this.allisCorr.push(this.isCorrect)
+      this.question=""
+      this.answers= ["", ""]
+      this.questionImg=""
+      this.isCorrect=false
+      this.time=""
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -145,17 +186,20 @@ export default {
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
       },
+    accessQuestion: function (i){
+      this.question = this.allQuestions[i]
+      this.isCorrect = this.allisCorr[i]
 
+      this.questionImg = this.allQImg[i]
+      //console.log("qimg "+this.allQImg)
+      //this.answers = this.allAnswers[i]
+      //this.time = this.allTime[i]
+    }
     /*updatePreview(){
       //THis is the code for updating title and description
       this.timerCount = this.time;
       this.timerEnabled = true;
     },*/
-    saveQuiz(){
-      if(this.question!==""){
-        this.addQuestion();
-      }
-    }
     },
   }
 
@@ -232,7 +276,7 @@ body textarea{
   text-align:center;
 }
 
-#addQuestionButton {
+#addAnswerButton {
   height: 100%;
   width: 15%;
   background-color: #ffcc00;

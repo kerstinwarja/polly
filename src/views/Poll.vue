@@ -3,6 +3,12 @@
 
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
+
+    <!--div> FORSTÄTTER NÄR RESULT FINNS
+      <router-link v-bind:to="'/poll/'+ this.pollId">
+        <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
+      </router-link>
+    </div-->
       <div id="audio">
      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
         <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -92,11 +98,9 @@ clearInterval(intervalId)
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-
     socket.on("musicSelection", SONG =>
       this.SONG = SONG
     ),
-
     socket.on("newQuestion", q =>
       this.question = q,
       //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
@@ -113,13 +117,15 @@ clearInterval(intervalId)
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
     },
-    nextQue() {
+    nextQues() {
       console.log("next pressed")
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber+1})
       this.questionNumber++
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+      window.location.reload()
       //this.timerCount = this.question.t
       //this.nextactivated = true
     },
+
   }
 }
 </script>
@@ -136,4 +142,19 @@ clearInterval(intervalId)
   margin-bottom:5%;
 }
 
+#forwardButton{
+  height: 5%;
+  width: 8%;
+  margin-right: 4%;
+  margin-top: 10%;
+  float: right;
+}
+#backButton{
+  height: 5%;
+  width: 8%;
+  margin-left: 4%;
+  margin-top: 10%;
+  float: left;
+
+}
 </style>
