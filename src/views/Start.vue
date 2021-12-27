@@ -67,11 +67,12 @@ export default {
   }
 }
 </script>
+
 <style>
 template{
   margin: 0px;
-  
 }
+
 body{
   background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
@@ -80,32 +81,28 @@ body{
   background-attachment: fixed;
   margin: 0px;
   padding: 0px;
-  
 }
-
-
-
 
 button{
     border-radius: 8px;
 }
 
 .wrapper {
-   margin: 0px;
    width: 95%;
    height: 95%;
    display: grid;
-   grid-gap: 5px;
+   grid-gap: 3%;
    grid-template-columns: 50% 50%;
    align-items: center;
+   padding-left: 1%;
   }
 
 .wrapper button{
-  width: 50%;
-  height: 50px;
+  width: 70%;
+  height: 3em;
   background-color: #fbf1e0;
   text-transform: uppercase;
-  font-size: 22pt;
+  font-size: 2em;
   color: navy;
   border: 2px navy solid;
 }
@@ -114,7 +111,6 @@ button:hover {
   cursor: pointer;
 }
 
-
 #nav button{
   width: 130px;
   height: 40px;
@@ -122,21 +118,19 @@ button:hover {
   left: 7%;
   background-color: #fbf1e0;
   position: absolute;
-  font-size: 9pt;
+  font-size: 0.8em;
   color: navy;
   border: 2px navy solid;
   text-transform: uppercase;
 }
 
 header {
-  font-size: 50pt;
+  font-size: 4em;
   text-align: center;
-  padding-top: 50px;
+  padding-top: 5%;
   margin: 0;
   color: white;
-
   text-shadow: -2px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
-
 
 </style>
