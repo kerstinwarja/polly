@@ -5,6 +5,7 @@
 </header>
 
   <div class="wrap2">
+  <div>
   <div id="preview">
     <div id="previewTitle">
       <span id="as">{{question}}</span>
@@ -17,13 +18,20 @@
       </textarea>
     </div>
   </div>
+  <div id="questionMenu">
+    <p>Select a question to make alterations</p>
+    <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+      {{ q }}
+    </button>
+  </div>
+</div>
 
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
       <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
       <h3 style="float: left"> Answer: </h3>
-      <button type="submit" id="removeQues" v-on:click="removeAnswer()">
+      <button type="submit" id="removeAns" v-on:click="removeAnswer()">
         Remove answer
       </button>
       <button id="addAnswerButton" v-on:click="addAnswer">
@@ -35,44 +43,41 @@
       </div>
     </div>
     <div id="buttonDiv">
-      <button type="submit" id="updatePre" v-on:click="sendQuiz()">
-        Update preview
+      <button type="submit" v-on:click="setTime()">
+        <span>Set timer</span>
       </button>
-      <button id="addQues" v-on:click="addQuestion()">
-        Add question
-      </button>
-
-      <button id="importPic" type="submit" v-on:click="PicChoose()">
+      <!--select type="submit" v-model="time">
+        <option disabled value=""> Select time </option>
+               <option>5</option>
+               <option>10</option>
+               <option>15</option>
+      </select-->
+      <button type="submit" v-on:click="PicChoose()">
         <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
         <span>Import picture</span>
       </button>
-      <!-- timerKOD  -->
-      Timer
-          <select type="submit" v-model="time">
-            <option disabled value=""> Select time </option>
-                   <option>5</option>
-                   <option>10</option>
-                   <option>15</option>
-          </select>
+      <button  v-if="!this.isEditing" v-on:click="addQuestion()">
+        Add question
+      </button>
+      <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
+        Save changes
+      </button>
+      <button type="submit" v-on:click="sendQuiz()">
+        Delete question
+      </button>
     </div>
   </div>
 
 </div>
 
-  <div>
+  <!--div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div>
-
-<div id="questionMenu">
-  <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)">
-    {{ q }}{{i}}
-  </button>
-</div>
+  </div-->
 
   <router-link v-bind:to="'/initialize/'+ lang">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
@@ -97,7 +102,7 @@ export default {
       allQuestions:[],
       answers: ["", ""],
       allAnswers:[],
-      //questionNumber: 0,
+      questionNumber: 0,
       //allQnr:[],
       questionImg: "",
       allQimg:[],
@@ -109,7 +114,8 @@ export default {
       counter: 2,
       timerCount: "",
       timerEnabled: true,
-      time:""
+      time:"",
+      isEditing: false,
     }
   },
   created: function () {
@@ -152,18 +158,20 @@ export default {
 
       }
     },
-
+    clearFields: function(){
+      this.question=""
+      this.answers= ["", ""]
+      this.questionImg=""
+      this.isCorrect=false
+      this.time=""
+    },
     addQuestion: function(){
       this.allQuestions.push(this.question)
       this.allQimg.push(this.questionImg)
       this.allTime.push(this.time)
       this.allAnswers.push(this.answers)
       this.allisCorr.push(this.isCorrect)
-      this.question=""
-      this.answers= ["", ""]
-      this.questionImg=""
-      this.isCorrect=false
-      this.time=""
+      this.clearFields()
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -186,14 +194,28 @@ export default {
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
       },
+
+    setTime(){
+      let clock = prompt("Set a maximum time for answering the question (in seconds):");
+      this.time = clock;
+      },
     accessQuestion: function (i){
+      this.isEditing = true
       this.question = this.allQuestions[i]
       this.isCorrect = this.allisCorr[i]
-
-      this.questionImg = this.allQImg[i]
-      //console.log("qimg "+this.allQImg)
-      //this.answers = this.allAnswers[i]
-      //this.time = this.allTime[i]
+      this.questionImg = this.allQimg[i]
+      this.answers = this.allAnswers[i]
+      this.time = this.allTime[i]
+      this.questionNumber=i
+    },
+    saveChanges: function(i){
+      this.isEditing = false
+      this.allQuestions[i] =this.question
+      this.allisCorr[i] = this.isCorrect
+      this.allQimg[i] = this.questionImg
+      this.allAnswers[i] = this.answers
+      this.allTime[i] = this.time
+      this.clearFields()
     }
     /*updatePreview(){
       //THis is the code for updating title and description
@@ -225,7 +247,7 @@ h3{
   background-color: wheat;
   width: 100%;
   border: 3px navy solid;
-  height: 120%;
+  height: 32em;
   position: relative;
 }
 
@@ -260,7 +282,7 @@ body textarea{
   max-height: 100%;
   background-position: bottom;
   color: Black;
-  height: 72vh;
+  height: 25em;
   border: 5px black solid;
   overflow: hidden;
   resize: none;
@@ -268,6 +290,25 @@ body textarea{
   padding-bottom: 2%;
 }
 
+#questionMenu{
+  width:95%;
+  height: 5em;
+  border: black 2px solid;
+  margin-top: 1%;
+  background-color: wheat;
+  overflow: auto;
+  padding: 2%;
+}
+#questionMenu button{
+  background-color: navy;
+  color: white;
+  height: 50%;
+  width: 20%;
+  float:left;
+}
+#questionMenu p{
+  margin:0%;
+}
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -282,31 +323,21 @@ body textarea{
   background-color: #ffcc00;
 }
 
-#updatePre {
+#buttonDiv button {
   height: 100%;
   width: 20%;
   background-color: rgb(135, 175, 111);
 }
 
-#addQues {
-  height: 100%;
-  width: 20%;
-  background-color: rgb(100, 155, 36);
-  margin: 0 2%;
-}
 
-#removeQues {
+
+#removeAns {
   height: 100%;
   width: 15%;
   background-color: rgb(255, 0, 0);
   margin-bottom: 1%;
 }
 
-#importPic {
-  height: 100%;
-  width: 20%;
-  background-color: wheat;
-}
 
 #previewPic{
   width: 25%;
@@ -354,7 +385,7 @@ body textarea{
   height: 5%;
   width: 8%;
   margin-left: 4%;
-  margin-top: 10%;
+  margin-top: 1%;
   float: left;
 
 }
@@ -366,7 +397,7 @@ body textarea{
   height: 5%;
   width: 8%;
   margin-right: 4%;
-  margin-top: 10%;
+  margin-top: 1%;
   float: right;
   transform: scaleX(-1);
 }
@@ -392,4 +423,5 @@ body textarea{
 .answer5{
   background-color:#633D41;
   }
+
 </style>
