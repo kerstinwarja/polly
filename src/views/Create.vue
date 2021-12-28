@@ -18,6 +18,21 @@
       </textarea>
     </div>
   </div>
+<<<<<<< Updated upstream
+=======
+  <div id="questionMenu">
+    <template v-if="!this.isEditing">
+      <p>Select a question to make alterations</p>
+    </template>
+    <template v-if="this.isEditing">
+      <p> You are making changes in :"{{this.allQuestions[this.questionNumber]}}"</p>
+    </template>
+    <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+      {{i}}: {{ q }}
+    </button>
+  </div>
+</div>
+>>>>>>> Stashed changes
 
   <div class="createWindow">
     <div id="createDiv">
@@ -47,6 +62,7 @@
         <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
         <span>Import picture</span>
       </button>
+<<<<<<< Updated upstream
       <!-- timerKOD  -->
       Timer
           <select type="submit" v-model="time">
@@ -55,6 +71,17 @@
                    <option>10</option>
                    <option>15</option>
           </select>
+=======
+      <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
+        Add question
+      </button>
+      <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)">
+        Remove question
+      </button>
+      <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style="background-color: red ">
+        Save changes
+      </button>
+>>>>>>> Stashed changes
     </div>
   </div>
 
