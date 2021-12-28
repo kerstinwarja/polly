@@ -1,44 +1,44 @@
 <template>
-   <body>
-      <div id="previewTitle">
-        <h4 v-if="isHost">You are the host</h4>
-        <h4 v-else> It's time to play </h4>
-        <header>{{pollId}}</header>
+  <body>
+    <div id="previewTitle">
+      <h4 v-if="isHost">You are the host</h4>
+      <h4 v-else> It's time to play </h4>
+      <header>{{pollId}}</header>
+    </div>
+    <div id="wrap">
+      <div class="infoBoards" id="description">
+        <span id="pdes" >{{pollDesc}}</span>
       </div>
-      <div id="wrap">
-        <div class="infoBoards" id="description">
-            <span id="pdes" >{{pollDesc}}</span>
-        </div>
-        <div id="picture">
-          <img v-bind:src="pollImg">
-        </div>
-        <div class="infoBoards" >
-          <span id="partText">{{this.nameArray}}</span>
-        </div>
+      <div id="picture">
+        <img v-bind:src="pollImg">
       </div>
-      <div id="audio">
-       <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
-          <source src="../music/circusBrass.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
-          <source src="../music/circusTrap.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
-          <source src="../music/circusStrings.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
-          <source src="../music/circusTechno.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
-          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-        </audio>
+      <div class="infoBoards" >
+        <span id="partText">{{this.nameArray}}</span>
       </div>
-      <div v-show="isHost">
-        <!--router-link v-bind:to="'/poll/'+ this.pollId"-->
-          <button v-on:click="letsGo" id="startButton"> START QUIZ</button>
-        <!--/router-link-->
-      </div>
-    </body>
+    </div>
+    <div id="audio">
+      <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+        <source src="../music/circusBrass.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <source src="../music/circusTrap.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <source src="../music/circusStrings.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <source src="../music/circusTechno.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div v-show="isHost">
+      <!--router-link v-bind:to="'/poll/'+ this.pollId"-->
+        <button v-on:click="letsGo" id="startButton"> START QUIZ</button>
+      <!--/router-link-->
+    </div>
+  </body>
 </template>
 
 <script>
@@ -80,7 +80,7 @@ export default {
       this.question = q
     )
     socket.on("sendToPoll",() =>
-       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )
 
     //lyssnar på description i socket.js i join poll
@@ -93,7 +93,7 @@ export default {
       console.log("-----här------" +this.nameArray)
       }
     )
-    
+
 
     socket.on("imageAddress", imag =>
       this.pollImg = imag
@@ -107,27 +107,31 @@ export default {
   },
   methods:{
     letsGo: function() {
-      
       socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
         console.log('lets GO!');
-     this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     }
   }
 }
 </script>
+
 <style scoped>
+
 header{
   padding-top:0%;
   text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
 }
+
 #impPic{
   height: 30%;
   width: 35%;
 }
+
 h4{
   margin: 3% 0% 3% 0%;
   text-shadow: -0.01em 0 #990000, 0 0.05em #990000, 0.05em 0 #990000, 0 -0.01em #990000;
 }
+
 #previewTitle{
   font-size: 30px;
   text-shadow: 3px 3px navy;
@@ -136,6 +140,7 @@ h4{
   line-break: auto;
   max-height: 15%;
 }
+
 .infoBoards{
   color: navy;
   font-family: "Times New Roman";
@@ -147,36 +152,42 @@ h4{
   border: navy 2px solid;
   font-size: 1.5em;
 }
+
 span {
   position: relative;
   top: 10%;
 }
+
 #wrap img{
   max-height: 15em;
   max-width:100%;
   height:auto;
   width: auto;
 }
+
 #startButton {
   height: 5em;
   width: 15%;
   background-color: rgb(100, 155, 36);
   margin-bottom:5%;
-
 }
+
 #wrap {
-   margin: 0px;
-   padding: 3% 0% 3% 0%;
-   /*grid-gap: 1%;*/
-   width: 100%;
-   display: grid;
-   grid-template-columns: 33% 33% 33%;
+  margin: 0px;
+  padding: 3% 0% 3% 0%;
+  /*grid-gap: 1%;*/
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   align-items: center;
-  }
+}
+
 #audio {
   display:none;
 }
+
 #description {
   margin: 10%;
 }
+
 </style>

@@ -62,7 +62,7 @@ export default {
       socket.emit("switchLanguage", this.lang)
     },
     create: function(){
-      
+
     }
   }
 }
@@ -84,18 +84,18 @@ body{
 }
 
 button{
-    border-radius: 8px;
+  border-radius: 8px;
 }
 
 .wrapper {
-   width: 95%;
-   height: 95%;
-   display: grid;
-   grid-gap: 3%;
-   grid-template-columns: 50% 50%;
-   align-items: center;
-   padding-left: 1%;
-  }
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-gap: 3%;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-left: 1%;
+}
 
 .wrapper button{
   width: 70%;

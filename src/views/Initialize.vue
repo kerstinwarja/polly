@@ -21,25 +21,25 @@
           </div>
         </div>
         <div id="audio">
-       <audio controls v-if="music == 'Brass'">
-          <source src="../music/circusBrass.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls v-if="music == 'Trap'">
-          <source src="../music/circusTrap.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls v-if="music == 'Strings'">
-          <source src="../music/circusStrings.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls v-if="music == 'Techno'">
-          <source src="../music/circusTechno.mp3" type="audio/mpeg">
-        </audio>
-        <audio controls v-if="music == 'Ragtime'">
-          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-        </audio>
-        {{music}}
-      </div>
-      <div id="audio">
-         </div>
+          <audio controls v-if="music == 'Brass'">
+            <source src="../music/circusBrass.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Trap'">
+            <source src="../music/circusTrap.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Strings'">
+            <source src="../music/circusStrings.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Techno'">
+            <source src="../music/circusTechno.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Ragtime'">
+            <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+          </audio>
+          {{music}}
+        </div>
+        <div id="audio">
+        </div>
       </div>
       <div class="createWindow">
         <h3> Quiz name: </h3>
@@ -122,7 +122,7 @@ export default {
   methods: {
     createPoll: function () {
       this.timerCount = this.time;
-       this.SONG = this.music;
+      this.SONG = this.music;
       //Skickar pollDesc till servern
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
@@ -132,7 +132,7 @@ export default {
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.pollImg = pict;
-       console.log(this.pollImg)
+      console.log(this.pollImg)
   },
 
   }}
@@ -157,12 +157,14 @@ body textarea{
   font-family: sans-serif;
   border: 2px solid;
 }
+
 h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
 }
+
 h4 {
   margin: 3% 0% 3% 0%;
   text-align: center;
@@ -170,6 +172,7 @@ h4 {
   text-shadow: -1px 0 #990000, 0 3px #990000, 3px 0 #990000, 0 -1px #990000;
   font-size: 18pt;
 }
+
 #backButton{
   height: 5%;
   width: 8%;
@@ -186,10 +189,12 @@ h4 {
   float: right;
   transform: scaleX(-1);
 }
+
 #previewPic img{
   width: 100%;
   object-fit: contain;
 }
+
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -199,6 +204,7 @@ h4 {
   height: 100%;
   border: 5px #0b074d solid;
 }
+
 #previewTitle{
   font-size: 30px;
   text-shadow: -1px 0 navy, 0 3px navy, 3px 0 navy, 0 -1px navy;
@@ -219,14 +225,15 @@ h4 {
   border: navy 2px solid;
   font-size: 1em;
 }
+
 #previewDesc {
   margin: 10%;
 }
 
-
 #desIptBox{
   height: 20em;
 }
+
 ::placeholder{
   color:Navy;
 }
@@ -238,6 +245,7 @@ h4 {
   margin-top: 2%;
   float: left;
 }
+
 #forwardButton{
   height: 5%;
   width: 8%;
@@ -252,41 +260,41 @@ h4 {
 }
 
 .wrap2 {
-   margin: 0px;
-   padding-left: 4%;
-   width: 95%;
-   height: 95%;
-   display: grid;
-   grid-gap: 5%;
-   grid-template-columns: 61% 31%;
-   align-items: center;
+  margin: 0px;
+  padding-left: 4%;
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: 61% 31%;
+  align-items: center;
+}
 
-  }
-
-  .wrap2 button{
-    background-color: wheat;
-    text-transform: uppercase;
-    padding-bottom: 1%;
-    font-size:80%;
-  }
+.wrap2 button{
+  background-color: wheat;
+  text-transform: uppercase;
+  padding-bottom: 1%;
+  font-size:80%;
+}
 
 .wrap3 {
-   margin: 0px;
-   padding: 5% 0% 5% 8%;
-   grid-gap: 4%;
-   width: 80%;
-   display: grid;
-   grid-template-columns: 50% 50%;
-   align-items: center;
-  }
-  .wrap4{
-    margin: 0px;
-    padding: 5% 0% 5% 0%;
-    grid-gap: 1%;
-    width: 100%;
-    height: 40%;
-    display: grid;
-    grid-template-columns: 33% 33% 32%;
-    align-items: center;
-  }
+  margin: 0px;
+  padding: 5% 0% 5% 8%;
+  grid-gap: 4%;
+  width: 80%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+}
+
+.wrap4{
+  margin: 0px;
+  padding: 5% 0% 5% 0%;
+  grid-gap: 1%;
+  width: 100%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: 33% 33% 32%;
+  align-items: center;
+}
 </style>

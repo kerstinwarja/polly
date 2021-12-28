@@ -1,38 +1,37 @@
 <template>
   <!--{{pollId}}-->
-
   <Question v-bind:question="question"
             v-on:answer="submitAnswer"/>
 
-    <!--div> FORSTÄTTER NÄR RESULT FINNS
-      <router-link v-bind:to="'/poll/'+ this.pollId">
-        <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
-      </router-link>
-    </div-->
-      <div id="audio">
-     <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
-        <source src="../music/circusBrass.mp3" type="audio/mpeg">
-      </audio>
-      <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
-        <source src="../music/circusTrap.mp3" type="audio/mpeg">
-      </audio>
-      <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
-        <source src="../music/circusStrings.mp3" type="audio/mpeg">
-      </audio>
-      <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
-        <source src="../music/circusTechno.mp3" type="audio/mpeg">
-      </audio>
-      <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
-        <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-      </audio>
-    </div>
+  <!--div> FORSTÄTTER NÄR RESULT FINNS
+    <router-link v-bind:to="'/poll/'+ this.pollId">
+      <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
+    </router-link>
+  </div-->
+  <div id="audio">
+    <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+      <source src="../music/circusBrass.mp3" type="audio/mpeg">
+    </audio>
+    <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+      <source src="../music/circusTrap.mp3" type="audio/mpeg">
+    </audio>
+    <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+      <source src="../music/circusStrings.mp3" type="audio/mpeg">
+    </audio>
+    <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+      <source src="../music/circusTechno.mp3" type="audio/mpeg">
+    </audio>
+    <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+      <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
-   <!--{{timerCount}}
-   {{this.question.t}} -->
+  <!--{{timerCount}}
+  {{this.question.t}} -->
 
   <!-- <button v-on:click="nextQue()">
-          NExt
-        </button>-->
+    Next
+  </button>-->
 </template>
 
 <script>
@@ -131,6 +130,7 @@ clearInterval(intervalId)
 </script>
 
 <style>
+
 /*#audio {
   /*display:none;
 }*/
@@ -149,12 +149,13 @@ clearInterval(intervalId)
   margin-top: 10%;
   float: right;
 }
+
 #backButton{
   height: 5%;
   width: 8%;
   margin-left: 4%;
   margin-top: 10%;
   float: left;
-
 }
+
 </style>
