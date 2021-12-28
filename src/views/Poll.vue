@@ -97,6 +97,7 @@ clearInterval(intervalId)
         },*/
   created: function () {
     this.pollId = this.$route.params.id
+    this.isHost = this.$route.params.isHost==="true"?true:false;
     socket.emit('joinPoll', this.pollId)
     socket.on("musicSelection", SONG =>
       this.SONG = SONG
