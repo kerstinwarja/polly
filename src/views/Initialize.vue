@@ -207,9 +207,7 @@ h4 {
   line-break: auto;
   max-height: 15%;
 }
-#as{
-  margin: 10px 0px 0px;
-}
+
 .infoBoards{
   color: navy;
   font-family: "Times New Roman";
@@ -232,11 +230,7 @@ h4 {
 ::placeholder{
   color:Navy;
 }
-#updatePre{
-  width: 84%;
-  background-color: rgb(135, 175, 111);
-  margin-bottom: 4%;
-}
+
 #backButton{
   height: 5%;
   width: 8%;
