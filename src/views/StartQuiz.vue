@@ -13,7 +13,7 @@
           <img v-bind:src="pollImg">
         </div>
         <div class="infoBoards" >
-          <span id="partText">{{name}}</span>
+          <span id="partText">{{this.nameArray}}</span>
         </div>
       </div>
       <div id="audio">
@@ -55,7 +55,8 @@ export default {
       pollImg:"",
       isHost: false,
       SONG:"",
-      name: [],
+      myName: "",
+      nameArray:[],
       //data: {},
       //uiLabels: {},
       //pollDes: [],
@@ -86,10 +87,14 @@ export default {
     socket.on("description", desc =>
       this.pollDesc = desc
     )
-    socket.on("name", myName => {
-      this.name.push(myName)
-      console.log('--------------myName------------------')}
+
+    socket.on("sendName",participants => {
+      this.nameArray = participants
+      console.log("-----här------" +this.nameArray)
+      }
     )
+    
+
     socket.on("imageAddress", imag =>
       this.pollImg = imag
     )

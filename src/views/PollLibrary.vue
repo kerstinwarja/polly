@@ -64,10 +64,12 @@ export default {
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
-        socket.emit()
-      this.pollId = this.id
-      this.isHost= false
-      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost, nickname: this.myName} })
+        console.log("naaaaaaa2"+this.myName)
+         this.pollId = this.id
+        socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
+        
+        this.isHost= false
+        this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
       }
       else {
         alert("YOU NEED A NICKNAME")

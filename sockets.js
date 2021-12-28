@@ -49,6 +49,11 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
   });
+  socket.on('sendNickname', function(d) {
+    //io.to(d.pollId).emit('sendName',d.myName)
+    io.to(d.pollId).emit('sendName',data.getName(d.pollId,d.myName));
+    console.log('-----------sendNICK------------'+d.myName);
+  });
   
 
   socket.on('submitAnswer', function(d) {
