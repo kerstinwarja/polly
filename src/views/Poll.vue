@@ -29,10 +29,11 @@
 
    <!--{{timerCount}}
    {{this.question.t}} -->
-
-  <!-- <button v-on:click="nextQue()">
+<!--router-link v-bind:to="'/result/'+this.pollId"-->
+  <button v-if="this.isHost" v-on:click="goToResult()">
           NExt
-        </button>-->
+        </button>
+<!--/router-link-->
 </template>
 
 <script>
@@ -106,6 +107,9 @@ clearInterval(intervalId)
       this.question = q,
       //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
     ),
+    socket.on("sendToResult",() =>
+       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+    )
 
     this.timerCount = this.question.t
     this.questionImg = this.question.questionImg
@@ -126,6 +130,11 @@ clearInterval(intervalId)
       //this.timerCount = this.question.t
       //this.nextactivated = true
     },
+    goToResult(){
+      socket.emit("showResult", { id: this.pollId, isHost: this.isHost})
+       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+    
+    }
 
   }
 }

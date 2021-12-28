@@ -75,20 +75,20 @@
 
 </div>
 
-  <!--div>
+  <div>
     <input type="number" v-model="questionNumber">
     <button v-on:click="runQuestion">
       Run question
     </button>
     {{data}}
     <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-  </div-->
+  </div>
 
   <router-link v-bind:to="'/initialize/'+ lang">
       <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;"> Go back </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
+      <button style="float:right" class="backButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
     </router-link>
 </body>
 </template>
