@@ -18,18 +18,23 @@
       </textarea>
     </div>
   </div>
-  <div id="questionMenu">
-    <p>Select a question to make alterations</p>
-    <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-      {{ q }}
-    </button>
+    <div id="questionMenu">
+      <template v-if="!this.isEditing">
+        <h3>Select a question to make alterations</h3>
+      </template>
+      <template v-if="this.isEditing">
+        <h3> You are making changes in :"{{this.allQuestions[this.questionNumber]}}"</h3>
+      </template>
+      <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+        {{i}}: {{ q }}
+      </button>
   </div>
 </div>
 
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
-      <textarea id="quizTitle" type="text" v-model="question" placeholder="Write your question ..."></textarea> <br>
+      <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder="Write your question ..."></textarea> <br>
       <h3 style="float: left"> Answer: </h3>
       <button type="submit" id="removeAns" v-on:click="removeAnswer()">
         Remove answer
@@ -59,14 +64,11 @@
       <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
         Add question
       </button>
-      <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)">
+      <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
         Remove question
       </button>
-      <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
+      <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
         Save changes
-      </button>
-      <button type="submit" v-on:click="sendQuiz()" style="background-color: red">
-        Delete question
       </button>
     </div>
   </div>
@@ -83,10 +85,10 @@
   </div-->
 
   <router-link v-bind:to="'/initialize/'+ lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;"> Go back </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="sendQuiz" >
+      <button style="float:right" class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
     </router-link>
 </body>
 </template>
@@ -314,14 +316,15 @@ body textarea{
   padding: 2%;
 }
 #questionMenu button{
-  background-color: navy;
-  color: white;
+  background-color: #CF903A;
+  color: black;
   height: 50%;
   width: 20%;
   float:left;
+  overflow: hidden;
 }
-#questionMenu p{
-  margin:0%;
+#questionMenu h3{
+  text-align: center;
 }
 #previewTitle{
   font-size: 30px;
@@ -329,6 +332,7 @@ body textarea{
   color: white;
   line-break: auto;
   text-align:center;
+  min-height: 18%;
 }
 
 #addAnswerButton {
@@ -343,15 +347,12 @@ body textarea{
   background-color: rgb(135, 175, 111);
 }
 
-
-
 #removeAns {
   height: 100%;
   width: 15%;
   background-color: rgb(255, 0, 0);
   margin-bottom: 1%;
 }
-
 
 #previewPic{
   width: 25%;
@@ -395,14 +396,27 @@ body textarea{
   bottom: 0px;
 
 }
-#backButton{
-  height: 5%;
-  width: 8%;
-  margin-left: 4%;
-  margin-top: 1%;
+.backButton{
+  height: 10%;
+  width: auto;
+  margin: 2% 4% 2% 4%;
   float: left;
-
+  text-transform: uppercase;
+  color: navy;
+  text-align: center;
+  font-size: 1em;
 }
+
+.backButton img {
+  margin-top: 5%;
+  height: 1em;
+}
+
+.backButton text {
+  margin-bottom: 5%;
+  margin-top: 0%;
+}
+
 #previewPic img{
   width: 100%;
   object-fit: contain;
