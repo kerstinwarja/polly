@@ -26,7 +26,7 @@
         <h3> You are making changes in :"{{this.allQuestions[this.questionNumber]}}"</h3>
       </template>
       <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-        {{i}}: {{ q }}
+        {{i+1}}: {{ q }}
       </button>
   </div>
 </div>
