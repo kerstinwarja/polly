@@ -51,8 +51,14 @@ function sockets(io, socket, data) {
   });
   socket.on('sendNickname', function(d) {
     //io.to(d.pollId).emit('sendName',d.myName)
-    io.to(d.pollId).emit('sendName',data.getName(d.pollId,d.myName));
+    io.to(d.pollId).emit('sendName',data.addName(d.pollId,d.myName));
     console.log('-----------sendNICK------------'+d.myName);
+    //io.to(d.pollId).emit('getName',data.getName(d.pollId));
+  });
+  socket.on('getNickname', function(d) {
+    //io.to(d.pollId).emit('sendName',d.myName)
+    //console.log('-----------getNICK------------'+d.myName);
+    io.to(d.pollId).emit('getName',data.getName(d.pollId));
   });
   
 

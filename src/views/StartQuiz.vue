@@ -13,7 +13,10 @@
         <img v-bind:src="pollImg">
       </div>
       <div class="infoBoards" >
-        <span id="partText">{{this.nameArray}}</span>
+        Participants:
+        <span id="partText" v-for="name in this.nameArray" v-bind:key="name">
+          <li>{{name}}</li>
+        </span>
       </div>
     </div>
     <div id="audio">
@@ -55,7 +58,7 @@ export default {
       pollImg:"",
       isHost: false,
       SONG:"",
-      myName: "",
+      myName: "undefined",
       nameArray:[],
       //data: {},
       //uiLabels: {},
@@ -90,14 +93,12 @@ export default {
     socket.on("description", desc =>
       this.pollDesc = desc
     )
-    
+    socket.emit('getNickname',{pollId:this.pollId});
 
-    socket.on("sendName",participants => {
+    socket.on("getName",participants => {
       this.nameArray = participants
-      console.log("-----här------" +this.nameArray)
       }
     )
-
 
     socket.on("imageAddress", imag =>
       this.pollImg = imag
@@ -155,6 +156,14 @@ h4{
   border-radius: 2%;
   border: navy 2px solid;
   font-size: 1.5em;
+  
+}
+#partText{
+  text-align:left;
+  font-weight: bold;
+}
+li{
+  margin-left:33%
 }
 
 span {
