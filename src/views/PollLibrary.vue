@@ -1,34 +1,28 @@
 <template>
-
   <header class="pollLabHeader">
     <h1>Participate in poll</h1>
   </header>
-
-
   <h2>
     On this page you can participate in a poll with your friends. <br>
     Insert your group's shared poll ID to participate in the poll.
   </h2>
-
-
-    <div id="partPoll">
-      <label>
-        Insert poll ID: <br>
-        <input type="text" v-model="id"><br>
-      </label>
-      <label>
-        Insert nickname: <br>
-        <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
-      </label>
-      here{{this.nickname}}
-      <div class="buttonLink">
-
-         <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
-          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
-          <button v-on:click="hostQuiz">Host!</button>
-        <!-- </router-link> -->
-      </div>
+  <div id="partPoll">
+    <label>
+      Insert poll ID: <br>
+      <input type="text" v-model="id"><br>
+    </label>
+    <label>
+      Insert nickname: <br>
+      <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
+    </label>
+    here{{this.nickname}}
+    <div class="buttonLink">
+      <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
+      <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
+      <button v-on:click="hostQuiz">Host!</button>
+      <!-- </router-link> -->
     </div>
+  </div>
 
 
 
@@ -46,7 +40,7 @@ export default {
       id: "",
       lang: "",
       pollId: "",
-      myName:"",
+      myName: "",
       isHost:false
 
     }
@@ -65,9 +59,8 @@ export default {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
         console.log("naaaaaaa2"+this.myName)
-         this.pollId = this.id
+        this.pollId = this.id
         socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
-        
         this.isHost= false
         this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
       }
@@ -76,14 +69,13 @@ export default {
       }
   },
 
-  hostQuiz: function(){
-    this.isHost= true;
-    this.pollId = this.id
-    socket.emit()
-    this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
-
+    hostQuiz: function(){
+      this.isHost= true;
+      this.pollId = this.id
+      socket.emit()
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
+    }
   }
-}
 }
 
 </script>
@@ -101,11 +93,10 @@ export default {
   margin-left: 35%;
   font-size: 15pt;
   text-transform: uppercase;
-
 }
+
 #partPoll label {
   padding-top: 10%;
-
 }
 
 #partPoll button{
@@ -131,7 +122,6 @@ export default {
   padding-bottom: 15%;
 }
 
-
 .pollLabHeader {
   font-size: 20pt;
   text-align: center;
@@ -139,7 +129,6 @@ export default {
   margin: 0;
   color: white;
   text-shadow: 3px 3px #990000;
-
 }
 
 h2 {
@@ -148,7 +137,6 @@ h2 {
   color: white;
   text-shadow: 2px 2px #990000;
   font-size: 18pt;
-
 }
 
 </style>
