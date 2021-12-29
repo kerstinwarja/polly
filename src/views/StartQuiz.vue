@@ -72,6 +72,7 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.isHost = this.$route.params.isHost==="true"?true:false;
+    this.myName = this.$route.params.myName;
     socket.on()
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
@@ -79,14 +80,17 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
+    
     socket.on("sendToPoll",() =>
        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )
+    
 
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
     )
+    
 
     socket.on("sendName",participants => {
       this.nameArray = participants
