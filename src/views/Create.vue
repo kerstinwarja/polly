@@ -1,7 +1,7 @@
 <template>
   <body>
     <header>
-      <h1>Add questions and answers to your quiz! </h1>
+      <h1>{{uiLabels.createHead}}</h1>
     </header>
 
     <div class="wrap2">
@@ -14,16 +14,16 @@
             <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
           </div>
           <div id="answers">
-            <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder="Add an answer ..." readonly>
+            <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
             </textarea>
           </div>
         </div>
         <div id="questionMenu">
           <template v-if="!this.isEditing">
-            <h3>Select a question to make alterations</h3>
+            <h3>{{uiLabels.questionAlterate}}</h3>
           </template>
           <template v-if="this.isEditing">
-            <h3> You are making changes in :"{{this.allQuestions[this.questionNumber]}}"</h3>
+            <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
           </template>
           <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
             {{i}}: {{ q }}
@@ -34,22 +34,22 @@
       <div class="createWindow">
         <div id="createDiv">
           <h3> {{uiLabels.question}}: </h3> <br>
-          <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder="Write your question ..."></textarea> <br>
-          <h3 style="float: left"> Answer: </h3>
+          <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+          <h3 style="float: left">{{uiLabels.answer}}</h3>
           <button type="submit" id="removeAns" v-on:click="removeAnswer()">
-            Remove answer
+            {{uiLabels.answerRemove}}
           </button>
           <button id="addAnswerButton" v-on:click="addAnswer">
-            Add answer
+            {{uiLabels.answerAdd}}
           </button><br>
           <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
+            <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
             <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
         </div>
         <div id="buttonDiv">
           <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-            <span>Set <br> timer</span>
+            <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
           </button>
           <!--select type="submit" v-model="time">
             <option disabled value=""> Select time </option>
@@ -59,16 +59,16 @@
           </select-->
           <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
             <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-            <span>Import picture</span>
+            <span>{{uiLabels.impPic}}</span>
           </button>
           <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-            Add question
+            {{uiLabels.questionAdd}}
           </button>
           <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
-            Remove question
+            {{uiLabels.questionRem}}
           </button>
           <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
-            Save changes
+            {{uiLabels.saveChanges}}
           </button>
         </div>
       </div>
@@ -84,10 +84,14 @@
     </div-->
 
     <router-link v-bind:to="'/initialize/'+ lang">
-      <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;"> Go back </button>
+      <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
+        {{uiLabels.goBack}}
+      </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
+      <button style="float:right" class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
+        {{uiLabels.saveAndPlay}}
+      </button>
     </router-link>
   </body>
 </template>

@@ -13,7 +13,7 @@
         <img v-bind:src="pollImg">
       </div>
       <div class="infoBoards" >
-        <span id="partText">{{this.nameArray}}</span>
+        <span id="partText" v-for="name in this.nameArray" v-bind:key="name">{{name}}<br></span>
       </div>
     </div>
     <div id="audio">

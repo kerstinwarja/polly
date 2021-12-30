@@ -1,11 +1,11 @@
 <template>
   <body>
     <header>
-      <h1>It's time to create your quiz!</h1>
+      <h1>{{uiLabels.initializeHead}}</h1>
     </header>
     <div class="wrap2">
       <div id="preview">
-        <h4> It's time to play</h4>
+        <h4> {{uiLabels.play}}</h4>
         <div id="previewTitle">
           <p> {{pollId}} </p>
         </div>
@@ -17,7 +17,7 @@
             <img v-if="pollImg" v-bind:src="pollImg" id="prePic">
           </div>
           <div class="infoBoards" id="previewPartis">
-            <span>This is where your participants will be listed </span>
+            <span>{{uiLabels.participants}}</span>
           </div>
         </div>
         <div id="audio">
@@ -42,14 +42,14 @@
         </div>
       </div>
       <div class="createWindow">
-        <h3> Quiz name: </h3>
-        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
-        <h3>Quiz description:</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
+        <h3>{{uiLabels.quizName}}</h3>
+        <textarea id="quizTitle" type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
+        <h3>{{uiLabels.quizDesc}}</h3>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
-            <span>Import picture</span>
+            <span>{{uiLabels.impPic}}</span>
           </button>
           <select v-model="music" id="music">
             <!--gör selected hidden nått mer än att ta bort "selected music"?-->
