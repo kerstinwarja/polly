@@ -88,7 +88,7 @@
       <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;"> Go back </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
+      <button style="float:right" class="backButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);"> Save and play quiz </button>
     </router-link>
 </body>
 </template>
@@ -187,7 +187,7 @@ export default {
         this.allisCorr.splice(i,1);
         this.isEditing = false;
         this.clearFields();
-         
+
     },
     addAnswer: function () {
       if(this.counter<6) {
