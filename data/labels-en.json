@@ -28,5 +28,15 @@
 	"questionRem": "Remove question",
 	"saveChanges": "Save changes",
 	"goBack": "Go back",
-	"saveAndPlay": "Save and play quiz"
+	"saveAndPlay": "Save and play quiz",
+	"pollLibraryHead": "Participate in quiz",
+	"onThisPage": "On this page you can participate in a quiz with your friends.",
+	"insertYourGroups": "Insert the name of the quiz you wish to participate in.",
+	"nameInsert": "Insert quiz name",
+	"nickInsert": "Insert your nickname",
+	"host": "Host!",
+	"hostIf": "You are the host",
+	"ifParticipant": "It's time to play",
+	"parts": "Participants:",
+	"start": "START QUIZ!"
 }

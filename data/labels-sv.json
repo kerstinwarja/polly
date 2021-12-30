@@ -28,5 +28,15 @@
 	"questionRem": "Ta bort fråga",
 	"saveChanges": "Spara ändringar",
 	"goBack": "Gå tillbaka",
-	"saveAndPlay": "Spara och spela frågesport"
+	"saveAndPlay": "Spara och spela frågesport",
+	"pollLibraryHead": "Delta i en frågesport",
+	"onThisPage": "På denna sida kan du delta i en frågesport med dina vänner.",
+	"insertYourGroups": "Skriv in namnet på frågesporten du vill delta i.",
+	"nameInsert": "Skriv in frågesportsnamn",
+	"nickInsert": "Skriv in ditt smeknamn",
+	"host": "Värd!",
+	"HostIf": "Du är värden",
+	"ifParticipant": "Det är dags att spela",
+	"parts": "Deltagare:",
+	"start": "STARTA FRÅGESPORT!"
 }

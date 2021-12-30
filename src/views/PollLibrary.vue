@@ -1,25 +1,27 @@
 <template>
   <header class="pollLabHeader">
-    <h1>Participate in poll</h1>
+    <h1>{{uiLabels.pollLibraryHead}}</h1>
   </header>
   <h2>
-    On this page you can participate in a poll with your friends. <br>
-    Insert your group's shared poll ID to participate in the poll.
+    {{uiLabels.onThisPage}}<br>
+    {{uiLabels.insertYourGroups}}<br>
+    Hääääärräräärär{{this.nameArray}}<br>
+    IDDDDD{{id}}
   </h2>
   <div id="partPoll">
     <label>
-      Insert poll ID: <br>
+      {{uiLabels.nameInsert}}<br>
       <input type="text" v-model="id"><br>
     </label>
     <label>
-      Insert nickname: <br>
+      {{uiLabels.nickInsert}}<br>
       <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
     </label>
-    here{{this.nickname}}
+
     <div class="buttonLink">
-      <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
+      <!--<router-link  v-bind:to="/startquiz/+id">  tag="button"--><br>
       <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
-      <button v-on:click="hostQuiz">Host!</button>
+      <button v-on:click="hostQuiz">{{uiLabels.host}}</button>
       <!-- </router-link> -->
     </div>
   </div>
@@ -39,9 +41,11 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
-      pollId: "",
+      pollId:"",
       myName: "",
-      isHost:false
+      isHost:false,
+      nameArray:[],
+      nameTaken:false
 
     }
   },
@@ -53,16 +57,36 @@ export default {
       this.uiLabels = labels
     })
 
+    //markering
+    socket.emit('getNickname',{pollId:this.pollId});
+    socket.on("sendName",this.pollId)
+    socket.on("getName",participants => {
+          this.nameArray = participants
+        })
+
+
   },
   methods:{
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
-        console.log("naaaaaaa2"+this.myName)
         this.pollId = this.id
-        socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
-        this.isHost= false
-        this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+        //KAOS vi ska fixa
+        for(let index in this.nameArray){
+          console.log(this.nameArray[index])
+          if(this.myName==this.nameArray[index]){
+            alert("Nickname already exists")
+
+          }
+          else{
+            this.nameTaken=true
+          }
+        }
+        if(this.nameTaken==false){
+          socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
+          this.isHost= false
+          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+        }
       }
       else {
         alert("YOU NEED A NICKNAME")

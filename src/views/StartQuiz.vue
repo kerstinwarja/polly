@@ -1,8 +1,8 @@
 <template>
   <body>
     <div id="previewTitle">
-      <h4 v-if="isHost">You are the host</h4>
-      <h4 v-else> It's time to play </h4>
+      <h4 v-if="isHost"></h4>
+      <h4 v-else>It's time to play</h4>
       <header>{{pollId}}</header>
     </div>
     <div id="wrap">
@@ -12,8 +12,11 @@
       <div id="picture">
         <img v-bind:src="pollImg">
       </div>
-      <div class="infoBoards" >
-        <span id="partText" v-for="name in this.nameArray" v-bind:key="name">{{name}}<br></span>
+      <div class="infoBoards">
+        Participants:
+        <span id="partText" v-for="name in this.nameArray" v-bind:key="name">
+          <li>{{name}}</li>
+        </span>
       </div>
     </div>
     <div id="audio">
@@ -55,7 +58,7 @@ export default {
       pollImg:"",
       isHost: false,
       SONG:"",
-      myName: "",
+      myName: "undefined",
       nameArray:[],
       //data: {},
       //uiLabels: {},
@@ -72,6 +75,7 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.isHost = this.$route.params.isHost==="true"?true:false;
+    this.myName = this.$route.params.myName;
     socket.on()
     //emittar join poll
     socket.emit('joinPoll',this.pollId)
@@ -79,21 +83,22 @@ export default {
     socket.on("newQuestion", q =>
       this.question = q
     )
+
     socket.on("sendToPoll",() =>
       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )
+
 
     //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
       this.pollDesc = desc
     )
+    socket.emit('getNickname',{pollId:this.pollId});
 
-    socket.on("sendName",participants => {
+    socket.on("getName",participants => {
       this.nameArray = participants
-      console.log("-----här------" +this.nameArray)
       }
     )
-
 
     socket.on("imageAddress", imag =>
       this.pollImg = imag
@@ -151,6 +156,16 @@ h4{
   border-radius: 2%;
   border: navy 2px solid;
   font-size: 1.5em;
+  padding-bottom: 1%;
+}
+
+#partText{
+  text-align:left;
+  font-weight: bold;
+}
+
+li{
+  margin-left:33%
 }
 
 span {
