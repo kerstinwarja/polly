@@ -29,6 +29,7 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
+    poll.participants=[];
     //poll.questionNumber = 0;
     //poll.pollDes = [];
     this.polls[pollId] = poll;
@@ -57,17 +58,30 @@ Data.prototype.getDescription = function(pollId) {
   }
   return ""
 }
-/*Data.prototype.getName = function(pollId) {
-  const poll = this.polls[pollId];
-  console.log("Name requested for", pollId);
-  if (typeof poll !== 'undefined') {
 
-    return poll.myName;
+
+
+Data.prototype.getName = function(pollId) {
+  const poll = this.polls[pollId];
+  console.log("participants requested for", pollId,);
+  if (typeof poll !== 'undefined') {
+    //poll.participants.push(myName)
+    console.log("The participants: "+poll.participants)
+    return poll.participants
   }
-  return ""
+  return []
 }
-*/
+
+Data.prototype.addName=function(pollId,myName){
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    poll.participants.push(myName)
+    console.log("participant added to ",pollId,myName)
+  }
+}
+
 //här slutar jag . Här lägger jag in en ny funktion
+
 
 Data.prototype.getImage = function(pollId) {
   const poll = this.polls[pollId];
