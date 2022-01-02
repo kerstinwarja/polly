@@ -66,7 +66,7 @@ export default {
       socket.emit("switchLanguage", this.lang)
     },
     create: function(){
-      
+
     }
   }
 }
@@ -88,20 +88,30 @@ body{
 }
 
 button{
-    border-radius: 8px;
+  border-radius: 0.2em;
 }
 
 .wrapper {
-   width: 50%;
+
+/*   width: 50%;
    height: 100%;
    display: grid;
    grid-gap: 40%;
    grid-template-columns: 50% 50%;
    align-items: center;
 
-   margin: 2% 50% 10% 15%;
+   margin: 2% 50% 10% 15%;*/
 
-  }
+
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-gap: 3%;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-left: 1%;
+}
+
 
 .wrapper button{
   width: 100%;
@@ -110,7 +120,7 @@ button{
   text-transform: uppercase;
   font-size: 2em;
   color: navy;
-  border: 2px navy solid;
+  border: 0.1em navy solid;
 }
 
 button:hover {
@@ -118,15 +128,20 @@ button:hover {
 }
 
 #nav button{
-  width: 5%;
-  height: 10%;
+
+/*  width: 5%;
+  height: 10%;*/
+
+  width: 10em;
+  height: 4em;
+
   top: 7%;
   left: 7%;
   background-color: #fbf1e0;
   position: absolute;
   font-size: 0.8em;
   color: navy;
-  border: 2px navy solid;
+  border: 0.2em navy solid;
   text-transform: uppercase;
   /* border: 2px white solid; */
 /*  overflow: hidden;
@@ -148,7 +163,7 @@ header {
   padding-bottom: 0%;
   margin: 0;
   color: white;
-  text-shadow: -2px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
 }
 
 header h1 {
