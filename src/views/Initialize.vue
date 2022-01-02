@@ -45,10 +45,10 @@
         <h3> Quiz name: </h3>
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
         <h3>Quiz description:</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a description of your quiz..."></textarea>
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
-            <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
+            <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em; background-color: #CF903A;">
             <span>Import picture</span>
           </button>
           <select v-model="music" id="music">
@@ -150,13 +150,19 @@ header {
 }
 body textarea{
   width: 80%;
-  background-color: wheat;
+  background-color: #fbf1e0;
   color: Navy;
   resize:none;
   padding: 5px 5px 5px;
   font-family: sans-serif;
   border: 2px solid;
 }
+
+header h1 {
+  margin: 0%;
+  padding: 0% 0% 3% 0%;
+}
+
 h3{
   margin:0px;
   padding: 2% 10% 1%;
@@ -223,7 +229,6 @@ h4 {
   margin: 10%;
 }
 
-
 #desIptBox{
   height: 20em;
 }
@@ -279,6 +284,10 @@ h4 {
    grid-template-columns: 50% 50%;
    align-items: center;
   }
+
+.wrap3 button {
+  background-color: #CF903A;
+}
   .wrap4{
     margin: 0px;
     padding: 5% 0% 5% 0%;
@@ -288,5 +297,10 @@ h4 {
     display: grid;
     grid-template-columns: 33% 33% 32%;
     align-items: center;
+  }
+
+  #music {
+    background-color: #fbf1e0;
+    border: 2px navy solid;
   }
 </style>

@@ -34,7 +34,7 @@
   <div class="createWindow">
     <div id="createDiv">
       <h3> {{uiLabels.question}}: </h3> <br>
-      <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder="Write your question ..."></textarea> <br>
+      <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder="Write your question ..." style="margin-left: -4% "></textarea> <br>
       <h3 style="float: left"> Answer: </h3>
       <button type="submit" id="removeAns" v-on:click="removeAnswer()">
         Remove answer
@@ -42,7 +42,7 @@
       <button id="addAnswerButton" v-on:click="addAnswer">
         Add answer
       </button><br>
-      <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
+      <div id="answerDiv" v-for="(_, i) in answers" v-bind:key="'answer'+i">
         <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder="Add an answer ..."></textarea>
         <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
       </div>
@@ -248,8 +248,12 @@ export default {
 
 header {
   font-size: 20pt;
-  text-shadow: 3px 3px navy;
-  margin-bottom: 5%;
+  text-shadow: -1px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
+}
+
+header h1 {
+  margin: 0%;
+  padding: 0% 0% 3% 0%;
 }
 
 h3{
@@ -280,7 +284,7 @@ h3{
 
 body textarea{
   width: 80%;
-  background-color: wheat;
+  background-color: #fbf1e0;
   color: Navy;
   resize:none;
   padding: 5px 5px 5px;
@@ -421,6 +425,14 @@ body textarea{
   width: 100%;
   object-fit: contain;
 }
+
+#answerDiv input {
+  height: 30px;
+  width: 30px;
+  background-color: #fbf1e0;
+  cursor: pointer;
+}
+
 #forwardButton{
   height: 5%;
   width: 8%;
