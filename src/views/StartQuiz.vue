@@ -1,7 +1,7 @@
 <template>
   <body>
     <div id="previewTitle">
-      <h4 v-if="isHost"></h4>
+      <h4 v-if="isHost">You are the host of</h4>
       <h4 v-else>It's time to play</h4>
       <header>{{pollId}}</header>
     </div>
@@ -38,7 +38,7 @@
     </div>
     <div v-show="isHost">
       <!--router-link v-bind:to="'/poll/'+ this.pollId"-->
-        <button v-on:click="letsGo" id="startButton"> START QUIZ</button>
+        <button v-on:click="letsGo" id="startButton">START QUIZ</button>
       <!--/router-link-->
     </div>
   </body>
@@ -114,6 +114,8 @@ export default {
     letsGo: function() {
       socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
         console.log('lets GO!');
+      this.isHost= true;
+      socket.emit();
       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     }
   }
