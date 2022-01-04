@@ -1,6 +1,9 @@
 <template>
   <!--{{pollId}}-->
   <Question v-bind:question="question"
+            v-bind:timesUp="timesUp"
+            v-on:timesUp="setTimeUp"
+            v-bind:isHost="isHost"
             v-on:answer="submitAnswer"/>
 
   <!--div> FORSTÄTTER NÄR RESULT FINNS
@@ -51,6 +54,7 @@ export default {
     return {
       SONG:"",
       isHost: false,
+      timesUp: false,
       question: {
         q: "",
         a: [],
@@ -105,14 +109,29 @@ clearInterval(intervalId)
     socket.on("musicSelection", SONG =>
       this.SONG = SONG
     ),
-    socket.on("newQuestion", q =>
-      this.question = q,
-      //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
+    socket.on("newQuestion", q => {
+      this.question = q
+      this.timesUp=false
+      }
     ),
+
+    //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
+
+    /*socket.on("showCorrect",() =>
+      //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}}),
+      console.log('-----------socket.on(showCorrect)------------')
+    ),*/
 
     /*socket.on("sendToResult",() =>
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )*/
+
+    socket.on("showCorrect",() =>
+      this.timesUp=true,
+      console.log(this.timesUp),
+      //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, time: this.timesUp}}),
+      console.log('-----------socket.on(showCorrect)------------')
+    )
 
     this.timerCount = this.question.t
     this.questionImg = this.question.questionImg
@@ -133,8 +152,9 @@ clearInterval(intervalId)
       //this.timerCount = this.question.t
       //this.nextactivated = true
     },
-    continue: function () {
-      socket.emit('startPoll', {pollId: this.pollId, isHost: this.isHost})
+    setTimeUp: function () {
+      this.timesUp=false
+      socket.emit('showCorrectAnswer', {pollId: this.pollId})
     }
   }
 }
@@ -168,14 +188,5 @@ clearInterval(intervalId)
   margin-top: 10%;
   float: left;
 }*/
-
-#continueButton {
-  font-size: 1em;
-  text-transform: uppercase;
-  height: 2em;
-  width: auto;
-  background-color: rgb(100, 155, 36);
-  margin: 3% 0px 2% 80%;
-}
 
 </style>

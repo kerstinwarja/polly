@@ -45,8 +45,8 @@ export default {
       myName: "",
       isHost:false,
       nameArray:[],
-      nameTaken:false
-
+      nameTaken:false,
+      nickname: ""
     }
   },
   created: function () {

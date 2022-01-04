@@ -43,9 +43,9 @@
       </div>
       <div class="createWindow">
         <h3>{{uiLabels.quizName}}</h3>
-        <textarea id="quizTitle" type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
+        <textarea id="quizTitle" type="text" v-model="pollId" v-bind:placeholder="uiLabels.namePick"></textarea>
         <h3>{{uiLabels.quizDesc}}</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" v-bind:placeholder="uiLabels.descPick"></textarea>
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">

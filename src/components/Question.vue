@@ -7,6 +7,11 @@
     {{this.question.t - this.timerCount}}
     </div>
     <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
+    <div v-show="isHost">
+      <button v-on:click="zeroTimer" id="continueButton">
+        Show correct answer
+      </button>
+    </div>
   </div>
   <!--Dethär skulle behöva bytas ut mot att alternativet man klickar på får en tjock border-->
   <template  v-if="myAnswer!==''">
@@ -35,7 +40,7 @@
     </button>
   </template>
 
-  <template v-if="timesUp">
+  <template v-if="this.timesUp">
     <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
       {{ a }}
       {{this.question.isCorrect[index]}}
@@ -43,78 +48,70 @@
   </template>
   </div>
 
-  <div v-show="isHost">
-    <button v-on:click="zeroTimer" id="continueButton">
-      Show correct answer
-    </button>
-  </div>
-
 </template>
 
 <script>
-
-import io from 'socket.io-client';
-const socket = io();
 
 export default {
   name: 'Bars',
   props: {
     question: Object,
-
+    timesUp: Boolean,
+    isHost: Boolean
   },
-  emits:["answer"],
+  emits:["answer", "timesUp"],
 
   data: function () {
     return {
       timerCount: 0,
       timerEvent:null,
       timerEnabled: true,
-      timesUp:false,
-      isHost: false,
       myAnswer:"",
       clicked:false,
       pickedIndex:"",
       cloneAnsArray:[],
-      cloneStartAns:[]
+      cloneStartAns:[],
+      pollId: ""
     }
   },
   watch:{
     timerCount: function(timeNow){
       if(timeNow==this.question.t){
             clearInterval(this.timerEvent)
-            this.timesUp=true;
+            this.$emit('timesUp')
             console.log("timesUp" + this.timesUp)
       }
+    },
+    timesUp: function (isTimeUp) {
+      if(isTimeUp)
+        clearInterval(this.timerEvent)
     }
   },
   //Timer
 
   created:function(){
-    this.isHost = this.$route.params.isHost==="true"?true:false;
     var a = new Date()
     //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
     this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
     //console.log(intervalId)
-
-    socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
-    )
   },
 
   methods: {
 
     answer: function (answer, index) {
-      this.$emit("answer", answer);
-      //this.timesUp=true;
-      this.myAnswer=answer;
-      this.clicked=true;
-      this.findPickedAnswer(this.myAnswer);
-      if(this.question.isCorrect[index]){
-        console.log("CORRECT!");
-        //this.ansCorrect=true;
-
-      }else{
-        console.log("INCORRECT!");
+      if(!this.isHost){
+        this.$emit("answer", answer);
+        //this.timesUp=true;
+        this.myAnswer=answer;
+        this.clicked=true;
+        this.findPickedAnswer(this.myAnswer);
+        if(this.question.isCorrect[index]){
+          console.log("CORRECT!");
+          //this.ansCorrect=true;
+        }
+        else{
+          console.log("INCORRECT!");
+        }
       }
     },
     findPickedAnswer(myAnswer){
@@ -124,7 +121,9 @@ export default {
       this.cloneStartAns = array.slice(0, this.pickedIndex)
     },
     zeroTimer: function() {
-      this.timesUp=true;
+        console.log('-----------------första---------------');
+      this.$emit('timesUp')
+        console.log('----------------andra----------------');
     }
   }
 }
@@ -134,13 +133,18 @@ export default {
 <style>
 
 #wrap1 {
-  /*fixa med bilden och timern*/
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  margin-bottom: 2%;
 }
 
 #timer {
-  float: left;
-  margin-left: 10%;
+  margin-left: 30%;
   font-size: 200%;
+  background-color: rgb(100, 155, 36);
+  width: 10%;
+  height: 15%;
+  border-radius: 50%;
 }
 
 #quest{
@@ -174,6 +178,7 @@ button{
 #prePic{
   width: 30%;
   object-fit: contain;
+  margin-left: 35%;
 }
 
 .ans0{
@@ -226,7 +231,7 @@ h3{
   height: 2em;
   width: auto;
   background-color: rgb(100, 155, 36);
-  margin: 3% 0px 2% 80%;
+  margin-right: 5%;
 }
 
 </style>

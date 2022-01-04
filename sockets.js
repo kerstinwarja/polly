@@ -49,6 +49,10 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
   });
+  socket.on('showCorrectAnswer', function(d) {
+    io.to(d.pollId).emit('showCorrect')
+    console.log('-----------showMeTheMoney------------');
+  });
   socket.on('startPoll', function(d) {
     io.to(d.pollId).emit('sendToResult')
     console.log('-----------sendToResult------------');
