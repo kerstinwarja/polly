@@ -11,62 +11,51 @@
         </div>
         <div class="prevWrap">
           <div class="infoBoards" id="previewDesc">
-            <span id="pdes">{{pollDesc}}</span>
+            <span>{{pollDesc}}</span>
           </div>
           <div id="previewPic">
-            <img v-if="pollImg" v-bind:src="pollImg" id="prePic">
+            <img v-if="pollImg" v-bind:src="pollImg">
           </div>
-          <div class="infoBoards" id="previewPartis">
+          <div class="infoBoards">
             <span>{{uiLabels.participants}}</span>
           </div>
         </div>
-
-<!--från hannahs kod-->
-
-<div id="audio">
-  <audio controls v-if="music == 'Brass'">
-    <source src="../music/circusBrass.mp3" type="audio/mpeg">
-  </audio>
-  <audio controls v-if="music == 'Trap'">
-    <source src="../music/circusTrap.mp3" type="audio/mpeg">
-  </audio>
-  <audio controls v-if="music == 'Strings'">
-    <source src="../music/circusStrings.mp3" type="audio/mpeg">
-  </audio>
-  <audio controls v-if="music == 'Techno'">
-    <source src="../music/circusTechno.mp3" type="audio/mpeg">
-  </audio>
-  <audio controls v-if="music == 'Ragtime'">
-    <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-  </audio>
-  {{music}}
-</div>
-<!-- -->
-
-
+        <div>
+          <audio controls v-if="music == 'Brass'">
+            <source src="../music/circusBrass.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Trap'">
+            <source src="../music/circusTrap.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Strings'">
+            <source src="../music/circusStrings.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Techno'">
+            <source src="../music/circusTechno.mp3" type="audio/mpeg">
+          </audio>
+          <audio controls v-if="music == 'Ragtime'">
+            <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+          </audio>
+        </div>
       </div>
       <div class="createWrap">
         <h3>{{uiLabels.quizName}}</h3>
-        <textarea id="quizTitle" type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
+        <textarea type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
         <h3>{{uiLabels.quizDesc}}</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
-        <!--div class="buttonWrap"-->
-          <h3>Quiz picture</h3>
-          <button class="buttonWrap" type="submit" v-on:click="PicChoose()">
+          <h3>{{uiLabels.quizPic}}</h3>
+          <button class="importItems" type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>{{uiLabels.impPic}}</span>
           </button>
-          <h3>Choose quizmusic</h3>
-          <select class="buttonWrap" v-model="music">
-            <!--gör selected hidden nått mer än att ta bort "selected music"?-->
-           <!-- <option disabled value="" selected hidden> select music </option> -->
+          <h3>{{uiLabels.quizMusic}}</h3>
+          <select class="importItems" v-model="music">
                    <option>Brass</option>
                    <option>Ragtime</option>
                    <option>Strings</option>
                    <option>Techno</option>
                    <option>Trap</option>
           </select>
-        <!--/div-->
       </div>
     </div>
     <div>
@@ -75,21 +64,6 @@
     </router-link>
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
     </div>
-
-  <!--<router-link v-bind:to="'/create/'+lang">
-      <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-  </router-link>
-      <router-link v-bind:to="'/'">
-    <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
-  </router-link>
-  <router-link v-bind:to="'/create/'+lang">
-    <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-  </router-link>-->
-  <!--router-link v-bind:to="'/create/'+lang">
-    <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-  </router-link-->
-
-
   </body>
 </template>
 
@@ -102,8 +76,7 @@ export default {
     return {
       lang: "",
       pollId: "",
-      //pollName:""
-      pollDesc:"", // vi använder bara pollDesc inte pollDes :)
+      pollDesc:"",
       pollImg:"",
       data: {},
       uiLabels: {},
@@ -130,7 +103,6 @@ export default {
     createPoll: function () {
       this.timerCount = this.time;
       this.SONG = this.music;
-      //Skickar pollDesc till servern
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
     },
@@ -139,7 +111,8 @@ export default {
       this.pollImg = pict;
       console.log(this.pollImg)
     },
-  }}
+  }
+}
 </script>
 
 <style scoped>
@@ -172,11 +145,13 @@ h4 {
   align-items: top;
 }
 
-.mainWrap button{
+.importItems{
   background-color: wheat;
   text-transform: uppercase;
   padding-bottom: 1%;
   font-size:80%;
+  width: 80%;
+  border: 0.2em black solid;
 }
 
 .prevWrap{
@@ -198,7 +173,6 @@ h4 {
   background-size: cover;
   max-height: 100%;
   background-position: bottom;
-  color: Grey;
   height: 25em;
   border: 0.2em #0b074d solid;
 }
@@ -243,33 +217,21 @@ body textarea{
 #desIptBox{
   height: 10em;
 }
-::placeholder{
-  color:Navy;
-}
-
-.buttonWrap {
-  width: 80%;
-}
 
 #backButton{
   height: 3em;
-
-  margin-left: 4%;
-  margin-top: 2%;
+  margin: 2% 4% 2% 4%;
   float: left;
 }
 #forwardButton{
   height: 3em;
-
-  margin-right: 4%;
-  margin-top: 2%;
+  margin: 2% 4% 2% 4%;
   float: right;
   transform: scaleX(-1);
 }
 #forwardButton:hover {
   cursor: pointer;
 }
-
 
 @media only screen and (max-width: 500px) {
   /* For mobile phones: */

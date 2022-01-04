@@ -1,96 +1,83 @@
-
 <template>
   <body>
-  <header>
-    <h1>{{uiLabels.createHead}}</h1>
-  </header>
+    <header>
+      <h1>{{uiLabels.createHead}}</h1>
+    </header>
+    <div class="mainWrap">
+      <div>
+        <div id="preview">
+          <div id="previewTitle">
+            <span>{{question}}</span>
+          </div>
+          <div id="previewPic">
+            <img v-if="questionImg" v-bind:src="questionImg">
+          </div>
+          <div id="answers">
+              <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
+              </textarea>
+          </div>
+        </div>
 
-  <div class="wrap2">
-    <div>
-      <div id="preview">
-        <div id="previewTitle">
-          <span id="as">{{question}}</span>
-        </div>
-        <div id="previewPic">
-          <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
-        </div>
-        <div id="answers">
-            <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
-            </textarea>
+        <div id="questionMenu">
+          <template v-if="!this.isEditing">
+            <h3>{{uiLabels.questionAlterate}}</h3>
+          </template>
+          <template v-if="this.isEditing">
+            <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+          </template>
+          <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+            {{i+1}}: {{ q }}
+          </button>
         </div>
       </div>
-      <div id="questionMenu">
-        <template v-if="!this.isEditing">
-          <h3>{{uiLabels.questionAlterate}}</h3>
-        </template>
-        <template v-if="this.isEditing">
-          <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
-        </template>
-        <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-          {{i+1}}: {{ q }}
-        </button>
-      </div>
-    </div>
 
-    <div class="createWindow">
-      <div id="createDiv">
-        <h3> {{uiLabels.question}}: </h3> <br>
-        <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
-        <h3 style="float: left">{{uiLabels.answer}}</h3>
-        <button type="submit" id="removeAns" v-on:click="removeAnswer()">
-          {{uiLabels.answerRemove}}
-        </button>
-        <button id="addAnswerButton" v-on:click="addAnswer">
-          {{uiLabels.answerAdd}}
-        </button><br>
-        <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-          <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
-          <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+      <div class="createWindow">
+
+          <h3> {{uiLabels.question}}: </h3>
+          <textarea type="text" v-model="question" maxlength="100" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+          <h3>{{uiLabels.answer}}</h3>
+          <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
+            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+            <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+          </div>
+
+        <div id="buttonDiv">
+          <div>
+            <button type="submit" v-on:click="removeAnswer()" style="background-color: rgb(255, 0, 0);">
+              {{uiLabels.answerRemove}}
+            </button>
+            <button v-on:click="addAnswer">
+              {{uiLabels.answerAdd}}
+            </button>
+          </div>
+          <div>
+            <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
+              <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
+            </button>
+            <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
+              <span>{{uiLabels.impPic}}</span>
+            </button>
+            <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
+              {{uiLabels.questionAdd}}
+            </button>
+            <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
+              {{uiLabels.questionRem}}
+            </button>
+            <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
+              {{uiLabels.saveChanges}}
+            </button>
+          </div>
         </div>
-      </div>
-      <div id="buttonDiv">
-        <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-          <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
-        </button>
-        <!--select type="submit" v-model="time">
-          <option disabled value=""> Select time </option>
-          <option>5</option>
-          <option>10</option>
-          <option>15</option>
-        </select-->
-        <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
-          <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-          <span>{{uiLabels.impPic}}</span>
-        </button>
-        <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-          {{uiLabels.questionAdd}}
-        </button>
-        <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
-          {{uiLabels.questionRem}}
-        </button>
-        <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
-          {{uiLabels.saveChanges}}
-        </button>
       </div>
     </div>
-    </div>
-
-    <!--div>
-      <input type="number" v-model="questionNumber">
-      <button v-on:click="runQuestion">
-        Run question
-      </button>
-      {{data}}
-      <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-    </div-->
-
     <router-link v-bind:to="'/initialize/'+ lang">
       <button class="navButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
         {{uiLabels.goBack}}
       </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="navButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
+      <button style="float:right" class="navButton" v-on:click="sendQuiz()">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
         {{uiLabels.saveAndPlay}}
       </button>
     </router-link>
@@ -250,27 +237,11 @@ header {
 }
 h3{
   margin:0px;
-  padding: 0% 10% 1%;
+  padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
 }
-.createWindow{
-  background-color: wheat;
-  width: 100%;
-  border: 0.2em navy solid;
-  height: 32em;
-  position: relative;
-}
-.wrap2 {
-  margin: 0px;
-  padding-left: 4%;
-  width: 95%;
-  height: 95%;
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns: 61% 31%;
-  align-items: top;
-}
+
 body textarea{
   width: 80%;
   background-color: #f0e7d1;
@@ -280,8 +251,16 @@ body textarea{
   font-family: sans-serif;
   border: 0.1em solid;
 }
-::placeholder{
-  color:navy;
+
+.mainWrap {
+  margin: 0px;
+  padding-left: 4%;
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: 61% 31%;
+  align-items: top;
 }
 #preview{
   background-color: wheat;
@@ -296,26 +275,7 @@ body textarea{
   position: relative;
   padding-bottom: 2%;
 }
-#questionMenu{
-  width:95%;
-  height: 5em;
-  border: black 0.1em solid;
-  margin-top: 1%;
-  background-color: wheat;
-  overflow: auto;
-  padding: 2%;
-}
-#questionMenu button{
-  background-color: #CF903A;
-  color: black;
-  height: 50%;
-  width: 20%;
-  float:left;
-  overflow: hidden;
-}
-#questionMenu h3{
-  text-align: center;
-}
+
 #previewTitle{
   font-size: 30px;
   text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
@@ -324,22 +284,7 @@ body textarea{
   text-align:center;
   min-height: 18%;
 }
-#addAnswerButton {
-  height: 100%;
-  width: 15%;
-  background-color: rgb(135, 175, 111);
-}
-#buttonDiv button {
-  height: 100%;
-  width: 20%;
-  background-color: rgb(135, 175, 111);
-}
-#removeAns {
-  height: 100%;
-  width: 15%;
-  background-color: rgb(255, 0, 0);
-  margin-bottom: 1%;
-}
+
 #previewPic{
   width: 25%;
   height: 35%;
@@ -348,11 +293,15 @@ body textarea{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+#previewPic img{
+  width: 100%;
+  object-fit: contain;
+}
 #answers{
   display:grid;
   height: 9em;
   width: 90%;
-  grid-template-columns: repeat(2, 1fr); /*default*/
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5em;
   align-items: center;
   margin-left:5%;
@@ -367,15 +316,49 @@ body textarea{
   border-radius: 0.7em;
   color:black;
 }
-#createDiv {
-  min-height: 85%;
+#questionMenu{
+  width:95%;
+  height: 5em;
+  border: black 0.1em solid;
+  margin-top: 1%;
+  background-color: wheat;
+  overflow: auto;
+  padding: 2%;
+}
+
+#questionMenu button{
+  background-color: #CF903A;
+  color: black;
+  height: 50%;
+  width: 20%;
+  float:left;
+  overflow: hidden;
+}
+
+#questionMenu h3{
+  text-align: center;
+}
+
+.createWindow{
+  background-color: wheat;
+  width: 100%;
+  border: 0.2em navy solid;
+  height: 34em;
+  position: relative;
 }
 #buttonDiv {
-  height: 10%;
+  display:grid;
+  grid-template-rows: 50% 50%;
+  height: 20%;
   width: 100%;
   position: absolute;
   padding-bottom: 5%;
   bottom: 0px;
+}
+#buttonDiv button {
+  height: 95%;
+  width: 20%;
+  background-color: rgb(135, 175, 111);
 }
 
 .navButton{
@@ -388,29 +371,7 @@ body textarea{
   text-align: center;
   font-size: 1em;
 }
-.backButton img {
-  margin-top: 5%;
-  height: 1em;
-}
-.backButton text {
-  margin-bottom: 5%;
-  margin-top: 0%;
-}
-#previewPic img{
-  width: 100%;
-  object-fit: contain;
-}
-#forwardButton{
-  height: 5%;
-  width: 8%;
-  margin-right: 4%;
-  margin-top: 1%;
-  float: right;
-  transform: scaleX(-1);
-}
-#timer{
-  margin: 0%;
-}
+
 .answer0{
   background-color:#628579;
 }
@@ -428,5 +389,33 @@ body textarea{
 }
 .answer5{
   background-color:#633D41;
+}
+
+@media only screen and (max-width: 980px) {
+  /* For mobile phones: */
+  #buttonDiv button{
+    width: 10%;
+    height:10%
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  /* For mobile phones: */
+  .mainWrap{
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'create'
+      'preview'
+      'qmenu';
+  }
+  #preview{
+    grid-area:preview;
+  }
+  .createWindow{
+    grid-area:create;
+  }
+  #questionMenu{
+    grid-area:qmenu;
+  }
 }
 </style>
