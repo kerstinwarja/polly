@@ -1,12 +1,12 @@
 <template>
   <header class="pollLabHeader">
-    <h1>{{uiLabels.pollLibraryHead}}</h1>
+    <h1>{{uiLabels.participatePoll}}</h1>
   </header>
   <h2>
     {{uiLabels.onThisPage}}<br>
     {{uiLabels.insertYourGroups}}<br>
     Hääääärräräärär{{this.nameArray}}<br>
-    IDDDDD{{id}}
+    IDDDDD{{this.pollId}}
   </h2>
   <div id="partPoll">
     <label>
@@ -49,6 +49,22 @@ export default {
 
     }
   },
+
+//behöver nog inte denna om alla får ha samma nickname
+  watch:{
+    id: function(thisId){
+      if(thisId!=""){
+            this.pollId = thisId
+            socket.emit('getNickname',{pollId:this.pollId});
+            socket.on("getName",participants => {
+                  this.nameArray = participants
+                });
+            console.log("nameArray "+this.nameArray)
+      }
+
+    }
+  },
+
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -58,19 +74,17 @@ export default {
     })
 
     //markering
-    socket.emit('getNickname',{pollId:this.pollId});
-    socket.on("sendName",this.pollId)
+    //socket.emit('getNickname',{pollId:this.pollId});
+    //socket.on("sendName",this.pollId)
     socket.on("getName",participants => {
           this.nameArray = participants
         })
-
-
   },
   methods:{
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
-        this.pollId = this.id
+        //this.pollId = this.id
         //KAOS vi ska fixa
         for(let index in this.nameArray){
           console.log(this.nameArray[index])

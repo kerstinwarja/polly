@@ -112,7 +112,8 @@ button:hover {
 }
 
 #nav button{
-  width: 10em;
+  width: 10%;
+  min-width: 6em;
   height: 4em;
   top: 7%;
   left: 7%;
@@ -131,6 +132,17 @@ header {
   margin: 0;
   color: white;
   text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+}
+
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  header {
+    font-size: 2em;
+  }
+  .wrapper{
+    grid-template-columns: 100%;
+  }
+
 }
 
 </style>

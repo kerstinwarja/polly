@@ -3,13 +3,13 @@
     <header>
       <h1>{{uiLabels.initializeHead}}</h1>
     </header>
-    <div class="wrap2">
+    <div class="mainWrap">
       <div id="preview">
         <h4> {{uiLabels.play}}</h4>
         <div id="previewTitle">
           <p> {{pollId}} </p>
         </div>
-        <div class="wrap4">
+        <div class="prevWrap">
           <div class="infoBoards" id="previewDesc">
             <span id="pdes">{{pollDesc}}</span>
           </div>
@@ -41,17 +41,19 @@
         <div id="audio">
         </div>
       </div>
-      <div class="createWindow">
+      <div class="createWrap">
         <h3>{{uiLabels.quizName}}</h3>
         <textarea id="quizTitle" type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
         <h3>{{uiLabels.quizDesc}}</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
-        <div class="wrap3">
-          <button type="submit" v-on:click="PicChoose()">
+        <!--div class="buttonWrap"-->
+          <h3>Quiz picture</h3>
+          <button class="buttonWrap" type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
             <span>{{uiLabels.impPic}}</span>
           </button>
-          <select v-model="music" id="music">
+          <h3>Choose quizmusic</h3>
+          <select class="buttonWrap" v-model="music">
             <!--gör selected hidden nått mer än att ta bort "selected music"?-->
            <!-- <option disabled value="" selected hidden> select music </option> -->
                    <option>Brass</option>
@@ -60,8 +62,14 @@
                    <option>Techno</option>
                    <option>Trap</option>
           </select>
-        </div>
+        <!--/div-->
       </div>
+    </div>
+    <div>
+    <router-link v-bind:to="'/'">
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+    </router-link>
+      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
     </div>
 
 
@@ -77,10 +85,7 @@
     <!--router-link v-bind:to="'/create/'+lang">
       <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
     </router-link-->
-      <router-link v-bind:to="'/'">
-        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
-      </router-link>
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
+
   </body>
 </template>
 
@@ -143,21 +148,6 @@ header {
   font-size: 1.7em;
   text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
 }
-.createWindow{
-  background-color: wheat;
-  width: 100%;
-  border: 0.2em navy solid;
-}
-body textarea{
-  width: 80%;
-  background-color: #f0e7d1;
-  color: Navy;
-  resize:none;
-  padding: 0.4em 0.4em 0.4em;
-  font-family: sans-serif;
-  border: 0.1em solid;
-}
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
@@ -173,21 +163,33 @@ h4 {
   font-size: 2em;
 }
 
-#backButton{
-  height: 5%;
-  width: 8%;
-  margin-left: 4%;
-  margin-top: 2%;
-  float: left;
+.mainWrap {
+  margin: 0px;
+  padding: 0% 4% 0% 4%;
+  width: 92%;
+  height: 100%;
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: 61% 31%;
+  align-items: top;
 }
 
-#forwardButton{
-  height: 5%;
-  width: 8%;
-  margin-right: 4%;
-  margin-top: 2%;
-  float: right;
-  transform: scaleX(-1);
+.mainWrap button{
+  background-color: wheat;
+  text-transform: uppercase;
+  padding-bottom: 1%;
+  font-size:80%;
+}
+
+.prevWrap{
+  margin: 0px;
+  padding: 5% 0% 5% 0%;
+  grid-gap: 1%;
+  width: 100%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: 33% 33% 32%;
+  align-items: center;
 }
 
 #previewPic img{
@@ -201,7 +203,7 @@ h4 {
   max-height: 100%;
   background-position: bottom;
   color: Grey;
-  height: 100%;
+  height: 25em;
   border: 0.2em #0b074d solid;
 }
 
@@ -230,25 +232,44 @@ h4 {
   margin: 10%;
 }
 
+.createWrap{
+  background-color: wheat;
+  width: 100%;
+  border: 0.2em navy solid;
+}
+body textarea{
+  width: 80%;
+  background-color: #f0e7d1;
+  color: Navy;
+  resize:none;
+  padding: 0.4em 0.4em 0.4em;
+  font-family: sans-serif;
+  border: 0.1em solid;
+}
+
 #desIptBox{
-  height: 20em;
+  height: 10em;
 }
 
 ::placeholder{
   color:Navy;
 }
 
+.buttonWrap {
+  width: 80%;
+}
+
 #backButton{
-  height: 5%;
-  width: 8%;
+  height: 3em;
+
   margin-left: 4%;
   margin-top: 2%;
   float: left;
 }
 
 #forwardButton{
-  height: 5%;
-  width: 8%;
+  height: 3em;
+
   margin-right: 4%;
   margin-top: 2%;
   float: right;
@@ -259,42 +280,15 @@ h4 {
   cursor: pointer;
 }
 
-.wrap2 {
-  margin: 0px;
-  padding-left: 4%;
-  width: 95%;
-  height: 95%;
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns: 61% 31%;
-  align-items: center;
-}
 
-.wrap2 button{
-  background-color: wheat;
-  text-transform: uppercase;
-  padding-bottom: 1%;
-  font-size:80%;
-}
-
-.wrap3 {
-  margin: 0px;
-  padding: 5% 0% 5% 8%;
-  grid-gap: 4%;
-  width: 80%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-}
-
-.wrap4{
-  margin: 0px;
-  padding: 5% 0% 5% 0%;
-  grid-gap: 1%;
-  width: 100%;
-  height: 40%;
-  display: grid;
-  grid-template-columns: 33% 33% 32%;
-  align-items: center;
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  .mainWrap{
+    grid-template-columns: 100%;
+    grid-template-rows:35% 55% 10% ;
+  }
+  #desIptBox{
+    height: 10em;
+  }
 }
 </style>

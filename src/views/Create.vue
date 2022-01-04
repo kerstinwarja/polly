@@ -84,12 +84,12 @@
     </div-->
 
     <router-link v-bind:to="'/initialize/'+ lang">
-      <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
+      <button class="navButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
         {{uiLabels.goBack}}
       </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="backButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
+      <button style="float:right" class="navButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
         {{uiLabels.saveAndPlay}}
       </button>
     </router-link>
@@ -403,7 +403,7 @@ body textarea{
 
 }
 
-.backButton{
+.navButton{
   height: 10%;
   width: auto;
   margin: 2% 4% 2% 4%;
