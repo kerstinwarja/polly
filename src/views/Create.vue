@@ -1,77 +1,78 @@
+
 <template>
   <body>
-    <header>
-      <h1>{{uiLabels.createHead}}</h1>
-    </header>
+  <header>
+    <h1>{{uiLabels.createHead}}</h1>
+  </header>
 
-    <div class="wrap2">
-      <div>
-        <div id="preview">
-          <div id="previewTitle">
-            <span id="as">{{question}}</span>
-          </div>
-          <div id="previewPic">
-            <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
-          </div>
-          <div id="answers">
+  <div class="wrap2">
+    <div>
+      <div id="preview">
+        <div id="previewTitle">
+          <span id="as">{{question}}</span>
+        </div>
+        <div id="previewPic">
+          <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
+        </div>
+        <div id="answers">
             <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
             </textarea>
-          </div>
-        </div>
-        <div id="questionMenu">
-          <template v-if="!this.isEditing">
-            <h3>{{uiLabels.questionAlterate}}</h3>
-          </template>
-          <template v-if="this.isEditing">
-            <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
-          </template>
-          <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-            {{i+1}}: {{ q }}
-          </button>
         </div>
       </div>
+      <div id="questionMenu">
+        <template v-if="!this.isEditing">
+          <h3>{{uiLabels.questionAlterate}}</h3>
+        </template>
+        <template v-if="this.isEditing">
+          <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+        </template>
+        <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+          {{i+1}}: {{ q }}
+        </button>
+      </div>
+    </div>
 
-      <div class="createWindow">
-        <div id="createDiv">
-          <h3> {{uiLabels.question}}: </h3> <br>
-          <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
-          <h3 style="float: left">{{uiLabels.answer}}</h3>
-          <button type="submit" id="removeAns" v-on:click="removeAnswer()">
-            {{uiLabels.answerRemove}}
-          </button>
-          <button id="addAnswerButton" v-on:click="addAnswer">
-            {{uiLabels.answerAdd}}
-          </button><br>
-          <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
-            <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
-          </div>
-        </div>
-        <div id="buttonDiv">
-          <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-            <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
-          </button>
-          <!--select type="submit" v-model="time">
-            <option disabled value=""> Select time </option>
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
-          </select-->
-          <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
-            <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-            <span>{{uiLabels.impPic}}</span>
-          </button>
-          <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-            {{uiLabels.questionAdd}}
-          </button>
-          <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
-            {{uiLabels.questionRem}}
-          </button>
-          <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
-            {{uiLabels.saveChanges}}
-          </button>
+    <div class="createWindow">
+      <div id="createDiv">
+        <h3> {{uiLabels.question}}: </h3> <br>
+        <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+        <h3 style="float: left">{{uiLabels.answer}}</h3>
+        <button type="submit" id="removeAns" v-on:click="removeAnswer()">
+          {{uiLabels.answerRemove}}
+        </button>
+        <button id="addAnswerButton" v-on:click="addAnswer">
+          {{uiLabels.answerAdd}}
+        </button><br>
+        <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
+          <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+          <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
         </div>
       </div>
+      <div id="buttonDiv">
+        <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
+          <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
+        </button>
+        <!--select type="submit" v-model="time">
+          <option disabled value=""> Select time </option>
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+        </select-->
+        <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
+          <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
+          <span>{{uiLabels.impPic}}</span>
+        </button>
+        <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
+          {{uiLabels.questionAdd}}
+        </button>
+        <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
+          {{uiLabels.questionRem}}
+        </button>
+        <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
+          {{uiLabels.saveChanges}}
+        </button>
+      </div>
+    </div>
     </div>
 
     <!--div>
@@ -99,7 +100,6 @@
 <script>
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Create',
   data: function () {
@@ -134,17 +134,16 @@ export default {
       this.uiLabels = labels
     })
     socket.on("dataUpdate", (data) =>
-      this.data = data
+        this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data
+        this.data = data
     )
   },
   methods: {
     /*createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
-
     /*addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
       this.questionNumber ++
@@ -152,7 +151,6 @@ export default {
       this.answers= ["", ""]
       this.questionImg=""
     },*/
-
     sendQuiz: function(){
       if(this.question!==""){
         this.addQuestion();
@@ -183,14 +181,13 @@ export default {
       this.clearFields()
     },
     removeQuestion(i){
-        this.allQuestions.splice(i,1);
-         this.allQimg.splice(i,1);
-        this.allTime.splice(i,1);
-        this.allAnswers.splice(i,1);
-        this.allisCorr.splice(i,1);
-        this.isEditing = false;
-        this.clearFields();
-
+      this.allQuestions.splice(i,1);
+      this.allQimg.splice(i,1);
+      this.allTime.splice(i,1);
+      this.allAnswers.splice(i,1);
+      this.allisCorr.splice(i,1);
+      this.isEditing = false;
+      this.clearFields();
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -212,12 +209,11 @@ export default {
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
-      },
-
+    },
     setTime(){
       let clock = prompt("Set a maximum time for answering the question (in seconds):");
       this.time = clock;
-      },
+    },
     accessQuestion: function (i){
       this.isEditing = true
       this.question = this.allQuestions[i]
@@ -241,27 +237,23 @@ export default {
       this.timerCount = this.time;
       this.timerEnabled = true;
     },*/
-    },
-  }
-
+  },
+}
 </script>
 
 
 <style scoped>
-
 header {
   font-size: 1.5em;
   text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.05em navy;
   margin-bottom: 5%;
 }
-
 h3{
   margin:0px;
   padding: 0% 10% 1%;
   text-align: left;
   color: Navy;
 }
-
 .createWindow{
   background-color: wheat;
   width: 100%;
@@ -269,7 +261,6 @@ h3{
   height: 32em;
   position: relative;
 }
-
 .wrap2 {
   margin: 0px;
   padding-left: 4%;
@@ -280,7 +271,6 @@ h3{
   grid-template-columns: 61% 31%;
   align-items: top;
 }
-
 body textarea{
   width: 80%;
   background-color: #f0e7d1;
@@ -290,11 +280,9 @@ body textarea{
   font-family: sans-serif;
   border: 0.1em solid;
 }
-
 ::placeholder{
   color:navy;
 }
-
 #preview{
   background-color: wheat;
   background-size: cover;
@@ -308,7 +296,6 @@ body textarea{
   position: relative;
   padding-bottom: 2%;
 }
-
 #questionMenu{
   width:95%;
   height: 5em;
@@ -318,7 +305,6 @@ body textarea{
   overflow: auto;
   padding: 2%;
 }
-
 #questionMenu button{
   background-color: #CF903A;
   color: black;
@@ -327,11 +313,9 @@ body textarea{
   float:left;
   overflow: hidden;
 }
-
 #questionMenu h3{
   text-align: center;
 }
-
 #previewTitle{
   font-size: 30px;
   text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
@@ -340,26 +324,22 @@ body textarea{
   text-align:center;
   min-height: 18%;
 }
-
 #addAnswerButton {
   height: 100%;
   width: 15%;
   background-color: rgb(135, 175, 111);
 }
-
 #buttonDiv button {
   height: 100%;
   width: 20%;
   background-color: rgb(135, 175, 111);
 }
-
 #removeAns {
   height: 100%;
   width: 15%;
   background-color: rgb(255, 0, 0);
   margin-bottom: 1%;
 }
-
 #previewPic{
   width: 25%;
   height: 35%;
@@ -368,7 +348,6 @@ body textarea{
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-
 #answers{
   display:grid;
   height: 9em;
@@ -381,7 +360,6 @@ body textarea{
   margin-top: 25%;
   clear: left;
 }
-
 #answerBox{
   height:85%;
   width:100%;
@@ -389,18 +367,15 @@ body textarea{
   border-radius: 0.7em;
   color:black;
 }
-
 #createDiv {
   min-height: 85%;
 }
-
 #buttonDiv {
   height: 10%;
   width: 100%;
   position: absolute;
   padding-bottom: 5%;
   bottom: 0px;
-
 }
 
 .navButton{
@@ -413,22 +388,18 @@ body textarea{
   text-align: center;
   font-size: 1em;
 }
-
 .backButton img {
   margin-top: 5%;
   height: 1em;
 }
-
 .backButton text {
   margin-bottom: 5%;
   margin-top: 0%;
 }
-
 #previewPic img{
   width: 100%;
   object-fit: contain;
 }
-
 #forwardButton{
   height: 5%;
   width: 8%;
@@ -437,33 +408,25 @@ body textarea{
   float: right;
   transform: scaleX(-1);
 }
-
 #timer{
   margin: 0%;
 }
-
 .answer0{
   background-color:#628579;
 }
-
 .answer1{
   background-color:#536CB0;
 }
-
 .answer2{
   background-color:#CF903A;
 }
-
 .answer3{
   background-color:#A3493E;
 }
-
 .answer4{
   background-color:#D8A1A9;
 }
-
 .answer5{
   background-color:#633D41;
 }
-
 </style>

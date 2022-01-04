@@ -20,26 +20,30 @@
             <span>{{uiLabels.participants}}</span>
           </div>
         </div>
-        <div id="audio">
-          <audio controls v-if="music == 'Brass'">
-            <source src="../music/circusBrass.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Trap'">
-            <source src="../music/circusTrap.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Strings'">
-            <source src="../music/circusStrings.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Techno'">
-            <source src="../music/circusTechno.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Ragtime'">
-            <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-          </audio>
-          {{music}}
-        </div>
-        <div id="audio">
-        </div>
+
+<!--från hannahs kod-->
+
+<div id="audio">
+  <audio controls v-if="music == 'Brass'">
+    <source src="../music/circusBrass.mp3" type="audio/mpeg">
+  </audio>
+  <audio controls v-if="music == 'Trap'">
+    <source src="../music/circusTrap.mp3" type="audio/mpeg">
+  </audio>
+  <audio controls v-if="music == 'Strings'">
+    <source src="../music/circusStrings.mp3" type="audio/mpeg">
+  </audio>
+  <audio controls v-if="music == 'Techno'">
+    <source src="../music/circusTechno.mp3" type="audio/mpeg">
+  </audio>
+  <audio controls v-if="music == 'Ragtime'">
+    <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+  </audio>
+  {{music}}
+</div>
+<!-- -->
+
+
       </div>
       <div class="createWrap">
         <h3>{{uiLabels.quizName}}</h3>
@@ -72,19 +76,19 @@
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
     </div>
 
-
-    <!--<router-link v-bind:to="'/create/'+lang">
-        <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-    </router-link>
-        <router-link v-bind:to="'/'">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
-    </router-link>
-    <router-link v-bind:to="'/create/'+lang">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
-    </router-link>-->
-    <!--router-link v-bind:to="'/create/'+lang">
+  <!--<router-link v-bind:to="'/create/'+lang">
       <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
-    </router-link-->
+  </router-link>
+      <router-link v-bind:to="'/'">
+    <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+  </router-link>
+  <router-link v-bind:to="'/create/'+lang">
+    <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" >
+  </router-link>-->
+  <!--router-link v-bind:to="'/create/'+lang">
+    <button v-on:click="createPoll">{{uiLabels.createPoll}}</button>
+  </router-link-->
+
 
   </body>
 </template>
@@ -110,7 +114,6 @@ export default {
       questionNumber: 0
     }
   },
-
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -118,11 +121,10 @@ export default {
       this.uiLabels = labels
     })
     socket.on("dataUpdate", (data) =>
-      this.data = data
+        this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data)
-
+        this.data = data)
   },
   methods: {
     createPoll: function () {
@@ -131,15 +133,12 @@ export default {
       //Skickar pollDesc till servern
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
-
     },
-
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.pollImg = pict;
       console.log(this.pollImg)
-  },
-
+    },
   }}
 </script>
 
@@ -154,7 +153,6 @@ h3{
   text-align: left;
   color: Navy;
 }
-
 h4 {
   margin: 3% 0% 3% 0%;
   text-align: center;
@@ -191,12 +189,10 @@ h4 {
   grid-template-columns: 33% 33% 32%;
   align-items: center;
 }
-
 #previewPic img{
   width: 100%;
   object-fit: contain;
 }
-
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -206,7 +202,6 @@ h4 {
   height: 25em;
   border: 0.2em #0b074d solid;
 }
-
 #previewTitle{
   font-size: 30px;
   text-shadow: -0.03em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.03em navy;
@@ -215,7 +210,6 @@ h4 {
   line-break: auto;
   max-height: 15%;
 }
-
 .infoBoards{
   color: navy;
   font-family: "Times New Roman";
@@ -227,7 +221,6 @@ h4 {
   border: navy 0.1em solid;
   font-size: 1em;
 }
-
 #previewDesc {
   margin: 10%;
 }
@@ -250,7 +243,6 @@ body textarea{
 #desIptBox{
   height: 10em;
 }
-
 ::placeholder{
   color:Navy;
 }
@@ -266,7 +258,6 @@ body textarea{
   margin-top: 2%;
   float: left;
 }
-
 #forwardButton{
   height: 3em;
 
@@ -275,7 +266,6 @@ body textarea{
   float: right;
   transform: scaleX(-1);
 }
-
 #forwardButton:hover {
   cursor: pointer;
 }

@@ -33,7 +33,7 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(pollId));
     //HÄR TESTAR JAG. Skapa en socket.emit med getImg här
     socket.emit('description', data.getDescription(pollId));
-   // socket.emit('name', data.getName(pollId));
+    // socket.emit('name', data.getName(pollId));
     socket.emit('imageAddress', data.getImage(pollId));
     socket.emit('musicSelection', data.getMusic(pollId));
     socket.emit("allQuestionsArray", data.getQuestionArray(pollId));
@@ -48,6 +48,10 @@ function sockets(io, socket, data) {
   socket.on('startQuiz', function(d) {
     io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
+  });
+  socket.on('startPoll', function(d) {
+    io.to(d.pollId).emit('sendToResult')
+    console.log('-----------sendToResult------------');
   });
   socket.on('sendNickname', function(d) {
     //io.to(d.pollId).emit('sendName',d.myName)
