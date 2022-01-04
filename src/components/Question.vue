@@ -4,7 +4,7 @@
   </div>
   <div id="wrap1">
     <div id="timer" v-if="this.question.t != ''">
-    {{this.question.t - this.timerCount}}
+      {{this.question.t - this.timerCount}}
     </div>
     <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
   </div>
@@ -14,33 +14,33 @@
   </template>
   <!--fram till hit-->
   <div id="ans">
-  <template v-if="!timesUp && !this.clicked">
-    <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="this.myAnswer =='' && (answer(a, index))"> <!--id="{clicked ? 'isChosen': ''}"-->
-      {{ a }}
-    </button>
-  </template>
-  <!--Jag gjorde en variant här men lite krånglig egentligen, funkar dock fast byter färg också. //Pelle -->
-  <template v-if="!timesUp && this.clicked">
+    <template v-if="!timesUp && !this.clicked">
+      <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index" v-on:click="this.myAnswer =='' && (answer(a, index))"> <!--id="{clicked ? 'isChosen': ''}"-->
+        {{ a }}
+      </button>
+    </template>
+    <!--Jag gjorde en variant här men lite krånglig egentligen, funkar dock fast byter färg också. //Pelle -->
+    <template v-if="!timesUp && this.clicked">
 
-    <button v-for="(a,index) in cloneStartAns" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index"> <!--id="{clicked ? 'isChosen': ''}"-->
-      {{ a }}
-    </button>
+      <button v-for="(a,index) in cloneStartAns" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+index"> <!--id="{clicked ? 'isChosen': ''}"-->
+        {{ a }}
+      </button>
 
-    <button  v-bind:key="this.question.a[this.pickedIndex]" v-bind:index="index" v-bind:class="'ans'+'Pick'" > <!--id="{clicked ? 'isChosen': ''}"-->
-      {{ this.question.a[this.pickedIndex] }}
-    </button>
+      <button  v-bind:key="this.question.a[this.pickedIndex]" v-bind:index="index" v-bind:class="'ans'+'Pick'" > <!--id="{clicked ? 'isChosen': ''}"-->
+        {{ this.question.a[this.pickedIndex] }}
+      </button>
 
-    <button v-for="(a,index) in cloneAnsArray" v-bind:key="a" v-bind:index="index+this.pickedIndex" v-bind:class="'ans'+(index+this.pickedIndex+1)" > <!--id="{clicked ? 'isChosen': ''}"-->
-      {{ a }}
-    </button>
-  </template>
+      <button v-for="(a,index) in cloneAnsArray" v-bind:key="a" v-bind:index="index+this.pickedIndex" v-bind:class="'ans'+(index+this.pickedIndex+1)" > <!--id="{clicked ? 'isChosen': ''}"-->
+        {{ a }}
+      </button>
+    </template>
 
-  <template v-if="timesUp">
-    <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
-      {{ a }}
-      {{this.question.isCorrect[index]}}
-    </button>
-  </template>
+    <template v-if="timesUp">
+      <button v-for="(a,index) in question.a" v-bind:key="a" v-bind:index="index" v-bind:class="'ans'+ question.isCorrect[index]">
+        {{ a }}
+        {{this.question.isCorrect[index]}}
+      </button>
+    </template>
   </div>
 
   <div v-show="isHost">
@@ -52,18 +52,14 @@
 </template>
 
 <script>
-
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Bars',
   props: {
     question: Object,
-
   },
   emits:["answer"],
-
   data: function () {
     return {
       timerCount: 0,
@@ -81,28 +77,24 @@ export default {
   watch:{
     timerCount: function(timeNow){
       if(timeNow==this.question.t){
-            clearInterval(this.timerEvent)
-            this.timesUp=true;
-            console.log("timesUp" + this.timesUp)
+        clearInterval(this.timerEvent)
+        this.timesUp=true;
+        console.log("timesUp" + this.timesUp)
       }
     }
   },
   //Timer
-
   created:function(){
     this.isHost = this.$route.params.isHost==="true"?true:false;
     var a = new Date()
     //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
     this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
     //console.log(intervalId)
-
     socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+        this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
     )
   },
-
   methods: {
-
     answer: function (answer, index) {
       this.$emit("answer", answer);
       //this.timesUp=true;
@@ -112,7 +104,6 @@ export default {
       if(this.question.isCorrect[index]){
         console.log("CORRECT!");
         //this.ansCorrect=true;
-
       }else{
         console.log("INCORRECT!");
       }
@@ -128,21 +119,17 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
-
 #wrap1 {
   /*fixa med bilden och timern*/
 }
-
 #timer {
   float: left;
   margin-left: 10%;
   font-size: 200%;
 }
-
 #quest{
   font-size: 40pt;
   text-align: center;
@@ -151,7 +138,6 @@ export default {
   color: white;
   text-shadow: 3px 3px #990000;
 }
-
 #ans{
   display:grid;
   height: 200px;
@@ -163,63 +149,50 @@ export default {
   margin-right: 5%;
   margin-top: 0%;
 }
-
 button{
   height:100%;
   width:100%;
   background-color: greenyellow;
   font-size:30pt;
 }
-
 #prePic{
   width: 30%;
   object-fit: contain;
 }
-
 .ans0{
   background-color:#628579;
 }
-
 .ans1{
   background-color:#536CB0;
 }
-
 .ans2{
   background-color:#CF903A;
 }
-
 .ans3{
   background-color:#A3493E;
 }
-
 .ans4{
   background-color:#D8A1A9;
 }
-
 .ans5{
   background-color:#633D41;
 }
-
 .anstrue{
   background-color: green;
 }
-
 .ansfalse{
   background-color: gray;
   opacity: 0.3;
 }
-
 .ansPick{
   background-color:#99e5cb;
   border: black 8px solid;
 }
-
 h3{
   font-size: 20pt;
   color: white;
   text-shadow: 3px 3px #990000;
 }
-
 #continueButton {
   font-size: 1em;
   text-transform: uppercase;
@@ -228,5 +201,4 @@ h3{
   background-color: rgb(100, 155, 36);
   margin: 3% 0px 2% 80%;
 }
-
 </style>
