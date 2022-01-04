@@ -4,7 +4,7 @@
   </div>
   <div id="wrap1">
     <div id="timer" v-if="this.question.t != ''">
-    {{this.question.t - this.timerCount}}
+      {{this.question.t - this.timerCount}}
     </div>
     <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
     <div v-show="isHost">
@@ -88,16 +88,13 @@ export default {
     }
   },
   //Timer
-
   created:function(){
     var a = new Date()
     //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
     this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
     //console.log(intervalId)
   },
-
   methods: {
-
     answer: function (answer, index) {
       if(!this.isHost){
         this.$emit("answer", answer);
@@ -127,17 +124,14 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>
-
 #wrap1 {
   display: grid;
   grid-template-columns: 15% 70% 15%;
   margin-bottom: 2%;
 }
-
 #timer {
   margin-left: 30%;
   font-size: 200%;
@@ -146,7 +140,6 @@ export default {
   height: 15%;
   border-radius: 50%;
 }
-
 #quest{
   font-size: 40pt;
   text-align: center;
@@ -155,7 +148,6 @@ export default {
   color: white;
   text-shadow: 3px 3px #990000;
 }
-
 #ans{
   display:grid;
   height: 200px;
@@ -167,64 +159,51 @@ export default {
   margin-right: 5%;
   margin-top: 0%;
 }
-
 button{
   height:100%;
   width:100%;
   background-color: greenyellow;
   font-size:30pt;
 }
-
 #prePic{
   width: 30%;
   object-fit: contain;
   margin-left: 35%;
 }
-
 .ans0{
   background-color:#628579;
 }
-
 .ans1{
   background-color:#536CB0;
 }
-
 .ans2{
   background-color:#CF903A;
 }
-
 .ans3{
   background-color:#A3493E;
 }
-
 .ans4{
   background-color:#D8A1A9;
 }
-
 .ans5{
   background-color:#633D41;
 }
-
 .anstrue{
   background-color: green;
 }
-
 .ansfalse{
   background-color: gray;
   opacity: 0.3;
 }
-
 .ansPick{
   background-color:#99e5cb;
   border: black 8px solid;
 }
-
 h3{
   font-size: 20pt;
   color: white;
   text-shadow: 3px 3px #990000;
 }
-
 #continueButton {
   font-size: 1em;
   text-transform: uppercase;
@@ -233,5 +212,4 @@ h3{
   background-color: rgb(100, 155, 36);
   margin-right: 5%;
 }
-
 </style>

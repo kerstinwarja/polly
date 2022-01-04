@@ -3,21 +3,21 @@
     <header>
       <h1>{{uiLabels.createHead}}</h1>
     </header>
-
-    <div class="wrap2">
+    <div class="mainWrap">
       <div>
         <div id="preview">
           <div id="previewTitle">
-            <span id="as">{{question}}</span>
+            <span>{{question}}</span>
           </div>
           <div id="previewPic">
-            <img v-if="questionImg" v-bind:src="questionImg" id="prePic">
+            <img v-if="questionImg" v-bind:src="questionImg">
           </div>
           <div id="answers">
-            <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
-            </textarea>
+              <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
+              </textarea>
           </div>
         </div>
+
         <div id="questionMenu">
           <template v-if="!this.isEditing">
             <h3>{{uiLabels.questionAlterate}}</h3>
@@ -32,64 +32,52 @@
       </div>
 
       <div class="createWindow">
-        <div id="createDiv">
-          <h3> {{uiLabels.question}}: </h3> <br>
-          <textarea id="quizTitle" type="text" v-model="question" maxlength="70" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
-          <h3 style="float: left">{{uiLabels.answer}}</h3>
-          <button type="submit" id="removeAns" v-on:click="removeAnswer()">
-            {{uiLabels.answerRemove}}
-          </button>
-          <button id="addAnswerButton" v-on:click="addAnswer">
-            {{uiLabels.answerAdd}}
-          </button><br>
+
+          <h3> {{uiLabels.question}}: </h3>
+          <textarea type="text" v-model="question" maxlength="100" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+          <h3>{{uiLabels.answer}}</h3>
           <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <textarea id="ansAlt" type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
             <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
-        </div>
+
         <div id="buttonDiv">
-          <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-            <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
-          </button>
-          <!--select type="submit" v-model="time">
-            <option disabled value=""> Select time </option>
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
-          </select-->
-          <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
-            <!--img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;"-->
-            <span>{{uiLabels.impPic}}</span>
-          </button>
-          <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-            {{uiLabels.questionAdd}}
-          </button>
-          <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
-            {{uiLabels.questionRem}}
-          </button>
-          <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
-            {{uiLabels.saveChanges}}
-          </button>
+          <div>
+            <button type="submit" v-on:click="removeAnswer()" style="background-color: rgb(255, 0, 0);">
+              {{uiLabels.answerRemove}}
+            </button>
+            <button v-on:click="addAnswer">
+              {{uiLabels.answerAdd}}
+            </button>
+          </div>
+          <div>
+            <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
+              <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
+            </button>
+            <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
+              <span>{{uiLabels.impPic}}</span>
+            </button>
+            <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
+              {{uiLabels.questionAdd}}
+            </button>
+            <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
+              {{uiLabels.questionRem}}
+            </button>
+            <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
+              {{uiLabels.saveChanges}}
+            </button>
+          </div>
         </div>
       </div>
     </div>
-
-    <!--div>
-      <input type="number" v-model="questionNumber">
-      <button v-on:click="runQuestion">
-        Run question
-      </button>
-      {{data}}
-      <router-link v-bind:to="'/result/'+ pollId">Check result</router-link>
-    </div-->
-
     <router-link v-bind:to="'/initialize/'+ lang">
-      <button class="backButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
+      <button class="navButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
         {{uiLabels.goBack}}
       </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="backButton" v-on:click="sendQuiz()"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
+      <button style="float:right" class="navButton" v-on:click="sendQuiz()">
+        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
         {{uiLabels.saveAndPlay}}
       </button>
     </router-link>
@@ -99,7 +87,6 @@
 <script>
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Create',
   data: function () {
@@ -134,17 +121,16 @@ export default {
       this.uiLabels = labels
     })
     socket.on("dataUpdate", (data) =>
-      this.data = data
+        this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data
+        this.data = data
     )
   },
   methods: {
     /*createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },*/
-
     /*addQuestion: function () {
       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
       this.questionNumber ++
@@ -152,7 +138,6 @@ export default {
       this.answers= ["", ""]
       this.questionImg=""
     },*/
-
     sendQuiz: function(){
       if(this.question!==""){
         this.addQuestion();
@@ -183,14 +168,13 @@ export default {
       this.clearFields()
     },
     removeQuestion(i){
-        this.allQuestions.splice(i,1);
-         this.allQimg.splice(i,1);
-        this.allTime.splice(i,1);
-        this.allAnswers.splice(i,1);
-        this.allisCorr.splice(i,1);
-        this.isEditing = false;
-        this.clearFields();
-
+      this.allQuestions.splice(i,1);
+      this.allQimg.splice(i,1);
+      this.allTime.splice(i,1);
+      this.allAnswers.splice(i,1);
+      this.allisCorr.splice(i,1);
+      this.isEditing = false;
+      this.clearFields();
     },
     addAnswer: function () {
       if(this.counter<6) {
@@ -212,12 +196,11 @@ export default {
     PicChoose(){
       let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
-      },
-
+    },
     setTime(){
       let clock = prompt("Set a maximum time for answering the question (in seconds):");
       this.time = clock;
-      },
+    },
     accessQuestion: function (i){
       this.isEditing = true
       this.question = this.allQuestions[i]
@@ -241,44 +224,22 @@ export default {
       this.timerCount = this.time;
       this.timerEnabled = true;
     },*/
-    },
-  }
-
+  },
+}
 </script>
 
 
 <style scoped>
-
 header {
   font-size: 1.5em;
   text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.05em navy;
   margin-bottom: 5%;
 }
-
 h3{
   margin:0px;
-  padding: 0% 10% 1%;
+  padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
-}
-
-.createWindow{
-  background-color: wheat;
-  width: 100%;
-  border: 0.2em navy solid;
-  height: 32em;
-  position: relative;
-}
-
-.wrap2 {
-  margin: 0px;
-  padding-left: 4%;
-  width: 95%;
-  height: 95%;
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns: 61% 31%;
-  align-items: top;
 }
 
 body textarea{
@@ -291,10 +252,16 @@ body textarea{
   border: 0.1em solid;
 }
 
-::placeholder{
-  color:navy;
+.mainWrap {
+  margin: 0px;
+  padding-left: 4%;
+  width: 95%;
+  height: 95%;
+  display: grid;
+  grid-gap: 5%;
+  grid-template-columns: 61% 31%;
+  align-items: top;
 }
-
 #preview{
   background-color: wheat;
   background-size: cover;
@@ -309,6 +276,46 @@ body textarea{
   padding-bottom: 2%;
 }
 
+#previewTitle{
+  font-size: 30px;
+  text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
+  color: white;
+  line-break: auto;
+  text-align:center;
+  min-height: 18%;
+}
+
+#previewPic{
+  width: 25%;
+  height: 35%;
+  position: absolute;
+  left: 37.5%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+#previewPic img{
+  width: 100%;
+  object-fit: contain;
+}
+#answers{
+  display:grid;
+  height: 9em;
+  width: 90%;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  align-items: center;
+  margin-left:5%;
+  margin-right: 5%;
+  margin-top: 25%;
+  clear: left;
+}
+#answerBox{
+  height:85%;
+  width:100%;
+  font-size:0.5;
+  border-radius: 0.7em;
+  color:black;
+}
 #questionMenu{
   width:95%;
   height: 5em;
@@ -332,78 +339,29 @@ body textarea{
   text-align: center;
 }
 
-#previewTitle{
-  font-size: 30px;
-  text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
-  color: white;
-  line-break: auto;
-  text-align:center;
-  min-height: 18%;
+.createWindow{
+  background-color: wheat;
+  width: 100%;
+  border: 0.2em navy solid;
+  height: 34em;
+  position: relative;
 }
-
-#addAnswerButton {
-  height: 100%;
-  width: 15%;
-  background-color: rgb(135, 175, 111);
-}
-
-#buttonDiv button {
-  height: 100%;
-  width: 20%;
-  background-color: rgb(135, 175, 111);
-}
-
-#removeAns {
-  height: 100%;
-  width: 15%;
-  background-color: rgb(255, 0, 0);
-  margin-bottom: 1%;
-}
-
-#previewPic{
-  width: 25%;
-  height: 35%;
-  position: absolute;
-  left: 37.5%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-#answers{
-  display:grid;
-  height: 9em;
-  width: 90%;
-  grid-template-columns: repeat(2, 1fr); /*default*/
-  gap: 1.5em;
-  align-items: center;
-  margin-left:5%;
-  margin-right: 5%;
-  margin-top: 25%;
-  clear: left;
-}
-
-#answerBox{
-  height:85%;
-  width:100%;
-  font-size:0.5;
-  border-radius: 0.7em;
-  color:black;
-}
-
-#createDiv {
-  min-height: 85%;
-}
-
 #buttonDiv {
-  height: 10%;
+  display:grid;
+  grid-template-rows: 50% 50%;
+  height: 20%;
   width: 100%;
   position: absolute;
   padding-bottom: 5%;
   bottom: 0px;
-
+}
+#buttonDiv button {
+  height: 95%;
+  width: 20%;
+  background-color: rgb(135, 175, 111);
 }
 
-.backButton{
+.navButton{
   height: 10%;
   width: auto;
   margin: 2% 4% 2% 4%;
@@ -414,56 +372,50 @@ body textarea{
   font-size: 1em;
 }
 
-.backButton img {
-  margin-top: 5%;
-  height: 1em;
-}
-
-.backButton text {
-  margin-bottom: 5%;
-  margin-top: 0%;
-}
-
-#previewPic img{
-  width: 100%;
-  object-fit: contain;
-}
-
-#forwardButton{
-  height: 5%;
-  width: 8%;
-  margin-right: 4%;
-  margin-top: 1%;
-  float: right;
-  transform: scaleX(-1);
-}
-
-#timer{
-  margin: 0%;
-}
-
 .answer0{
   background-color:#628579;
 }
-
 .answer1{
   background-color:#536CB0;
 }
-
 .answer2{
   background-color:#CF903A;
 }
-
 .answer3{
   background-color:#A3493E;
 }
-
 .answer4{
   background-color:#D8A1A9;
 }
-
 .answer5{
   background-color:#633D41;
 }
 
+@media only screen and (max-width: 980px) {
+  /* For mobile phones: */
+  #buttonDiv button{
+    width: 10%;
+    height:10%
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  /* For mobile phones: */
+  .mainWrap{
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'create'
+      'preview'
+      'qmenu';
+  }
+  #preview{
+    grid-area:preview;
+  }
+  .createWindow{
+    grid-area:create;
+  }
+  #questionMenu{
+    grid-area:qmenu;
+  }
+}
 </style>

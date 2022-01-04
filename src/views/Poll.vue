@@ -44,7 +44,6 @@
 import Question from '@/components/Question.vue';
 import io from 'socket.io-client';
 const socket = io();
-
 export default {
   name: 'Poll',
   components: {
@@ -66,25 +65,17 @@ export default {
       //timerCount : 45,
       //timerEnabled: true,
       pollId: "inactive poll",
-     // nextactivated : true,
+      // nextactivated : true,
     }
   },
   /*
-
 var a = new Date()
-
-
 intervalId = setInterval(()=>{
     console.log(Math.round((new Date() - a)/1000))
 }, 1000)
-
-
 clearInterval(intervalId)
-
-
   GAMMAL TIMER UNDER, NY HET TIMER ÖVER
   watch: {
-
             timerCount: {
                 handler(time) {
                   console.log(this.question.t)
@@ -99,7 +90,6 @@ clearInterval(intervalId)
                 },
                 immediate: true
             }
-
         },*/
   created: function () {
     this.pollId = this.$route.params.id
@@ -107,7 +97,7 @@ clearInterval(intervalId)
     socket.emit('joinPoll', this.pollId)
     socket.on()
     socket.on("musicSelection", SONG =>
-      this.SONG = SONG
+        this.SONG = SONG
     ),
     socket.on("newQuestion", q => {
       this.question = q
@@ -137,9 +127,7 @@ clearInterval(intervalId)
     this.questionImg = this.question.questionImg
     this.isCorrect = this.question.isCorrect
     this.questionNumber = this.question.questionNumber
-
   },
-
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
@@ -165,14 +153,12 @@ clearInterval(intervalId)
 #audio {
   display:none;
 }
-
 #startButton {
   height: 5em;
   width: 15%;
   background-color: rgb(100, 155, 36);
   margin-bottom:5%;
 }
-
 #forwardButton{
   height: 5%;
   width: 8%;
@@ -180,7 +166,6 @@ clearInterval(intervalId)
   margin-top: 10%;
   float: right;
 }
-
 #backButton{
   height: 5%;
   width: 8%;
