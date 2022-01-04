@@ -26,12 +26,14 @@
     </audio>
   </div>
 
+
   <!--{{timerCount}}
   {{this.question.t}} -->
 
   <!-- <button v-on:click="nextQue()">
     Next
   </button>-->
+
 </template>
 
 <script>
@@ -48,6 +50,7 @@ export default {
   data: function () {
     return {
       SONG:"",
+      isHost: false,
       question: {
         q: "",
         a: [],
@@ -96,7 +99,9 @@ clearInterval(intervalId)
         },*/
   created: function () {
     this.pollId = this.$route.params.id
+    this.isHost = this.$route.params.isHost==="true"?true:false;
     socket.emit('joinPoll', this.pollId)
+    socket.on()
     socket.on("musicSelection", SONG =>
       this.SONG = SONG
     ),
@@ -104,6 +109,10 @@ clearInterval(intervalId)
       this.question = q,
       //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
     ),
+
+    /*socket.on("sendToResult",() =>
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+    )*/
 
     this.timerCount = this.question.t
     this.questionImg = this.question.questionImg
@@ -124,16 +133,18 @@ clearInterval(intervalId)
       //this.timerCount = this.question.t
       //this.nextactivated = true
     },
-
+    continue: function () {
+      socket.emit('startPoll', {pollId: this.pollId, isHost: this.isHost})
+    }
   }
 }
 </script>
 
 <style>
-
-/*#audio {
-  /*display:none;
-}*/
+/*----------------------------Ta bort?--------------
+#audio {
+  display:none;
+}
 
 #startButton {
   height: 5em;
@@ -156,6 +167,15 @@ clearInterval(intervalId)
   margin-left: 4%;
   margin-top: 10%;
   float: left;
+}*/
+
+#continueButton {
+  font-size: 1em;
+  text-transform: uppercase;
+  height: 2em;
+  width: auto;
+  background-color: rgb(100, 155, 36);
+  margin: 3% 0px 2% 80%;
 }
 
 </style>

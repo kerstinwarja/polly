@@ -49,6 +49,10 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
   });
+  socket.on('startPoll', function(d) {
+    io.to(d.pollId).emit('sendToResult')
+    console.log('-----------sendToResult------------');
+  });
   socket.on('sendNickname', function(d) {
     //io.to(d.pollId).emit('sendName',d.myName)
     io.to(d.pollId).emit('sendName',data.addName(d.pollId,d.myName));
@@ -60,7 +64,7 @@ function sockets(io, socket, data) {
     //console.log('-----------getNICK------------'+d.myName);
     io.to(d.pollId).emit('getName',data.getName(d.pollId));
   });
-  
+
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
