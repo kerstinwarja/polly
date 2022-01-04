@@ -1,11 +1,11 @@
 <template>
   <body>
     <header>
-      <h1>{{uiLabels.initializeHead}}</h1>
+      <h1>It's time to create your quiz!</h1>
     </header>
     <div class="wrap2">
       <div id="preview">
-        <h4> {{uiLabels.play}}</h4>
+        <h4> It's time to play</h4>
         <div id="previewTitle">
           <p> {{pollId}} </p>
         </div>
@@ -17,40 +17,39 @@
             <img v-if="pollImg" v-bind:src="pollImg" id="prePic">
           </div>
           <div class="infoBoards" id="previewPartis">
-            <span>{{uiLabels.participants}}</span>
+            <span>This is where your participants will be listed </span>
           </div>
         </div>
         <div id="audio">
-          <audio controls v-if="music == 'Brass'">
-            <source src="../music/circusBrass.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Trap'">
-            <source src="../music/circusTrap.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Strings'">
-            <source src="../music/circusStrings.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Techno'">
-            <source src="../music/circusTechno.mp3" type="audio/mpeg">
-          </audio>
-          <audio controls v-if="music == 'Ragtime'">
-            <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-          </audio>
-          {{music}}
-        </div>
-        <div id="audio">
-        </div>
+       <audio controls v-if="music == 'Brass'">
+          <source src="../music/circusBrass.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="music == 'Trap'">
+          <source src="../music/circusTrap.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="music == 'Strings'">
+          <source src="../music/circusStrings.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="music == 'Techno'">
+          <source src="../music/circusTechno.mp3" type="audio/mpeg">
+        </audio>
+        <audio controls v-if="music == 'Ragtime'">
+          <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+        </audio>
+        {{music}}
+      </div>
+      <div id="audio">
+         </div>
       </div>
       <div class="createWindow">
-        <h3>{{uiLabels.quizName}}</h3>
-        <textarea id="quizTitle" type="text" v-model="pollId" placeholder={{uiLabels.namePick}}></textarea>
-        <h3>{{uiLabels.quizDesc}}</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
+        <h3> Quiz name: </h3>
+        <textarea id="quizTitle" type="text" v-model="pollId" placeholder="Pick a name for your quiz..."></textarea>
+        <h3>Quiz description:</h3>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder="Add a short description of your quiz..."></textarea>
         <div class="wrap3">
           <button type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
-            <span>{{uiLabels.impPic}}</span>
-
+            <span>Import picture</span>
           </button>
           <select v-model="music" id="music">
             <!--gör selected hidden nått mer än att ta bort "selected music"?-->
@@ -123,7 +122,7 @@ export default {
   methods: {
     createPoll: function () {
       this.timerCount = this.time;
-      this.SONG = this.music;
+       this.SONG = this.music;
       //Skickar pollDesc till servern
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
       this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
@@ -133,7 +132,7 @@ export default {
     PicChoose(){
       let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.pollImg = pict;
-      console.log(this.pollImg)
+       console.log(this.pollImg)
   },
 
   }}
@@ -141,48 +140,36 @@ export default {
 
 <style scoped>
 header {
-  font-size: 1.7em;
-  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
+  font-size: 20pt;
+  text-shadow: -1px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
 .createWindow{
   background-color: wheat;
   width: 100%;
-  border: 0.2em navy solid;
+  border: 3px navy solid;
 }
 body textarea{
   width: 80%;
-
-  background-color: #f0e7d1;
-
+  background-color: wheat;
   color: Navy;
   resize:none;
-  padding: 0.4em 0.4em 0.4em;
+  padding: 5px 5px 5px;
   font-family: sans-serif;
-  border: 0.1em solid;
+  border: 2px solid;
 }
-
-
-/*header h1 {
-  margin: 0%;
-  padding: 0% 0% 3% 0%;
-}*/
-
-
 h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
   color: Navy;
 }
-
 h4 {
   margin: 3% 0% 3% 0%;
   text-align: center;
   color: white;
-  text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
-  font-size: 2em;
+  text-shadow: -1px 0 #990000, 0 3px #990000, 3px 0 #990000, 0 -1px #990000;
+  font-size: 18pt;
 }
-
 #backButton{
   height: 5%;
   width: 8%;
@@ -199,12 +186,10 @@ h4 {
   float: right;
   transform: scaleX(-1);
 }
-
 #previewPic img{
   width: 100%;
   object-fit: contain;
 }
-
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -212,14 +197,13 @@ h4 {
   background-position: bottom;
   color: Grey;
   height: 100%;
-  border: 0.2em #0b074d solid;
+  border: 5px #0b074d solid;
 }
-
 #previewTitle{
   font-size: 30px;
-  text-shadow: -0.03em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.03em navy;
+  text-shadow: -1px 0 navy, 0 3px navy, 3px 0 navy, 0 -1px navy;
   color: white;
-  height: 10%;
+  height: 15%;
   line-break: auto;
   max-height: 15%;
 }
@@ -232,18 +216,17 @@ h4 {
   width: 90%;
   background-color: wheat;
   border-radius: 2%;
-  border: navy 0.1em solid;
+  border: navy 2px solid;
   font-size: 1em;
 }
-
 #previewDesc {
   margin: 10%;
 }
 
+
 #desIptBox{
   height: 20em;
 }
-
 ::placeholder{
   color:Navy;
 }
@@ -255,7 +238,6 @@ h4 {
   margin-top: 2%;
   float: left;
 }
-
 #forwardButton{
   height: 5%;
   width: 8%;
@@ -270,33 +252,26 @@ h4 {
 }
 
 .wrap2 {
-  margin: 0px;
-  padding-left: 4%;
-  width: 95%;
-  height: 95%;
-  display: grid;
-  grid-gap: 5%;
-  grid-template-columns: 61% 31%;
-  align-items: center;
-}
+   margin: 0px;
+   padding-left: 4%;
+   width: 95%;
+   height: 95%;
+   display: grid;
+   grid-gap: 5%;
+   grid-template-columns: 61% 31%;
+   align-items: center;
 
-.wrap2 button{
-  background-color: wheat;
-  text-transform: uppercase;
-  padding-bottom: 1%;
-  font-size:80%;
-}
+  }
+
+  .wrap2 button{
+    background-color: wheat;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+    font-size:80%;
+  }
 
 .wrap3 {
-  margin: 0px;
-  padding: 5% 0% 5% 8%;
-  grid-gap: 4%;
-  width: 80%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-}
-/*   margin: 0px;
+   margin: 0px;
    padding: 5% 0% 5% 8%;
    grid-gap: 4%;
    width: 80%;
@@ -304,10 +279,6 @@ h4 {
    grid-template-columns: 50% 50%;
    align-items: center;
   }
-
-.wrap3 button {
-  background-color: #CF903A;
-}
   .wrap4{
     margin: 0px;
     padding: 5% 0% 5% 0%;
@@ -317,23 +288,5 @@ h4 {
     display: grid;
     grid-template-columns: 33% 33% 32%;
     align-items: center;
-  }*/
-
-  #music {
-    background-color: #fbf1e0;
-    border: 2px navy solid;
   }
-
-
-.wrap4{
-  margin: 0px;
-  padding: 5% 0% 5% 0%;
-  grid-gap: 1%;
-  width: 100%;
-  height: 40%;
-  display: grid;
-  grid-template-columns: 33% 33% 32%;
-  align-items: center;
-}
-
 </style>

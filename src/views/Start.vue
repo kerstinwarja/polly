@@ -1,15 +1,11 @@
 <template>
   <body>
     <div id="nav">
-      <!-- <button v-on:click="switchLanguage"><img src="https://cdn.wallpapersafari.com/93/55/sWHPlh.jpg"> {{uiLabels.changeLanguage}}</button-->
-      <button v-on:click="switchLanguage"> {{uiLabels.changeLanguage}}</button>
+      <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
     </div>
-    <div>
     <header>
       <h1>Quizcus</h1>
     </header>
-    <p id="subTitle">Create a quiz or <br> participate in an existing quiz!</p>
-    </div>
      <div class="wrapper">
         <!--Create Poll button-->
         <router-link v-bind:to="'/initialize/'+lang">
@@ -66,7 +62,7 @@ export default {
       socket.emit("switchLanguage", this.lang)
     },
     create: function(){
-
+      
     }
   }
 }
@@ -88,39 +84,27 @@ body{
 }
 
 button{
-  border-radius: 0.2em;
+    border-radius: 8px;
 }
 
 .wrapper {
-
-/*   width: 50%;
-   height: 100%;
+   width: 95%;
+   height: 95%;
    display: grid;
-   grid-gap: 40%;
+   grid-gap: 3%;
    grid-template-columns: 50% 50%;
    align-items: center;
-
-   margin: 2% 50% 10% 15%;*/
-
-
-  width: 95%;
-  height: 95%;
-  display: grid;
-  grid-gap: 3%;
-  grid-template-columns: 50% 50%;
-  align-items: center;
-  padding-left: 1%;
-}
-
+   padding-left: 1%;
+  }
 
 .wrapper button{
-  width: 100%;
+  width: 70%;
   height: 3em;
   background-color: #fbf1e0;
   text-transform: uppercase;
   font-size: 2em;
   color: navy;
-  border: 0.1em navy solid;
+  border: 2px navy solid;
 }
 
 button:hover {
@@ -128,55 +112,25 @@ button:hover {
 }
 
 #nav button{
-
-/*  width: 5%;
-  height: 10%;*/
-
-  width: 10em;
-  height: 4em;
-
+  width: 130px;
+  height: 40px;
   top: 7%;
   left: 7%;
   background-color: #fbf1e0;
   position: absolute;
   font-size: 0.8em;
   color: navy;
-  border: 0.2em navy solid;
+  border: 2px navy solid;
   text-transform: uppercase;
-  /* border: 2px white solid; */
-/*  overflow: hidden;
-  border-radius: 100%;
-  background-image: url(https://cdn.wallpapersafari.com/93/55/sWHPlh.jpg);*/
-}
-
-#nav img {
-  height: 100%;
-  width: 100%;
-  border-radius: 100%;
-
 }
 
 header {
-  font-size: 4.5em;
+  font-size: 4em;
   text-align: center;
   padding-top: 5%;
-  padding-bottom: 0%;
   margin: 0;
   color: white;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-}
-
-header h1 {
-  margin: 0%;
-  padding: 7% 0% 0% 0%;
-}
-
-#subTitle {
-  font-size: 3em;
-  text-align: center;
-  margin-top: 0;
-  color: white;
-  text-shadow: -2px 0 #990000, 0 2px #990000, 2px 0 #990000, 0 -2px #990000;
+  text-shadow: -2px 0 #990000, 0 4px #990000, 4px 0 #990000, 0 -1px #990000;
 }
 
 </style>
