@@ -34,14 +34,14 @@
       <div class="createWindow">
 
           <h3> {{uiLabels.question}}: </h3>
-          <textarea type="text" v-model="question" maxlength="100" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+          <textarea type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <div id="ansTitle">
             <h3>{{uiLabels.answer}}</h3>
             <h3 id="markedCorrect">Mark<br>as<br>correct</h3>
           </div>
           <div   v-for="(_, i) in answers" v-bind:key="'answer'+i">
             <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>
-            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" v-bind:placeholder="uiLabels.answerPlaceholder"></textarea>
             <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
           <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color: rgb(135, 175, 111);">{{uiLabels.answerAdd}}</button>
