@@ -234,14 +234,13 @@ body textarea{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
     grid-template-columns: 100%;
     grid-template-areas:
       'create'
       'preview'
-      'navButton'
   }
   header{
     font-size: 1em;
@@ -249,18 +248,27 @@ body textarea{
   }
   .createWrap{
     grid-area:create;
-    height: 28em;
+    height: 33em;
   }
   #preview{
     grid-area:preview;
-    height: 18em;
+    height: 30em;
   }
   #desIptBox{
     height: 10em;
   }
   #navButtons{
     margin-top: 12%;
-    grid-area: navButton;
   }
 }
+
+@media only screen and (max-width: 700px) {
+  #preview{
+    height: 20em;
+  }
+  .createWrap{
+    height: 28em;
+  }
+}
+
 </style>

@@ -34,7 +34,7 @@
       <div class="createWindow">
 
           <h3> {{uiLabels.question}}: </h3>
-          <textarea type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
+          <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <div id="ansTitle">
             <h3>{{uiLabels.answer}}</h3>
             <h3 id="markedCorrect">Mark<br>as<br>correct</h3>
@@ -80,17 +80,19 @@
         </div>
       </div>
     </div>
+    <div class="navButton">
     <router-link v-bind:to="'/initialize/'+ lang">
-      <button class="navButton"> <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
+      <button > <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
         {{uiLabels.goBack}}
       </button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" class="navButton" v-on:click="sendQuiz()">
+      <button style="float:right" v-on:click="sendQuiz()">
         <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
         {{uiLabels.saveAndPlay}}
       </button>
     </router-link>
+  </div>
   </body>
 </template>
 
@@ -280,11 +282,12 @@ body textarea{
   overflow: hidden;
   resize: none;
   position: relative;
-  padding-bottom: 2%;
+  padding: 2% 0% 1% 0%;
+  align-items: bottom;
 }
 
 #previewTitle{
-  font-size: 30px;
+  font-size: 1.5em;
   text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
   color: white;
   line-break: auto;
@@ -293,10 +296,10 @@ body textarea{
 }
 
 #previewPic{
-  width: 25%;
-  height: 35%;
+  height: 25%;
+  width: 35%;
   position: absolute;
-  left: 37.5%;
+  left: 32.5%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -313,12 +316,14 @@ body textarea{
   align-items: center;
   margin-left:5%;
   margin-right: 5%;
-  margin-top: 25%;
+  margin-top: 26%;
   clear: left;
+  transform: translateY(10%);
+
 }
 #answerBox{
   height:85%;
-  width:100%;
+  width:90%;
   font-size:0.5;
   border-radius: 0.7em;
   color:black;
@@ -353,6 +358,10 @@ body textarea{
   height: 34em;
   position: relative;
 }
+
+#qInput{
+  width:90%
+}
 #ansTitle{
   display:grid;
   grid-template-columns: 85% 15%;
@@ -380,7 +389,7 @@ body textarea{
   background-color: rgb(135, 175, 111);
 }
 
-.navButton{
+.navButton button{
   height: 10%;
   width: auto;
   margin: 2% 4% 2% 4%;
@@ -410,19 +419,29 @@ body textarea{
   background-color:#633D41;
 }
 
+@media only screen and (max-width: 1300px) {
+ body textarea{
+   width:60%;
+ }
+ #ansTitle{
+   grid-template-columns: 80% 20%;
+ }
+
+}
 
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
+  padding: 0% 8% 0% 8%;
+  width:84%;
     grid-template-columns: 100%;
     grid-template-areas:
       'create'
       'preview'
-      'qmenu';
   }
   header{
-    font-size: 1em;
-    padding:5%;
+    font-size: 1.5em;
+    padding-top:5%
   }
   #preview{
     grid-area:preview;
@@ -431,12 +450,24 @@ body textarea{
     grid-area:create;
     height: 36em;
   }
-  #questionMenu{
-    grid-area:qmenu;
+  .navButton{
+    margin-top: 10%;
   }
-  #buttonDiv button {
-    width:10%;
-
+  #ansTitle{
+    grid-template-columns: 70% 30%;
+  }
+  #answers{
+    transform: translateY(0%);
   }
 }
+@media only screen and (max-width: 700px) {
+  #preview{
+    height:25em
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #preview{
+    height:18em
+  }}
 </style>
