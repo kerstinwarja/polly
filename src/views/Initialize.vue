@@ -58,7 +58,7 @@
           </select>
       </div>
     </div>
-    <div>
+    <div id="navButtons">
     <router-link v-bind:to="'/'">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
@@ -222,6 +222,7 @@ body textarea{
   height: 3em;
   margin: 2% 4% 2% 4%;
   float: left;
+      z-index:-1;
 }
 #forwardButton{
   height: 3em;
@@ -233,14 +234,33 @@ body textarea{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
   /* For mobile phones: */
   .mainWrap{
     grid-template-columns: 100%;
-    grid-template-rows:35% 55% 10% ;
+    grid-template-areas:
+      'create'
+      'preview'
+      'navButton'
+  }
+  header{
+    font-size: 1em;
+    padding:5%;
+  }
+  .createWrap{
+    grid-area:create;
+    height: 28em;
+  }
+  #preview{
+    grid-area:preview;
+    height: 18em;
   }
   #desIptBox{
     height: 10em;
+  }
+  #navButtons{
+    margin-top: 12%;
+    grid-area: navButton;
   }
 }
 </style>

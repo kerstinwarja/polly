@@ -35,22 +35,26 @@
 
           <h3> {{uiLabels.question}}: </h3>
           <textarea type="text" v-model="question" maxlength="100" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
-          <h3>{{uiLabels.answer}}</h3>
-          <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
-            <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+          <div id="ansTitle">
+            <h3>{{uiLabels.answer}}</h3>
+            <h3 id="markedCorrect">Mark<br>as<br>correct</h3>
           </div>
-
+          <div   v-for="(_, i) in answers" v-bind:key="'answer'+i">
+            <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>
+            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+            <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
+          </div>
+          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color: rgb(135, 175, 111);">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
-          <div>
+          <!--div>
             <button type="submit" v-on:click="removeAnswer()" style="background-color: rgb(255, 0, 0);">
               {{uiLabels.answerRemove}}
             </button>
             <button v-on:click="addAnswer">
               {{uiLabels.answerAdd}}
             </button>
-          </div>
-          <div>
+          </div-->
+
             <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
               <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
             </button>
@@ -66,7 +70,7 @@
             <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
               {{uiLabels.saveChanges}}
             </button>
-          </div>
+
         </div>
       </div>
     </div>
@@ -106,7 +110,6 @@ export default {
       allTime:[],
       data: {},
       uiLabels: {},
-      counter: 2,
       timerCount: "",
       timerEnabled: true,
       time:"",
@@ -154,7 +157,6 @@ export default {
     clearFields: function(){
       this.question=""
       this.answers= ["", ""]
-      this.counter = 2;
       this.questionImg=""
       this.isCorrect=[false,false]
       this.time=""
@@ -177,17 +179,16 @@ export default {
       this.clearFields();
     },
     addAnswer: function () {
-      if(this.counter<6) {
+      console.log("HERE")
+      if(this.answers.length<6) {
         this.answers.push("");
         this.isCorrect.push(false);
-        this.counter++;
       }
     },
-    removeAnswer: function () {
-      if(this.counter>2) {
-        this.counter--;
-        this.answers.pop();
-        this.isCorrect.pop();
+    removeAnswer: function (i) {
+      if(this.answers.length>2) {
+        this.answers.splice(i, 1);
+        this.isCorrect.splice(i, 1);
       }
     },
     runQuestion: function () {
@@ -243,7 +244,7 @@ h3{
 }
 
 body textarea{
-  width: 80%;
+  width: 70%;
   background-color: #f0e7d1;
   color: Navy;
   resize:none;
@@ -254,8 +255,8 @@ body textarea{
 
 .mainWrap {
   margin: 0px;
-  padding-left: 4%;
-  width: 95%;
+  padding: 0% 4% 0% 4%;
+  width: 92%;
   height: 95%;
   display: grid;
   grid-gap: 5%;
@@ -268,7 +269,7 @@ body textarea{
   max-height: 100%;
   background-position: bottom;
   color: Black;
-  height: 25em;
+  height: 27em;
   border: 0.3em black solid;
   overflow: hidden;
   resize: none;
@@ -346,17 +347,29 @@ body textarea{
   height: 34em;
   position: relative;
 }
-#buttonDiv {
+#ansTitle{
   display:grid;
-  grid-template-rows: 50% 50%;
-  height: 20%;
+  grid-template-columns: 85% 15%;
+  padding-left:3%;
+}
+.ansButtons{
+  margin: 0% 4% 0% 4%;
+  /*-ms-transform: translateY(-50%);*/
+  transform: translateY(-75%);
+}
+#markedCorrect{
+  font-size:0.9em;
+  text-align: center;
+}
+#buttonDiv {
+  height: 10%;
   width: 100%;
   position: absolute;
-  padding-bottom: 5%;
+  padding: 5% 0% 5% 0%;
   bottom: 0px;
 }
 #buttonDiv button {
-  height: 95%;
+  height: 100%;
   width: 20%;
   background-color: rgb(135, 175, 111);
 }
@@ -391,15 +404,8 @@ body textarea{
   background-color:#633D41;
 }
 
-@media only screen and (max-width: 980px) {
-  /* For mobile phones: */
-  #buttonDiv button{
-    width: 10%;
-    height:10%
-  }
-}
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
     grid-template-columns: 100%;
@@ -408,14 +414,23 @@ body textarea{
       'preview'
       'qmenu';
   }
+  header{
+    font-size: 1em;
+    padding:5%;
+  }
   #preview{
     grid-area:preview;
   }
   .createWindow{
     grid-area:create;
+    height: 36em;
   }
   #questionMenu{
     grid-area:qmenu;
+  }
+  #buttonDiv button {
+    width:10%;
+
   }
 }
 </style>
