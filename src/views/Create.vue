@@ -56,10 +56,16 @@
           </div-->
 
             <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-              <span>{{uiLabels.set}}<br>{{uiLabels.timer}}</span>
+              <span>
+                {{uiLabels.set}}<br>
+                {{uiLabels.timer}}
+              </span>
             </button>
             <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
-              <span>{{uiLabels.impPic}}</span>
+              <span>
+                {{uiLabels.import}}<br>
+                {{uiLabels.picture}}
+              </span>
             </button>
             <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
               {{uiLabels.questionAdd}}

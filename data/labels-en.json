@@ -26,6 +26,8 @@
 	"answerPlaceholder": "Add an answer...",
 	"set": "Set",
 	"timer": "timer",
+	"import": "Import",
+	"picture": "picture",
 	"questionAdd": "Add question",
 	"questionRem": "Remove question",
 	"saveChanges": "Save changes",
