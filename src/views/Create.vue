@@ -13,7 +13,7 @@
             <img v-if="questionImg" v-bind:src="questionImg">
           </div>
           <div id="answers">
-              <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" placeholder={{uiLabels.previewPlaceholder}} readonly>
+              <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" v-bind:placeholder="uiLabels.previewPlaceholder" readonly>
               </textarea>
           </div>
         </div>
@@ -34,10 +34,10 @@
       <div class="createWindow">
 
           <h3> {{uiLabels.question}}: </h3>
-          <textarea type="text" v-model="question" maxlength="100" placeholder={{uiLabels.questionPlaceholder}}></textarea> <br>
+          <textarea type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <h3>{{uiLabels.answer}}</h3>
           <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" placeholder={{uiLabels.answerPlaceholder}}></textarea>
+            <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" v-bind:placeholder="uiLabels.answerPlaceholder"></textarea>
             <input type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
 
