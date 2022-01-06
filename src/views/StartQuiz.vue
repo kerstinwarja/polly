@@ -65,7 +65,7 @@ export default {
       //pollDes: [],
       //question: "",
       //answers: ["", ""],
-      //questionNumber: 0,
+      questionNumber: 0,
       question: {
         q: "",
         a: []
@@ -113,7 +113,7 @@ export default {
       socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
       console.log('lets GO!');
       this.isHost= true;
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, questionNumber : this.questionNumber, isHost: this.isHost}})
     }
   }
 }
