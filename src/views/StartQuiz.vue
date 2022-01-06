@@ -1,46 +1,45 @@
 <template>
   <body>
-  <div id="previewTitle">
     <h4 v-if="isHost">You are the host of</h4>
     <h4 v-else>It's time to play</h4>
-    <header>{{pollId}}</header>
-  </div>
-  <div id="wrap">
-    <div class="infoBoards" id="description">
-      <span id="pdes" >{{pollDesc}}</span>
+    <header>
+      <h1>{{pollId}}</h1>
+    </header>
+    <div id="wrap">
+      <div class="infoBoards" id="pollParts">
+        {{uiLabels.parts}}
+        <span class="infoBoardsInner" v-for="name in this.nameArray" v-bind:key="name">
+            <li>{{name}}</li>
+          </span>
+      </div>
+      <div id="picture">
+        <img v-bind:src="pollImg">
+      </div>
+      <div class="infoBoards"  id="pollDesc" v-if="this.pollDesc!=''">
+        {{uiLabels.desc}}<br>
+        <span class="infoBoardsInner">{{pollDesc}}</span>
+      </div>
     </div>
-    <div id="picture">
-      <img v-bind:src="pollImg">
+    <div id="audio">
+      <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+        <source src="../music/circusBrass.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+        <source src="../music/circusTrap.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+        <source src="../music/circusStrings.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+        <source src="../music/circusTechno.mp3" type="audio/mpeg">
+      </audio>
+      <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+        <source src="../music/circusRagtime.mp3" type="audio/mpeg">
+      </audio>
     </div>
-    <div class="infoBoards">
-      Participants:
-      <span id="partText" v-for="name in this.nameArray" v-bind:key="name">
-          <li>{{name}}</li>
-        </span>
+    <div v-show="isHost">
+      <button v-on:click="letsGo" id="startButton">START QUIZ</button>
     </div>
-  </div>
-  <div id="audio">
-    <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
-      <source src="../music/circusBrass.mp3" type="audio/mpeg">
-    </audio>
-    <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
-      <source src="../music/circusTrap.mp3" type="audio/mpeg">
-    </audio>
-    <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
-      <source src="../music/circusStrings.mp3" type="audio/mpeg">
-    </audio>
-    <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
-      <source src="../music/circusTechno.mp3" type="audio/mpeg">
-    </audio>
-    <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
-      <source src="../music/circusRagtime.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-  <div v-show="isHost">
-    <!--router-link v-bind:to="'/poll/'+ this.pollId"-->
-    <button v-on:click="letsGo" id="startButton">START QUIZ</button>
-    <!--/router-link-->
-  </div>
   </body>
 </template>
 
@@ -61,7 +60,7 @@ export default {
       myName: "undefined",
       nameArray:[],
       //data: {},
-      //uiLabels: {},
+      uiLabels: {},
       //pollDes: [],
       //question: "",
       //answers: ["", ""],
@@ -73,10 +72,17 @@ export default {
     }
   },
   created: function () {
+    this.lang = this.$route.params.lang;
     this.pollId = this.$route.params.id;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
+
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
     //emittar join poll
+
     socket.emit('joinPoll',this.pollId)
     //lyssnar på frågor, kanske ta bort
     socket.on("newQuestion", q =>
@@ -122,55 +128,26 @@ export default {
 
 <style scoped>
 
-header{
-  padding-top:0%;
-  text-shadow: -0.01em 0 navy, 0 0.05em navy, 0.05em 0 navy, 0 -0.01em navy;
-}
-
-#impPic{
-  height: 30%;
-  width: 35%;
+header {
+  font-size: 3em;
+  text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.03em navy;
+  padding:0%;
 }
 
 h4{
+  line-break: auto;
+  color: white;
+  font-size: 2em;
   margin: 3% 0% 3% 0%;
   text-shadow: -0.02em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.02em #990000;
 }
 
-#previewTitle{
-  font-size: 2em;
-  text-shadow: -0.1em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.1em navy;
-  color: white;
-  height: 15%;
-  line-break: auto;
-  max-height: 15%;
-}
-
-.infoBoards{
-  color: navy;
-  font-family: "Times New Roman";
-  line-break: auto;
-  height: 100%;
-  width: 90%;
-  background-color: wheat;
-  border-radius: 2%;
-  border: navy 0.1em solid;
-  font-size: 1.5em;
-  padding-bottom: 1%;
-}
-
-#partText{
-  text-align:left;
-  font-weight: bold;
-}
-
-li{
-  margin-left:33%
-}
-
-span {
-  position: relative;
-  top: 10%;
+#wrap {
+  padding: 3% 0% 3% 0%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  align-items: center;
 }
 
 #wrap img{
@@ -179,6 +156,38 @@ span {
   height:auto;
   width: auto;
 }
+#impPic{
+  height: 30%;
+  width: 35%;
+}
+
+.infoBoards{
+  color: navy;
+  font-family: "Times New Roman";
+  line-break: auto;
+  height: 80%;
+  width: 90%;
+  background-color: wheat;
+  border-radius: 2%;
+  border: navy 0.1em solid;
+  font-size: 1.5em;
+  padding:0% 0% 1% 2%;
+  margin: 0% 5% 0% 5%;
+  overflow:auto;
+  min-height: 10em;
+
+}
+
+.infoBoardsInner{
+  text-align:left;
+  font-weight: bold;
+  position: relative;
+  top: 10%;
+}
+
+/*li{
+  margin-left:33%
+}*/
 
 #startButton {
   height: 5em;
@@ -187,22 +196,42 @@ span {
   margin-bottom:5%;
 }
 
-#wrap {
-  margin: 0px;
-  padding: 3% 0% 3% 0%;
-  /*grid-gap: 1%;*/
-  width: 100%;
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  align-items: center;
-}
-
 #audio {
   display:none;
 }
 
-#description {
-  margin: 10%;
+@media only screen and (max-width: 980px) {
+  /* For mobile phones: */
+#wrap{
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'pic'
+      'des'
+      'par';
+    align-items:center;
+  }
+#pollDesc{
+  grid-area: des;
+}
+#pollParts{
+  grid-area:par;
+}
+#picture{
+  grid-area:pic;
+}
+.infoBoards{
+  width: 60%;
+  margin:5% 20% 5% 20%;
+  text-align: left;
+  padding-left:2%;
 }
 
+}
+@media only screen and (max-width: 500px) {
+  .infoBoards{
+    width: 90%;
+    margin:5%;
+    min-height:5em;
+  }
+}
 </style>

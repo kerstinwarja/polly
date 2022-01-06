@@ -44,5 +44,6 @@
 	"hostIf": "You are the gameleader",
 	"ifParticipant": "It's time to play",
 	"parts": "Participants:",
+	"desc": "Description:",
 	"start": "START QUIZ!"
 }
