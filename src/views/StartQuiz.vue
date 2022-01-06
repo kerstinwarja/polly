@@ -116,11 +116,12 @@ export default {
   },
   methods:{
     letsGo: function() {
-      this.questionNumber=0,
-      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
+      this.questionNumber=0;
+      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray});
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
       console.log('lets GO!');
       this.isHost= true;
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}});
     }
   }
 }

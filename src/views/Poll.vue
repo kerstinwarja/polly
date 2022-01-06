@@ -1,4 +1,5 @@
 <template>
+
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
@@ -103,6 +104,7 @@ clearInterval(intervalId)
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray
+    console.log("Ny start på quizzet nmr ",this.$route.params.questionNumber, this.questionNumber)
     socket.emit('joinPoll', this.pollId)
     socket.on()
     socket.on("musicSelection", SONG =>
@@ -115,6 +117,7 @@ clearInterval(intervalId)
       this.questionImg = q.questionImg
       this.isCorrect = q.isCorrect
       this.questionNumber = q.questionNumber
+       console.log("Röva nmr ", this.questionNumber)
       }
     ),
 
