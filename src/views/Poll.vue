@@ -29,6 +29,12 @@
     </audio>
   </div>
 
+  <div v-show="isHost">
+    <button v-if="timesUp" v-on:click="continueToResult" class="continueButton">
+      Continue
+    </button>
+  </div>
+
 
   <!--{{timerCount}}
   {{this.question.t}} -->
@@ -94,6 +100,7 @@ clearInterval(intervalId)
   created: function () {
     this.pollId = this.$route.params.id
     this.isHost = this.$route.params.isHost==="true"?true:false;
+    this.questionNumber = this.$route.params.questionNumber
     socket.emit('joinPoll', this.pollId)
     socket.on()
     socket.on("musicSelection", SONG =>
@@ -102,6 +109,10 @@ clearInterval(intervalId)
     socket.on("newQuestion", q => {
       this.question = q
       this.timesUp=false
+      this.timerCount = q.t
+      this.questionImg = q.questionImg
+      this.isCorrect = q.isCorrect
+      this.questionNumber = q.questionNumber
       }
     ),
 
@@ -112,9 +123,9 @@ clearInterval(intervalId)
       console.log('-----------socket.on(showCorrect)------------')
     ),*/
 
-    /*socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
-    )*/
+    socket.on("sendToResult",() =>
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber}})
+    )
 
     socket.on("showCorrect",() =>
       this.timesUp=true,
@@ -123,10 +134,6 @@ clearInterval(intervalId)
       console.log('-----------socket.on(showCorrect)------------')
     )
 
-    this.timerCount = this.question.t
-    this.questionImg = this.question.questionImg
-    this.isCorrect = this.question.isCorrect
-    this.questionNumber = this.question.questionNumber
   },
   methods: {
     submitAnswer: function (answer) {
@@ -143,6 +150,12 @@ clearInterval(intervalId)
     setTimeUp: function () {
       this.timesUp=false
       socket.emit('showCorrectAnswer', {pollId: this.pollId})
+    },
+    continueToResult: function() {
+      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
+      console.log('continue woho!');
+      this.isHost= true;
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber}})
     }
   }
 }

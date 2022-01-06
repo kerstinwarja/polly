@@ -53,10 +53,19 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('showCorrect')
     console.log('-----------showMeTheMoney------------');
   });
-  socket.on('startPoll', function(d) {
+  socket.on('goToResult', function(d) {
     io.to(d.pollId).emit('sendToResult')
     console.log('-----------sendToResult------------');
   });
+  socket.on('goBackToQues', function(d) {
+    io.to(d.pollId).emit('sendToQues')
+    console.log('-----------sendToQues------------');
+  });
+  socket.on('goToStart', function(d) {
+    io.to(d.pollId).emit('sendToStart')
+    console.log('-----------sendToStart------------');
+  });
+
   socket.on('sendNickname', function(d) {
     //io.to(d.pollId).emit('sendName',d.myName)
     io.to(d.pollId).emit('sendName',data.addName(d.pollId,d.myName));

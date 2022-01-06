@@ -8,9 +8,12 @@
     </div>
     <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
     <div v-show="isHost">
-      <button v-on:click="zeroTimer" id="continueButton">
+      <button v-on:click="zeroTimer" class="continueButton">
         Show correct answer
       </button>
+<!--      <button v-if="timesUp" v-on:click="letsGo" class="continueButton">
+        Continue
+      </button>-->
     </div>
   </div>
   <!--Dethär skulle behöva bytas ut mot att alternativet man klickar på får en tjock border-->
@@ -71,7 +74,8 @@ export default {
       pickedIndex:"",
       cloneAnsArray:[],
       cloneStartAns:[],
-      pollId: ""
+      pollId: "",
+      questionCounter: 0
     }
   },
   watch:{
@@ -204,7 +208,7 @@ h3{
   color: white;
   text-shadow: 3px 3px #990000;
 }
-#continueButton {
+.continueButton {
   font-size: 1em;
   text-transform: uppercase;
   height: 2em;
