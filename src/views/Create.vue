@@ -63,18 +63,17 @@
             </button>
             <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
               <span>
-                {{uiLabels.import}}<br>
-                {{uiLabels.picture}}
+                {{uiLabels.import}}<br>{{uiLabels.picture}}
               </span>
             </button>
             <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-              {{uiLabels.questionAdd}}
+              {{uiLabels.add}}<br>{{uiLabels.questionLower}}
             </button>
             <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
-              {{uiLabels.questionRem}}
+              {{uiLabels.remove}}<br>{{uiLabels.questionLower}}
             </button>
             <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
-              {{uiLabels.saveChanges}}
+              {{uiLabels.save}}<br>{{uiLabels.changes}}
             </button>
 
         </div>
@@ -82,13 +81,10 @@
     </div>
     <div class="navButton">
     <router-link v-bind:to="'/initialize/'+ lang">
-      <button > <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em;">
-        {{uiLabels.goBack}}
-      </button>
+      <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
     </router-link>
     <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right" v-on:click="sendQuiz()">
-        <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" style = "height:1em; transform: scaleX(-1);">
+      <button style="float:right; background-color: #236627" v-on:click="sendQuiz()">
         {{uiLabels.saveAndPlay}}
       </button>
     </router-link>
@@ -318,7 +314,7 @@ body textarea{
   margin-right: 5%;
   margin-top: 26%;
   clear: left;
-  transform: translateY(10%);
+/*  transform: translateY(-10%);*/
 
 }
 #answerBox{
@@ -385,17 +381,17 @@ body textarea{
 }
 #buttonDiv button {
   height: 100%;
-  width: 20%;
+  width: 23%;
   background-color: rgb(135, 175, 111);
 }
 
 .navButton button{
-  height: 10%;
-  width: auto;
+  height: 3em;
+  width: 6em;
   margin: 2% 4% 2% 4%;
   float: left;
   text-transform: uppercase;
-  color: navy;
+  color: wheat;
   text-align: center;
   font-size: 1em;
 }
@@ -466,8 +462,18 @@ body textarea{
   }
 }
 
+@media only screen and (max-width: 600px) {
+  #preview{
+    height:21em
+  }
+}
+
 @media only screen and (max-width: 400px) {
   #preview{
     height:18em
-  }}
+  }
+  #buttonDiv button {
+    width:25%;
+  }
+}
 </style>

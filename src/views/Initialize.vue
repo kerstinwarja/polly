@@ -60,9 +60,11 @@
     </div>
     <div id="navButtons">
     <router-link v-bind:to="'/'">
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
+      <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
     </router-link>
-      <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="forwardButton" v-on:click="createPoll">
+      <button style="float:right; background-color: #236627" v-on:click="createPoll">
+        {{uiLabels.add}}{{uiLabels.questions}}
+      </button>
     </div>
   </body>
 </template>
@@ -218,20 +220,15 @@ body textarea{
   height: 10em;
 }
 
-#backButton{
+#navButtons button{
   height: 3em;
+  width: 6.6em;
   margin: 2% 4% 2% 4%;
   float: left;
-      z-index:-1;
-}
-#forwardButton{
-  height: 3em;
-  margin: 2% 4% 2% 4%;
-  float: right;
-  transform: scaleX(-1);
-}
-#forwardButton:hover {
-  cursor: pointer;
+  text-transform: uppercase;
+  color: wheat;
+  text-align: center;
+  font-size: 1em;
 }
 
 @media only screen and (max-width: 980px) {

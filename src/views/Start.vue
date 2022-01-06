@@ -80,7 +80,7 @@ body{
   padding: 0px;
 }
 button{
-  border-radius: 0.2em;
+  border-radius: 0.8em;
 }
 .wrapper {
   width: 95%;
