@@ -42,7 +42,7 @@
         <h3>{{uiLabels.quizName}}</h3>
         <textarea type="text" v-model="pollId" v-bind:placeholder="uiLabels.namePick"></textarea>
         <h3>{{uiLabels.quizDesc}}</h3>
-        <textarea id="desIptBox" type="text" v-model="pollDesc" placeholder={{uiLabels.descPick}}></textarea>
+        <textarea id="desIptBox" type="text" v-model="pollDesc" v-bind:placeholder="uiLabels.descPick"></textarea>
           <h3>{{uiLabels.quizPic}}</h3>
           <button class="importItems" type="submit" v-on:click="PicChoose()">
             <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
@@ -58,7 +58,7 @@
           </select>
       </div>
     </div>
-    <div>
+    <div id="navButtons">
     <router-link v-bind:to="'/'">
       <img src="https://www.pngkey.com/png/full/87-875502_back-button-arrow-sign.png" id="backButton" >
     </router-link>
@@ -222,6 +222,7 @@ body textarea{
   height: 3em;
   margin: 2% 4% 2% 4%;
   float: left;
+      z-index:-1;
 }
 #forwardButton{
   height: 3em;
@@ -233,14 +234,41 @@ body textarea{
   cursor: pointer;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
     grid-template-columns: 100%;
-    grid-template-rows:35% 55% 10% ;
+    grid-template-areas:
+      'create'
+      'preview'
+  }
+  header{
+    font-size: 1em;
+    padding:5%;
+  }
+  .createWrap{
+    grid-area:create;
+    height: 33em;
+  }
+  #preview{
+    grid-area:preview;
+    height: 30em;
   }
   #desIptBox{
     height: 10em;
   }
+  #navButtons{
+    margin-top: 12%;
+  }
 }
+
+@media only screen and (max-width: 700px) {
+  #preview{
+    height: 20em;
+  }
+  .createWrap{
+    height: 28em;
+  }
+}
+
 </style>

@@ -125,13 +125,15 @@ header {
   text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 980px) {
   /* For mobile phones: */
   header {
-    font-size: 2em;
+    font-size: 3em;
+    padding-top:30%;
   }
   .wrapper{
     grid-template-columns: 100%;
+
   }
 
 }
