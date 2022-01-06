@@ -60,6 +60,7 @@ export default {
       SONG:"",
       isHost: false,
       timesUp: false,
+      nameArray:[],
       question: {
         q: "",
         a: [],
@@ -101,6 +102,7 @@ clearInterval(intervalId)
     this.pollId = this.$route.params.id
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
+    this.nameArray = this.$route.params.nameArray
     socket.emit('joinPoll', this.pollId)
     socket.on()
     socket.on("musicSelection", SONG =>
@@ -124,7 +126,7 @@ clearInterval(intervalId)
     ),*/
 
     socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     )
 
     socket.on("showCorrect",() =>
@@ -152,10 +154,10 @@ clearInterval(intervalId)
       socket.emit('showCorrectAnswer', {pollId: this.pollId})
     },
     continueToResult: function() {
-      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
+      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
       console.log('continue woho!');
       this.isHost= true;
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     }
   }
 }

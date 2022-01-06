@@ -44,10 +44,12 @@ export default {
     return {
       uiLabels: {},
       id: "",
-      lang: "en"
+      lang: "en",
+      questionNumber: 0
     }
   },
   created: function () {
+    this.questionNumber = this.$route.params.questionNumber
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })

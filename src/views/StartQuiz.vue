@@ -65,7 +65,7 @@ export default {
       //pollDes: [],
       //question: "",
       //answers: ["", ""],
-      //questionNumber: 0,
+      questionNumber: 0,
       question: {
         q: "",
         a: []
@@ -84,7 +84,7 @@ export default {
     )
 
     socket.on("sendToPoll",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     )
 
     //lyssnar på description i socket.js i join poll
@@ -110,10 +110,11 @@ export default {
   },
   methods:{
     letsGo: function() {
-      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost})
+      this.questionNumber=0,
+      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
       console.log('lets GO!');
       this.isHost= true;
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     }
   }
 }
