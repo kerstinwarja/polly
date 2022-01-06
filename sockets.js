@@ -33,7 +33,7 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(pollId));
     //HÄR TESTAR JAG. Skapa en socket.emit med getImg här
     socket.emit('description', data.getDescription(pollId));
-   // socket.emit('name', data.getName(pollId));
+    // socket.emit('name', data.getName(pollId));
     socket.emit('imageAddress', data.getImage(pollId));
     socket.emit('musicSelection', data.getMusic(pollId));
     socket.emit("allQuestionsArray", data.getQuestionArray(pollId));
@@ -49,11 +49,34 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendToPoll')
     console.log('-----------sendToPoll------------');
   });
-  socket.on('showResult', function(d) {
+  socket.on('showCorrectAnswer', function(d) {
+    io.to(d.pollId).emit('showCorrect')
+    console.log('-----------showMeTheMoney------------');
+  });
+  socket.on('goToResult', function(d) {
     io.to(d.pollId).emit('sendToResult')
     console.log('-----------sendToResult------------');
   });
-  
+  socket.on('goBackToQues', function(d) {
+    io.to(d.pollId).emit('sendToQues')
+    console.log('-----------sendToQues------------');
+  });
+  socket.on('goToStart', function(d) {
+    io.to(d.pollId).emit('sendToStart')
+    console.log('-----------sendToStart------------');
+  });
+
+  socket.on('sendNickname', function(d) {
+    //io.to(d.pollId).emit('sendName',d.myName)
+    io.to(d.pollId).emit('sendName',data.addName(d.pollId,d.myName));
+    //io.to(d.pollId).emit('getName',data.getName(d.pollId));
+  });
+  socket.on('getNickname', function(d) {
+    //io.to(d.pollId).emit('sendName',d.myName)
+    console.log('-----------getNICK------------');
+    io.to(d.pollId).emit('getName',data.getName(d.pollId));
+  });
+
 
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);

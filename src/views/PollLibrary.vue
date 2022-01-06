@@ -1,34 +1,28 @@
 <template>
-
   <header class="pollLabHeader">
-    <h1>Participate in poll</h1>
+    <h1>{{uiLabels.participatePoll}}</h1>
   </header>
-
-
   <h2>
-    On this page you can participate in a poll with your friends. <br>
-    Insert your group's shared poll ID to participate in the poll.
+    {{uiLabels.onThisPage}}<br>
+    {{uiLabels.insertYourGroups}}<br>
   </h2>
+  <div id="partPoll">
+    <label>
+      {{uiLabels.nameInsert}}<br>
+      <input type="text" v-model="id"><br>
+    </label>
+    <label>
+      {{uiLabels.nickInsert}}<br>
+      <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
+    </label>
 
-
-    <div id="partPoll">
-      <label>
-        Insert poll ID: <br>
-        <input type="text" v-model="id"><br>
-      </label>
-      <label>
-        Insert nickname: <br>
-        <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
-      </label>
-      here{{this.nickname}}
-      <div class="buttonLink">
-
-         <!--<router-link  v-bind:to="/startquiz/+id" -->  tag="button"><br>
-          <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
-          <button v-on:click="hostQuiz">Host!</button>
-        <!-- </router-link> -->
-      </div>
+    <div class="buttonLink">
+      <!--<router-link  v-bind:to="/startquiz/+id">  tag="button"--><br>
+      <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
+      <button v-on:click="hostQuiz">{{uiLabels.host}}</button>
+      <!-- </router-link> -->
     </div>
+  </div>
 
 
 
@@ -45,12 +39,30 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
-      pollId: "",
-      myName:"",
-      isHost:false
+      pollId:"",
+      myName: "",
+      isHost:false,
+      nameArray:[],
+      nameTaken:false,
+      nickname: ""
+    }
+  },
+
+//behöver nog inte denna om alla får ha samma nickname
+  watch:{
+    id: function(thisId){
+      if(thisId!=""){
+            this.pollId = thisId
+            socket.emit('getNickname',{pollId:this.pollId});
+            socket.on("getName",participants => {
+                  this.nameArray = participants
+                });
+            console.log("nameArray "+this.nameArray)
+      }
 
     }
   },
+
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -59,29 +71,47 @@ export default {
       this.uiLabels = labels
     })
 
+    //markering
+    //socket.emit('getNickname',{pollId:this.pollId});
+    //socket.on("sendName",this.pollId)
+    socket.on("getName",participants => {
+          this.nameArray = participants
+        })
   },
   methods:{
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
-        socket.emit()
-      this.pollId = this.id
-      this.isHost= false
-      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost, nickname: this.myName} })
+        //this.pollId = this.id
+        //KAOS vi ska fixa
+        for(let index in this.nameArray){
+          console.log(this.nameArray[index])
+          if(this.myName==this.nameArray[index]){
+            alert("Nickname already exists")
+
+          }
+          else{
+            this.nameTaken=true
+          }
+        }
+        if(this.nameTaken==false){
+          socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
+          this.isHost= false
+          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+        }
       }
       else {
         alert("YOU NEED A NICKNAME")
       }
   },
 
-  hostQuiz: function(){
-    this.isHost= true;
-    this.pollId = this.id
-    socket.emit()
-    this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
-
+    hostQuiz: function(){
+      this.isHost= true;
+      this.pollId = this.id
+      socket.emit()
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
+    }
   }
-}
 }
 
 </script>
@@ -95,15 +125,14 @@ export default {
   border: navy solid;
   background-color: wheat;
   color: navy;
-  text-shadow: 2px 2px white;
+  text-shadow: 0.1em 0.1em white;
   margin-left: 35%;
-  font-size: 15pt;
+  font-size: 1.2em;
   text-transform: uppercase;
-
 }
+
 #partPoll label {
   padding-top: 10%;
-
 }
 
 #partPoll button{
@@ -111,24 +140,23 @@ export default {
   height: 50%;
   background-color: #ffcc00;
   text-transform: uppercase;
-  font-size: 13pt;
+  font-size: 0.8em;
   color: navy;
-  text-shadow: 1px 1px white;
+  text-shadow: 0.1em 0.1em white;
 }
 
 #partPoll input {
   height: 50%;
   width: 50%;
-  font-size: 20pt;
+  font-size: 1.2em;
   background-color: #fbf1e0;
   color: navy;
-  border: 2px navy solid;
+  border: 0.1em navy solid;
 }
 
 .buttonLink {
   padding-bottom: 15%;
 }
-
 
 .pollLabHeader {
   font-size: 20pt;
@@ -136,17 +164,15 @@ export default {
   padding-top:0; /*5%*/
   margin: 0;
   color: white;
-  text-shadow: 3px 3px #990000;
-
+  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
 }
 
 h2 {
   margin: 5%;
   text-align: center;
   color: white;
-  text-shadow: 2px 2px #990000;
+  text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
   font-size: 18pt;
-
 }
 
 </style>
