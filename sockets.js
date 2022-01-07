@@ -82,7 +82,7 @@ function sockets(io, socket, data) {
 
 
   socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer, d.myName);
+    data.submitAnswer(d.pollId, d.myPoints, d.myName);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
   socket.on('clearAnswer', function(d) {

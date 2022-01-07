@@ -1,5 +1,6 @@
 <template>
-  <h1> Still my name : {{this.myName}} </h1>
+  <h1> Still my name : {{this.myName}}
+    and my points {{this.myPoints}} </h1>
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
@@ -61,6 +62,8 @@ export default {
       SONG:"",
       isHost: false,
       timesUp: false,
+      sendPoints: 0,
+      myPoints: 10,
       myName : "",
       nameArray:[],
       question: {
@@ -69,46 +72,20 @@ export default {
         t:"",
         isCorrect:[],
         questionNumber: 0,
-        questionImg: ""
+        questionImg: "",
       },
-      //timerCount : 45,
-      //timerEnabled: true,
       pollId: "inactive poll",
-      // nextactivated : true,
     }
   },
-  /*
-var a = new Date()
-intervalId = setInterval(()=>{
-    console.log(Math.round((new Date() - a)/1000))
-}, 1000)
-clearInterval(intervalId)
-  GAMMAL TIMER UNDER, NY HET TIMER ÖVER
-  watch: {
-            timerCount: {
-                handler(time) {
-                  console.log(this.question.t)
-                     if (time > 0 && this.timerEnabled) {
-                        setTimeout(() => {
-                            this.timerCount--;
-                        }, 1000);
-                    }
-                    else{
-                      this.timerCount = "SLUT";
-                    }
-                },
-                immediate: true
-            }
-        },*/
   created: function () {
     this.pollId = this.$route.params.id;
     this.myName = this.$route.params.myName;
+    this.myPoints = this.$route.params.myPoints;
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray
     console.log("Ny start på quizzet nmr ",this.$route.params.questionNumber, this.questionNumber)
     socket.emit('joinPoll', this.pollId)
-    socket.on()
     socket.on("musicSelection", SONG =>
         this.SONG = SONG
     ),
@@ -119,7 +96,6 @@ clearInterval(intervalId)
       this.questionImg = q.questionImg
       this.isCorrect = q.isCorrect
       this.questionNumber = q.questionNumber
-       console.log("Röva nmr ", this.questionNumber)
       }
     ),
     socket.on("sendToResult",() =>
@@ -134,7 +110,7 @@ clearInterval(intervalId)
     ),*/
 
     socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName}})
     )
 
     socket.on("showCorrect",() =>
@@ -147,7 +123,17 @@ clearInterval(intervalId)
   },
   methods: {
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer, myName: this.myName})
+      this.sendPoints = this.answerPoints(answer);
+      socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.sendPoints, myName: this.myName})
+    },
+    answerPoints (answer){
+     var  ansIndex = this.question.a.indexOf(answer);
+     var corr = this.isCorrect[ansIndex];
+     if (corr){
+       this.myPoints = parseInt(this.myPoints)+ 20;
+     }
+     console.log(this.myPoints)
+     return this.myPoints;
     },
     nextQues() {
       console.log("next pressed")

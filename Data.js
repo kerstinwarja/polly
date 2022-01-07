@@ -133,21 +133,21 @@ Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   return []
 }
 
-Data.prototype.submitAnswer = function(pollId, answer, myName) {
+Data.prototype.submitAnswer = function(pollId, myPoints, myName) {
   const poll = this.polls[pollId];
-  console.log("answer submitted for ", pollId, answer);
+ // console.log("answer submitted for ", pollId, );
   if (typeof poll !== 'undefined') {
     let answers = poll.answers[poll.currentQuestion];
     if (typeof answers !== 'object') {
       answers = {};
-      answers[myName] = 40;
+      answers[myName] = myPoints;
       //answers[myName] = ""+answer;
       poll.answers.push(answers);
     }
     else if (typeof answers[myName] === 'undefined')
-      answers[myName] = 40;
-    else
-      answers[myName] += 20;
+      answers[myName] = myPoints;
+    /*else
+      answers[myName] += 20;*/
     console.log("answers looks like ", answers, typeof answers);
     console.log("answers: ", answers,"typeof: ", typeof answers, "poll.answers: ", poll.answers);
   }

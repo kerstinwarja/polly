@@ -59,6 +59,7 @@ export default {
       isHost: false,
       SONG:"",
       myName: "",
+      myPoints:10,
       nameArray:[],
       //data: {},
       uiLabels: {},
@@ -91,7 +92,7 @@ export default {
     )
 
     socket.on("sendToPoll",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, myName: this.myName, nameArray: this.nameArray}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myPoints:this.myPoints, myName: this.myName, nameArray: this.nameArray}})
     )
 
     //lyssnar på description i socket.js i join poll

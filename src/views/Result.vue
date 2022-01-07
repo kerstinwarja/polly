@@ -2,6 +2,7 @@
   <div>
     {{question}}: här är quesnr
     {{questionNumber}}
+   <h2> Mitt NAmn är{{myName}}</h2>
 
   </div>
   <Bars v-bind:data="data"
@@ -40,6 +41,8 @@ export default {
       questionNumber: 0,
       isHost: false,
       nameArray:[],
+      myName: "",
+      myPoints: 0,
       data: {
       }
     }
@@ -47,6 +50,7 @@ export default {
   created: function () {
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
+    this.myPoints = this.$route.params.myPoints;
     this.pollId = this.$route.params.id;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray;
@@ -60,7 +64,7 @@ export default {
       this.data = {};
     })
     socket.on("sendToQues",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName, nameArray: this.nameArray}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints, nameArray: this.nameArray}})
     )
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
@@ -72,7 +76,7 @@ export default {
     runQuestion: function () {
       this.questionNumber++;
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-      socket.emit('goBackToQues', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
+      socket.emit('goBackToQues', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, myName: this.myName})
       console.log('continue to next question woho!');
       this.isHost= true;
       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
