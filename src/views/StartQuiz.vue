@@ -172,7 +172,7 @@ h4{
 
 .infoBoards{
   color: navy;
-  font-family: "Times New Roman";
+
   line-break: auto;
   height: 80%;
   width: 90%;
@@ -192,6 +192,7 @@ h4{
   font-weight: bold;
   position: relative;
   top: 10%;
+  text-transform: uppercase;
 }
 
 /*li{

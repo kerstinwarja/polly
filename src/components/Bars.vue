@@ -1,15 +1,19 @@
 <template>
-  {{nameArray}}
-<div class="wrapper">
+<div class="barWrapper">
   <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px', width:'20px'}">
+    <div v-bind:style="{height: item + 'px', width:'30px'}">
+
+    </div>
+    <div id="barSpan">
       <span> {{item}} </span>
     </div>
-    <div> 
+    <div id="names">
       {{key}}
     </div>
   </div>
+
 </div>
+
 </template>
 
 <script>
@@ -18,12 +22,6 @@ export default {
   props: {
     data: Object,
   },
-
-  data: function () {
-    return {
-      nameArray:[]
-    }
-    }
 }
 </script>
 
@@ -32,30 +30,66 @@ export default {
 .bar {
   display: inline-block;
   width: 50px;
-  vertical-align: bottom;
+  transform: rotate(-90deg);
+  margin: 0%;
+
 }
 
-.bar span {
+#barSpan {
   position: relative;
-  top: -1.2em;
+  transform: rotate(90deg);
+  font-size: 1.5em;
 }
+
+#names {
+  transform: rotate(90deg);
+  padding-top: 150%;
+  text-transform: uppercase;
+  font-size: 1em;
+
+
+}
+
 .bar:nth-child(1) div:nth-child(1) {
-  background-color:red;
+  background-color: #990000;
+  margin: auto;
+  border: 0.1em black solid;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:blue;
+  background-color:navy;
+  margin: auto;
+  border: 0.1em black solid;
 }
 .bar:nth-child(3) div:nth-child(1) {
-  background-color:teal;
+  background-color: #ffcc00;
+  margin: auto;
+  border: 0.1em black solid;
 }
 .bar:nth-child(4) div:nth-child(1) {
-  background-color:purple;
+  background-color:rgb(100, 155, 36);
+  margin: auto;
+  border: 0.1em black solid;
 }
 .bar:nth-child(5) div:nth-child(1) {
-  background-color:yellow;
+  background-color:#633D41;
+  margin: auto;
+  border: 0.1em black solid;
 }
 
-.wrapper {
-  padding:3em;
+.barWrapper {
+  background-color: wheat;
+  width: 50%;
+  min-height: 10em;
+
+  margin: auto;
+  border: 0.2em navy solid;
+  border-radius: 0.8em;
+  font-size: 2em;
+  color: navy;
+  vertical-align: bottom;
+  display: grid;
+  grid-template-rows: 12% 12% 12% 12% 12%;
+  grid-gap: 10%;
+  padding: 0%;
 }
 </style>

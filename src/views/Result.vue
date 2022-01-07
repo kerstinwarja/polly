@@ -1,16 +1,13 @@
 <template>
   <div>
-    {{question}}: här är quesnr
-    {{questionNumber}}
-   <h2> Mitt NAmn är{{myName}}</h2>
+    <h1> {{pollId}}</h1>
+    <header>Scoreboard</header>
+  </div>
+  <div>
 
   </div>
   <Bars v-bind:data="data"
         v-bind:nameArray="nameArray"/>
-  This is the result of your poll
-  <br>
-  You have succeded
-  {{data}}
 
   <div v-show="isHost">
     <button v-on:click="runQuestion" class="continueButton">
@@ -18,8 +15,8 @@
     </button>
   </div>
   <div v-show="isHost">
-    <button v-on:click="endQuiz" class="continueButton">
-      Press to end this quiz
+    <button v-on:click="endQuiz" class="exitQuizButton">
+      End quiz
     </button>
   </div>
 </template>
@@ -43,6 +40,7 @@ export default {
       nameArray:[],
       myName: "",
       myPoints: 0,
+      pollId:"",
       data: {
       }
     }
@@ -89,3 +87,45 @@ export default {
   }
 }
 </script>
+
+<style>
+h1 {
+  font-size: 3em;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+  color: white;
+  margin-top: 3%;
+  margin-bottom: 0%;
+}
+
+header {
+  font-size: 5em;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+  color: white;
+  padding-top: 0%;
+  margin-bottom: 3%;
+}
+
+.continueButton {
+  float: right;
+  background-color: rgb(100, 155, 36);
+  color: white;
+  font-size: 1em;
+  margin-left: 5%;
+  text-transform: uppercase;
+  height: 3em;
+  width: 15%;
+  border: 0.2em navy solid;
+}
+
+.exitQuizButton {
+  float: left;
+  background-color: #990000;
+  color: white;
+  font-size: 1em;
+  margin-left: 5%;
+  text-transform: uppercase;
+  height: 3em;
+  width: 15%;
+  border: 0.2em navy solid;
+}
+</style>
