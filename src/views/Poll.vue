@@ -1,39 +1,38 @@
 <template>
-  <h1> Still my name : {{this.myName}}
-    and my points {{this.myPoints}} </h1>
+  <!--h1> Still my name : {{this.myName}}
+    and my points {{this.myPoints}} </h1-->
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
             v-on:timesUp="setTimeUp"
             v-bind:isHost="isHost"
             v-on:answer="submitAnswer"/>
-
   <!--div> FORSTÄTTER NÄR RESULT FINNS
     <router-link v-bind:to="'/poll/'+ this.pollId">
       <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
     </router-link>
   </div-->
   <div id="audio">
-    <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+    <audio controls loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+    <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
       <source src="../music/circusTrap.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+    <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
       <source src="../music/circusStrings.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+    <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
       <source src="../music/circusTechno.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+    <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
   </div>
 
   <div v-show="isHost">
-    <button v-if="timesUp" v-on:click="continueToResult" class="continueButton">
-      Continue
+    <button v-if="timesUp" v-on:click="continueToResult" class="continueButton" id="showRes">
+      Show Result
     </button>
   </div>
 
@@ -156,31 +155,8 @@ export default {
   }
 }
 </script>
-
 <style>
-/*----------------------------Ta bort?--------------
-#audio {
+#audio{
   display:none;
 }
-#startButton {
-  height: 5em;
-  width: 15%;
-  background-color: rgb(100, 155, 36);
-  margin-bottom:5%;
-}
-#forwardButton{
-  height: 5%;
-  width: 8%;
-  margin-right: 4%;
-  margin-top: 10%;
-  float: right;
-}
-#backButton{
-  height: 5%;
-  width: 8%;
-  margin-left: 4%;
-  margin-top: 10%;
-  float: left;
-}*/
-
 </style>
