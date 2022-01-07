@@ -46,5 +46,7 @@
 	"parts": "Participants:",
 	"desc": "Description:",
 	"start": "START QUIZ!",
-	"welcome":"Welcome to the quiz waiting room!"
+	"welcome":"Welcome to the quiz waiting room!",
+	"timesUp": "Time's up!",
+	"showResult": "Show Result"
 }

@@ -268,7 +268,7 @@ body textarea{
   align-items: top;
 }
 #preview{
-  background-color: wheat;
+  background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
   max-height: 100%;
   background-position: bottom;
@@ -308,13 +308,12 @@ body textarea{
   height: 9em;
   width: 90%;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5em;
+  gap: 5%;
   align-items: center;
   margin-left:5%;
   margin-right: 5%;
   margin-top: 26%;
   clear: left;
-/*  transform: translateY(-10%);*/
 
 }
 #answerBox{
@@ -366,7 +365,6 @@ body textarea{
 }
 .ansButtons{
   margin: 0% 4% 0% 4%;
-  /*-ms-transform: translateY(-50%);*/
   transform: translateY(-75%);
 }
 #markedCorrect{
@@ -469,12 +467,19 @@ body textarea{
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
   #preview{
     height:18em
   }
   #buttonDiv button {
     width:25%;
+  }
+  #answerBox{
+    height:88%;
+    font-size:0.3;
+  }
+  .navButton button{
+    margin: 4% 4% 4% 4%;
   }
 }
 </style>

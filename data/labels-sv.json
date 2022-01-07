@@ -46,5 +46,7 @@
 	"parts": "Deltagare:",
 	"desc": "Beskrivning:",
 	"start": "STARTA QUIZ!",
-	"welcome":"Välkommen till quizets väntrum!"
+	"welcome":"Välkommen till quizets väntrum!",
+	"timesUp": "Tiden är ute!",
+	"showResult": "Show Result"
 }
