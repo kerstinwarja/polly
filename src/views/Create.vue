@@ -323,6 +323,7 @@ body textarea{
   font-size:0.5;
   border-radius: 0.7em;
   color:black;
+  overflow:hidden;
 }
 #questionMenu{
   width:95%;

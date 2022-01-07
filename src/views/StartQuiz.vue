@@ -1,6 +1,5 @@
 <template>
   <body>
-    <h1>My NAme IS{{myName}}</h1>
     <h4 v-if="isHost">You are the host of</h4>
     <h4 v-else>It's time to play</h4>
     <header>
@@ -10,7 +9,7 @@
       <div class="infoBoards"  id="pollDesc">
         {{uiLabels.desc}}<br>
         <span class="infoBoardsInner"> {{uiLabels.welcome}} </span><br>
-        <span class="infoBoardsInner">{{pollDesc}}</span>  
+        <span class="infoBoardsInner">{{pollDesc}}</span>
       </div>
       <div id="picture">
         <img v-bind:src="pollImg">
@@ -21,7 +20,7 @@
             <li>{{name}}</li>
           </span>
       </div>
-     
+
     </div>
     <div id="audio">
       <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
