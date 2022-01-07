@@ -79,7 +79,11 @@ Data.prototype.addName=function(pollId,myName){
     console.log("participant added to ",pollId,myName)
   }
 }
-
+Data.prototype.clearName=function(pollId){
+  const poll = this.polls[pollId];
+    poll.participants = [];
+    console.log("participants is no more ",poll.participants)
+}
 //här slutar jag . Här lägger jag in en ny funktion
 
 
@@ -129,23 +133,30 @@ Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   return []
 }
 
-Data.prototype.submitAnswer = function(pollId, answer) {
+Data.prototype.submitAnswer = function(pollId, answer, myName) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
   if (typeof poll !== 'undefined') {
     let answers = poll.answers[poll.currentQuestion];
     if (typeof answers !== 'object') {
       answers = {};
-      answers[answer] = 1;
+      answers[myName] = 40;
+      //answers[myName] = ""+answer;
       poll.answers.push(answers);
     }
-    else if (typeof answers[answer] === 'undefined')
-      answers[answer] = 1;
+    else if (typeof answers[myName] === 'undefined')
+      answers[myName] = 40;
     else
-      answers[answer] += 1
+      answers[myName] += 20;
     console.log("answers looks like ", answers, typeof answers);
+    console.log("answers: ", answers,"typeof: ", typeof answers, "poll.answers: ", poll.answers);
   }
 }
+Data.prototype.clearAnswers = function(pollId) {
+  const poll = this.polls[pollId];
+  poll.answers = [];
+}
+
 
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];

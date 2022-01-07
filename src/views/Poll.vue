@@ -1,5 +1,5 @@
 <template>
-
+  <h1> Still my name : {{this.myName}} </h1>
   <!--{{pollId}}-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
@@ -61,6 +61,7 @@ export default {
       SONG:"",
       isHost: false,
       timesUp: false,
+      myName : "",
       nameArray:[],
       question: {
         q: "",
@@ -100,7 +101,8 @@ clearInterval(intervalId)
             }
         },*/
   created: function () {
-    this.pollId = this.$route.params.id
+    this.pollId = this.$route.params.id;
+    this.myName = this.$route.params.myName;
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray
@@ -145,7 +147,7 @@ clearInterval(intervalId)
   },
   methods: {
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer, myName: this.myName})
     },
     nextQues() {
       console.log("next pressed")

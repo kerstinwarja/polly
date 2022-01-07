@@ -71,6 +71,9 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendName',data.addName(d.pollId,d.myName));
     //io.to(d.pollId).emit('getName',data.getName(d.pollId));
   });
+  socket.on('clearNickname', function(d) {
+    io.to(d.pollId).emit('sendName2',data.clearName(d.pollId));
+  });
   socket.on('getNickname', function(d) {
     //io.to(d.pollId).emit('sendName',d.myName)
     console.log('-----------getNICK------------');
@@ -79,8 +82,11 @@ function sockets(io, socket, data) {
 
 
   socket.on('submitAnswer', function(d) {
-    data.submitAnswer(d.pollId, d.answer);
+    data.submitAnswer(d.pollId, d.answer, d.myName);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+  });
+  socket.on('clearAnswer', function(d) {
+    io.to(d.pollId).emit('sendName3', data.clearAnswers(d.pollId));
   });
 
   socket.on('resetAll', () => {

@@ -1,5 +1,6 @@
 <template>
   <body>
+    <h1>My NAme IS{{myName}}</h1>
     <h4 v-if="isHost">You are the host of</h4>
     <h4 v-else>It's time to play</h4>
     <header>
@@ -57,7 +58,7 @@ export default {
       pollImg:"",
       isHost: false,
       SONG:"",
-      myName: "undefined",
+      myName: "",
       nameArray:[],
       //data: {},
       uiLabels: {},
@@ -90,7 +91,7 @@ export default {
     )
 
     socket.on("sendToPoll",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, myName: this.myName, nameArray: this.nameArray}})
     )
 
     //lyssnar på description i socket.js i join poll
@@ -122,6 +123,9 @@ export default {
       console.log('lets GO!');
       this.isHost= true;
       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}});
+      socket.emit('clearNickname',{pollId:this.pollId} )
+      socket.emit('clearAnswer',{pollId:this.pollId} )
+
     }
   }
 }
