@@ -2,7 +2,7 @@
   {{nameArray}}
 <div class="wrapper">
   <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px'}">
+    <div v-bind:style="{height: item + 'px', width:'20px'}">
       <span> {{item}} </span>
     </div>
     <div> 

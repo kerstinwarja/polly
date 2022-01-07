@@ -48,8 +48,9 @@ export default {
             socket.emit('getNickname',{pollId:this.pollId});
             socket.on("getName",participants => {
                   this.nameArray = participants
+                  console.log("check ", this.nameArray);
                 });
-            console.log("nameArray "+this.nameArray)
+            console.log("nameArray 2"+this.nameArray)
       }
 
     }
@@ -89,7 +90,7 @@ export default {
         if(this.nameTaken==false){
           socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
           this.isHost= false
-          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost} })
+          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
         }
       }
       else {
