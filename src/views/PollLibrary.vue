@@ -1,11 +1,9 @@
 <template>
-  <header class="pollLabHeader">
+  <header>
     <h1>{{uiLabels.participatePoll}}</h1>
   </header>
-  <h2>
-    {{uiLabels.onThisPage}}<br>
-    {{uiLabels.insertYourGroups}}<br>
-  </h2>
+  <h2>{{uiLabels.onThisPage}}</h2>
+  <h2>{{uiLabels.insertYourGroups}}</h2>
   <div id="partPoll">
     <label>
       {{uiLabels.nameInsert}}<br>
@@ -13,19 +11,13 @@
     </label>
     <label>
       {{uiLabels.nickInsert}}<br>
-      <input type="text" v-model="nickname">  <!-- skicka till servern hur? tar det senare-->
+      <input type="text" maxlength="17" v-model="nickname">
     </label>
-
     <div class="buttonLink">
-      <!--<router-link  v-bind:to="/startquiz/+id">  tag="button"--><br>
       <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
       <button v-on:click="hostQuiz">{{uiLabels.host}}</button>
-      <!-- </router-link> -->
     </div>
   </div>
-
-
-
 </template>
 
 <script>
@@ -97,7 +89,7 @@ export default {
         if(this.nameTaken==false){
           socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
           this.isHost= false
-          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost:this.isHost} })
+          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost} })
         }
       }
       else {
@@ -109,7 +101,7 @@ export default {
       this.isHost= true;
       this.pollId = this.id
       socket.emit()
-      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, isHost: this.isHost} })
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost: this.isHost} })
     }
   }
 }
@@ -117,7 +109,25 @@ export default {
 </script>
 
 <style>
+header {
+  font-size: 20pt;
+  text-align: center;
+  padding-top:0; /*5%*/
+  color: white;
+  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
+}
+h1{
+  margin: 5% 0% 2% 0%;
+}
 
+h2 {
+  margin: 0% 0% 5% 0%;
+  text-align: center;
+  color: white;
+  text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
+  font-size: 18pt;
+  line-break: auto;
+}
 #partPoll {
   width: 30%;
   height:auto;
@@ -143,6 +153,7 @@ export default {
   font-size: 0.8em;
   color: navy;
   text-shadow: 0.1em 0.1em white;
+  margin-top: 3%;
 }
 
 #partPoll input {
@@ -152,27 +163,18 @@ export default {
   background-color: #fbf1e0;
   color: navy;
   border: 0.1em navy solid;
+  text-align:center;
 }
 
 .buttonLink {
   padding-bottom: 15%;
 }
 
-.pollLabHeader {
-  font-size: 20pt;
-  text-align: center;
-  padding-top:0; /*5%*/
-  margin: 0;
-  color: white;
-  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
-}
-
-h2 {
-  margin: 5%;
-  text-align: center;
-  color: white;
-  text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
-  font-size: 18pt;
+@media only screen and (max-width: 890px) {
+  #partPoll{
+    width:80%;
+    margin-left:10%;
+  }
 }
 
 </style>

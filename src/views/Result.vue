@@ -2,8 +2,10 @@
   <div>
     {{question}}: här är quesnr
     {{questionNumber}}
+
   </div>
-  <Bars v-bind:data="data"/>
+  <Bars v-bind:data="data"
+        v-bind:nameArray="nameArray"/>
   This is the result of your poll
   <br>
   You have succeded
@@ -37,6 +39,7 @@ export default {
       question: "",
       questionNumber: 0,
       isHost: false,
+      nameArray:[],
       data: {
       }
     }
@@ -46,6 +49,7 @@ export default {
     this.myName = this.$route.params.myName;
     this.pollId = this.$route.params.id;
     this.questionNumber = this.$route.params.questionNumber
+    this.nameArray = this.$route.params.nameArray;
     socket.emit('joinPoll', this.pollId)
     socket.on("dataUpdate", (update) => {
       this.data = update.a;
@@ -56,26 +60,27 @@ export default {
       this.data = {};
     })
     socket.on("sendToQues",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost,questionNumber: this.questionNumber}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     )
     socket.on("sendToStart",() =>
-        this.$router.push({ name: 'Start', params: { id: this.pollId}})
+        this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
+
   },
 
   methods: {
     runQuestion: function () {
       this.questionNumber++;
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-      socket.emit('goBackToQues', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
+      socket.emit('goBackToQues', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
       console.log('continue to next question woho!');
       this.isHost= true;
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber}})
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
     },
     endQuiz: function () {
       this.questionNumber=0;
-      socket.emit('goToStart', {pollId: this.pollId, isHost: this.isHost})
-      this.$router.push({ name: 'Start', params: { id: this.pollId}})
+      socket.emit('goToStart', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
+      this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     }
   }
 }

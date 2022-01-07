@@ -44,10 +44,12 @@ export default {
     return {
       uiLabels: {},
       id: "",
-      lang: "en"
+      lang: "en",
+      questionNumber: 0
     }
   },
   created: function () {
+    this.questionNumber = this.$route.params.questionNumber
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -70,6 +72,7 @@ export default {
 template{
   margin: 0px;
 }
+
 body{
   background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
@@ -80,7 +83,7 @@ body{
   padding: 0px;
 }
 button{
-  border-radius: 0.2em;
+  border-radius: 0.8em;
 }
 .wrapper {
   width: 95%;

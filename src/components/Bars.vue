@@ -1,4 +1,5 @@
 <template>
+  {{nameArray}}
 <div class="wrapper">
   <div class="bar" v-for="(item, key) in data" v-bind:key="key">
     <div v-bind:style="{height: item + 'px'}">
@@ -15,8 +16,14 @@
 export default {
   name: 'Bars',
   props: {
-    data: Object
-  }
+    data: Object,
+  },
+
+  data: function () {
+    return {
+      nameArray:[]
+    }
+    }
 }
 </script>
 
