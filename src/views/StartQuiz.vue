@@ -1,24 +1,26 @@
 <template>
   <body>
-    <h4 v-if="isHost">You are the host of</h4>
-    <h4 v-else>It's time to play</h4>
+    <h4 v-if="isHost">{{uiLabels.hostIf}}</h4>
+    <h4 v-else>{{uiLabels.play}}</h4>
     <header>
       <h1>{{pollId}}</h1>
     </header>
     <div id="wrap">
+      <div class="infoBoards"  id="pollDesc">
+        {{uiLabels.desc}}<br>
+        <span class="infoBoardsInner"> {{uiLabels.welcome}} </span><br>
+        <span class="infoBoardsInner">{{pollDesc}}</span>  
+      </div>
+      <div id="picture">
+        <img v-bind:src="pollImg">
+      </div>
       <div class="infoBoards" id="pollParts">
         {{uiLabels.parts}}
         <span class="infoBoardsInner" v-for="name in this.nameArray" v-bind:key="name">
             <li>{{name}}</li>
           </span>
       </div>
-      <div id="picture">
-        <img v-bind:src="pollImg">
-      </div>
-      <div class="infoBoards"  id="pollDesc" v-if="this.pollDesc!=''">
-        {{uiLabels.desc}}<br>
-        <span class="infoBoardsInner">{{pollDesc}}</span>
-      </div>
+     
     </div>
     <div id="audio">
       <audio controls  loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
@@ -38,7 +40,7 @@
       </audio>
     </div>
     <div v-show="isHost">
-      <button v-on:click="letsGo" id="startButton">START QUIZ</button>
+      <button v-on:click="letsGo" id="startButton">{{uiLabels.start}}</button>
     </div>
   </body>
 </template>
@@ -148,7 +150,7 @@ h4{
   width: 100%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  align-items: center;
+  /*align-items: center;*/
 }
 
 #wrap img{
@@ -161,6 +163,7 @@ h4{
   height: 30%;
   width: 35%;
 }
+
 
 .infoBoards{
   color: navy;

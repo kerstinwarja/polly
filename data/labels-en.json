@@ -19,7 +19,7 @@
 	"createHead": "Add questions and answers to your quiz!",
 	"previewPlaceholder": "Add an answer...",
 	"questionAlterate": "Select a question to make alterations",
-	"changes": "You are making changes in: ",
+	"makeingChanges": "You are making changes in: ",
 	"questionPlaceholder": "Write your question ...",
 	"answer": "Answer:",
 	"answerRemove": "Remove answer",
@@ -40,10 +40,11 @@
 	"insertYourGroups": "Use the name of the quiz to join the game and dont forget a nickname!",
 	"nameInsert": "Insert quiz name",
 	"nickInsert": "Insert your nickname",
-	"host": "I am the gameleader!",
+	"host":"I am the host!",
 	"hostIf": "You are the gameleader",
 	"ifParticipant": "It's time to play",
 	"parts": "Participants:",
 	"desc": "Description:",
-	"start": "START QUIZ!"
+	"start": "START QUIZ!",
+	"welcome":"Welcome to the quiz waiting room!"
 }

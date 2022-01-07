@@ -23,7 +23,7 @@
             <h3>{{uiLabels.questionAlterate}}</h3>
           </div>
           <div v-if="this.isEditing">
-            <h3>{{uiLabels.changes}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+            <h3>{{uiLabels.makeingChanges}}"{{this.allQuestions[this.questionNumber]}}"</h3>
           </div>
           <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
             {{i+1}}: {{ q }}

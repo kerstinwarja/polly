@@ -11,12 +11,17 @@
         </div>
         <div class="prevWrap">
           <div class="infoBoards" id="previewDesc">
+            {{uiLabels.desc}}<br>
+
+            <span>{{uiLabels.welcome}} </span>
+            <br>
             <span>{{pollDesc}}</span>
           </div>
           <div id="previewPic">
             <img v-if="pollImg" v-bind:src="pollImg">
           </div>
-          <div class="infoBoards">
+          <div class="infoBoards" id="previewPart">
+            {{uiLabels.parts}}<br>
             <span>{{uiLabels.participants}}</span>
           </div>
         </div>
@@ -163,7 +168,7 @@ h4 {
   width: 100%;
   height: 40%;
   display: grid;
-  grid-template-columns: 33% 33% 32%;
+  grid-template-columns: 32% 33% 32%;
   align-items: center;
 }
 #previewPic img{
@@ -196,9 +201,14 @@ h4 {
   border-radius: 2%;
   border: navy 0.1em solid;
   font-size: 1em;
+  overflow:auto;
+  margin:0% 5% 0% 5%;
 }
-#previewDesc {
-  margin: 10%;
+.infoBoards span{
+  font-weight: bold;
+  position: relative;
+  top: 10%;
+  
 }
 
 .createWrap{
@@ -237,7 +247,7 @@ body textarea{
     grid-template-columns: 100%;
     grid-template-areas:
       'create'
-      'preview'
+      'preview';
   }
   header{
     font-size: 1em;
@@ -249,23 +259,73 @@ body textarea{
   }
   #preview{
     grid-area:preview;
-    height: 30em;
+    height: 65em;
   }
+  #previewPic img{
+    width: 60%;
+    object-fit: contain;
+}
   #desIptBox{
     height: 10em;
   }
   #navButtons{
     margin-top: 12%;
   }
+
+  .prevWrap{
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'pic'
+      'des'
+      'par';
+    align-items:center;
+    
+  }
+  #previewPic{
+    grid-area:pic;
+  }
+  #previewDesc{
+    grid-area:des;
+    margin:5% 20% 5% 20%;
+  }
+  #previewPart{
+    grid-area:par;
+  }
+  .infoBoards{
+  height:80%;
+  min-height: 6em;
+  width: 60%;
+  margin:5% 20% 5% 20%;
+  text-align: left;
+  padding:0% 0% 1% 2%;
+  
+  
+}
+
+
+
 }
 
 @media only screen and (max-width: 700px) {
   #preview{
-    height: 20em;
+    height: 52em;
   }
   .createWrap{
     height: 28em;
   }
 }
+@media only screen and (max-width: 500px) {
+  #preview{
+    height: 46em;
+  }
+}
+@media only screen and (max-width: 440px) {
+  #preview{
+    height: 39em;
+  }
+
+}
+
+
 
 </style>

@@ -93,7 +93,6 @@ Data.prototype.getImage = function(pollId) {
   return ""
 }
 
-
 Data.prototype.getMusic = function(pollId) {
   const poll = this.polls[pollId];
   console.log("music requested for", pollId);
@@ -102,18 +101,6 @@ Data.prototype.getMusic = function(pollId) {
   }
   return ""
 }
-//Ett försök leta denna för att ta bort om det inte går
-Data.prototype.getQuestionArray = function(pollId) {
-  const poll = this.polls[pollId];
-  console.log("questionarray requested for",pollId);
-  if (typeof poll !== 'undefined') {
-    return poll.questions
-  }
-
-  return []
-}
-
-
 
 Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   const poll = this.polls[pollId];

@@ -19,7 +19,7 @@
 	"createHead": "Lägg till frågor och svar till ditt quiz",
 	"previewPlaceholder": "Lägg till ett svar...",
 	"questionAlterate": "Välj en fråga för att göra ändringar",
-	"changes": "Du ändrar nu i: ",
+	"makeingChanges": "Du ändrar nu i: ",
 	"questionPlaceholder": "Skriv din fråga",
 	"answer": "Svar:",
 	"answerRemove": "Ta bort svar",
@@ -40,10 +40,11 @@
 	"insertYourGroups": "Skriv in namnet på quizet för att delta och glöm inte att välja ett smeknamn!",
 	"nameInsert": "Skriv in quiznamn",
 	"nickInsert": "Skriv in ditt smeknamn",
-	"host": "Jag är spelledaren!",
+	"host": "Jag är spelledare!",
 	"HostIf": "Du är spelledaren",
 	"ifParticipant": "Det är dags att spela",
 	"parts": "Deltagare:",
 	"desc": "Beskrivning:",
-	"start": "STARTA QUIZ!"
+	"start": "STARTA QUIZ!",
+	"welcome":"Välkommen till quizets väntrum!"
 }

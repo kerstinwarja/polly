@@ -21,11 +21,7 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
 
   });
-  //används inte nu men ha kvar som inspo för framtiden :)
-  /*socket.on('addDescription', function(d) {
-    data.addDescription(d.pollId, d.pollDesc);
-    socket.emit('dataUpdate', data.getDescription(d.pollId));
-  });*/
+ 
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
@@ -36,7 +32,6 @@ function sockets(io, socket, data) {
     // socket.emit('name', data.getName(pollId));
     socket.emit('imageAddress', data.getImage(pollId));
     socket.emit('musicSelection', data.getMusic(pollId));
-    socket.emit("allQuestionsArray", data.getQuestionArray(pollId));
 
   });
 
