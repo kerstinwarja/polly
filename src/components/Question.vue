@@ -125,7 +125,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #mainWrap {
   display: grid;
   grid-template-columns: 20% 60% 20%;
