@@ -1,14 +1,15 @@
 <template>
 <div class="barWrapper">
   <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px', width:'30px'}">
+    <div v-bind:style="{height: item + 'px', width:'1em'}">
 
     </div>
+
     <div id="barSpan">
       <span> {{item}} </span>
     </div>
     <div id="names">
-      {{key}}
+      <p>{{key}}</p>
     </div>
   </div>
 
@@ -28,7 +29,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .bar {
-  display: inline-block;
   width: 50px;
   transform: rotate(-90deg);
   margin: 0%;
@@ -42,7 +42,7 @@ export default {
 
 #names {
   transform: rotate(90deg);
-  padding-top: 100%;
+  margin-left: -2.5em;
   font-size: 1em;
 }
 

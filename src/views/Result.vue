@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>{{pollId}}</h1>
     <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: </header>
     <header v-else>Scoreboard</header>
   </div>
@@ -111,7 +110,7 @@ header {
   background-color: rgb(100, 155, 36);
   color: white;
   font-size: 1em;
-  margin-left: 5%;
+  margin-right: 5%;
   text-transform: uppercase;
   height: 3em;
   width: 15%;
