@@ -50,7 +50,6 @@ export default {
   width: 50px;
   transform: rotate(-90deg);
   margin: 0%;
-
 }
 
 #barSpan {
@@ -61,36 +60,39 @@ export default {
 
 #names {
   transform: rotate(90deg);
-  padding-top: 150%;
+  padding-top: 100%;
   font-size: 1em;
-
-
 }
 
 .bar:nth-child(1) div:nth-child(1) {
   background-color: #990000;
   margin: auto;
   border: 0.1em black solid;
+  margin-top: 1em;
 }
 .bar:nth-child(2) div:nth-child(1) {
   background-color:navy;
   margin: auto;
   border: 0.1em black solid;
+  margin-top: 1em;
 }
 .bar:nth-child(3) div:nth-child(1) {
   background-color: #ffcc00;
   margin: auto;
   border: 0.1em black solid;
+  margin-top: 1em;
 }
 .bar:nth-child(4) div:nth-child(1) {
   background-color:rgb(100, 155, 36);
   margin: auto;
   border: 0.1em black solid;
+  margin-top: 1em;
 }
 .bar:nth-child(5) div:nth-child(1) {
   background-color:#633D41;
   margin: auto;
   border: 0.1em black solid;
+  margin-top: 1em;
 }
 header {
   font-size: 5em;
@@ -103,8 +105,8 @@ header {
 .barWrapper {
   background-color: wheat;
   width: 50%;
-  min-height: 10em;
-
+  min-height: 12em;
+  max-height: 12em;
   margin: auto;
   border: 0.2em navy solid;
   border-radius: 0.8em;
@@ -112,8 +114,8 @@ header {
   color: navy;
   vertical-align: bottom;
   display: grid;
-  grid-template-rows: 12% 12% 12% 12% 12%;
-  grid-gap: 10%;
+  grid-template-rows: 15% 15% 15% 15% 15%;
+  grid-gap: 6%;
   padding: 0%;
 }
 </style>

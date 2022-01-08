@@ -9,7 +9,7 @@
   </div-->
   <Bars v-bind:data="data"
         v-bind:nameArray="nameArray"/>
-  <div v-show="isHost">
+  <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
       Next question!
     </button>
