@@ -223,7 +223,7 @@ li{
 }
 .infoBoards{
   width: 60%;
-  margin:5% 20% 5% 20%;
+  margin:5% 20% 0% 20%;
   text-align: left;
   padding-left:2%;
 }
@@ -235,7 +235,7 @@ li{
 @media only screen and (max-width: 500px) {
   .infoBoards{
     width: 90%;
-    margin:5%;
+  margin:3% 5% 0% 5%;
     min-height:5em;
   }
   #startButton {
