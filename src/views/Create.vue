@@ -312,7 +312,7 @@ body textarea{
 }
 #answers{
   display:grid;
-  height: 7em;
+  height: 10em;
   width: 95%;
   grid-template-columns: repeat(2, 1fr);
   gap: 3%;
@@ -321,14 +321,14 @@ body textarea{
   clear: left;
 }
 #answerBox{
-  height:85%;
+  height: 85%;
   width: 98%;
-  font-size:1.5em;
+  font-size:1.3em;
   border-radius: 0.7em;
   color:black;
   overflow:hidden;
   text-align:center;
-  padding:0%;
+  padding:1%;
 }
 #questionMenu{
   width:95%;
@@ -366,14 +366,14 @@ body textarea{
   padding-left:3%;
 }
 .ansButtons{
-  margin: 0% 4% 0% 4%;
+  margin: 0% 2% 0% 2%;
   transform: translateY(-75%);
 }
 .ansButtons:hover{
     transform: translateY(-85%);
 }
 #markedCorrect{
-  font-size:0.9em;
+  font-size:0.6em;
   text-align: center;
 }
 #buttonDiv {
@@ -417,14 +417,14 @@ body textarea{
 .answer5{
   background-color:#633D41;
 }
-@media only screen and (max-width: 1300px) {
+/*@media only screen and (max-width: 1300px) {
  body textarea{
    width:60%;
  }
  #ansTitle{
    grid-template-columns: 80% 20%;
  }
-}
+}*/
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
@@ -436,49 +436,69 @@ body textarea{
       'preview'
   }
   header{
-    font-size: 1.5em;
+    font-size: 1em;
     padding-top:5%
   }
   #preview{
     grid-area:preview;
+    height:36em;
   }
+  #previewTitle{
+    font-size: 2.5em;
+    margin:5% 0% 5% 0%;
+  }
+
   .createWindow{
     grid-area:create;
     height: 36em;
   }
+#ansTitle{
+  grid-template-columns: 80% 20%;
+}
   .navButton{
     margin-top: 10%;
   }
-  #ansTitle{
-    grid-template-columns: 70% 30%;
-  }
   #answers{
-    transform: translateY(0%);
+    margin: 35% 2% 0% 2%;
   }
 }
 @media only screen and (max-width: 700px) {
   #preview{
-    height:25em
+    height:40em
+  }
+  #previewTitle{
+    font-size: 1.5em;
+  }
+  #answers{
+    margin: 45% 2% 0% 2%;
+  }
+  #answerBox{
+    font-size:1em;
+  }
+  .navButton button{
+    margin: 7% 4% 4% 4%;
   }
 }
-@media only screen and (max-width: 600px) {
-  #preview{
-    height:21em
-  }
-}
+
 @media only screen and (max-width: 450px) {
   #preview{
-    height:18em
+    height:30em
   }
+
   #buttonDiv button {
     width:25%;
   }
-  #answerBox{
-    height:88%;
-    font-size:0.3;
+  #answers{
+    margin: 55% 2% 0% 2%;
   }
-  .navButton button{
-    margin: 4% 4% 4% 4%;
+  #answerBox{
+    font-size:0.8em;
+  }
+  .ansButtons{
+      margin: 0% 4% 0% 4%;
+  }
+  body textarea{
+    width:65%;
   }
 }
 </style>

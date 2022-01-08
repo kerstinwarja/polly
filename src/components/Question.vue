@@ -2,21 +2,16 @@
   <div id="quest">
     <p>{{question.q}}</p>
   </div>
-  <div id="mainWrap">
-  <div></div>
-  <div>
-    <img v-if="question.questionImg" v-bind:src="question.questionImg" id="prePic">
+  <div id="prePic">
+    <img v-if="question.questionImg" v-bind:src="question.questionImg" >
   </div>
-  <div>
-  <div id="timer" v-if="this.question.t != '' && this.question.t!=null">
-    {{this.question.t - this.timerCount}}
-  </div>
-  <div v-show="isHost">
-    <button v-on:click="zeroTimer" class="continueButton">
+  <div class="timer">
+    <div v-if="this.question.t != '' && this.question.t!=null">
+      {{this.question.t - this.timerCount}}
+    </div>
+    <button v-show="isHost" v-on:click="zeroTimer" id="timesUp">
       Time's up!
     </button>
-  </div>
-</div>
   </div>
   <div id="ans">
   <template v-if="!timesUp && !this.clicked">
@@ -86,12 +81,12 @@ export default {
         this.timerCount = this.question.t
     }
   },
-
+  //Timer
   created:function(){
     //if(this.question.t!=""&&this.question.t!=null){
       var a = new Date()
       this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
-
+    //}
   },
   methods: {
     answer: function (answer, index) {
@@ -124,18 +119,37 @@ export default {
 </script>
 
 <style scoped>
-#mainWrap {
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  margin-bottom: 2%;
+.timer {
+  position: absolute;
+  left: 80%;
+  font-size: 6em;
+  height:20%;
+  align-items: top;
 }
-#timer {
-  font-size: 7em;
+#timesUp{
+  font-size: 15%;
+  text-transform: uppercase;
+  height: 4em;
+  width: auto;
+  background-color: black;
+  color: white;
+  position:relative;
+  margin-bottom: 50%;
 }
-#prePic{
-  width: 40%;
-  object-fit: contain;
 
+#prePic{
+  height: 35%;
+  width: 45%;
+  position: absolute;
+  left: 27.5%;
+  /*background-repeat: no-repeat;
+  background-size: 100% 100%;*/
+}
+
+#prePic img {
+  height: 100%;
+  width:100%;
+  object-fit: contain;
 }
 #ans{
   display:grid;
@@ -145,7 +159,7 @@ export default {
   grid-template-columns: repeat(2, 1fr); /*default*/
   gap: 3%;
   align-items: center;
-  margin:0% 5% 0% 5%;
+  margin:25% 5% 0% 5%;
 }
 .ans0{
   background-color:#628579;
@@ -192,41 +206,35 @@ button{
   font-size:2em;
   border: black 0.1em solid;
 }
-
-.continueButton {
-  font-size: 1em;
-  text-transform: uppercase;
-  height: 4em;
-  width: auto;
-  background-color: black;
-  color: white;
-}
-#showRes{
-  margin-top:9%
+@media only screen and (max-width: 1330px) {
+  #ans{
+    margin:35% 5% 0% 5%;
+  }
 }
 @media only screen and (max-width: 990px) {
   button{
     font-size:1.5em;
   }
-  #prePic{
-    width:60%;
+  #ans{
+    margin:48% 5% 0% 5%;
   }
 }
 @media only screen and (max-width: 705px) {
-  .continueButton {
-    font-size: 0.8em;
-  }
-#showRes{
- margin-top:5%;
+#ans{
+  margin:60% 5% 0% 5%;
 }
 button{
-  font-size:0.8em;
+  font-size:1em;
 }
-#timer {
+.timer {
   font-size: 3em;
 }
 #quest{
   font-size:2em;
 }
 }
+@media only screen and (max-width: 500px) {
+  #ans{
+    margin:80% 5% 0% 5%;
+  }}
 </style>

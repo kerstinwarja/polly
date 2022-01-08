@@ -170,7 +170,7 @@ p{
 
 .prevWrap{
   margin: 0px;
-  padding: 5% 0% 5% 0%;
+  padding: 3% 0% 3% 0%;
   grid-gap: 1%;
   width: 100%;
   height: 40%;
@@ -178,10 +178,14 @@ p{
   grid-template-columns: 32% 33% 32%;
   align-items: center;
 }
+
 #previewPic img{
-  width: 100%;
-  object-fit: contain;
+  max-height: 9em;
+  max-width:100%;
+  height:auto;
+  width: auto;
 }
+
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -191,16 +195,15 @@ p{
   border: 0.2em #0b074d solid;
 }
 #previewTitle{
-  font-size: 3em;
+  font-size: 2em;
   text-shadow: -0.03em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.03em navy;
   color: white;
-  height: 10%;
+  margin: 5%;
   line-break: auto;
   max-height: 15%;
 }
 .infoBoards{
   color: navy;
-  font-family: "Times New Roman";
   line-break: auto;
   height: 100%;
   width: 90%;
@@ -254,7 +257,6 @@ select:hover{
 }
 
 @media only screen and (max-width: 980px) {
-  /* For mobile phones: */
   .mainWrap{
     grid-template-columns: 100%;
     grid-template-areas:
@@ -273,49 +275,50 @@ select:hover{
     grid-area:preview;
     height: 65em;
   }
-  #previewPic img{
-    width: 60%;
-    object-fit: contain;
-}
   #desIptBox{
     height: 10em;
   }
-  #navButtons{
-    margin-top: 12%;
+  #previewTitle{
+    font-size: 3em;
   }
-
   .prevWrap{
+    padding:0%;
     grid-template-columns: 100%;
     grid-template-areas:
       'pic'
       'des'
       'par';
-    align-items:center;
-
+    grid-gap:5%;
   }
   #previewPic{
     grid-area:pic;
   }
+  #previewPic img{
+    max-height: 15em;
+  }
   #previewDesc{
     grid-area:des;
-    margin:5% 20% 5% 20%;
   }
   #previewPart{
     grid-area:par;
   }
+
+  #navButtons{
+    margin-top: 12%;
+  }
   .infoBoards{
-  height:80%;
-  min-height: 6em;
-  width: 60%;
-  margin:5% 20% 5% 20%;
-  text-align: left;
-  padding:0% 0% 1% 2%;
-}
+    font-size: 1.5em;
+    height:90%;
+    min-height: 6em;
+    width: 60%;
+    margin:5% 20% 5% 20%;
+    text-align: left;
+  }
 }
 
 @media only screen and (max-width: 700px) {
   #preview{
-    height: 52em;
+    height: 55em;
   }
   .createWrap{
     height: 28em;
@@ -323,15 +326,20 @@ select:hover{
 }
 @media only screen and (max-width: 500px) {
   #preview{
-    height: 46em;
+    height: 55em;
+  }
+  .infoBoards{
+    width: 90%;
+    margin:5%;
+  }
+  #previewTitle{
+    margin:10%;
+  }
+  #navButtons{
+    margin-top: 20%;
   }
 }
-@media only screen and (max-width: 440px) {
-  #preview{
-    height: 39em;
-  }
 
-}
 
 
 

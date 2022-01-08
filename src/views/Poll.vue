@@ -2,6 +2,11 @@
   <!--h1> Still my name : {{this.myName}}
     and my points {{this.myPoints}} </h1-->
   <!--{{pollId}}-->
+  <!--div v-show="isHost">Behövs diven (jag la till &&isHost i v-if)?-->
+    <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
+      Show Result
+    </button>
+  <!--/div-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
             v-on:timesUp="setTimeUp"
@@ -28,12 +33,6 @@
     <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
-  </div>
-
-  <div v-show="isHost">
-    <button v-if="timesUp" v-on:click="continueToResult" class="continueButton" id="showRes">
-      Show Result
-    </button>
   </div>
 
 </template>
@@ -151,15 +150,13 @@ export default {
 #audio{
   display:none;
 }
-.continueButton {
+#showRes {
   font-size: 1em;
   text-transform: uppercase;
   height: 4em;
   width: auto;
   background-color: black;
   color: white;
-}
-#showRes{
- margin-top:1%;
+  margin-top:1%;
 }
 </style>
