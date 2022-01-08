@@ -1,5 +1,4 @@
 <template>
-  {{allQuestions}}
   <!--h1> Still my name : {{this.myName}}
     and my points {{this.myPoints}} </h1-->
   <!--{{pollId}}-->
@@ -14,19 +13,19 @@
     </router-link>
   </div-->
   <div id="audio">
-    <audio controls loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
     </audio>
-    <audio controls loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
       <source src="../music/circusTrap.mp3" type="audio/mpeg">
     </audio>
-    <audio controls loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
       <source src="../music/circusStrings.mp3" type="audio/mpeg">
     </audio>
-    <audio controls loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
       <source src="../music/circusTechno.mp3" type="audio/mpeg">
     </audio>
-    <audio controls loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
   </div>
@@ -36,14 +35,6 @@
       Show Result
     </button>
   </div>
-
-
-  <!--{{timerCount}}
-  {{this.question.t}} -->
-
-  <!-- <button v-on:click="nextQue()">
-    Next
-  </button>-->
 
 </template>
 
@@ -104,13 +95,6 @@ export default {
     socket.on("sendToResult",() =>
        this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, allQuestions: this.allQuestions}})
     )
-
-    //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
-
-    /*socket.on("showCorrect",() =>
-      //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}}),
-      console.log('-----------socket.on(showCorrect)------------')
-    ),*/
 
     socket.on("sendToResult",() => {
       this.updateScoreboard(),

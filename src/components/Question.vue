@@ -86,12 +86,12 @@ export default {
         this.timerCount = this.question.t
     }
   },
-  //Timer
+
   created:function(){
     //if(this.question.t!=""&&this.question.t!=null){
       var a = new Date()
       this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
-    //}
+
   },
   methods: {
     answer: function (answer, index) {
