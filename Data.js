@@ -36,7 +36,6 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
     console.log("poll created", pollId, poll);
   }
   return this.polls[pollId];
-
 }
 
 Data.prototype.addQuestion = function(pollId, q) {

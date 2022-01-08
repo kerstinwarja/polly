@@ -76,8 +76,8 @@ export default {
   watch:{
     timerCount: function(timeNow){
       if(timeNow==this.question.t){
-            clearInterval(this.timerEvent)
-            this.$emit('timesUp')
+        clearInterval(this.timerEvent)
+        this.$emit('timesUp')
       }
     },
     timesUp: function (isTimeUp) {
@@ -88,12 +88,10 @@ export default {
   },
   //Timer
   created:function(){
-      if(this.question.t!=""&&this.question.t!=null){
+    //if(this.question.t!=""&&this.question.t!=null){
       var a = new Date()
-      //var intervalId = setInterval(()=>{console.log(this.timerCount - Math.round((new Date() - a)/1000))}, 1000)
       this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
-      //console.log(this.timerCount)
-    }
+    //}
   },
   methods: {
     answer: function (answer, index) {

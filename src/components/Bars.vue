@@ -44,7 +44,6 @@ export default {
 #names {
   transform: rotate(90deg);
   padding-top: 150%;
-  text-transform: uppercase;
   font-size: 1em;
 
 

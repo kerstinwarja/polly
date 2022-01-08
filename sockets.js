@@ -17,11 +17,11 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, {q: d.q, a: d.a, t: d.t, questionNumber: d.questionNumber, questionImg: d.questionImg, isCorrect: d.isCorrect});
+    data.addQuestion(d.pollId, {q: d.q, a: d.a, t: d.t, questionNumber: d.questionNumber, questionImg: d.questionImg, isCorrect: d.isCorrect, allQuestions: d.allQuestions});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
 
   });
- 
+
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);

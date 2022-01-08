@@ -191,7 +191,6 @@ h4{
   font-weight: bold;
   position: relative;
   top: 10%;
-  text-transform: uppercase;
 }
 
 /*li{

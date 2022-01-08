@@ -1,4 +1,5 @@
 <template>
+  {{allQuestions}}
   <!--h1> Still my name : {{this.myName}}
     and my points {{this.myPoints}} </h1-->
   <!--{{pollId}}-->
@@ -65,6 +66,7 @@ export default {
       myPoints: 10,
       myName : "",
       nameArray:[],
+      clicked: false,
       question: {
         q: "",
         a: [],
@@ -72,6 +74,7 @@ export default {
         isCorrect:[],
         questionNumber: 0,
         questionImg: "",
+        allQuestions: 0
       },
       pollId: "inactive poll",
     }
@@ -95,10 +98,11 @@ export default {
       this.questionImg = q.questionImg
       this.isCorrect = q.isCorrect
       this.questionNumber = q.questionNumber
+      this.allQuestions = q.allQuestions
       }
     ),
     socket.on("sendToResult",() =>
-       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost}})
+       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, allQuestions: this.allQuestions}})
     )
 
     //socket.on("runQuestion", {pollId: this.pollId, questionNumber: this.question.questionNumber})
@@ -108,22 +112,26 @@ export default {
       console.log('-----------socket.on(showCorrect)------------')
     ),*/
 
-    socket.on("sendToResult",() =>
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName}})
-    )
+    socket.on("sendToResult",() => {
+      this.updateScoreboard(),
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
+    })
 
     socket.on("showCorrect",() =>
       this.timesUp=true,
-      console.log(this.timesUp),
       //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, time: this.timesUp}}),
-      console.log('-----------socket.on(showCorrect)------------')
     )
-
   },
   methods: {
     submitAnswer: function (answer) {
-      this.sendPoints = this.answerPoints(answer);
-      socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.sendPoints, myName: this.myName})
+      this.clicked = true,
+      this.myPoints = this.answerPoints(answer);
+      socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
+    },
+    updateScoreboard () {
+      if(!this.isHost || !this.clicked) {
+        socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
+      }
     },
     answerPoints (answer){
      var  ansIndex = this.question.a.indexOf(answer);
@@ -147,10 +155,10 @@ export default {
       socket.emit('showCorrectAnswer', {pollId: this.pollId})
     },
     continueToResult: function() {
-      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray})
+      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions})
       console.log('continue woho!');
       this.isHost= true;
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions}})
     }
   }
 }
@@ -158,5 +166,16 @@ export default {
 <style scoped>
 #audio{
   display:none;
+}
+.continueButton {
+  font-size: 1em;
+  text-transform: uppercase;
+  height: 4em;
+  width: auto;
+  background-color: black;
+  color: white;
+}
+#showRes{
+ margin-top:1%;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1> {{pollId}}</h1>
-    <header>Scoreboard</header>
+    <h1>{{pollId}}</h1>
+    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: </header>
+    <header v-else>Scoreboard</header>
   </div>
   <div>
 
   </div>
   <Bars v-bind:data="data"
         v-bind:nameArray="nameArray"/>
-
   <div v-show="isHost">
     <button v-on:click="runQuestion" class="continueButton">
       Next question!
@@ -41,6 +41,7 @@ export default {
       myName: "",
       myPoints: 0,
       pollId:"",
+      allQuestions: 0,
       data: {
       }
     }
@@ -50,6 +51,7 @@ export default {
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
     this.pollId = this.$route.params.id;
+    this.allQuestions = this.$route.params.allQuestions;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray;
     socket.emit('joinPoll', this.pollId)
@@ -67,7 +69,6 @@ export default {
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
-
   },
 
   methods: {

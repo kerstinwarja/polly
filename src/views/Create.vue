@@ -155,7 +155,7 @@ export default {
         this.questionImg = this.allQimg[i]
         this.time = this.allTime[i]
         this.isCorrect = this.allisCorr[i]
-        socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: i ,questionImg: this.questionImg, isCorrect: this.isCorrect} )
+        socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: i ,questionImg: this.questionImg, isCorrect: this.isCorrect, allQuestions: this.allQuestions.length} )
       }
     },
     clearFields: function(){
