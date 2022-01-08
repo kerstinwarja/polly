@@ -44,7 +44,7 @@
             <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" v-bind:placeholder="uiLabels.answerPlaceholder"></textarea>
             <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
-          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color: rgb(135, 175, 111);">{{uiLabels.answerAdd}}</button>
+          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="  background-color: rgb(100, 155, 36)">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
           <!--div>
             <button type="submit" v-on:click="removeAnswer()" style="background-color: rgb(255, 0, 0);">
@@ -69,10 +69,10 @@
             <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
               {{uiLabels.add}}<br>{{uiLabels.questionLower}}
             </button>
-            <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: #A3493E">
+            <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: rgb(255, 0, 0);">
               {{uiLabels.remove}}<br>{{uiLabels.questionLower}}
             </button>
-            <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)" style = "background-color: royalblue">
+            <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
               {{uiLabels.save}}<br>{{uiLabels.changes}}
             </button>
 
@@ -367,6 +367,9 @@ body textarea{
   margin: 0% 4% 0% 4%;
   transform: translateY(-75%);
 }
+.ansButtons:hover{
+    transform: translateY(-85%);
+}
 #markedCorrect{
   font-size:0.9em;
   text-align: center;
@@ -381,7 +384,8 @@ body textarea{
 #buttonDiv button {
   height: 100%;
   width: 23%;
-  background-color: rgb(135, 175, 111);
+  background-color: rgb(100, 155, 36);
+  /*background-color: rgb(135, 175, 111);*/
 }
 
 .navButton button{

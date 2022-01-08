@@ -85,6 +85,7 @@ body{
 button{
   border-radius: 0.8em;
 }
+
 .wrapper {
   width: 95%;
   height: 95%;
@@ -105,6 +106,8 @@ button{
 }
 button:hover {
   cursor: pointer;
+  box-shadow: 0px 5px 10px #646467;
+  transform: translateY(-5px);
 }
 #nav button{
   width: 10%;
