@@ -11,18 +11,16 @@
         </div>
         <div class="prevWrap">
           <div class="infoBoards" id="previewDesc">
-            {{uiLabels.desc}}<br>
-
-            <span>{{uiLabels.welcome}} </span>
-            <br>
-            <span>{{pollDesc}}</span>
+            <p>{{uiLabels.desc}}</p>
+            <p>{{uiLabels.welcome}}</p>
+            <p>{{pollDesc}}</p>
           </div>
           <div id="previewPic">
             <img v-if="pollImg" v-bind:src="pollImg">
           </div>
           <div class="infoBoards" id="previewPart">
-            {{uiLabels.parts}}<br>
-            <span>{{uiLabels.participants}}</span>
+            <p>{{uiLabels.parts}}</p>
+            <p>{{uiLabels.participants}}</p>
           </div>
         </div>
         <div>
@@ -143,7 +141,11 @@ h4 {
   text-align: center;
   color: white;
   text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
-  font-size: 2em;
+  font-size: 1em;
+}
+p{
+  margin:3%;
+  font-weight: bold;
 }
 
 .mainWrap {
@@ -189,7 +191,7 @@ h4 {
   border: 0.2em #0b074d solid;
 }
 #previewTitle{
-  font-size: 30px;
+  font-size: 3em;
   text-shadow: -0.03em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.03em navy;
   color: white;
   height: 10%;
@@ -209,16 +211,16 @@ h4 {
   overflow:auto;
   margin:0% 5% 0% 5%;
 }
-.infoBoards span{
+/*.infoBoards span{
   font-weight: bold;
   position: relative;
   top: 10%;
-
-}
+}*/
 
 .createWrap{
   background-color: wheat;
   width: 100%;
+  height:100%;
   border: 0.2em navy solid;
 }
 body textarea{
@@ -308,12 +310,7 @@ select:hover{
   margin:5% 20% 5% 20%;
   text-align: left;
   padding:0% 0% 1% 2%;
-
-
 }
-
-
-
 }
 
 @media only screen and (max-width: 700px) {

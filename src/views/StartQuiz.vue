@@ -7,16 +7,16 @@
     </header>
     <div id="wrap">
       <div class="infoBoards"  id="pollDesc">
-        {{uiLabels.desc}}<br>
-        <span class="infoBoardsInner"> {{uiLabels.welcome}} </span><br>
-        <span class="infoBoardsInner">{{pollDesc}}</span>
+        <p>{{uiLabels.desc}}</p>
+        <p> {{uiLabels.welcome}} </p>
+        <p>{{pollDesc}}</p>
       </div>
       <div id="picture">
         <img v-bind:src="pollImg">
       </div>
       <div class="infoBoards" id="pollParts">
-        {{uiLabels.parts}}
-        <span class="infoBoardsInner" v-for="name in this.nameArray" v-bind:key="name">
+        <p>{{uiLabels.parts}}</p>
+        <span v-for="name in this.nameArray" v-bind:key="name">
             <li>{{name}}</li>
           </span>
       </div>
@@ -148,6 +148,14 @@ h4{
   margin: 3% 0% 3% 0%;
   text-shadow: -0.02em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.02em #990000;
 }
+p{
+  margin: 3% 0% 3% 0%;
+}
+
+li{
+  text-align:left;
+  margin-left:30%;
+}
 
 #wrap {
   padding: 3% 0% 3% 0%;
@@ -156,7 +164,6 @@ h4{
   grid-template-columns: 33% 33% 33%;
   /*align-items: center;*/
 }
-
 #wrap img{
   max-height: 15em;
   max-width:100%;
@@ -168,12 +175,10 @@ h4{
   width: 35%;
 }
 
-
 .infoBoards{
   color: navy;
-
   line-break: auto;
-  height: 80%;
+  height: 10em;
   width: 90%;
   background-color: wheat;
   border-radius: 2%;
@@ -182,21 +187,8 @@ h4{
   padding:0% 0% 1% 2%;
   margin: 0% 5% 0% 5%;
   overflow:auto;
-  min-height: 10em;
-
-}
-
-.infoBoardsInner{
-  text-align:left;
   font-weight: bold;
-  position: relative;
-  top: 10%;
-  text-transform: uppercase;
 }
-
-/*li{
-  margin-left:33%
-}*/
 
 #startButton {
   height: 5em;
@@ -234,6 +226,9 @@ h4{
   margin:5% 20% 5% 20%;
   text-align: left;
   padding-left:2%;
+}
+li{
+  margin:0%;
 }
 
 }
