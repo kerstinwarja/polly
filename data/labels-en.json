@@ -48,5 +48,8 @@
 	"start": "START QUIZ!",
 	"welcome":"Welcome to the quiz waiting room!",
 	"timesUp": "Time's up!",
-	"showResult": "Show Result"
+	"showResult": "Show Result",
+	"alertQuizName":"YOU NEED A QUIZNAME",
+	"enterPic":"Please enter a pictureadress:",
+	"alertNickname":"YOU NEED A NICKNAME"
 }

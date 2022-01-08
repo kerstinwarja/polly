@@ -48,5 +48,8 @@
 	"start": "STARTA QUIZ!",
 	"welcome":"Välkommen till quizets väntrum!",
 	"timesUp": "Tiden är ute!",
-	"showResult": "Show Result"
+	"showResult": "Show Result",
+	"alertQuizName":"DU BEHÖVER ETT QUIZNAMN",
+	"enterPic":"Lägg till en bildadress:",
+	"alertNickname":"DU BEHÖVER ETT SMEKNAMN"
 }

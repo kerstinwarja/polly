@@ -108,13 +108,18 @@ export default {
   },
   methods: {
     createPoll: function () {
-      this.timerCount = this.time;
-      this.SONG = this.music;
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
-      this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+      if(this.pollId!=""){
+        this.timerCount = this.time;
+        this.SONG = this.music;
+        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
+        this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+      }
+      else {
+        alert(this.uiLabels.alertQuizName)
+      }
     },
     PicChoose(){
-      let pict = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+      let pict = prompt(this.uiLabels.enterPic, "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.pollImg = pict;
       console.log(this.pollImg)
     },

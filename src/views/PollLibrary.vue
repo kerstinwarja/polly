@@ -34,25 +34,7 @@ export default {
       pollId:"",
       myName: "",
       isHost:false,
-      nameArray:[],
-      nameTaken:false,
       nickname: ""
-    }
-  },
-
-//behöver nog inte denna om alla får ha samma nickname
-  watch:{
-    id: function(thisId){
-      if(thisId!=""){
-            this.pollId = thisId
-            socket.emit('getNickname',{pollId:this.pollId});
-            socket.on("getName",participants => {
-                  this.nameArray = participants
-                  console.log("check ", this.nameArray);
-                });
-            console.log("nameArray 2"+this.nameArray)
-      }
-
     }
   },
 
@@ -64,37 +46,19 @@ export default {
       this.uiLabels = labels
     })
 
-    //markering
-    //socket.emit('getNickname',{pollId:this.pollId});
-    //socket.on("sendName",this.pollId)
-    socket.on("getName",participants => {
-          this.nameArray = participants
-        })
   },
   methods:{
     startquiz: function() {
       if(this.nickname != "" && this.nickname!= undefined){
         this.myName = this.nickname
-        //this.pollId = this.id
-        //KAOS vi ska fixa
-        for(let index in this.nameArray){
-          console.log(this.nameArray[index])
-          if(this.myName==this.nameArray[index]){
-            alert("Nickname already exists")
-
-          }
-          else{
-            this.nameTaken=true
-          }
-        }
-        if(this.nameTaken==false){
-          socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
-          this.isHost= false
-          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
-        }
+        this.pollId = this.id
+        socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
+        this.isHost= false
+        this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
       }
+    
       else {
-        alert("YOU NEED A NICKNAME")
+        alert(this.uiLabels.alertNickname)
       }
   },
 
