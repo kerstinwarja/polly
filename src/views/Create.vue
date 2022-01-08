@@ -166,12 +166,17 @@ export default {
       this.time=""
     },
     addQuestion: function(){
-      this.allQuestions.push(this.question)
-      this.allQimg.push(this.questionImg)
-      this.allTime.push(this.time)
-      this.allAnswers.push(this.answers)
-      this.allisCorr.push(this.isCorrect)
-      this.clearFields()
+      if(this.allQuestions.length<=24){
+        this.allQuestions.push(this.question)
+        this.allQimg.push(this.questionImg)
+        this.allTime.push(this.time)
+        this.allAnswers.push(this.answers)
+        this.allisCorr.push(this.isCorrect)
+        this.clearFields()
+      }
+      else {
+        alert('You have reached the maximum number of questions')
+      }
     },
     removeQuestion(i){
       this.allQuestions.splice(i,1);

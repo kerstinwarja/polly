@@ -92,9 +92,9 @@ export default {
       this.allQuestions = q.allQuestions
       }
     ),
-    socket.on("sendToResult",() =>
+    /*socket.on("sendToResult",() =>
        this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, allQuestions: this.allQuestions}})
-    )
+    )*/
 
     socket.on("sendToResult",() => {
       this.updateScoreboard(),
@@ -156,7 +156,7 @@ export default {
   text-transform: uppercase;
   height: 4em;
   width: auto;
-  background-color: black;
+  background-color: rgb(100, 155, 36);
   color: white;
 }
 #showRes{
