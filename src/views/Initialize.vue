@@ -153,7 +153,7 @@ h4 {
 }
 
 .importItems{
-  background-color: wheat;
+  background-color: #fbf1e0;
   text-transform: uppercase;
   padding-bottom: 1%;
   font-size:80%;
@@ -208,7 +208,7 @@ h4 {
   font-weight: bold;
   position: relative;
   top: 10%;
-  
+
 }
 
 .createWrap{
@@ -224,6 +224,11 @@ body textarea{
   padding: 0.4em 0.4em 0.4em;
   font-family: sans-serif;
   border: 0.1em solid;
+}
+select:hover{
+  cursor: pointer;
+  box-shadow: 0px 5px 10px #646467;
+  transform: translateY(-5px);
 }
 
 #desIptBox{
@@ -279,7 +284,7 @@ body textarea{
       'des'
       'par';
     align-items:center;
-    
+
   }
   #previewPic{
     grid-area:pic;
@@ -298,8 +303,8 @@ body textarea{
   margin:5% 20% 5% 20%;
   text-align: left;
   padding:0% 0% 1% 2%;
-  
-  
+
+
 }
 
 

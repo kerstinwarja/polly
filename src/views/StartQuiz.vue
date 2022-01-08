@@ -201,7 +201,8 @@ h4{
 #startButton {
   height: 5em;
   width: 15%;
-  background-color: rgb(100, 155, 36);
+  background-color: #236627;
+  color: wheat;
   margin-bottom:5%;
 }
 
@@ -241,6 +242,9 @@ h4{
     width: 90%;
     margin:5%;
     min-height:5em;
+  }
+  #startButton {
+    width: 30%;
   }
 }
 </style>
