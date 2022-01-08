@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <!--div>
     <h1>{{pollId}}</h1>
     <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: </header>
-    <header v-else>Scoreboard</header>
+    <header v-if="this.questionNumber < this.allQuestions-1">Scoreboard</header>
   </div>
   <div>
 
-  </div>
+  </div-->
   <Bars v-bind:data="data"
         v-bind:nameArray="nameArray"/>
   <div v-show="isHost">
@@ -84,7 +84,7 @@ export default {
       this.questionNumber=0;
       socket.emit('goToStart', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
       this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
-    }
+    },
   }
 }
 </script>

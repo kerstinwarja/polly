@@ -1,5 +1,9 @@
 <template>
+<header v-if="this.questionNumber == this.allQuestions-1">And the winner is:{{arrdata[0][0]}} </header>
+    <header>Scoreboard</header>
 <div class="barWrapper">
+  <template v-if="arrdata[0][1] == arrdata[1][1]"> The leaders are: {{arrdata[0][0]}} and {{arrdata[1][0]}} </template>
+  <template v-else> The leader is: {{arrdata[0][0]}} </template>
   <div class="bar" v-for="(item, key) in data" v-bind:key="key">
     <div v-bind:style="{height: item + 'px', width:'30px'}">
 
@@ -21,6 +25,20 @@ export default {
   name: 'Bars',
   props: {
     data: Object,
+  },
+  data: function () {
+    return {
+      arrdata:[],
+    }
+  },
+  created:function(){
+    this.sortera();
+  },
+  methods: {
+    sortera(){
+    this.arrdata = Object.entries(this.data).sort((a,b) => b[1]-a[1]);
+
+    },
   },
 }
 </script>
@@ -73,6 +91,13 @@ export default {
   background-color:#633D41;
   margin: auto;
   border: 0.1em black solid;
+}
+header {
+  font-size: 5em;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+  color: white;
+  padding-top: 0%;
+  margin-bottom: 3%;
 }
 
 .barWrapper {
