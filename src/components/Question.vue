@@ -145,9 +145,7 @@ export default {
   grid-template-columns: repeat(2, 1fr); /*default*/
   gap: 3%;
   align-items: center;
-  margin-left:5%;
-  margin-right: 5%;
-  margin-top: 0%;
+  margin:0% 5% 0% 5%;
 }
 .ans0{
   background-color:#628579;
@@ -192,6 +190,7 @@ button{
   width:100%;
   background-color: wheat;
   font-size:2em;
+  border: black 0.1em solid;
 }
 
 .continueButton {

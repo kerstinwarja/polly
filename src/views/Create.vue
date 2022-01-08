@@ -12,6 +12,9 @@
           <div id="previewPic">
             <img v-if="questionImg" v-bind:src="questionImg">
           </div>
+          <div id="timer">
+            {{this.time}}
+          </div>
           <div id="answers">
               <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" v-bind:placeholder="uiLabels.previewPlaceholder" readonly>
               </textarea>
@@ -235,6 +238,13 @@ export default {
 
 
 <style scoped>
+#timer{
+  width: 90%;
+  text-align: right;
+  font-size:3em;
+  position:absolute;
+}
+
 header {
   font-size: 1.5em;
   text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.05em navy;
@@ -246,7 +256,6 @@ h3{
   text-align: left;
   color: Navy;
 }
-
 body textarea{
   width: 70%;
   background-color: #f0e7d1;
@@ -256,7 +265,6 @@ body textarea{
   font-family: sans-serif;
   border: 0.1em solid;
 }
-
 .mainWrap {
   margin: 0px;
   padding: 0% 4% 0% 4%;
@@ -281,7 +289,6 @@ body textarea{
   padding: 2% 0% 1% 0%;
   align-items: bottom;
 }
-
 #previewTitle{
   font-size: 1.5em;
   text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
@@ -290,7 +297,6 @@ body textarea{
   text-align:center;
   min-height: 18%;
 }
-
 #previewPic{
   height: 25%;
   width: 35%;
@@ -301,28 +307,28 @@ body textarea{
 }
 #previewPic img{
   width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 #answers{
   display:grid;
-  height: 9em;
-  width: 90%;
+  height: 7em;
+  width: 95%;
   grid-template-columns: repeat(2, 1fr);
-  gap: 5%;
+  gap: 3%;
   align-items: center;
-  margin-left:5%;
-  margin-right: 5%;
-  margin-top: 26%;
+  margin: 26% 2% 0% 2%;
   clear: left;
-
 }
 #answerBox{
   height:85%;
-  width:90%;
-  font-size:0.5;
+  width: 98%;
+  font-size:1.5em;
   border-radius: 0.7em;
   color:black;
   overflow:hidden;
+  text-align:center;
+  padding:0%;
 }
 #questionMenu{
   width:95%;
@@ -333,7 +339,6 @@ body textarea{
   overflow: auto;
   padding: 2%;
 }
-
 #questionMenu button{
   background-color: #CF903A;
   color: black;
@@ -342,11 +347,9 @@ body textarea{
   float:left;
   overflow: hidden;
 }
-
 #questionMenu h3{
   text-align: center;
 }
-
 .createWindow{
   background-color: wheat;
   width: 100%;
@@ -354,7 +357,6 @@ body textarea{
   height: 34em;
   position: relative;
 }
-
 #qInput{
   width:90%
 }
@@ -387,7 +389,6 @@ body textarea{
   background-color: rgb(100, 155, 36);
   /*background-color: rgb(135, 175, 111);*/
 }
-
 .navButton button{
   height: 3em;
   width: 6em;
@@ -398,7 +399,6 @@ body textarea{
   text-align: center;
   font-size: 1em;
 }
-
 .answer0{
   background-color:#628579;
 }
@@ -417,7 +417,6 @@ body textarea{
 .answer5{
   background-color:#633D41;
 }
-
 @media only screen and (max-width: 1300px) {
  body textarea{
    width:60%;
@@ -425,9 +424,7 @@ body textarea{
  #ansTitle{
    grid-template-columns: 80% 20%;
  }
-
 }
-
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
@@ -464,13 +461,11 @@ body textarea{
     height:25em
   }
 }
-
 @media only screen and (max-width: 600px) {
   #preview{
     height:21em
   }
 }
-
 @media only screen and (max-width: 450px) {
   #preview{
     height:18em
