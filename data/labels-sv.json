@@ -31,6 +31,9 @@
 	"picture": "bild",
 	"add": "Lägg till ",
 	"questionLower": "fråga",
+	"mark":"markera",
+	"as":"som",
+	"correct":"korrekt",
 	"remove": "Ta bort ",
 	"save": "Spara ",
 	"changes": "ändringar",
@@ -48,7 +51,7 @@
 	"start": "STARTA QUIZ!",
 	"welcome":"Välkommen till quizets väntrum!",
 	"timesUp": "Tiden är ute!",
-	"showResult": "Show Result",
+	"showResult": "Visa resultat",
 	"alertQuizName":"DU BEHÖVER ETT QUIZNAMN",
 	"enterPic":"Lägg till en bildadress:",
 	"alertNickname":"DU BEHÖVER ETT SMEKNAMN"

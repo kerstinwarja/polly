@@ -4,7 +4,7 @@
   <!--{{pollId}}-->
   <!--div v-show="isHost">Behövs diven (jag la till &&isHost i v-if)?-->
     <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
-      Show Result
+      {{uiLabels.showResult}}
     </button>
   <!--/div-->
   <Question v-bind:question="question"
@@ -49,6 +49,8 @@ export default {
   },
   data: function () {
     return {
+      uiLabels: {},
+      lang:"",
       SONG:"",
       isHost: false,
       timesUp: false,
@@ -70,6 +72,13 @@ export default {
     }
   },
   created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      console.log(labels)
+      this.uiLabels = labels
+    })
+
     this.pollId = this.$route.params.id;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;

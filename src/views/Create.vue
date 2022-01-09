@@ -40,7 +40,7 @@
           <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <div id="ansTitle">
             <h3>{{uiLabels.answer}}</h3>
-            <h3 id="markedCorrect">Mark<br>as<br>correct</h3>
+            <h3 id="markedCorrect">{{uiLabels.mark}}<br>{{uiLabels.as}}<br>{{uiLabels.correct}}</h3>
           </div>
           <div   v-for="(_, i) in answers" v-bind:key="'answer'+i">
             <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>

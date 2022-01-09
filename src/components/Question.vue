@@ -10,7 +10,7 @@
       {{this.question.t - this.timerCount}}
     </div>
     <button v-show="isHost" v-on:click="zeroTimer" id="timesUp">
-      Time's up!
+      {{uiLabels.timesUp}}  
     </button>
   </div>
   <div id="ans">
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
+const socket = io();
 
 export default {
   name: 'Bars',
@@ -56,6 +58,8 @@ export default {
 
   data: function () {
     return {
+      uiLabels: {},
+      lang:"",
       timerCount: 0,
       timerEvent:null,
       timerEnabled: true,
@@ -83,6 +87,12 @@ export default {
   },
   //Timer
   created:function(){
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      console.log(labels)
+      this.uiLabels = labels
+    })
     //if(this.question.t!=""&&this.question.t!=null){
       var a = new Date()
       this.timerEvent = setInterval(()=>{this.timerCount = Math.round((new Date() - a)/1000)}, 1000) //Math.round((new Date() - a)/1000)
