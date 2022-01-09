@@ -155,7 +155,7 @@ export default {
   text-transform: uppercase;
   height: 4em;
   width: auto;
-  background-color: rgb(100, 155, 36);
+  background-color: black;
   color: white;
   margin-top:1%;
 }
