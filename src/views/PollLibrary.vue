@@ -56,7 +56,7 @@ export default {
         this.isHost= false
         this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
       }
-    
+
       else {
         alert(this.uiLabels.alertNickname)
       }
@@ -86,7 +86,7 @@ h1{
 }
 
 h2 {
-  margin: 0% 0% 5% 0%;
+  margin: 0% 0% 2% 0%;
   text-align: center;
   color: white;
   text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
