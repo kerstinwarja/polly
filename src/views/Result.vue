@@ -33,6 +33,7 @@ export default {
   },
   data: function () {
     return {
+      lang:"",
       question: "",
       questionNumber: 0,
       isHost: false,
@@ -46,6 +47,7 @@ export default {
     }
   },
   created: function () {
+    this.lang = this.$route.params.lang;
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
