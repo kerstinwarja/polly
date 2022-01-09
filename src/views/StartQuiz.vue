@@ -1,5 +1,9 @@
 <template>
   <body>
+    <button v-show="this.SONG!='' || this.showPlayButton" id="musicControl" type="submit" v-on:click="pauseplay()">
+      <img v-if="paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
+      <img v-if="!paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
+    </button>
     <h4 v-if="isHost">You are the host of</h4>
     <h4 v-else>It's time to play</h4>
     <header>
@@ -23,19 +27,19 @@
 
     </div>
     <div id="audio">
-      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
         <source src="../music/circusBrass.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+      <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
         <source src="../music/circusTrap.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+      <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
         <source src="../music/circusStrings.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+      <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
         <source src="../music/circusTechno.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+      <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
         <source src="../music/circusRagtime.mp3" type="audio/mpeg">
       </audio>
     </div>
@@ -68,6 +72,9 @@ export default {
       //question: "",
       //answers: ["", ""],
       questionNumber: 0,
+      paused:false,
+      showPlayButton:false,
+      songBackup:"",
       question: {
         q: "",
         a: []
@@ -127,8 +134,19 @@ export default {
       this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}});
       socket.emit('clearNickname',{pollId:this.pollId} )
       socket.emit('clearAnswer',{pollId:this.pollId} )
-
-    }
+    },
+    pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
+      this.showPlayButton=true
+      if(!this.paused){
+        this.songBackup = this.SONG
+        this.SONG = ""
+        this.paused = true
+      }
+      else{
+        this.SONG = this.songBackup
+        this.paused = false
+      }
+    },
   }
 }
 </script>
@@ -156,7 +174,12 @@ li{
   text-align:left;
   margin-left:30%;
 }
-
+#musicControl{
+  position:absolute;
+  left:2%;
+  top:2%;
+  background-color: wheat;
+}
 #wrap {
   padding: 3% 0% 3% 0%;
   width: 100%;
