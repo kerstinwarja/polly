@@ -4,7 +4,6 @@
     <div v-bind:style="{height: item + 'px', width:'1em'}">
 
     </div>
-    {{nameArray}}
     <div id="barSpan">
       <span> {{item}} </span>
     </div>
