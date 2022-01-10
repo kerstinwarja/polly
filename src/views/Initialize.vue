@@ -89,7 +89,8 @@ export default {
       music:"",
       question: "",
       answers: ["", ""],
-      questionNumber: 0
+      questionNumber: 0,
+      polls:[]
     }
   },
   created: function () {
@@ -98,6 +99,10 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.emit("getPolls");
+    socket.on("polls", (polls) => {
+      this.polls=polls;
+    });
     socket.on("dataUpdate", (data) =>
         this.data = data
     )
@@ -109,12 +114,13 @@ export default {
       if(this.pollId!=""){
         this.timerCount = this.time;
         this.SONG = this.music;
-        socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
-        this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+        if(this.polls.indexOf(this.pollId)==-1){
+          socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
+          this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
+        }
+        else alert(this.uiLabels.alertPickNewQuizName) 
       }
-      else {
-        alert(this.uiLabels.alertQuizName)
-      }
+      else alert(this.uiLabels.alertQuizName)
     },
     PicChoose(){
       let pict = prompt(this.uiLabels.enterPic, "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");

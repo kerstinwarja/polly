@@ -53,6 +53,8 @@
 	"timesUp": "Tiden är ute!",
 	"showResult": "Visa resultat",
 	"alertQuizName":"DU BEHÖVER ETT QUIZNAMN",
+	"alertPickNewQuizName":"Det finns redan ett quiz med detta namn... Välj ett nytt quiznamn",
+	"alertNoQuiz":"Det finns inget quiz med detta namn",
 	"enterPic":"Lägg till en bildadress:",
 	"alertNickname":"DU BEHÖVER ETT SMEKNAMN"
 }
