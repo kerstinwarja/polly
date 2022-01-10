@@ -83,9 +83,6 @@ function sockets(io, socket, data) {
   socket.on('clearAnswer', function(d) {
     io.to(d.pollId).emit('sendName3', data.clearAnswers(d.pollId));
   });
-  socket.on('getPolls',function(){
-    socket.emit('polls', data.getPolls());
-  });
 
   socket.on('resetAll', () => {
     data = new Data();

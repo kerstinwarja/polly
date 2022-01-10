@@ -34,8 +34,7 @@ export default {
       pollId:"",
       myName: "",
       isHost:false,
-      nickname: "",
-      polls:[]
+      nickname: ""
     }
   },
 
@@ -46,38 +45,28 @@ export default {
       console.log(labels)
       this.uiLabels = labels
     })
-    socket.emit("getPolls");
-    socket.on("polls", (polls) => {
-      this.polls=polls;
-    });
 
   },
   methods:{
     startquiz: function() {
-      this.pollId = this.id
-      if(this.polls.indexOf(this.pollId)!=-1){
-        if(this.nickname != "" && this.nickname!= undefined){
-          this.myName = this.nickname
-          socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
-          this.isHost= false
-          this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
-        }
-        else alert(this.uiLabels.alertNickname)  
+      if(this.nickname != "" && this.nickname!= undefined){
+        this.myName = this.nickname
+        this.pollId = this.id
+        socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
+        this.isHost= false
+        this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
       }
-      else alert(this.uiLabels.alertNoQuiz)
-    },
+
+      else {
+        alert(this.uiLabels.alertNickname)
+      }
+  },
 
     hostQuiz: function(){
       this.isHost= true;
       this.pollId = this.id
-      
-      if(this.polls.indexOf(this.pollId)!=-1){
-        this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost: this.isHost} })
-      }
-      else{
-        alert(this.uiLabels.alertNoQuiz)
-      }
-      
+      socket.emit()
+      this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost: this.isHost} })
     }
   }
 }

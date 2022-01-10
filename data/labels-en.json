@@ -53,8 +53,6 @@
 	"timesUp": "Time's up!",
 	"showResult": "Show Result",
 	"alertQuizName":"YOU NEED A QUIZNAME",
-	"alertPickNewQuizName":"A quiz with this name already exists... Pick a new quiz name",
-	"alertNoQuiz":"There is no quiz with this name",
 	"enterPic":"Please enter a pictureadress:",
 	"alertNickname":"YOU NEED A NICKNAME"
 }
