@@ -7,11 +7,7 @@
             v-on:timesUp="setTimeUp"
             v-bind:isHost="isHost"
             v-on:answer="submitAnswer"/>
-  <!--div> FORSTÄTTER NÄR RESULT FINNS
-    <router-link v-bind:to="'/poll/'+ this.pollId">
-      <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
-    </router-link>
-  </div-->
+
   <div id="audio">
     <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -43,13 +39,16 @@
 import Question from '@/components/Question.vue';
 import io from 'socket.io-client';
 const socket = io();
+
 export default {
   name: 'Poll',
   components: {
     Question
   },
   data: function () {
-    return {
+    return { 
+      uiLabels: {},
+      lang:"",
       SONG:"",
       isHost: false,
       timesUp: false,
@@ -65,30 +64,37 @@ export default {
         isCorrect:[],
         questionNumber: 0,
         questionImg: "",
-        allQuestions: 0
+        allQuestions: 0,
       },
-      pollId: "inactive poll",
+      pollId: "inactive poll"
     }
   },
   created: function () {
+     this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      console.log(labels)
+      this.uiLabels = labels
+    })
     this.pollId = this.$route.params.id;
-    this.myName = this.$route.params.myName;
+     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
     this.nameArray = this.$route.params.nameArray
     console.log("Ny start på quizzet nmr ",this.$route.params.questionNumber, this.questionNumber)
     socket.emit('joinPoll', this.pollId)
-    socket.on("musicSelection", SONG =>
+     socket.on("musicSelection", SONG =>
         this.SONG = SONG
     ),
-    socket.on("newQuestion", q => {
-      this.question = q
-      this.timesUp=false
-      this.timerCount = q.t
-      this.questionImg = q.questionImg
-      this.isCorrect = q.isCorrect
-      this.questionNumber = q.questionNumber
+    
+    socket.on("newQuestion", q =>{
+      this.question = q,
+      this.timesUp=false,
+      this.timerCount = q.t,
+      this.questionImg = q.questionImg,
+      this.isCorrect = q.isCorrect,
+      this.questionNumber = q.questionNumber,
       this.allQuestions = q.allQuestions
       }
     ),
@@ -105,6 +111,9 @@ export default {
       this.timesUp=true,
       //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, time: this.timesUp}}),
     )
+  },
+  unmounted:function() {
+    socket.emit('leavePoll', this.pollId)
   },
   methods: {
     submitAnswer: function (answer) {

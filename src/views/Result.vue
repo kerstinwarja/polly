@@ -67,8 +67,11 @@ export default {
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints, nameArray: this.nameArray}})
     )
     socket.on("sendToStart",() =>
-        this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
+        this.$router.push({ name: 'Start'})
     )
+  },
+   unmounted:function() {
+    socket.emit('leavePoll', this.pollId)
   },
 
   methods: {
@@ -83,7 +86,7 @@ export default {
     endQuiz: function () {
       this.questionNumber=0;
       socket.emit('goToStart', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
-      this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
+      this.$router.push({ path:"/"})
     },
   }
 }
