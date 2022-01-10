@@ -1,27 +1,26 @@
 <template>
 <div class="barWrapper">
-  <div class="bar" v-for="(item, key) in data" v-bind:key="key">
-    <div v-bind:style="{height: item + 'px', width:'1em'}">
+  <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+    <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
 
     </div>
     <div id="barSpan">
-      <span> {{item}} </span>
+      <span> {{item[1]}} </span>
     </div>
     <div id="names">
-      <p>{{key}}</p>
+      <p>{{item[0]}}</p>
     </div>
   </div>
-
 </div>
-
 </template>
+
 
 <script>
 export default {
   name: 'Bars',
   props: {
     data: Object,
-    nameArray: Array,
+    arrdata: Array,
   },
 }
 </script>

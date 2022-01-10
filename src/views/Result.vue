@@ -7,7 +7,7 @@
 
   </div>
   <Bars v-bind:data="data"
-        v-bind:nameArray="nameArray"/>
+        v-bind:arrdata="arrdata"/>
   <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
       Next question!
@@ -76,7 +76,7 @@ export default {
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
-    
+
 
   },
 
