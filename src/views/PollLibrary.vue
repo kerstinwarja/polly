@@ -1,14 +1,17 @@
 <template>
   <header>
     <h1>{{uiLabels.participatePoll}}</h1>
+    
   </header>
   <h2>{{uiLabels.onThisPage}}</h2>
   <h2>{{uiLabels.insertYourGroups}}</h2>
   <div id="partPoll">
     <label>
       {{uiLabels.nameInsert}}<br>
-      <input type="text" v-model="id"><br>
     </label>
+    <select v-model="id" id="selectId">
+      <option v-for="pollId in polls" v-bind:key="pollId" >{{pollId}}  </option>
+    </select>
     <label>
       {{uiLabels.nickInsert}}<br>
       <input type="text" maxlength="17" v-model="myName">
@@ -63,6 +66,7 @@ export default {
         else alert(this.uiLabels.alertNickname)
       }
       else alert(this.uiLabels.alertNoQuiz)
+      
     },
 
     hostQuiz: function(){
@@ -119,6 +123,8 @@ h2 {
   padding-top: 10%;
 }
 
+
+
 #partPoll button{
   width: 60%;
   height: 50%;
@@ -138,6 +144,19 @@ h2 {
   color: #2d4463;
   border: 0.1em #2d4463 solid;
   text-align:center;
+  padding:0;
+}
+#selectId{
+  height: 100%;
+  width: 51%;
+  font-size: 1.2em;
+  background-color: #fbf1e0;
+  color: navy;
+  border: 0.1em navy solid;
+  margin-left:25%;
+  text-align:center;
+  
+
 }
 
 .buttonLink {

@@ -11,6 +11,7 @@
   <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
     {{uiLabels.showResult}}
   </button>
+ 
   <div id="audio">
     <audio controls autoplay loop v-if="SONG == 'Brass' ">
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -146,6 +147,7 @@ export default {
       this.isHost= true;
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, allQuestions: this.allQuestions}})
     },
+    
     pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
       this.showPlayButton=true
       if(!this.paused){
