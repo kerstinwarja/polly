@@ -212,6 +212,7 @@ button{
 @media only screen and (max-width: 705px) {
   #ans{
     margin:65% 5% 0% 5%;
+    color: black;
   }
   button{
     font-size:1em;
@@ -226,6 +227,7 @@ button{
 @media only screen and (max-width: 500px) {
   #ans{
     margin:95% 5% 0% 5%;
+    color: black;
   }
 }
 </style>
