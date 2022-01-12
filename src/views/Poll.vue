@@ -8,8 +8,14 @@
             v-on:timesUp="setTimeUp"
             v-bind:isHost="isHost"
             v-on:answer="submitAnswer"/>
-  <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
+  <button v-if="timesUp && isHost && allQuestions-1!==questionNumber " v-on:click="continueToResult" id="showRes">
+    
+    {{allQuestions}}
+    {{questionNumber}}
     {{uiLabels.showResult}}
+  </button>
+  <button v-if="timesUp && isHost && allQuestions-1==questionNumber" v-on:click="continueToFinalResult" id="showRes">
+    FINAL
   </button>
   <div id="audio">
     <audio controls autoplay loop v-if="SONG == 'Brass' ">
@@ -104,6 +110,10 @@ export default {
       this.updateScoreboard(this.myPoints),
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
     })
+    socket.on("sendToFinalResult",() => {
+      this.updateScoreboard(this.myPoints),
+      this.$router.push({ name: 'FinalResult', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
+    })
 
     socket.on("showCorrect",() =>
       this.timesUp=true,
@@ -147,6 +157,12 @@ export default {
       console.log('continue woho!');
       this.isHost= true;
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions}})
+    },
+    continueToFinalResult: function() {
+      socket.emit('goToFinalResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions})
+      console.log('continue woho!');
+      this.isHost= true;
+      this.$router.push({ name: 'FinalResult', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions}})
     },
     pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
       this.showPlayButton=true

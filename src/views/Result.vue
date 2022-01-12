@@ -1,7 +1,7 @@
 <template>
   <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.arrdata[0][0]}}</header>
-    <header v-else>Scoreboard</header>
+  
+    <header>Scoreboard</header>
   </div>
   <div>
 

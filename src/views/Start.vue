@@ -43,6 +43,8 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    
+    
   },
   methods: {
     switchLanguage: function() {
