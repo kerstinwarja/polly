@@ -154,6 +154,7 @@ export default {
 }
 .ans0{
   background-color:#628579;
+  color: black;
 }
 .ans1{
   background-color:#536CB0;
