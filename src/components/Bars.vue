@@ -57,7 +57,7 @@ export default {
   margin-top: 1em;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:#2d4463;
+  background-color:navy;
   margin: auto;
   border: 0.1em black solid;
   margin-top: 1em;
@@ -87,10 +87,10 @@ export default {
   min-height: 12em;
   max-height: 12em;
   margin: auto;
-  border: 0.2em #2d4463 solid;
+  border: 0.2em navy solid;
   border-radius: 0.8em;
   font-size: 2em;
-  color: #2d4463;
+  color: navy;
   vertical-align: bottom;
   display: grid;
   grid-template-rows: 15% 15% 15% 15% 15%;
