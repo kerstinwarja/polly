@@ -1,24 +1,22 @@
 <template>
   <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">{{uiLabels.winner}}{{this.posArray[0]}}</header>
-    <header v-else>{{uiLabels.scoreBoard}}</header>
-   <template v-if="!this.isHost"> <h2>{{uiLabels.position}} {{this.posArray.indexOf(this.myName)+1}}</h2> </template>
+    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.posArray[0]}}</header>
+    <header v-else>Scoreboard</header>
+   <template v-if="!this.isHost"> <h2>Your position is: {{this.posArray.indexOf(this.myName)+1}}</h2> </template>
   </div>
   <div>
 
   </div>
   <Bars v-bind:data="data"
-        v-bind:arrdata="arrdata"
-        v-bind:questionNumber="questionNumber"
-        v-bind:allQuestions="allQuestions"/>
+        v-bind:arrdata="arrdata"/>
   <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
-      {{uiLabels.nextQues}}
+      Next question!
     </button>
   </div>
   <div v-show="isHost">
     <button v-on:click="endQuiz" class="continueButton" id="exitQuizButton">
-      {{uiLabels.endQuiz}}
+      End quiz
     </button>
   </div>
 </template>
@@ -43,17 +41,16 @@ export default {
       myName: "",
       myPoints: 0,
       pollId:"",
+      uiLabels: {},
       allQuestions: 0,
       arrdata:[],
       posArray:[],
-      uiLabels: {},
       data: {
       }
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
-    console.log("lang", this.lang);
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
@@ -70,16 +67,17 @@ export default {
       this.question = update.q;
       this.data = {};
     })
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      console.log(labels)
+      this.uiLabels = labels
+    })
     socket.on("sendToQues",() =>
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints}})
     )
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
-    socket.emit("pageLoaded", this.lang);
-    socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
   },
 
   methods: {
@@ -104,8 +102,6 @@ export default {
       this.posArray.splice(i, 1);
     }
     },
-
-
   }
 }
 </script>
@@ -115,10 +111,16 @@ export default {
 header {
   padding-top:0%;
   font-size: 2em;
-  text-shadow: -0.04em 0 #990000, 0 0.13em #990000, 0.13em 0 #990000, 0 0em #990000;
+  text-shadow: 0.07em 0 #990000;
+
   margin:0%;
 }
-
+h2{
+  padding-top:0%;
+  color: white;
+  text-shadow: 0.07em 0 #990000;
+  margin:0%;
+}
 .continueButton {
   float: right;
   margin: 2% 5% 2% 0%;
@@ -129,7 +131,7 @@ header {
   height: 4em;
   width: 15%;
   min-width: 8em;
-  border: 0.2em #2d4463 solid;
+  border: 0.2em navy solid;
 }
 
 #exitQuizButton {

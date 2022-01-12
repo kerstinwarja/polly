@@ -1,26 +1,17 @@
 <template>
-  <div class="barWrapper">
-    <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
-      <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
+<div class="barWrapper">
+  <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+    <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
 
-<<<<<<< HEAD
-      </div>
-      <div id="barSpan">
-        <span> {{item[1]}} </span>
-      </div>
-      <div id="names">
-        <p>{{item[0]}}</p>
-      </div>
-=======
     </div>
     <div id="barSpan">
       <span> {{item[1]-10}}p </span>
     </div>
     <div id="names">
       <p>{{item[0]}}</p>
->>>>>>> dd2f8b430c8782b4c84fa7fa56e940d2df94668b
     </div>
   </div>
+</div>
 </template>
 
 
@@ -30,22 +21,12 @@ export default {
   props: {
     data: Object,
     arrdata: Array,
-    questionNumber: Number,
-    allQuestions: Number,
   },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  font-size: 3em;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-  color: white;
-  margin-top: 3%;
-  margin-bottom: 0%;
-}
-
 .bar {
   width: 50px;
   transform: rotate(-90deg);
@@ -60,7 +41,7 @@ h1 {
 
 #names {
   transform: rotate(90deg);
-  margin-left: -2.5em;
+  margin-left: -3.0em;
   font-size: 1em;
 }
 
@@ -71,7 +52,7 @@ h1 {
   margin-top: 1em;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:#2d4463;
+  background-color:navy;
   margin: auto;
   border: 0.1em black solid;
   margin-top: 1em;
@@ -101,10 +82,10 @@ h1 {
   min-height: 12em;
   max-height: 12em;
   margin: auto;
-  border: 0.2em #2d4463 solid;
+  border: 0.2em navy solid;
   border-radius: 0.8em;
   font-size: 2em;
-  color: #2d4463;
+  color: navy;
   vertical-align: bottom;
   display: grid;
   grid-template-rows: 15% 15% 15% 15% 15%;
