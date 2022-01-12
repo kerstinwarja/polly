@@ -158,8 +158,7 @@ p{
   margin: 3% 0% 3% 0%;
 }
 li{
-  text-align:left;
-  margin-left:30%;
+  text-align: left;
 }
 #musicControl{
   position:absolute;
@@ -187,7 +186,7 @@ li{
   color: #2d4463;
   line-break: auto;
   height: 10em;
-  width: 91%;
+  width: 90%;
   background-color: wheat;
   border-radius: 2%;
   border: #2d4463 0.1em solid;
@@ -231,17 +230,14 @@ li{
   .infoBoards{
     width: 60%;
     margin:5% 20% 0% 20%;
-    text-align: left;
     padding-left:2%;
-  }
-  li{
-    margin:0%;
+    text-align: left;
   }
 }
 @media only screen and (max-width: 500px) {
   .infoBoards{
     width: 90%;
-  margin:3% 5% 0% 5%;
+    margin:3% 5% 0% 5%;
     min-height:5em;
   }
   #startButton {

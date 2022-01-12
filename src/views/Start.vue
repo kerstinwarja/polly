@@ -128,7 +128,7 @@ button:hover {
 }
 #nav button{
   width: 10%;
-  min-width: 4em;
+  min-width: 7em;
   height: 3em;
   top: 7%;
   left: 7%;

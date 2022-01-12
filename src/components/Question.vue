@@ -142,14 +142,15 @@ export default {
   object-fit: contain;
 }
 #ans{
-  display:grid;
+  color: black;
+  display: grid;
   height: 10em;
   width: 90%;
   grid-template-columns: repeat(2, 1fr);
   gap: 3%;
   align-items: center;
-  margin:27% 5% 0% 5%;
-  padding-bottom:1%;
+  margin: 27% 5% 0% 5%;
+  padding-bottom: 1%;
 }
 .ans0{
   background-color:#628579;

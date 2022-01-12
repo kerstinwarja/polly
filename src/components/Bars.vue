@@ -85,8 +85,8 @@ export default {
 .barWrapper {
   background-color: wheat;
   width: 50%;
-  min-height: 12em;
-  max-height: 12em;
+  min-height: 14em;
+  max-height: 14em;
   margin: auto;
   border: 0.2em navy solid;
   border-radius: 0.8em;
