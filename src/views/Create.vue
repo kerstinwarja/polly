@@ -324,6 +324,7 @@ body textarea{
   align-items: center;
   margin: 26% 2% 0% 2%;
   clear: left;
+  
 }
 #answerBox{
   height: 85%;
@@ -334,6 +335,7 @@ body textarea{
   overflow:hidden;
   text-align:center;
   padding:1%;
+  
 }
 #questionMenu{
   width:95%;
@@ -380,6 +382,8 @@ body textarea{
 #markedCorrect{
   font-size:0.6em;
   text-align: center;
+  
+
 }
 #buttonDiv {
   height: 10%;
