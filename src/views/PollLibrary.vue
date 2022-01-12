@@ -21,6 +21,11 @@
       <button v-on:click="hostQuiz">{{uiLabels.host}}</button>
     </div>
   </div>
+  <footer>
+    <div>
+      <h5> © Quizcus inc</h5>
+    </div>
+  </footer>
 </template>
 
 <script>

@@ -19,6 +19,11 @@
       {{uiLabels.endQuiz}}
     </button>
   </div>
+  <footer>
+    <div>
+      <h5> © Quizcus inc</h5>
+    </div>
+  </footer>
 </template>
 
 <script>
