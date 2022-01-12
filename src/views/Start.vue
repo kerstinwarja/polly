@@ -43,8 +43,8 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-    
-    
+
+
   },
   methods: {
     switchLanguage: function() {
@@ -75,14 +75,14 @@ header {
 h4 {
   text-align: center;
   color: white;
-  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.04em 0 #990000, 0 0.04em #990000, 0.09em 0 #990000, 0 -0.04em #990000;
   font-size: 0.5em;
 }
 h6{
   font-size: 1.5em;
   margin:2%;
   color:white;
-  text-shadow: -0.06em 0 black, 0 0.06em black, 0.06em 0 black, 0 -0.06em black;
+  text-shadow: -0.05em 0 black, 0 0.05em black, 0.09em 0 black, 0 -0.05em black;
 }
 
 body{

@@ -148,7 +148,7 @@ export default {
 
 header {
   font-size: 3em;
-  text-shadow: -0.05em 0 #2d4463, 0 0.15em #2d4463, 0.15em 0 #2d4463, 0 -0.03em #2d4463;
+  text-shadow: -0.05em 0 #2d4463, 0 0.05em #2d4463, 0.10em 0 #2d4463, 0 -0.05em #2d4463;
   padding:0%;
 }
 
@@ -157,7 +157,7 @@ h4{
   color: white;
   font-size: 2em;
   margin: 3% 0% 3% 0%;
-  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.04em 0 #990000, 0 0.04em #990000, 0.09em 0 #990000, 0 -0.04em #990000;
 }
 p{
   margin: 3% 0% 3% 0%;

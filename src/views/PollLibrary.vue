@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>{{uiLabels.participatePoll}}</h1>
-    
+
   </header>
   <h2>{{uiLabels.onThisPage}}</h2>
   <h2>{{uiLabels.insertYourGroups}}</h2>
@@ -66,7 +66,7 @@ export default {
         else alert(this.uiLabels.alertNickname)
       }
       else alert(this.uiLabels.alertNoQuiz)
-      
+
     },
 
     hostQuiz: function(){
@@ -92,7 +92,7 @@ header {
   text-align: center;
   padding-top:0; /*5%*/
   color: white;
-  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
+  text-shadow:-0.06em 0 #990000, 0 0.06em #990000, 0.12em 0 #990000, 0 -0.06em #990000;
 }
 h1{
   margin: 5% 0% 2% 0%;
@@ -102,7 +102,7 @@ h2 {
   margin: 0% 0% 2% 0%;
   text-align: center;
   color: white;
-  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.04em 0 #990000, 0 0.04em #990000, 0.09em 0 #990000, 0 -0.04em #990000;
   font-size: 18pt;
   line-break: auto;
 }
@@ -155,7 +155,7 @@ h2 {
   border: 0.1em navy solid;
   margin-left:25%;
   text-align:center;
-  
+
 
 }
 
