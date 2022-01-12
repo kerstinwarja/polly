@@ -2,7 +2,7 @@
   <div>
     <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.arrdata[0][0]}}</header>
     <header v-else>Scoreboard</header>
-    <h2>Your position is: {{this.posArray.indexOf(this.myName)+1}}</h2>
+   <template v-if="!this.isHost"> <h2>Your position is: {{this.posArray.indexOf(this.myName)+1}}</h2> </template>
   </div>
   <div>
 
