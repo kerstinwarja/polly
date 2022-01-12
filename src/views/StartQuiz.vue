@@ -148,7 +148,7 @@ export default {
 
 header {
   font-size: 3em;
-  text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.03em navy;
+  text-shadow: -0.05em 0 #2d4463, 0 0.15em #2d4463, 0.15em 0 #2d4463, 0 -0.03em #2d4463;
   padding:0%;
 }
 
@@ -192,13 +192,13 @@ li{
 }
 
 .infoBoards{
-  color: navy;
+  color: #2d4463;
   line-break: auto;
   height: 10em;
   width: 90%;
   background-color: wheat;
   border-radius: 2%;
-  border: navy 0.1em solid;
+  border: #2d4463 0.1em solid;
   font-size: 1.5em;
   padding:0% 0% 1% 2%;
   margin: 0% 5% 0% 5%;
@@ -213,7 +213,7 @@ li{
   text-transform: uppercase;
   height: 4em;
   width: 15%;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
   margin-bottom:2%;
 }
 

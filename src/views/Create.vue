@@ -233,12 +233,12 @@ h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
-  color: Navy;
+  color: #2d4463;
 }
 body textarea{
   width: 70%;
   background-color: #f0e7d1;
-  color: Navy;
+  color: #2d4463;
   resize:none;
   padding: 0.4em 0.4em 0.4em;
   font-family: sans-serif;
@@ -269,7 +269,7 @@ body textarea{
 }
 #previewTitle{
   font-size: 1.5em;
-  text-shadow: -0.01em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.01em navy;
+  text-shadow: -0.01em 0 #2d4463, 0 0.07em #2d4463, 0.07em 0 #2d4463, 0 -0.01em #2d4463;
   color: white;
   line-break: auto;
   text-align:center;
@@ -313,7 +313,7 @@ body textarea{
 #questionMenu{
   width: 100%;
   height: 5em;
-  border: navy 0.2em solid;
+  border: #2d4463 0.2em solid;
   background-color: wheat;
   overflow: auto;
   margin-bottom: 2%;

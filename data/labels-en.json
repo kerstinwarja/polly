@@ -61,5 +61,10 @@
 	"enterPic":"Please enter a pictureadress:",
 	"enterTime":"Set a maximum time for answering the question (in seconds):",
 	"timeWrong":"Time can only be entered using numbers. Please try again",
-	"alertNickname":"You need a nickname to participate in the quiz"
+	"alertNickname":"You need a nickname to participate in the quiz",
+	"scoreBoard":"Scoreboard",
+	"winner": "And the winner is: ",
+	"position": "Your position is:",
+	"nextQues": "Next question!",
+	"endQuiz": "End quiz"
 }
