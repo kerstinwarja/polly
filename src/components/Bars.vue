@@ -57,7 +57,7 @@ export default {
   margin-top: 1em;
 }
 .bar:nth-child(2) div:nth-child(1) {
-  background-color:navy;
+  background-color:#2d4463;
   margin: auto;
   border: 0.1em black solid;
   margin-top: 1em;
