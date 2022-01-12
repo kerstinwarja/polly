@@ -3,6 +3,7 @@
     <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
       <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
 
+<<<<<<< HEAD
       </div>
       <div id="barSpan">
         <span> {{item[1]}} </span>
@@ -10,6 +11,14 @@
       <div id="names">
         <p>{{item[0]}}</p>
       </div>
+=======
+    </div>
+    <div id="barSpan">
+      <span> {{item[1]-10}}p </span>
+    </div>
+    <div id="names">
+      <p>{{item[0]}}</p>
+>>>>>>> dd2f8b430c8782b4c84fa7fa56e940d2df94668b
     </div>
   </div>
 </template>

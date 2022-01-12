@@ -4,7 +4,6 @@
       <h1>{{uiLabels.createHead}}</h1>
     </header>
     <div class="mainWrap">
-      <div>
         <div id="preview">
           <div id="previewTitle">
             <span>{{question}}</span>
@@ -20,22 +19,7 @@
               </textarea>
           </div>
         </div>
-
-        <div id="questionMenu">
-          <div v-if="!this.isEditing">
-            <h3>{{uiLabels.questionAlterate}}</h3>
-          </div>
-          <div v-if="this.isEditing">
-            <h3>{{uiLabels.makeingChanges}}"{{this.allQuestions[this.questionNumber]}}"</h3>
-          </div>
-          <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-            {{i+1}}: {{ q }}
-          </button>
-        </div>
-      </div>
-
       <div class="createWindow">
-
           <h3> {{uiLabels.question}}: </h3>
           <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <h3>{{uiLabels.answer}}</h3>
@@ -47,7 +31,7 @@
             <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
         </div>
-          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="  background-color: rgb(100, 155, 36)">{{uiLabels.answerAdd}}</button>
+          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color:#a4db74">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
             <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
               <span>
@@ -70,7 +54,19 @@
               {{uiLabels.save}}<br>{{uiLabels.changes}}
             </button>
         </div>
+    </div>
+
+    <div id="questionMenu">
+      <div v-if="!this.isEditing">
+        <h3>{{uiLabels.questionAlterate}}</h3>
       </div>
+      <div v-if="this.isEditing">
+        <h3>{{uiLabels.makeingChanges}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+      </div>
+      <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+        {{i+1}}: {{ q }}
+      </button>
+    </div>
     </div>
     <div class="navButton">
     <router-link v-bind:to="'/initialize/'+ lang">
@@ -185,11 +181,16 @@ export default {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
     PicChoose(){
-      let person = prompt("Please enter a pictureadress:", "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
+      let person = prompt(this.uiLabels.enterPic, "https://m.media-amazon.com/images/I/714csIk-dRL._AC_SL1500_.jpg");
       this.questionImg = person;
     },
     setTime(){
-      let clock = prompt("Set a maximum time for answering the question (in seconds):");
+      let clock = prompt(this.uiLabels.enterTime);
+      if(isNaN(clock)){
+        alert(this.uiLabels.timeWrong)
+        this.setTime();
+        return;
+      }
       this.time = clock;
     },
     accessQuestion: function (i){
@@ -244,7 +245,6 @@ body textarea{
   border: 0.1em solid;
 }
 .mainWrap {
-  margin: 0px;
   padding: 0% 4% 0% 4%;
   width: 92%;
   height: 100%;
@@ -311,37 +311,37 @@ body textarea{
 
 }
 #questionMenu{
-  width:95%;
+  width: 100%;
   height: 5em;
   border: navy 0.2em solid;
-  margin-top: 1%;
   background-color: wheat;
   overflow: auto;
-  padding: 2%;
+  margin-bottom: 2%;
 }
 #questionMenu button{
   background-color: #CF903A;
   color: black;
-  height: 50%;
-  width: 20%;
+  height: 40%;
+  width: 15%;
   float:left;
   overflow: hidden;
 }
 #questionMenu h3{
   text-align: center;
+  padding-top:1%;
 }
 .createWindow{
   background-color: wheat;
   width: 100%;
   border: 0.2em #2d4463 solid;
-  height: 34em;
+  height: 26em;
   position: relative;
 }
 #qInput{
   width:90%
 }
 #answerInput{
-  height:25%;
+  height:40%;
   overflow:auto;
 }
 #ansTitle{
@@ -404,12 +404,14 @@ body textarea{
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
-  padding: 0% 8% 0% 8%;
-  width:84%;
+    padding: 0% 8% 0% 8%;
+    width:84%;
     grid-template-columns: 100%;
     grid-template-areas:
       'create'
-      'preview'
+      'qmenu'
+      'preview';
+    grid-gap: 2%;
   }
   header{
     font-size: 1em;
@@ -423,7 +425,9 @@ body textarea{
     font-size: 2.5em;
     margin:5% 0% 5% 0%;
   }
-
+#questionMenu{
+ grid-area: qmenu;
+}
   .createWindow{
     grid-area:create;
     height: 36em;
