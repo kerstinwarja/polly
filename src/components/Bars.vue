@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream
 <header v-if="this.questionNumber == this.allQuestions-1">And the winner is:{{arrdata[0][0]}} </header>
     <header>Scoreboard</header>
 <div class="barWrapper">
@@ -10,6 +11,22 @@
     </div>
     <div id="barSpan">
       <span> {{item}} </span>
+=======
+  <body>
+    <div class="barWrapper">
+      <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+        <template v-if="key<2">
+        <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
+        </div>
+        <div id="barSpan">
+          <span> {{item[1]-10}}p </span>
+        </div>
+        <div id="names">
+          <p>{{item[0]}}</p>
+        </div>
+        </template>
+      </div>
+>>>>>>> Stashed changes
     </div>
     <div id="names">
       {{key}}
