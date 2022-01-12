@@ -251,9 +251,8 @@ export default {
 }
 
 header {
-  font-size: 1.5em;
-  text-shadow: -0.05em 0 navy, 0 0.15em navy, 0.15em 0 navy, 0 -0.05em navy;
-  margin-bottom: 5%;
+  font-size: 1.7em;
+  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
 }
 h3{
   margin:0px;

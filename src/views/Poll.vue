@@ -3,6 +3,10 @@
     and my points {{this.myPoints}} </h1-->
   <!--{{pollId}}-->
   <!--div v-show="isHost">Behövs diven (jag la till &&isHost i v-if)?-->
+  <button v-show="this.SONG!='' || this.showPlayButton" id="musicControl" type="submit" v-on:click="pauseplay()">
+    <img v-if="paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
+    <img v-if="!paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
+  </button>
     <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
       {{uiLabels.showResult}}
     </button>
@@ -52,6 +56,9 @@ export default {
       uiLabels: {},
       lang:"",
       SONG:"",
+      paused:false,
+      showPlayButton:false,
+      songBackup:"",
       isHost: false,
       timesUp: false,
       sendPoints: 0,
@@ -78,7 +85,6 @@ export default {
       console.log(labels)
       this.uiLabels = labels
     })
-
     this.pollId = this.$route.params.id;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
@@ -105,7 +111,7 @@ export default {
     )*/
 
     socket.on("sendToResult",() => {
-      this.updateScoreboard(),
+      this.updateScoreboard(this.myPoints),
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
     })
 
@@ -120,9 +126,9 @@ export default {
       this.myPoints = this.answerPoints(answer);
       socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
     },
-    updateScoreboard () {
+    updateScoreboard (myPoints) {
       if(!this.isHost || !this.clicked) {
-        socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
+        socket.emit("submitAnswer", {pollId: this.pollId, myPoints: myPoints, myName: this.myName})
       }
     },
     answerPoints (answer){
@@ -151,11 +157,29 @@ export default {
       console.log('continue woho!');
       this.isHost= true;
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions}})
+    },
+    pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
+      this.showPlayButton=true
+      if(!this.paused){
+        this.songBackup = this.SONG
+        this.SONG = ""
+        this.paused = true
+      }
+      else{
+        this.SONG = this.songBackup
+        this.paused = false
+      }
     }
   }
 }
 </script>
 <style scoped>
+#musicControl{
+  position:absolute;
+  left:5%;
+  top:2%;
+  background-color: wheat;
+}
 #audio{
   display:none;
 }
@@ -164,7 +188,7 @@ export default {
   text-transform: uppercase;
   height: 4em;
   width: auto;
-  background-color: rgb(100, 155, 36);
+  background-color: black;
   color: white;
   margin-top:1%;
 }
