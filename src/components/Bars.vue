@@ -5,7 +5,7 @@
 
     </div>
     <div id="barSpan">
-      <span> {{item[1]}} </span>
+      <span> {{item[1]-10}}p </span>
     </div>
     <div id="names">
       <p>{{item[0]}}</p>

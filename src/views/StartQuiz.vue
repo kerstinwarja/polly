@@ -94,7 +94,7 @@ export default {
     )
 
     socket.on("sendToPoll",() =>
-        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myPoints:this.myPoints, myName: this.myName, nameArray: this.nameArray}})
+        this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myPoints:this.myPoints, myName: this.myName/*nameArray: this.nameArray*/}})
     )
 
     socket.on("description", desc =>
@@ -120,11 +120,11 @@ export default {
   methods:{
     letsGo: function() {
       this.questionNumber=0;
-      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray});
+      socket.emit('startQuiz', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber /*nameArray: this.nameArray*/});
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
       console.log('lets GO!');
       this.isHost= true;
-      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray}});
+      this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber/*nameArray: this.nameArray*/}});
       socket.emit('clearNickname',{pollId:this.pollId} )
       socket.emit('clearAnswer',{pollId:this.pollId} )
     },

@@ -85,10 +85,7 @@ export default {
       pollImg:"",
       data: {},
       uiLabels: {},
-      SONG:"",
       music:"",
-      question: "",
-      answers: ["", ""],
       questionNumber: 0,
       polls:[]
     }
@@ -113,9 +110,8 @@ export default {
     createPoll: function () {
       if(this.pollId!=""){
         this.timerCount = this.time;
-        this.SONG = this.music;
         if(this.polls.indexOf(this.pollId)==-1){
-          socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
+          socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.music })
           this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
         }
         else alert(this.uiLabels.alertPickNewQuizName)
