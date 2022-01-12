@@ -10,7 +10,6 @@ function sockets(io, socket, data) {
   });
 
   socket.on('createPoll', function(d) {
-    console.log("in data"+d.pollImg);
     socket.emit('pollCreated', data.createPoll(d.pollId, d.lang, d.pollDesc, d.pollImg, d.SONG));
   });
 
@@ -43,17 +42,14 @@ function sockets(io, socket, data) {
 
   socket.on('goToResult', function(d) {
     io.to(d.pollId).emit('sendToResult')
-    console.log('-----------sendToResult------------');
   });
 
   socket.on('goBackToQues', function(d) {
     io.to(d.pollId).emit('sendToQues')
-    console.log('-----------sendToQues------------');
   });
 
   socket.on('goToStart', function(d) {
     io.to(d.pollId).emit('sendToStart')
-    console.log('-----------sendToStart------------');
   });
 
   socket.on('sendNickname', function(d) {
@@ -72,10 +68,11 @@ function sockets(io, socket, data) {
     data.submitAnswer(d.pollId, d.myPoints, d.myName);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
-  
+
   socket.on('clearAnswer', function(d) {
     io.to(d.pollId).emit('sendName3', data.clearAnswers(d.pollId));
   });
+  
   socket.on('getPolls',function(){
     socket.emit('polls', data.getPolls());
   });

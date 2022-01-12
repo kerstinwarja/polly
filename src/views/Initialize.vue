@@ -1,8 +1,8 @@
 <template>
+  <header>
+    <h1>{{uiLabels.initializeHead}}</h1>
+  </header>
   <body>
-    <header>
-      <h1>{{uiLabels.initializeHead}}</h1>
-    </header>
     <div class="mainWrap">
       <div id="preview">
         <h4> {{uiLabels.play}}</h4>
@@ -46,25 +46,25 @@
         <textarea type="text" v-model="pollId" v-bind:placeholder="uiLabels.namePick"></textarea>
         <h3>{{uiLabels.quizDesc}}</h3>
         <textarea id="desIptBox" type="text" v-model="pollDesc" v-bind:placeholder="uiLabels.descPick"></textarea>
-          <h3>{{uiLabels.quizPic}}</h3>
-          <button class="importItems" type="submit" v-on:click="PicChoose()">
-            <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
-            <span>{{uiLabels.impPic}}</span>
-          </button>
-          <h3>{{uiLabels.quizMusic}}</h3>
-          <select class="importItems" v-model="music">
-                   <option>Brass</option>
-                   <option>Ragtime</option>
-                   <option>Strings</option>
-                   <option>Techno</option>
-                   <option>Trap</option>
-          </select>
+        <h3>{{uiLabels.quizPic}}</h3>
+        <button class="importItems" type="submit" v-on:click="PicChoose()">
+          <img src="https://static.thenounproject.com/png/17840-200.png" style = "height:1.5em;">
+          <span>{{uiLabels.impPic}}</span>
+        </button>
+        <h3>{{uiLabels.quizMusic}}</h3>
+        <select class="importItems" v-model="music">
+           <option>Brass</option>
+           <option>Ragtime</option>
+           <option>Strings</option>
+           <option>Techno</option>
+           <option>Trap</option>
+        </select>
       </div>
     </div>
     <div id="navButtons">
-    <router-link v-bind:to="'/'">
-      <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
-    </router-link>
+      <router-link v-bind:to="'/'">
+        <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
+      </router-link>
       <button style="float:right; background-color: #236627" v-on:click="createPoll">
         {{uiLabels.add}}{{uiLabels.questions}}
       </button>
@@ -155,7 +155,6 @@ p{
   margin:3%;
   font-weight: bold;
 }
-
 .mainWrap {
   margin: 0px;
   padding: 0% 4% 0% 4%;
@@ -166,7 +165,6 @@ p{
   grid-template-columns: 61% 31%;
   align-items: top;
 }
-
 .importItems{
   background-color: #fbf1e0;
   text-transform: uppercase;
@@ -175,7 +173,6 @@ p{
   width: 80%;
   border: 0.2em black solid;
 }
-
 .prevWrap{
   margin: 0px;
   padding: 3% 0% 3% 0%;
@@ -186,14 +183,12 @@ p{
   grid-template-columns: 32% 33% 32%;
   align-items: center;
 }
-
 #previewPic img{
   max-height: 9em;
   max-width:100%;
   height:auto;
   width: auto;
 }
-
 #preview{
   background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg);
   background-size: cover;
@@ -222,7 +217,6 @@ p{
   overflow:auto;
   margin:0% 5% 0% 5%;
 }
-
 .createWrap{
   background-color: wheat;
   width: 100%;
@@ -243,11 +237,9 @@ select:hover{
   box-shadow: 0px 5px 10px #646467;
   transform: translateY(-5px);
 }
-
 #desIptBox{
   height: 10em;
 }
-
 #navButtons button{
   height: 3em;
   width: 6.6em;
@@ -258,7 +250,6 @@ select:hover{
   text-align: center;
   font-size: 1em;
 }
-
 @media only screen and (max-width: 980px) {
   .mainWrap{
     grid-template-columns: 100%;
@@ -318,7 +309,6 @@ select:hover{
     text-align: left;
   }
 }
-
 @media only screen and (max-width: 700px) {
   #preview{
     height: 55em;
@@ -342,8 +332,4 @@ select:hover{
     margin-top: 20%;
   }
 }
-
-
-
-
 </style>

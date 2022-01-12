@@ -21,8 +21,8 @@
       <div class="infoBoards" id="pollParts">
         <p>{{uiLabels.parts}}</p>
         <span v-for="name in this.nameArray" v-bind:key="name">
-            <li>{{name}}</li>
-          </span>
+          <li>{{name}}</li>
+        </span>
       </div>
     </div>
     <div id="audio">
@@ -87,31 +87,23 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
-
-
     socket.emit('joinPoll',this.pollId)
-
     socket.on("newQuestion", q =>
         this.question = q
     )
-
     socket.on("sendToPoll",() =>
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myPoints:this.myPoints, myName: this.myName/*nameArray: this.nameArray*/}})
     )
-
     socket.on("description", desc =>
         this.pollDesc = desc
     )
     socket.emit('getNickname',{pollId:this.pollId});
-
     socket.on("getName",participants => {
           this.nameArray = participants
         }
     )
-
     socket.on("imageAddress", imag =>
         this.pollImg = imag
     )
@@ -150,13 +142,11 @@ export default {
 </script>
 
 <style scoped>
-
 header {
   font-size: 3em;
   text-shadow: -0.05em 0 #2d4463, 0 0.05em #2d4463, 0.10em 0 #2d4463, 0 -0.05em #2d4463;
   padding:0%;
 }
-
 h4{
   line-break: auto;
   color: white;
@@ -167,7 +157,6 @@ h4{
 p{
   margin: 3% 0% 3% 0%;
 }
-
 li{
   text-align:left;
   margin-left:30%;
@@ -183,7 +172,6 @@ li{
   width: 100%;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  /*align-items: center;*/
 }
 #wrap img{
   max-height: 15em;
@@ -195,7 +183,6 @@ li{
   height: 30%;
   width: 35%;
 }
-
 .infoBoards{
   color: #2d4463;
   line-break: auto;
@@ -210,7 +197,6 @@ li{
   overflow:auto;
   font-weight: bold;
 }
-
 #startButton {
   background-color: rgb(100, 155, 36);
   color: white;
@@ -221,40 +207,36 @@ li{
   border: 0.2em #2d4463 solid;
   margin-bottom:2%;
 }
-
 #audio {
   display:none;
 }
-
 @media only screen and (max-width: 980px) {
-  /* For mobile phones: */
-#wrap{
-    grid-template-columns: 100%;
-    grid-template-areas:
-      'pic'
-      'des'
-      'par';
-    align-items:center;
+  #wrap{
+      grid-template-columns: 100%;
+      grid-template-areas:
+        'pic'
+        'des'
+        'par';
+      align-items:center;
   }
-#pollDesc{
-  grid-area: des;
-}
-#pollParts{
-  grid-area:par;
-}
-#picture{
-  grid-area:pic;
-}
-.infoBoards{
-  width: 60%;
-  margin:5% 20% 0% 20%;
-  text-align: left;
-  padding-left:2%;
-}
-li{
-  margin:0%;
-}
-
+  #pollDesc{
+    grid-area: des;
+  }
+  #pollParts{
+    grid-area:par;
+  }
+  #picture{
+    grid-area:pic;
+  }
+  .infoBoards{
+    width: 60%;
+    margin:5% 20% 0% 20%;
+    text-align: left;
+    padding-left:2%;
+  }
+  li{
+    margin:0%;
+  }
 }
 @media only screen and (max-width: 500px) {
   .infoBoards{

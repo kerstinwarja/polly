@@ -11,7 +11,6 @@
   <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
     {{uiLabels.showResult}}
   </button>
-
   <div id="audio">
     <audio controls autoplay loop v-if="SONG == 'Brass' ">
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -29,7 +28,7 @@
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
   </div>
-<footer>
+  <footer>
     <div>
       <h5> © Quizcus inc</h5>
     </div>
@@ -37,7 +36,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Question from '@/components/Question.vue';
 import io from 'socket.io-client';
 const socket = io();
@@ -99,12 +97,10 @@ export default {
       this.allQuestions = q.allQuestions
       }
     ),
-
     socket.on("sendToResult",() => {
       this.updateScoreboard(this.myPoints),
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
     })
-
     socket.on("showCorrect",() =>
       this.timesUp=true,
     )
@@ -145,8 +141,7 @@ export default {
       this.isHost= true;
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, allQuestions: this.allQuestions}})
     },
-
-    pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
+    pauseplay: function(){
       this.showPlayButton=true
       if(!this.paused){
         this.songBackup = this.SONG
@@ -161,6 +156,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 #musicControl{
   position:absolute;

@@ -1,85 +1,83 @@
 <template>
+  <header>
+    <h1>{{uiLabels.createHead}}</h1>
+  </header>
   <body>
-    <header>
-      <h1>{{uiLabels.createHead}}</h1>
-    </header>
     <div class="mainWrap">
-        <div id="preview">
-          <div id="previewTitle">
-            <span>{{question}}</span>
-          </div>
-          <div id="previewPic">
-            <img v-if="questionImg" v-bind:src="questionImg">
-          </div>
-          <div id="timer">
-            {{this.time}}
-          </div>
-          <div id="answers">
-              <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" v-bind:placeholder="uiLabels.previewPlaceholder" readonly>
-              </textarea>
-          </div>
+      <div id="preview">
+        <div id="previewTitle">
+          <span>{{question}}</span>
         </div>
+        <div id="previewPic">
+          <img v-if="questionImg" v-bind:src="questionImg">
+        </div>
+        <div id="timer">
+          {{this.time}}
+        </div>
+        <div id="answers">
+          <textarea id="answerBox" type="text"  v-for="(_,i) in answers"  v-model="answers[i]" v-bind:key="'answer'+i"  v-bind:class="'answer'+i" v-bind:placeholder="uiLabels.previewPlaceholder" readonly></textarea>
+        </div>
+      </div>
       <div class="createWindow">
-          <h3> {{uiLabels.question}}: </h3>
-          <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
-          <h3>{{uiLabels.answer}}</h3>
-          <h3 id="markedCorrect">{{uiLabels.markCorr}}</h3>
-          <div id="answerInput" >
+        <h3> {{uiLabels.question}}: </h3>
+        <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
+        <h3>{{uiLabels.answer}}</h3>
+        <h3 id="markedCorrect">{{uiLabels.markCorr}}</h3>
+        <div id="answerInput" >
           <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
             <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>
             <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" v-bind:placeholder="uiLabels.answerPlaceholder"></textarea>
             <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
         </div>
-          <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color:#a4db74">{{uiLabels.answerAdd}}</button>
+        <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="background-color:#a4db74">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
-            <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
-              <span>
-                {{uiLabels.set}}<br>
-                {{uiLabels.timer}}
-              </span>
-            </button>
-            <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
-              <span>
-                {{uiLabels.import}}<br>{{uiLabels.picture}}
-              </span>
-            </button>
-            <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
-              {{uiLabels.add}}<br>{{uiLabels.questionLower}}
-            </button>
-            <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: rgb(255, 0, 0);">
-              {{uiLabels.remove}}<br>{{uiLabels.questionLower}}
-            </button>
-            <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
-              {{uiLabels.save}}<br>{{uiLabels.changes}}
-            </button>
+          <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
+            <span>
+              {{uiLabels.set}}<br>
+              {{uiLabels.timer}}
+            </span>
+          </button>
+          <button type="submit" v-on:click="PicChoose()" style="background-color: rosybrown">
+            <span>
+              {{uiLabels.import}}<br>{{uiLabels.picture}}
+            </span>
+          </button>
+          <button  v-if="!this.isEditing" v-on:click="addQuestion()" >
+            {{uiLabels.add}}<br>{{uiLabels.questionLower}}
+          </button>
+          <button  v-if="this.isEditing" v-on:click="removeQuestion(this.questionNumber)" style = "background-color: rgb(255, 0, 0);">
+            {{uiLabels.remove}}<br>{{uiLabels.questionLower}}
+          </button>
+          <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
+            {{uiLabels.save}}<br>{{uiLabels.changes}}
+          </button>
         </div>
-    </div>
-
-    <div id="questionMenu">
-      <div v-if="!this.isEditing">
-        <h3>{{uiLabels.questionAlterate}}</h3>
       </div>
-      <div v-if="this.isEditing">
-        <h3>{{uiLabels.makeingChanges}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+      <div id="questionMenu">
+        <div v-if="!this.isEditing">
+          <h3>{{uiLabels.questionAlterate}}</h3>
+        </div>
+        <div v-if="this.isEditing">
+          <h3>{{uiLabels.makeingChanges}}"{{this.allQuestions[this.questionNumber]}}"</h3>
+        </div>
+        <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
+          {{i+1}}: {{ q }}
+        </button>
       </div>
-      <button v-for="(q,i) in this.allQuestions" v-bind:key="q" v-bind:index="i" v-on:click="accessQuestion(i)" v-bind:class="finishedQuestions">
-        {{i+1}}: {{ q }}
-      </button>
-    </div>
     </div>
     <div class="navButton">
-    <router-link v-bind:to="'/initialize/'+ lang">
-      <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
-    </router-link>
-    <router-link v-bind:to="'/polllibrary/'+ lang">
-      <button style="float:right; background-color: #236627" v-on:click="sendQuiz()">
-        {{uiLabels.saveAndPlay}}
-      </button>
-    </router-link>
-  </div>
+      <router-link v-bind:to="'/initialize/'+ lang">
+        <button style ="background-color: #4f5559">{{uiLabels.goBack}}</button>
+      </router-link>
+      <router-link v-bind:to="'/polllibrary/'+ lang">
+        <button style="float:right; background-color: #236627" v-on:click="sendQuiz()">
+          {{uiLabels.saveAndPlay}}
+        </button>
+      </router-link>
+    </div>
   </body>
-   <footer>
+  <footer>
     <div>
       <h5> © Quizcus inc</h5>
     </div>
@@ -220,7 +218,6 @@ export default {
 }
 </script>
 
-
 <style scoped>
 #timer{
   width: 90%;
@@ -228,7 +225,6 @@ export default {
   font-size:3em;
   position:absolute;
 }
-
 header {
   padding-top:0%;
   font-size: 1.7em;
@@ -302,7 +298,6 @@ body textarea{
   align-items: center;
   margin: 22% 2% 0% 2%;
   clear: left;
-
 }
 #answerBox{
   height: 85%;
@@ -313,7 +308,6 @@ body textarea{
   overflow:hidden;
   text-align:center;
   padding:1%;
-
 }
 #questionMenu{
   width: 100%;
@@ -359,7 +353,7 @@ body textarea{
   transform: translateY(-75%);
 }
 .ansButtons:hover{
-    transform: translateY(-85%);
+  transform: translateY(-85%);
 }
 #markedCorrect{
   font-size:0.7em;
@@ -376,7 +370,6 @@ body textarea{
   height: 100%;
   width: 23%;
   background-color: rgb(100, 155, 36);
-  /*background-color: rgb(135, 175, 111);*/
 }
 .navButton button{
   height: 3em;
@@ -407,7 +400,6 @@ body textarea{
   background-color:#633D41;
 }
 @media only screen and (max-width: 980px) {
-  /* For mobile phones: */
   .mainWrap{
     padding: 0% 8% 0% 8%;
     width:84%;
@@ -430,16 +422,16 @@ body textarea{
     font-size: 2.5em;
     margin:5% 0% 5% 0%;
   }
-#questionMenu{
- grid-area: qmenu;
-}
+  #questionMenu{
+   grid-area: qmenu;
+  }
   .createWindow{
     grid-area:create;
     height: 36em;
   }
-#ansTitle{
-  grid-template-columns: 80% 20%;
-}
+  #ansTitle{
+    grid-template-columns: 80% 20%;
+  }
   .navButton{
     margin-top: 10%;
   }
@@ -447,7 +439,6 @@ body textarea{
     margin: 35% 2% 0% 2%;
   }
 }
-
 @media only screen and (max-width: 700px) {
   #preview{
     height:40em
@@ -475,7 +466,6 @@ body textarea{
   #preview{
     height:32em
   }
-
   #buttonDiv button {
     width:25%;
   }
@@ -483,7 +473,7 @@ body textarea{
     font-size:0.8em;
   }
   .ansButtons{
-      margin: 0% 4% 0% 4%;
+    margin: 0% 4% 0% 4%;
   }
   body textarea{
     width:65%;

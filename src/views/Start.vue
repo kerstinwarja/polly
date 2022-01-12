@@ -1,26 +1,26 @@
 <template>
   <body>
-  <div id="nav">
-    <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-  </div>
-  <header>
-    <h4>{{uiLabels.welcomeTo}}</h4>
-    <h1>Quizcus</h1>
-  </header>
-  <div class="wrapper">
-    <div>
-    <router-link v-bind:to="'/initialize/'+lang">
-      <button>{{uiLabels.createPoll}}</button>
-    </router-link>
-    <h6>{{uiLabels.createExpli}}</h6>
-  </div>
-  <div>
-    <router-link v-bind:to="'/polllibrary/'+lang">
-      <button>{{uiLabels.participatePoll}}</button>
-    </router-link>
-    <h6>{{uiLabels.participateExpli}}</h6>
-  </div>
-</div>
+    <div id="nav">
+      <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+    </div>
+    <header>
+      <h4>{{uiLabels.welcomeTo}}</h4>
+      <h1>Quizcus</h1>
+    </header>
+    <div class="wrapper">
+      <div>
+        <router-link v-bind:to="'/initialize/'+lang">
+          <button>{{uiLabels.createPoll}}</button>
+        </router-link>
+        <h6>{{uiLabels.createExpli}}</h6>
+      </div>
+      <div>
+        <router-link v-bind:to="'/polllibrary/'+lang">
+          <button>{{uiLabels.participatePoll}}</button>
+        </router-link>
+        <h6>{{uiLabels.participateExpli}}</h6>
+      </div>
+    </div>
   </body>
   <footer>
     <div>
@@ -28,7 +28,6 @@
     </div>
   </footer>
 </template>
-
 
 <script>
 import io from 'socket.io-client';
@@ -48,8 +47,6 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-
-
   },
   methods: {
     switchLanguage: function() {
@@ -76,7 +73,6 @@ header {
   color: white;
   text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
 }
-
 h4 {
   text-align: center;
   color: white;
@@ -89,7 +85,6 @@ h6{
   color:white;
   text-shadow: -0.05em 0 black, 0 0.05em black, 0.09em 0 black, 0 -0.05em black;
 }
-
 body{
   background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
   background-repeat: no-repeat;
@@ -102,7 +97,6 @@ body{
 button{
   border-radius: 0.8em;
 }
-
 .wrapper {
   width: 95%;
   height: 95%;
@@ -143,31 +137,25 @@ button:hover {
   text-transform: uppercase;
 }
 footer{
-  /*background-color: rgba(160, 160, 160, 0.815);*/
    position: fixed;
    bottom: 0;
    height: 2%;
    width: 97%;
    text-align: left;
    padding-left: 2%;
-  /* border-top: 1px black solid;*/
 }
 footer h5{
   text-align: left;
   clear: left;
-  margin: 0;
+  margin: 0%;
 }
-
 @media only screen and (max-width: 980px) {
-  /* For mobile phones: */
   header {
     font-size: 3em;
   }
   .wrapper{
     grid-template-columns: 100%;
-
   }
-
 }
 
 </style>

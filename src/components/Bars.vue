@@ -1,19 +1,19 @@
 <template>
-<div class="barWrapper">
-  <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
-    <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
-
+  <body>
+    <div class="barWrapper">
+      <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+        <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
+        </div>
+        <div id="barSpan">
+          <span> {{item[1]-10}}p </span>
+        </div>
+        <div id="names">
+          <p>{{item[0]}}</p>
+        </div>
+      </div>
     </div>
-    <div id="barSpan">
-      <span> {{item[1]-10}}p </span>
-    </div>
-    <div id="names">
-      <p>{{item[0]}}</p>
-    </div>
-  </div>
-</div>
+  </body>
 </template>
-
 
 <script>
 export default {
@@ -25,20 +25,17 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .bar {
   width: 50px;
   transform: rotate(-90deg);
   margin: 0%;
 }
-
 #barSpan {
   position: relative;
   transform: rotate(90deg);
   font-size: 1.5em;
 }
-
 #names {
   transform: rotate(90deg);
   margin-left: -1.5em;
@@ -49,7 +46,6 @@ export default {
     color: black;
     font-weight: bold;
 }
-
 .bar:nth-child(1) div:nth-child(1) {
   background-color: #990000;
   margin: auto;
@@ -80,7 +76,6 @@ export default {
   border: 0.1em black solid;
   margin-top: 1em;
 }
-
 .barWrapper {
   background-color: wheat;
   width: 50%;
@@ -97,12 +92,11 @@ export default {
   grid-gap: 6%;
   padding: 0%;
 }
-
 @media only screen and (max-width: 1100px) {
   .barWrapper {
     width: 90%;
     min-height: 16em;
     max-height: 16em;
-  }}
-
+  }
+}
 </style>

@@ -2,7 +2,6 @@
 
 const languages = ["en", "se"];
 
-// Store data in an object to keep the global namespace clean
 function Data() {
   this.polls = {};
 }
@@ -17,7 +16,6 @@ Data.prototype.getUILabels = function (lang = "en") {
   const ui = require("./data/labels-" + lang + ".json");
   return ui;
 }
-
 Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG) {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
@@ -34,7 +32,6 @@ Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG)
   }
   return this.polls[pollId];
 }
-
 Data.prototype.addQuestion = function(pollId, q) {
   const poll = this.polls[pollId];
   console.log("question added to", pollId, q);
@@ -42,7 +39,6 @@ Data.prototype.addQuestion = function(pollId, q) {
     poll.questions.push(q);
   }
 }
-
 Data.prototype.getDescription = function(pollId) {
   const poll = this.polls[pollId];
   console.log("description requested for", pollId);
@@ -51,7 +47,6 @@ Data.prototype.getDescription = function(pollId) {
   }
   return ""
 }
-
 Data.prototype.getName = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId,);
@@ -61,7 +56,6 @@ Data.prototype.getName = function(pollId) {
   }
   return []
 }
-
 Data.prototype.addName=function(pollId,myName){
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
@@ -69,12 +63,10 @@ Data.prototype.addName=function(pollId,myName){
     console.log("participant added to ",pollId,myName)
   }
 }
-
 Data.prototype.clearName=function(pollId){
   const poll = this.polls[pollId];
     poll.participants = [];
 }
-
 Data.prototype.getImage = function(pollId) {
   const poll = this.polls[pollId];
   console.log("image requested for", pollId);
@@ -83,7 +75,6 @@ Data.prototype.getImage = function(pollId) {
   }
   return ""
 }
-
 Data.prototype.getMusic = function(pollId) {
   const poll = this.polls[pollId];
   console.log("music requested for", pollId);
@@ -92,7 +83,6 @@ Data.prototype.getMusic = function(pollId) {
   }
   return ""
 }
-
 Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   const poll = this.polls[pollId];
   console.log("question requested for ", pollId, questionNumber);
@@ -104,7 +94,6 @@ Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   }
   return []
 }
-
 Data.prototype.submitAnswer = function(pollId, myPoints, myName) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
@@ -116,16 +105,12 @@ Data.prototype.submitAnswer = function(pollId, myPoints, myName) {
     }
     else if (typeof answers[myName] === 'undefined')
       answers[myName] = myPoints;
-    console.log("answers looks like ", answers, typeof answers);
-    console.log("answers: ", answers,"typeof: ", typeof answers, "poll.answers: ", poll.answers);
   }
 }
-
 Data.prototype.clearAnswers = function(pollId) {
   const poll = this.polls[pollId];
   poll.answers = [];
 }
-
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
@@ -136,9 +121,7 @@ Data.prototype.getAnswers = function(pollId) {
   }
   return {}
 }
-
 Data.prototype.getPolls=function(){
   return Object.keys(this.polls)
 }
-
 module.exports = Data;
