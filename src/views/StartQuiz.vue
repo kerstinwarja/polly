@@ -187,7 +187,7 @@ li{
   color: #2d4463;
   line-break: auto;
   height: 10em;
-  width: 90%;
+  width: 91%;
   background-color: wheat;
   border-radius: 2%;
   border: #2d4463 0.1em solid;

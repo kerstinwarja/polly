@@ -50,6 +50,7 @@ export default {
     left: 1em;
     color: black;
     font-weight: bold;
+    white-space: nowrap;
 }
 .bar:nth-child(1) div:nth-child(1) {
   background-color: #990000;
