@@ -85,10 +85,7 @@ export default {
       pollImg:"",
       data: {},
       uiLabels: {},
-      SONG:"",
       music:"",
-      question: "",
-      answers: ["", ""],
       questionNumber: 0,
       polls:[]
     }
@@ -113,12 +110,11 @@ export default {
     createPoll: function () {
       if(this.pollId!=""){
         this.timerCount = this.time;
-        this.SONG = this.music;
         if(this.polls.indexOf(this.pollId)==-1){
-          socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.SONG })
+          socket.emit("createPoll", {pollId: this.pollId, lang: this.lang, pollDesc: this.pollDesc, pollImg: this.pollImg, SONG: this.music })
           this.$router.push({ name: 'Create', params: { id: this.pollId, lang: this.lang} })
         }
-        else alert(this.uiLabels.alertPickNewQuizName) 
+        else alert(this.uiLabels.alertPickNewQuizName)
       }
       else alert(this.uiLabels.alertQuizName)
     },
@@ -141,7 +137,7 @@ h3{
   margin:0px;
   padding: 2% 10% 1%;
   text-align: left;
-  color: Navy;
+  color: #2d4463;
 }
 h4 {
   margin: 3% 0% 3% 0%;
@@ -199,48 +195,43 @@ p{
   max-height: 100%;
   background-position: bottom;
   height: 25em;
-  border: 0.2em #0b074d solid;
+  border: 0.2em #2d4463 solid;
 }
 #previewTitle{
   font-size: 2em;
-  text-shadow: -0.03em 0 navy, 0 0.07em navy, 0.07em 0 navy, 0 -0.03em navy;
+  text-shadow: -0.03em 0 #2d4463, 0 0.07em #2d4463, 0.07em 0 #2d4463, 0 -0.03em #2d4463;
   color: white;
   margin: 5%;
   line-break: auto;
   max-height: 15%;
 }
 .infoBoards{
-  color: navy;
+  color: #2d4463;
   line-break: auto;
   height: 100%;
   width: 90%;
   background-color: wheat;
   border-radius: 2%;
-  border: navy 0.1em solid;
+  border: #2d4463 0.1em solid;
   font-size: 1em;
   overflow:auto;
   margin:0% 5% 0% 5%;
 }
-/*.infoBoards span{
-  font-weight: bold;
-  position: relative;
-  top: 10%;
-}*/
 
 .createWrap{
   background-color: wheat;
   width: 100%;
   height:100%;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
 }
 body textarea{
   width: 80%;
   background-color: #f0e7d1;
-  color: Navy;
+  color: #2d4463;
   resize:none;
   padding: 0.4em 0.4em 0.4em;
   font-family: sans-serif;
-  border: 0.1em solid;
+  border: 0.1em #2d4463 solid;
 }
 select:hover{
   cursor: pointer;

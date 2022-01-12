@@ -11,7 +11,7 @@
     </label>
     <label>
       {{uiLabels.nickInsert}}<br>
-      <input type="text" maxlength="17" v-model="nickname">
+      <input type="text" maxlength="17" v-model="myName">
     </label>
     <div class="buttonLink">
       <button v-on:click="startquiz">{{uiLabels.participatePoll}}!</button>
@@ -34,7 +34,6 @@ export default {
       pollId:"",
       myName: "",
       isHost:false,
-      nickname: "",
       polls:[]
     }
   },
@@ -56,8 +55,7 @@ export default {
     startquiz: function() {
       this.pollId = this.id
       if(this.polls.indexOf(this.pollId)!=-1){
-        if(this.nickname != "" && this.nickname!= undefined){
-          this.myName = this.nickname
+        if(this.myName != "" && this.myName!= undefined){
           socket.emit('sendNickname',{pollId:this.pollId, myName:this.myName});
           this.isHost= false
           this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })

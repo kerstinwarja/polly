@@ -38,15 +38,15 @@
 
           <h3> {{uiLabels.question}}: </h3>
           <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
-          <div id="ansTitle">
-            <h3>{{uiLabels.answer}}</h3>
-            <h3 id="markedCorrect">{{uiLabels.mark}}<br>{{uiLabels.as}}<br>{{uiLabels.correct}}</h3>
-          </div>
-          <div   v-for="(_, i) in answers" v-bind:key="'answer'+i">
+          <h3>{{uiLabels.answer}}</h3>
+          <h3 id="markedCorrect">Mark the answer(s) as correct by checking the box to its right</h3>
+          <div id="answerInput" >
+          <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
             <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>
             <textarea type="text" v-model="answers[i]" v-bind:key="'answer'+i" maxlength="50" v-bind:placeholder="uiLabels.answerPlaceholder"></textarea>
             <input class="ansButtons" type="checkbox" v-bind:key="'answer'+i" v-model="isCorrect[i]">
           </div>
+        </div>
           <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="  background-color: rgb(100, 155, 36)">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
             <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
@@ -247,7 +247,7 @@ body textarea{
   margin: 0px;
   padding: 0% 4% 0% 4%;
   width: 92%;
-  height: 95%;
+  height: 100%;
   display: grid;
   grid-gap: 5%;
   grid-template-columns: 61% 31%;
@@ -259,8 +259,8 @@ body textarea{
   max-height: 100%;
   background-position: bottom;
   color: Black;
-  height: 30em;
-  border: 0.3em black solid;
+  height: 25em;
+  border: 0.2em #2d4463 solid;
   overflow: hidden;
   resize: none;
   position: relative;
@@ -290,25 +290,25 @@ body textarea{
 }
 #answers{
   display:grid;
-  height: 10em;
+  height: 8em;
   width: 95%;
   grid-template-columns: repeat(2, 1fr);
   gap: 3%;
   align-items: center;
-  margin: 26% 2% 0% 2%;
+  margin: 22% 2% 0% 2%;
   clear: left;
-  
+
 }
 #answerBox{
   height: 85%;
   width: 98%;
-  font-size:1.1em;
+  font-size:1em;
   border-radius: 0.7em;
   color:black;
   overflow:hidden;
   text-align:center;
   padding:1%;
-  
+
 }
 #questionMenu{
   width:95%;
@@ -333,12 +333,16 @@ body textarea{
 .createWindow{
   background-color: wheat;
   width: 100%;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
   height: 34em;
   position: relative;
 }
 #qInput{
   width:90%
+}
+#answerInput{
+  height:25%;
+  overflow:auto;
 }
 #ansTitle{
   display:grid;
@@ -353,10 +357,8 @@ body textarea{
     transform: translateY(-85%);
 }
 #markedCorrect{
-  font-size:0.6em;
-  text-align: center;
-  
-
+  font-size:0.7em;
+  padding-top:0%;
 }
 #buttonDiv {
   height: 10%;
@@ -446,6 +448,7 @@ body textarea{
   }
   #answers{
     margin: 45% 2% 0% 2%;
+    height:10em;
   }
   #answerBox{
     font-size:1em;
