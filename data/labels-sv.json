@@ -61,5 +61,10 @@
 	"enterPic":"Lägg till en bildadress:",
 	"enterTime":"Sätt en tidsgränd för att besvara frågan (i sekunder):",
 	"timeWrong":"Tiden kan bara anges med siffror. Försök igen",
-	"alertNickname":"Du behöver ett smeknamn för att kunna delta i quizet"
+	"alertNickname":"Du behöver ett smeknamn för att kunna delta i quizet",
+	"scoreBoard":"Poängtavla",
+	"winner": "Och vinnaren är: ",
+	"position": "Du är på plats: ",
+	"nextQues": "Nästa fråga!",
+	"endQuiz": "Avsluta quiz"
 }

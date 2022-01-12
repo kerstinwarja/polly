@@ -179,7 +179,7 @@ export default {
   height: 4em;
   width: 15%;
   min-width:8em;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
   margin-bottom:2%;
 }
 </style>

@@ -60,7 +60,7 @@ export default {
           this.isHost= false
           this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost:this.isHost, myName: this.myName} })
         }
-        else alert(this.uiLabels.alertNickname)  
+        else alert(this.uiLabels.alertNickname)
       }
       else alert(this.uiLabels.alertNoQuiz)
     },
@@ -68,14 +68,14 @@ export default {
     hostQuiz: function(){
       this.isHost= true;
       this.pollId = this.id
-      
+
       if(this.polls.indexOf(this.pollId)!=-1){
         this.$router.push({ name: 'StartQuiz', params: { id: this.pollId, lang: this.lang, isHost: this.isHost} })
       }
       else{
         alert(this.uiLabels.alertNoQuiz)
       }
-      
+
     }
   }
 }
@@ -106,9 +106,9 @@ h2 {
   width: 30%;
   height:auto;
   display: grid;
-  border: navy solid;
+  border: #2d4463 solid;
   background-color: wheat;
-  color: navy;
+  color: #2d4463;
   text-shadow: 0.1em 0.1em white;
   margin-left: 35%;
   font-size: 1.2em;
@@ -125,7 +125,7 @@ h2 {
   background-color: #ffcc00;
   text-transform: uppercase;
   font-size: 0.8em;
-  color: navy;
+  color: #2d4463;
   text-shadow: 0.1em 0.1em white;
   margin-top: 3%;
 }
@@ -135,8 +135,8 @@ h2 {
   width: 50%;
   font-size: 1.2em;
   background-color: #fbf1e0;
-  color: navy;
-  border: 0.1em navy solid;
+  color: #2d4463;
+  border: 0.1em #2d4463 solid;
   text-align:center;
 }
 
