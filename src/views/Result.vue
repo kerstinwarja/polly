@@ -41,7 +41,6 @@ export default {
       myName: "",
       myPoints: 0,
       pollId:"",
-      uiLabels: {},
       allQuestions: 0,
       arrdata:[],
       posArray:[],
@@ -68,11 +67,6 @@ export default {
     socket.on("newQuestion", update => {
       this.question = update.q;
       this.data = {};
-    })
-    socket.emit("pageLoaded", this.lang);
-    socket.on("init", (labels) => {
-      console.log(labels)
-      this.uiLabels = labels
     })
     socket.on("sendToQues",() =>
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints}})

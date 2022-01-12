@@ -157,7 +157,7 @@ h4{
   color: white;
   font-size: 2em;
   margin: 3% 0% 3% 0%;
-  text-shadow: -0.02em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.02em #990000;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
 }
 p{
   margin: 3% 0% 3% 0%;

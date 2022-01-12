@@ -41,7 +41,7 @@ export default {
 
 #names {
   transform: rotate(90deg);
-  margin-left: -1.2em;
+  margin-left: -1.5em;
   font-size: 0.8em;
   position: absolute;
     top: 2px;

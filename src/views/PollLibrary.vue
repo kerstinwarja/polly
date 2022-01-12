@@ -92,7 +92,7 @@ header {
   text-align: center;
   padding-top:0; /*5%*/
   color: white;
-  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
 }
 h1{
   margin: 5% 0% 2% 0%;
@@ -102,7 +102,7 @@ h2 {
   margin: 0% 0% 2% 0%;
   text-align: center;
   color: white;
-  text-shadow: -0.05em 0 #990000, 0 0.1em #990000, 0.1em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
   font-size: 18pt;
   line-break: auto;
 }
