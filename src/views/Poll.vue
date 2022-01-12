@@ -54,7 +54,6 @@ export default {
       sendPoints: 0,
       myPoints: 10,
       myName : "",
-      nameArray:[],
       clicked: false,
       question: {
         q: "",
@@ -80,7 +79,6 @@ export default {
     this.myPoints = this.$route.params.myPoints;
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.questionNumber = this.$route.params.questionNumber
-    this.nameArray = this.$route.params.nameArray
     console.log("Ny start på quizzet nmr ",this.$route.params.questionNumber, this.questionNumber)
     socket.emit('joinPoll', this.pollId)
     socket.on("musicSelection", SONG =>
@@ -102,7 +100,7 @@ export default {
 
     socket.on("sendToResult",() => {
       this.updateScoreboard(this.myPoints),
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
     })
 
     socket.on("showCorrect",() =>
@@ -118,7 +116,6 @@ export default {
     },
     updateScoreboard (myPoints) {
       if(!this.isHost && !this.clicked) {
-        //this.myPoints = parseInt(myPoints)- 5;
         socket.emit("submitAnswer", {pollId: this.pollId, myPoints: myPoints, myName: this.myName})
       }
     },
@@ -144,10 +141,10 @@ export default {
       socket.emit('showCorrectAnswer', {pollId: this.pollId})
     },
     continueToResult: function() {
-      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions})
+      socket.emit('goToResult', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber, allQuestions: this.allQuestions})
       console.log('continue woho!');
       this.isHost= true;
-      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray, allQuestions: this.allQuestions}})
+      this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, allQuestions: this.allQuestions}})
     },
     pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
       this.showPlayButton=true
