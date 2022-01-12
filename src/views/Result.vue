@@ -1,13 +1,13 @@
 <template>
   <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: </header>
+    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.arrdata[0][0]}}</header>
     <header v-else>Scoreboard</header>
   </div>
   <div>
 
   </div>
   <Bars v-bind:data="data"
-        v-bind:nameArray="nameArray"/>
+        v-bind:arrdata="arrdata"/>
   <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
       Next question!
@@ -42,6 +42,7 @@ export default {
       myPoints: 0,
       pollId:"",
       allQuestions: 0,
+      arrdata:[],
       data: {
       }
     }
@@ -59,10 +60,15 @@ export default {
     socket.on("dataUpdate", (update) => {
       this.data = update.a;
       this.question = update.q;
+      this.sortera();
     });
     socket.on("newQuestion", update => {
       this.question = update.q;
       this.data = {};
+    })
+    socket.on("sendToResult",() => {
+      this.arrdata = "HÖRDE"
+      this.sortera();
     })
     socket.on("sendToQues",() =>
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints, nameArray: this.nameArray}})
@@ -70,6 +76,8 @@ export default {
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
+
+
   },
 
   methods: {
@@ -85,7 +93,12 @@ export default {
       this.questionNumber=0;
       socket.emit('goToStart', {pollId: this.pollId, isHost: this.isHost, questionNumber: this.questionNumber})
       this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
-    }
+    },
+    sortera(){
+    this.arrdata = Object.entries(this.data).sort((a,b) => b[1]-a[1]);
+    },
+
+
   }
 }
 </script>

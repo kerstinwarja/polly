@@ -85,7 +85,6 @@ export default {
       console.log(labels)
       this.uiLabels = labels
     })
-
     this.pollId = this.$route.params.id;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
@@ -112,7 +111,7 @@ export default {
     )*/
 
     socket.on("sendToResult",() => {
-      this.updateScoreboard(),
+      this.updateScoreboard(this.myPoints),
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, nameArray: this.nameArray,myPoints: this.myPoints, myName:this.myName, allQuestions: this.allQuestions}})
     })
 
@@ -127,9 +126,9 @@ export default {
       this.myPoints = this.answerPoints(answer);
       socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
     },
-    updateScoreboard () {
+    updateScoreboard (myPoints) {
       if(!this.isHost || !this.clicked) {
-        socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
+        socket.emit("submitAnswer", {pollId: this.pollId, myPoints: myPoints, myName: this.myName})
       }
     },
     answerPoints (answer){
