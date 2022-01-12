@@ -161,25 +161,32 @@ export default {
 }
 .ans2{
   background-color:#CF903A;
+  color: black;
 }
 .ans3{
   background-color:#A3493E;
+  color: black;
 }
 .ans4{
   background-color:#D8A1A9;
+  color: black;
 }
 .ans5{
   background-color:#633D41;
+  color: black;
 }
 .anstrue{
   background-color: green;
+  color: black;
 }
 .ansfalse{
   background-color: gray;
-  opacity: 0.3;
+  color: black;
+  opacity: 0.7;
 }
 .ansPick{
   background-color: white;
+  color: black;
   border: black 0.2em solid;
 }
 #quest{
