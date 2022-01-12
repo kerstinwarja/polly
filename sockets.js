@@ -45,10 +45,6 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('sendToResult')
     console.log('-----------sendToResult------------');
   });
-  socket.on('goToFinalResult', function(d) {
-    io.to(d.pollId).emit('sendToFinalResult')
-    console.log('-----------sendToFinalResult------------');
-  });
 
   socket.on('goBackToQues', function(d) {
     io.to(d.pollId).emit('sendToQues')
