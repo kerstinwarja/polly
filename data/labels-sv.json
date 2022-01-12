@@ -1,8 +1,11 @@
 {
 	"sales-pitch": "Svar. Helt. Enkelt.",
 	"invite": "Bjud in deltagare med den här länken:",
+	"welcomeTo": "Välkommen till",
 	"createPoll": "Skapa quiz",
+	"createExpli": "SKAPA ett helt nytt quiz",
 	"participatePoll": "Delta i ett quiz",
+	"participateExpli": "DELTA i quiz som deltagare eller spelledare",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"initializeHead":"Det är dags att skapa ditt quiz!",
@@ -44,7 +47,7 @@
 	"nameInsert": "Skriv in quiznamn",
 	"nickInsert": "Skriv in ditt smeknamn",
 	"host": "Jag är spelledare!",
-	"HostIf": "Du är spelledaren",
+	"hostIf": "Du är spelledaren för",
 	"ifParticipant": "Det är dags att spela",
 	"parts": "Deltagare:",
 	"desc": "Beskrivning:",
@@ -52,7 +55,7 @@
 	"welcome":"Välkommen till quizets väntrum!",
 	"timesUp": "Tiden är ute!",
 	"showResult": "Visa resultat",
-	"alertQuizName":"DU BEHÖVER ETT QUIZNAMN",
+	"alertQuizName":"Du behöver ett quiznamn",
 	"enterPic":"Lägg till en bildadress:",
-	"alertNickname":"DU BEHÖVER ETT SMEKNAMN"
+	"alertNickname":"Du behöver ett smaknamn"
 }

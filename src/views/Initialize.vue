@@ -127,6 +127,7 @@ export default {
 
 <style scoped>
 header {
+  padding-top:0%;
   font-size: 1.7em;
   text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
 }

@@ -4,7 +4,6 @@
     <div v-bind:style="{height: item + 'px', width:'1em'}">
 
     </div>
-    {{nameArray}}
     <div id="barSpan">
       <span> {{item}} </span>
     </div>
@@ -94,4 +93,12 @@ export default {
   grid-gap: 6%;
   padding: 0%;
 }
+
+@media only screen and (max-width: 1100px) {
+  .barWrapper {
+    width: 90%;
+    min-height: 16em;
+    max-height: 16em;
+  }}
+
 </style>

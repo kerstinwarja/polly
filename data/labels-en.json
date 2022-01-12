@@ -1,8 +1,11 @@
 {
 	"sales-pitch": "Simply. Great. Polling.",
 	"invite": "Invite participants with this link:",
+	"welcomeTo": "Welcome to",
 	"createPoll": "Create quiz",
+	"createExpli": "CREATE a new quiz from scratch",
 	"participatePoll": "Take a quiz",
+	"participateExpli": "TAKE of HOST an exisiting quiz",
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"initializeHead": "It's time to create your quiz!",
@@ -44,7 +47,7 @@
 	"nameInsert": "Insert quiz name",
 	"nickInsert": "Insert your nickname",
 	"host":"I am the host!",
-	"hostIf": "You are the gameleader",
+	"hostIf": "You are the gameleader for",
 	"ifParticipant": "It's time to play",
 	"parts": "Participants:",
 	"desc": "Description:",
@@ -52,7 +55,7 @@
 	"welcome":"Welcome to the quiz waiting room!",
 	"timesUp": "Time's up!",
 	"showResult": "Show Result",
-	"alertQuizName":"YOU NEED A QUIZNAME",
+	"alertQuizName":"You need a quizname",
 	"enterPic":"Please enter a pictureadress:",
-	"alertNickname":"YOU NEED A NICKNAME"
+	"alertNickname":"You need a nickname"
 }

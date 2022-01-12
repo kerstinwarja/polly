@@ -10,7 +10,7 @@
       {{this.question.t - this.timerCount}}
     </div>
     <button v-show="isHost" v-on:click="zeroTimer" id="timesUp">
-      {{uiLabels.timesUp}}  
+      {{uiLabels.timesUp}}
     </button>
   </div>
   <div id="ans">
@@ -165,11 +165,12 @@ export default {
   display:grid;
   height: 10em;
   width: 90%;
-  max-width: 90em;
+  /*max-width: 90em;*/
   grid-template-columns: repeat(2, 1fr); /*default*/
   gap: 3%;
   align-items: center;
-  margin:25% 5% 0% 5%;
+  margin:27% 5% 0% 5%;
+  padding-bottom:1%;
 }
 .ans0{
   background-color:#628579;
@@ -201,7 +202,7 @@ export default {
   border: black 0.2em solid;
 }
 #quest{
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   padding-top:0; /*5%*/
   margin: 0;
@@ -216,12 +217,12 @@ button{
   font-size:2em;
   border: black 0.1em solid;
 }
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1200px) {
   #ans{
-    margin:35% 5% 0% 5%;
+    margin:33% 5% 0% 5%;
   }
 }
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1000px) {
   button{
     font-size:1.5em;
   }
@@ -231,7 +232,7 @@ button{
 }
 @media only screen and (max-width: 705px) {
 #ans{
-  margin:60% 5% 0% 5%;
+  margin:65% 5% 0% 5%;
 }
 button{
   font-size:1em;
@@ -245,6 +246,6 @@ button{
 }
 @media only screen and (max-width: 500px) {
   #ans{
-    margin:80% 5% 0% 5%;
+    margin:95% 5% 0% 5%;
   }}
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: </header>
-    <header v-else>Scoreboard</header>
+    <header>
+      <h1 v-if="this.questionNumber == this.allQuestions-1">And the winner is:</h1>
+      <h1 v-else>Scoreboard</h1>
+     </header>
   </div>
   <div>
 
@@ -14,7 +16,7 @@
     </button>
   </div>
   <div v-show="isHost">
-    <button v-on:click="endQuiz" class="exitQuizButton">
+    <button v-on:click="endQuiz" class="continueButton" id="exitQuizButton">
       End quiz
     </button>
   </div>
@@ -91,43 +93,30 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-size: 3em;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-  color: white;
-  margin-top: 3%;
-  margin-bottom: 0%;
-}
 
 header {
-  font-size: 5em;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-  color: white;
-  padding-top: 0%;
-  margin-bottom: 3%;
+  padding-top:0%;
+  font-size: 2em;
+  text-shadow: -0.04em 0 #990000, 0 0.13em #990000, 0.13em 0 #990000, 0 0em #990000;
+  margin:0%;
 }
 
 .continueButton {
   float: right;
+  margin: 2% 5% 2% 0%;
   background-color: rgb(100, 155, 36);
   color: white;
   font-size: 1em;
-  margin-right: 5%;
   text-transform: uppercase;
-  height: 3em;
+  height: 4em;
   width: 15%;
+  min-width: 8em;
   border: 0.2em navy solid;
 }
 
-.exitQuizButton {
+#exitQuizButton {
   float: left;
   background-color: #990000;
-  color: white;
-  font-size: 1em;
-  margin-left: 5%;
-  text-transform: uppercase;
-  height: 3em;
-  width: 15%;
-  border: 0.2em navy solid;
+  margin: 2% 0% 2% 5%;
 }
 </style>
