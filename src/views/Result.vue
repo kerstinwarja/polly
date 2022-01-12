@@ -41,6 +41,7 @@ export default {
       myName: "",
       myPoints: 0,
       pollId:"",
+      uiLabels: {},
       allQuestions: 0,
       arrdata:[],
       posArray:[],
@@ -66,14 +67,17 @@ export default {
       this.question = update.q;
       this.data = {};
     })
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      console.log(labels)
+      this.uiLabels = labels
+    })
     socket.on("sendToQues",() =>
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myName:this.myName,myPoints:this.myPoints}})
     )
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
-
-
   },
 
   methods: {
@@ -98,8 +102,6 @@ export default {
       this.posArray.splice(i, 1);
     }
     },
-
-
   }
 }
 </script>
@@ -108,11 +110,18 @@ export default {
 
 header {
   padding-top:0%;
-  font-size: 2em;
-  text-shadow: -0.04em 0 #990000, 0 0.13em #990000, 0.13em 0 #990000, 0 0em #990000;
-  margin:0%;
-}
+  font-size: 4em;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
 
+  margin:2%;
+}
+h2{
+  padding-top:0%;
+  font-size: 2em;
+  color: white;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.09em 0 #990000, 0 -0.03em #990000;
+  margin-bottom:2%;
+}
 .continueButton {
   float: right;
   margin: 2% 5% 2% 0%;

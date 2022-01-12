@@ -94,9 +94,6 @@ export default {
       this.allQuestions = q.allQuestions
       }
     ),
-    /*socket.on("sendToResult",() =>
-       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, allQuestions: this.allQuestions}})
-    )*/
 
     socket.on("sendToResult",() => {
       this.updateScoreboard(this.myPoints),
@@ -105,7 +102,6 @@ export default {
 
     socket.on("showCorrect",() =>
       this.timesUp=true,
-      //this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, time: this.timesUp}}),
     )
   },
   methods: {
@@ -133,8 +129,6 @@ export default {
       this.questionNumber++
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
       window.location.reload()
-      //this.timerCount = this.question.t
-      //this.nextactivated = true
     },
     setTimeUp: function () {
       this.timesUp=false

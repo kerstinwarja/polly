@@ -41,8 +41,13 @@ export default {
 
 #names {
   transform: rotate(90deg);
-  margin-left: -2.5em;
-  font-size: 1em;
+  margin-left: -1.2em;
+  font-size: 0.8em;
+  position: absolute;
+    top: 2px;
+    left: 1px;
+    color: black;
+    font-weight: bold;
 }
 
 .bar:nth-child(1) div:nth-child(1) {
@@ -82,10 +87,10 @@ export default {
   min-height: 12em;
   max-height: 12em;
   margin: auto;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
   border-radius: 0.8em;
   font-size: 2em;
-  color: navy;
+  color: #2d4463;
   vertical-align: bottom;
   display: grid;
   grid-template-rows: 15% 15% 15% 15% 15%;
