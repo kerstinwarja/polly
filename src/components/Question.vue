@@ -207,7 +207,7 @@ export default {
   padding-top:0; /*5%*/
   margin: 0;
   color: white;
-  text-shadow: 3px 3px #990000;
+  text-shadow: -0.05em 0 #2d4463, 0 0.05em #2d4463, 0.10em 0 #2d4463, 0 -0.05em #2d4463;
 }
 
 button{

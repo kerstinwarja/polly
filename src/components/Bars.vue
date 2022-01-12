@@ -41,8 +41,13 @@ export default {
 
 #names {
   transform: rotate(90deg);
-  margin-left: -3.0em;
-  font-size: 1em;
+  margin-left: -1.5em;
+  font-size: 0.8em;
+  position: absolute;
+    top: 2px;
+    left: 1px;
+    color: black;
+    font-weight: bold;
 }
 
 .bar:nth-child(1) div:nth-child(1) {

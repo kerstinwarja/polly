@@ -227,7 +227,7 @@ export default {
 header {
   padding-top:0%;
   font-size: 1.7em;
-  text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
+  text-shadow: -0.06em 0 #990000, 0 0.06em #990000, 0.12em 0 #990000, 0 -0.06em #990000;
 }
 h3{
   margin:0px;
@@ -269,7 +269,7 @@ body textarea{
 }
 #previewTitle{
   font-size: 1.5em;
-  text-shadow: -0.01em 0 #2d4463, 0 0.07em #2d4463, 0.07em 0 #2d4463, 0 -0.01em #2d4463;
+  text-shadow: -0.04em 0 #2d4463, 0 0.04em #2d4463, 0.09em 0 #2d4463, 0 -0.04em #2d4463;
   color: white;
   line-break: auto;
   text-align:center;

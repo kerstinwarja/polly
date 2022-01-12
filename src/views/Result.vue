@@ -110,16 +110,17 @@ export default {
 
 header {
   padding-top:0%;
-  font-size: 2em;
-  text-shadow: 0.07em 0 #990000;
+  font-size: 4em;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.07em 0 #990000, 0 -0.03em #990000;
 
-  margin:0%;
+  margin:2%;
 }
 h2{
   padding-top:0%;
+  font-size: 2em;
   color: white;
-  text-shadow: 0.07em 0 #990000;
-  margin:0%;
+  text-shadow: -0.03em 0 #990000, 0 0.03em #990000, 0.09em 0 #990000, 0 -0.03em #990000;
+  margin-bottom:2%;
 }
 .continueButton {
   float: right;
