@@ -21,7 +21,7 @@
 	"impPic": "Import picture",
 	"createHead": "Add questions and answers to your quiz!",
 	"previewPlaceholder": "Add an answer...",
-	"questionAlterate": "Select a question to make alterations",
+	"questionAlterate": "Select a question to make changes",
 	"makeingChanges": "You are making changes in: ",
 	"questionPlaceholder": "Write your question ...",
 	"answer": "Answer:",
@@ -34,9 +34,6 @@
 	"picture": "picture",
 	"add": "Add ",
 	"questionLower": "question",
-	"mark":"Mark",
-	"as":"as",
-	"correct":"correct",
 	"remove": "Remove ",
 	"save": "Save ",
 	"changes": "changes",
@@ -66,5 +63,7 @@
 	"winner": "And the winner is: ",
 	"position": "Your position is:",
 	"nextQues": "Next question!",
-	"endQuiz": "End quiz"
+	"endQuiz": "End quiz",
+	"markCorr": "Mark the answer(s) as correct by checking the box to its right",
+	"maxQues": "You have reached the maximum number of questions"
 }

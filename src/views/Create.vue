@@ -23,7 +23,7 @@
           <h3> {{uiLabels.question}}: </h3>
           <textarea id="qInput" type="text" v-model="question" maxlength="100" v-bind:placeholder="uiLabels.questionPlaceholder"></textarea> <br>
           <h3>{{uiLabels.answer}}</h3>
-          <h3 id="markedCorrect">Mark the answer(s) as correct by checking the box to its right</h3>
+          <h3 id="markedCorrect">{{uiLabels.markCorr}}</h3>
           <div id="answerInput" >
           <div v-for="(_, i) in answers" v-bind:key="'answer'+i">
             <button  v-if="this.answers.length>2" class="ansButtons" type="submit" v-on:click="removeAnswer(i)" style="background-color: rgb(255, 0, 0);">-</button>
@@ -152,7 +152,7 @@ export default {
         this.clearFields()
       }
       else {
-        alert('You have reached the maximum number of questions')
+        alert(this.uiLabels.maxQues)
       }
     },
     removeQuestion(i){

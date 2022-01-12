@@ -34,9 +34,6 @@
 	"picture": "bild",
 	"add": "Lägg till ",
 	"questionLower": "fråga",
-	"mark":"markera",
-	"as":"som",
-	"correct":"korrekt",
 	"remove": "Ta bort ",
 	"save": "Spara ",
 	"changes": "ändringar",
@@ -66,5 +63,7 @@
 	"winner": "Och vinnaren är: ",
 	"position": "Du är på plats: ",
 	"nextQues": "Nästa fråga!",
-	"endQuiz": "Avsluta quiz"
+	"endQuiz": "Avsluta quiz",
+	"markCorr": "Markera svar som korrekt genom att fylla i rutan till höger",
+	"maxQues": "Du har nått maxgränsen för antal frågor"
 }

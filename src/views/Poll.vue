@@ -1,7 +1,7 @@
 <template>
   <button v-show="this.SONG!='' || this.showPlayButton" id="musicControl" type="submit" v-on:click="pauseplay()">
-    <img v-if="paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
-    <img v-if="!paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
+    <img v-if="paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
+    <img v-if="!paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
   </button>
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
@@ -11,7 +11,7 @@
   <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
     {{uiLabels.showResult}}
   </button>
- 
+
   <div id="audio">
     <audio controls autoplay loop v-if="SONG == 'Brass' ">
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
@@ -141,7 +141,7 @@ export default {
       this.isHost= true;
       this.$router.push({ name: 'Result', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber, allQuestions: this.allQuestions}})
     },
-    
+
     pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
       this.showPlayButton=true
       if(!this.paused){
