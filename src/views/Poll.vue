@@ -117,7 +117,8 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, myPoints: this.myPoints, myName: this.myName})
     },
     updateScoreboard (myPoints) {
-      if(!this.isHost || !this.clicked) {
+      if(!this.isHost && !this.clicked) {
+        //this.myPoints = parseInt(myPoints)- 5;
         socket.emit("submitAnswer", {pollId: this.pollId, myPoints: myPoints, myName: this.myName})
       }
     },
