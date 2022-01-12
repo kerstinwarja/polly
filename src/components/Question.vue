@@ -198,7 +198,7 @@ export default {
   opacity: 0.3;
 }
 .ansPick{
-  background-color:#99e5cb;
+  background-color: white;
   border: black 0.2em solid;
 }
 #quest{

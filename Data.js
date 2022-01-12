@@ -137,4 +137,8 @@ Data.prototype.getAnswers = function(pollId) {
   return {}
 }
 
+Data.prototype.getPolls=function(){
+  return Object.keys(this.polls)
+}
+
 module.exports = Data;
