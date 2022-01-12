@@ -1,13 +1,8 @@
 <template>
-  <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.arrdata[0][0]}}</header>
-    <header v-else>Scoreboard</header>
-  </div>
-  <div>
-
-  </div>
   <Bars v-bind:data="data"
-        v-bind:arrdata="arrdata"/>
+        v-bind:arrdata="arrdata"
+        v-bind:questionNumber="questionNumber"
+        v-bind:allQuestions="allQuestions"/>
   <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
       Next question!
@@ -104,13 +99,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-size: 3em;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-  color: white;
-  margin-top: 3%;
-  margin-bottom: 0%;
-}
 
 header {
   font-size: 5em;

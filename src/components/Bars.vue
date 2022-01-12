@@ -1,17 +1,17 @@
 <template>
-<div class="barWrapper">
-  <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
-    <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
+  <div class="barWrapper">
+    <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+      <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
 
-    </div>
-    <div id="barSpan">
-      <span> {{item[1]}} </span>
-    </div>
-    <div id="names">
-      <p>{{item[0]}}</p>
+      </div>
+      <div id="barSpan">
+        <span> {{item[1]}} </span>
+      </div>
+      <div id="names">
+        <p>{{item[0]}}</p>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 
@@ -21,12 +21,22 @@ export default {
   props: {
     data: Object,
     arrdata: Array,
+    questionNumber: Number,
+    allQuestions: Number,
   },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h1 {
+  font-size: 3em;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+  color: white;
+  margin-top: 3%;
+  margin-bottom: 0%;
+}
+
 .bar {
   width: 50px;
   transform: rotate(-90deg);
