@@ -29,7 +29,11 @@
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
   </div>
-
+<footer>
+    <div>
+      <h5> © Quizcus inc</h5>
+    </div>
+  </footer>
 </template>
 
 <script>

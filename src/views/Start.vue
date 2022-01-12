@@ -22,6 +22,11 @@
   </div>
 </div>
   </body>
+  <footer>
+    <div>
+      <h5> © Quizcus inc</h5>
+    </div>
+  </footer>
 </template>
 
 
@@ -136,6 +141,21 @@ button:hover {
   color: #2d4463;
   border: 0.2em #2d4463 solid;
   text-transform: uppercase;
+}
+footer{
+  /*background-color: rgba(160, 160, 160, 0.815);*/
+   position: fixed;
+   bottom: 0;
+   height: 2%;
+   width: 97%;
+   text-align: left;
+   padding-left: 2%;
+  /* border-top: 1px black solid;*/
+}
+footer h5{
+  text-align: left;
+  clear: left;
+  margin: 0;
 }
 
 @media only screen and (max-width: 980px) {
