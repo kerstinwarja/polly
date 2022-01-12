@@ -125,7 +125,7 @@ button:hover {
 }
 #nav button{
   width: 10%;
-  min-width: 6em;
+  min-width: 8em;
   height: 4em;
   top: 7%;
   left: 7%;
@@ -137,12 +137,12 @@ button:hover {
   text-transform: uppercase;
 }
 footer{
-   position: fixed;
-   bottom: 0;
-   height: 2%;
-   width: 97%;
-   text-align: left;
-   padding-left: 2%;
+  position: fixed;
+  bottom: 0;
+  height: 2%;
+  width: 97%;
+  text-align: left;
+  padding-left: 2%;
 }
 footer h5{
   text-align: left;

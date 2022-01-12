@@ -2,6 +2,7 @@
   <body>
     <div class="barWrapper">
       <div class="bar" v-for="(item, key) in arrdata" v-bind:key="'i'+key">
+        <template v-if="key<5">
         <div v-bind:style="{height: item[1] + 'px', width:'1em'}">
         </div>
         <div id="barSpan">
@@ -10,6 +11,7 @@
         <div id="names">
           <p>{{item[0]}}</p>
         </div>
+        </template>
       </div>
     </div>
   </body>
