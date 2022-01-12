@@ -94,7 +94,7 @@ export default {
   color: navy;
   vertical-align: bottom;
   display: grid;
-  grid-template-rows: 15% 15% 15% 15% 15%;
+  grid-template-rows: 14% 14% 14% 14% 18%;
   grid-gap: 6%;
   padding: 0%;
   text-align: left;
