@@ -5,7 +5,7 @@
 	"createPoll": "Skapa quiz",
 	"createExpli": "SKAPA ett helt nytt quiz",
 	"participatePoll": "Delta i ett quiz",
-	"participateExpli": "DELTA i quiz som deltagare eller spelledare",
+	"participateExpli": "DELTA i ett quiz som deltagare eller spelledare",
 	"question": "Fråga",
 	"changeLanguage": "Change to English",
 	"initializeHead":"Det är dags att skapa ditt quiz!",
@@ -55,9 +55,9 @@
 	"welcome":"Välkommen till quizets väntrum!",
 	"timesUp": "Tiden är ute!",
 	"showResult": "Visa resultat",
-	"alertQuizName":"Du behöver ett quiznamn",
+	"alertQuizName":"Du behöver ett quiznamn för att gå vidare",
 	"alertPickNewQuizName":"Det finns redan ett quiz med detta namn... Välj ett nytt quiznamn",
 	"alertNoQuiz":"Det finns inget quiz med detta namn",
 	"enterPic":"Lägg till en bildadress:",
-	"alertNickname":"Du behöver ett smaknamn"
+	"alertNickname":"Du behöver ett smeknamn för att kunna delta i quizet"
 }

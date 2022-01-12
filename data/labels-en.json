@@ -4,8 +4,8 @@
 	"welcomeTo": "Welcome to",
 	"createPoll": "Create quiz",
 	"createExpli": "CREATE a new quiz from scratch",
-	"participatePoll": "Take a quiz",
-	"participateExpli": "TAKE of HOST an exisiting quiz",
+	"participatePoll": "Participate in a quiz",
+	"participateExpli": "Participate in or HOST a quiz",
 	"question": "Question",
 	"changeLanguage": "Byt till svenska",
 	"initializeHead": "It's time to create your quiz!",
@@ -34,7 +34,7 @@
 	"picture": "picture",
 	"add": "Add ",
 	"questionLower": "question",
-	"mark":"mark",
+	"mark":"Mark",
 	"as":"as",
 	"correct":"correct",
 	"remove": "Remove ",
@@ -55,9 +55,9 @@
 	"welcome":"Welcome to the quiz waiting room!",
 	"timesUp": "Time's up!",
 	"showResult": "Show Result",
-	"alertQuizName":"You need a quizname",
+	"alertQuizName":"You need to enter a quizname before moving on",
 	"alertPickNewQuizName":"A quiz with this name already exists... Pick a new quiz name",
 	"alertNoQuiz":"There is no quiz with this name",
 	"enterPic":"Please enter a pictureadress:",
-	"alertNickname":"You need a nickname"
+	"alertNickname":"You need a nickname to participate in the quiz"
 }
