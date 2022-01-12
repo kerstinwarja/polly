@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header v-if="this.questionNumber == this.allQuestions-1">And the winner is: {{this.posArray[0]}}</header>
-    <header v-else>Scoreboard</header>
-   <template v-if="!this.isHost"> <h2>Your position is: {{this.posArray.indexOf(this.myName)+1}}</h2> </template>
+    <header v-if="this.questionNumber == this.allQuestions-1">{{uiLabels.winner}}{{this.posArray[0]}}</header>
+    <header v-else>{{uiLabels.scoreBoard}}</header>
+   <template v-if="!this.isHost"> <h2>{{uiLabels.position}} {{this.posArray.indexOf(this.myName)+1}}</h2> </template>
   </div>
   <div>
 
@@ -11,12 +11,12 @@
         v-bind:arrdata="arrdata"/>
   <div v-show="isHost && this.questionNumber != this.allQuestions-1">
     <button v-on:click="runQuestion" class="continueButton">
-      Next question!
+      {{uiLabels.nextQues}}
     </button>
   </div>
   <div v-show="isHost">
     <button v-on:click="endQuiz" class="continueButton" id="exitQuizButton">
-      End quiz
+      {{uiLabels.endQuiz}}
     </button>
   </div>
 </template>
@@ -44,12 +44,14 @@ export default {
       allQuestions: 0,
       arrdata:[],
       posArray:[],
+      uiLabels: {},
       data: {
       }
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    console.log("lang", this.lang);
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
     this.myPoints = this.$route.params.myPoints;
@@ -72,8 +74,10 @@ export default {
     socket.on("sendToStart",() =>
         this.$router.push({ name: 'Start', params: { id: this.pollId, questionNumber: this.questionNumber}})
     )
-
-
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
   },
 
   methods: {
@@ -123,7 +127,7 @@ header {
   height: 4em;
   width: 15%;
   min-width: 8em;
-  border: 0.2em navy solid;
+  border: 0.2em #2d4463 solid;
 }
 
 #exitQuizButton {
