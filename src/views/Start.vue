@@ -94,6 +94,9 @@ body{
   margin: 0px;
   padding: 0px;
 }
+footer{
+  margin-bottom:1%;
+}
 button{
   border-radius: 0.8em;
 }
@@ -125,8 +128,8 @@ button:hover {
 }
 #nav button{
   width: 10%;
-  min-width: 8em;
-  height: 4em;
+  min-width: 4em;
+  height: 3em;
   top: 7%;
   left: 7%;
   background-color: #fbf1e0;
@@ -155,6 +158,9 @@ footer h5{
   }
   .wrapper{
     grid-template-columns: 100%;
+  }
+  #nav{
+    font-size:0.5em;
   }
 }
 

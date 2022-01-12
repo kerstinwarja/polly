@@ -40,11 +40,14 @@ export default {
 }
 #names {
   transform: rotate(90deg);
-  margin-left: -1.5em;
+  margin-left: -5em;
   font-size: 0.8em;
-  position: absolute;
-    top: 2px;
-    left: 1px;
+  position:relative;
+  /*position: absolute;
+    float:left;
+    clear:left;
+    top: 2px;*/
+    left: 1em;
     color: black;
     font-weight: bold;
 }
@@ -93,6 +96,7 @@ export default {
   grid-template-rows: 15% 15% 15% 15% 15%;
   grid-gap: 6%;
   padding: 0%;
+  text-align: left;
 }
 @media only screen and (max-width: 1100px) {
   .barWrapper {
