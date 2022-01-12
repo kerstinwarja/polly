@@ -80,7 +80,7 @@ h6{
   font-size: 1.5em;
   margin:2%;
   color:white;
-  text-shadow: -0.03em 0 navy, 0 0.03em navy, 0.03em 0 navy, 0 -0.03em navy;
+  text-shadow: -0.06em 0 black, 0 0.06em black, 0.06em 0 black, 0 -0.06em black;
 }
 
 body{
@@ -111,8 +111,8 @@ button{
   background-color: #fbf1e0;
   text-transform: uppercase;
   font-size: 2em;
-  color: navy;
-  border: 0.1em navy solid;
+  color: #2d4463;
+  border: 0.1em #2d4463 solid;
 }
 button:hover {
   cursor: pointer;
@@ -131,8 +131,8 @@ button:hover {
   background-color: #fbf1e0;
   position: absolute;
   font-size: 0.8em;
-  color: navy;
-  border: 0.2em navy solid;
+  color: #2d4463;
+  border: 0.2em #2d4463 solid;
   text-transform: uppercase;
 }
 
