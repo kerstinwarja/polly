@@ -4,33 +4,23 @@
     <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
   </div>
   <header>
+    <h4>{{uiLabels.welcomeTo}}</h4>
     <h1>Quizcus</h1>
   </header>
   <div class="wrapper">
-    <!--Create Poll button-->
+    <div>
     <router-link v-bind:to="'/initialize/'+lang">
       <button>{{uiLabels.createPoll}}</button>
     </router-link>
-
-    <!--Participate in Poll button-->
-    <!--Skapa en ny vy för sidan vi hamnar på där man får skriva in pollid för att komma till "'/poll/'+id" -->
+    <h6>{{uiLabels.createExpli}}</h6>
+  </div>
+  <div>
     <router-link v-bind:to="'/polllibrary/'+lang">
       <button>{{uiLabels.participatePoll}}</button>
     </router-link>
-
-    <!-- ORGINALKOD TA INTE BORT FÖR SNÄLLA div
-    <router-link v-bind:to="'/create/'+lang">
-        <button>{{uiLabels.createPoll}}</button>
-    </router-link>
-      <div id="partPoll">
-        <label>
-          Write poll id:
-          <input type="text" v-model="id">
-        </label>
-        <router-link v-bind:to="'/poll/+id'" tag="button"><br>{{uiLabels.participatePoll}}</router-link>
-        </div>
-      </div-->
+    <h6>{{uiLabels.participateExpli}}</h6>
   </div>
+</div>
   </body>
 </template>
 
@@ -72,6 +62,26 @@ export default {
 template{
   margin: 0px;
 }
+header {
+  font-size: 4em;
+  text-align: center;
+  margin: 0%;
+  color: white;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+}
+
+h4 {
+  text-align: center;
+  color: white;
+  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
+  font-size: 0.5em;
+}
+h6{
+  font-size: 1.5em;
+  margin:2%;
+  color:white;
+  text-shadow: -0.03em 0 navy, 0 0.03em navy, 0.03em 0 navy, 0 -0.03em navy;
+}
 
 body{
   background-image:url('https://png.pngtree.com/thumb_back/fw800/background/20200916/pngtree-circus-background-image_398762.jpg');
@@ -109,6 +119,9 @@ button:hover {
   box-shadow: 0px 5px 10px #646467;
   transform: translateY(-5px);
 }
+#nav{
+  padding:0%;
+}
 #nav button{
   width: 10%;
   min-width: 6em;
@@ -122,20 +135,11 @@ button:hover {
   border: 0.2em navy solid;
   text-transform: uppercase;
 }
-header {
-  font-size: 4em;
-  text-align: center;
-  padding-top: 5%;
-  margin: 0;
-  color: white;
-  text-shadow: -0.03em 0 #990000, 0 0.07em #990000, 0.07em 0 #990000, 0 -0.01em #990000;
-}
 
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   header {
     font-size: 3em;
-    padding-top:30%;
   }
   .wrapper{
     grid-template-columns: 100%;

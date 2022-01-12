@@ -17,21 +17,18 @@ Data.prototype.getUILabels = function (lang = "en") {
   const ui = require("./data/labels-" + lang + ".json");
   return ui;
 }
-//Lägg till en poll.img = pollImg
+
 Data.prototype.createPoll = function(pollId, lang="en", pollDesc, pollImg, SONG) {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
     poll.lang = lang;
     poll.questions = [];
     poll.answers = [];
-    //poll.pollName=pollName;
     poll.pollDesc=pollDesc;
     poll.pollImg=pollImg;
     poll.SONG=SONG;
     poll.currentQuestion = 0;
     poll.participants=[];
-    //poll.questionNumber = 0;
-    //poll.pollDes = [];
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -43,28 +40,22 @@ Data.prototype.addQuestion = function(pollId, q) {
   console.log("question added to", pollId, q);
   if (typeof poll !== 'undefined') {
     poll.questions.push(q);
-    //poll.questions.push(qId);
   }
 }
-//här testar jag
 
 Data.prototype.getDescription = function(pollId) {
   const poll = this.polls[pollId];
   console.log("description requested for", pollId);
   if (typeof poll !== 'undefined') {
-
     return poll.pollDesc;
   }
   return ""
 }
 
-
-
 Data.prototype.getName = function(pollId) {
   const poll = this.polls[pollId];
   console.log("participants requested for", pollId,);
   if (typeof poll !== 'undefined') {
-    //poll.participants.push(myName)
     console.log("The participants: "+poll.participants)
     return poll.participants
   }
@@ -78,19 +69,16 @@ Data.prototype.addName=function(pollId,myName){
     console.log("participant added to ",pollId,myName)
   }
 }
+
 Data.prototype.clearName=function(pollId){
   const poll = this.polls[pollId];
     poll.participants = [];
-    console.log("participants is no more ",poll.participants)
 }
-//här slutar jag . Här lägger jag in en ny funktion
-
 
 Data.prototype.getImage = function(pollId) {
   const poll = this.polls[pollId];
   console.log("image requested for", pollId);
   if (typeof poll !== 'undefined') {
-
     return poll.pollImg;
   }
   return ""
@@ -110,9 +98,7 @@ Data.prototype.getQuestion = function(pollId, questionNumber=null) {
   console.log("question requested for ", pollId, questionNumber);
   if (typeof poll !== 'undefined') {
     if (questionNumber !== null) {
-      console.log("qnr " + questionNumber)
       poll.currentQuestion = questionNumber;
-      console.log("cQ " + poll.currentQuestion)
     }
     return poll.questions[poll.currentQuestion];
   }
@@ -121,28 +107,24 @@ Data.prototype.getQuestion = function(pollId, questionNumber=null) {
 
 Data.prototype.submitAnswer = function(pollId, myPoints, myName) {
   const poll = this.polls[pollId];
- // console.log("answer submitted for ", pollId, );
   if (typeof poll !== 'undefined') {
     let answers = poll.answers[poll.currentQuestion];
     if (typeof answers !== 'object') {
       answers = {};
       answers[myName] = myPoints;
-      //answers[myName] = ""+answer;
       poll.answers.push(answers);
     }
     else if (typeof answers[myName] === 'undefined')
       answers[myName] = myPoints;
-    /*else
-      answers[myName] += 20;*/
     console.log("answers looks like ", answers, typeof answers);
     console.log("answers: ", answers,"typeof: ", typeof answers, "poll.answers: ", poll.answers);
   }
 }
+
 Data.prototype.clearAnswers = function(pollId) {
   const poll = this.polls[pollId];
   poll.answers = [];
 }
-
 
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
@@ -153,6 +135,10 @@ Data.prototype.getAnswers = function(pollId) {
     }
   }
   return {}
+}
+
+Data.prototype.getPolls=function(){
+  return Object.keys(this.polls)
 }
 
 module.exports = Data;

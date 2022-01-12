@@ -1,40 +1,30 @@
 <template>
-  <!--h1> Still my name : {{this.myName}}
-    and my points {{this.myPoints}} </h1-->
-  <!--{{pollId}}-->
-  <!--div v-show="isHost">Behövs diven (jag la till &&isHost i v-if)?-->
   <button v-show="this.SONG!='' || this.showPlayButton" id="musicControl" type="submit" v-on:click="pauseplay()">
     <img v-if="paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
     <img v-if="!paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
   </button>
-    <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
-      {{uiLabels.showResult}}
-    </button>
-  <!--/div-->
   <Question v-bind:question="question"
             v-bind:timesUp="timesUp"
             v-on:timesUp="setTimeUp"
             v-bind:isHost="isHost"
             v-on:answer="submitAnswer"/>
-  <!--div> FORSTÄTTER NÄR RESULT FINNS
-    <router-link v-bind:to="'/poll/'+ this.pollId">
-      <button v-on:click="nextQues" id="forwardButton"> NEXT QUESTION</button>
-    </router-link>
-  </div-->
+  <button v-if="timesUp && isHost" v-on:click="continueToResult" id="showRes">
+    {{uiLabels.showResult}}
+  </button>
   <div id="audio">
-    <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Brass' ">
       <source src="../music/circusBrass.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Trap'">
       <source src="../music/circusTrap.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Strings'">
       <source src="../music/circusStrings.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Techno'">
       <source src="../music/circusTechno.mp3" type="audio/mpeg">
     </audio>
-    <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--remember to add autoplay-->
+    <audio controls autoplay loop v-if="SONG == 'Ragtime'">
       <source src="../music/circusRagtime.mp3" type="audio/mpeg">
     </audio>
   </div>
@@ -176,20 +166,22 @@ export default {
 <style scoped>
 #musicControl{
   position:absolute;
-  left:5%;
-  top:2%;
+  left:1%;
+  top:1%;
   background-color: wheat;
 }
 #audio{
   display:none;
 }
 #showRes {
+  background-color: rgb(100, 155, 36);
+  color: white;
   font-size: 1em;
   text-transform: uppercase;
   height: 4em;
-  width: auto;
-  background-color: black;
-  color: white;
-  margin-top:1%;
+  width: 15%;
+  min-width:8em;
+  border: 0.2em navy solid;
+  margin-bottom:2%;
 }
 </style>

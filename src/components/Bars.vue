@@ -102,4 +102,12 @@ h1 {
   grid-gap: 6%;
   padding: 0%;
 }
+
+@media only screen and (max-width: 1100px) {
+  .barWrapper {
+    width: 90%;
+    min-height: 16em;
+    max-height: 16em;
+  }}
+
 </style>

@@ -49,15 +49,6 @@
           </div>
           <button v-if="this.answers.length<6" type="submit" v-on:click="addAnswer()" style="  background-color: rgb(100, 155, 36)">{{uiLabels.answerAdd}}</button>
         <div id="buttonDiv">
-          <!--div>
-            <button type="submit" v-on:click="removeAnswer()" style="background-color: rgb(255, 0, 0);">
-              {{uiLabels.answerRemove}}
-            </button>
-            <button v-on:click="addAnswer">
-              {{uiLabels.answerAdd}}
-            </button>
-          </div-->
-
             <button type="submit" v-on:click="setTime()" style="background-color: darkcyan">
               <span>
                 {{uiLabels.set}}<br>
@@ -78,7 +69,6 @@
             <button v-if="this.isEditing" v-on:click="saveChanges(this.questionNumber)">
               {{uiLabels.save}}<br>{{uiLabels.changes}}
             </button>
-
         </div>
       </div>
     </div>
@@ -103,13 +93,11 @@ export default {
   data: function () {
     return {
       lang: "",
-      //pollId: "", //remove to not overwrite from initialize?
       question: "",
       allQuestions:[],
       answers: ["", ""],
       allAnswers:[],
       questionNumber: 0,
-      //allQnr:[],
       questionImg: "",
       allQimg:[],
       isCorrect:[false, false],
@@ -138,16 +126,6 @@ export default {
     )
   },
   methods: {
-    /*createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-    },*/
-    /*addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers, t: this.time, questionNumber: this.questionNumber,questionImg: this.questionImg, isCorrect: this.isCorrect} )
-      this.questionNumber ++
-      this.question=""
-      this.answers= ["", ""]
-      this.questionImg=""
-    },*/
     sendQuiz: function(){
       if(this.question!==""){
         this.addQuestion();
@@ -232,11 +210,6 @@ export default {
       this.allTime[i] = this.time
       this.clearFields()
     }
-    /*updatePreview(){
-      //THis is the code for updating title and description
-      this.timerCount = this.time;
-      this.timerEnabled = true;
-    },*/
   },
 }
 </script>
@@ -251,6 +224,7 @@ export default {
 }
 
 header {
+  padding-top:0%;
   font-size: 1.7em;
   text-shadow: -0.05em 0 #990000, 0 0.15em #990000, 0.15em 0 #990000, 0 -0.03em #990000;
 }
@@ -285,7 +259,7 @@ body textarea{
   max-height: 100%;
   background-position: bottom;
   color: Black;
-  height: 27em;
+  height: 30em;
   border: 0.3em black solid;
   overflow: hidden;
   resize: none;
@@ -323,21 +297,23 @@ body textarea{
   align-items: center;
   margin: 26% 2% 0% 2%;
   clear: left;
+  
 }
 #answerBox{
   height: 85%;
   width: 98%;
-  font-size:1.3em;
+  font-size:1.1em;
   border-radius: 0.7em;
   color:black;
   overflow:hidden;
   text-align:center;
   padding:1%;
+  
 }
 #questionMenu{
   width:95%;
   height: 5em;
-  border: black 0.1em solid;
+  border: navy 0.2em solid;
   margin-top: 1%;
   background-color: wheat;
   overflow: auto;
@@ -379,6 +355,8 @@ body textarea{
 #markedCorrect{
   font-size:0.6em;
   text-align: center;
+  
+
 }
 #buttonDiv {
   height: 10%;
@@ -421,14 +399,6 @@ body textarea{
 .answer5{
   background-color:#633D41;
 }
-/*@media only screen and (max-width: 1300px) {
- body textarea{
-   width:60%;
- }
- #ansTitle{
-   grid-template-columns: 80% 20%;
- }
-}*/
 @media only screen and (max-width: 980px) {
   /* For mobile phones: */
   .mainWrap{
@@ -445,7 +415,7 @@ body textarea{
   }
   #preview{
     grid-area:preview;
-    height:36em;
+    height:38em;
   }
   #previewTitle{
     font-size: 2.5em;
@@ -466,6 +436,7 @@ body textarea{
     margin: 35% 2% 0% 2%;
   }
 }
+
 @media only screen and (max-width: 700px) {
   #preview{
     height:40em
@@ -483,17 +454,18 @@ body textarea{
     margin: 7% 4% 4% 4%;
   }
 }
-
+@media only screen and (max-width: 500px) {
+  #answers{
+    margin: 55% 2% 0% 2%;
+  }
+}
 @media only screen and (max-width: 450px) {
   #preview{
-    height:30em
+    height:32em
   }
 
   #buttonDiv button {
     width:25%;
-  }
-  #answers{
-    margin: 55% 2% 0% 2%;
   }
   #answerBox{
     font-size:0.8em;

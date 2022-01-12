@@ -4,8 +4,8 @@
       <img v-if="paused" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" style="height:1.5em">
       <img v-if="!paused" src="https://cdn4.iconfinder.com/data/icons/play/100/Volume_mute-512.png" style="height:1.5em">
     </button>
-    <h4 v-if="isHost">You are the host of</h4>
-    <h4 v-else>It's time to play</h4>
+    <h4 v-if="isHost">{{uiLabels.hostIf}}</h4>
+    <h4 v-else>{{uiLabels.ifParticipant}}</h4>
     <header>
       <h1>{{pollId}}</h1>
     </header>
@@ -24,22 +24,21 @@
             <li>{{name}}</li>
           </span>
       </div>
-
     </div>
     <div id="audio">
-      <audio controls autoplay loop v-if="SONG == 'Brass' "> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
+      <audio controls autoplay loop v-if="SONG == 'Brass' ">
         <source src="../music/circusBrass.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Trap'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
+      <audio controls autoplay loop v-if="SONG == 'Trap'">
         <source src="../music/circusTrap.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Strings'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
+      <audio controls autoplay loop v-if="SONG == 'Strings'">
         <source src="../music/circusStrings.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Techno'"> <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
+      <audio controls autoplay loop v-if="SONG == 'Techno'">
         <source src="../music/circusTechno.mp3" type="audio/mpeg">
       </audio>
-      <audio controls autoplay loop v-if="SONG == 'Ragtime'">  <!--om man ska pausa med getElementById lägg till:id="myAudio"-->
+      <audio controls autoplay loop v-if="SONG == 'Ragtime'">
         <source src="../music/circusRagtime.mp3" type="audio/mpeg">
       </audio>
     </div>
@@ -58,7 +57,6 @@ export default {
     return {
       lang: "",
       pollId: "",
-      //pollName:""
       pollDesc:"",
       pollImg:"",
       isHost: false,
@@ -66,11 +64,7 @@ export default {
       myName: "",
       myPoints:10,
       nameArray:[],
-      //data: {},
       uiLabels: {},
-      //pollDes: [],
-      //question: "",
-      //answers: ["", ""],
       questionNumber: 0,
       paused:false,
       showPlayButton:false,
@@ -91,10 +85,10 @@ export default {
 
     this.isHost = this.$route.params.isHost==="true"?true:false;
     this.myName = this.$route.params.myName;
-    //emittar join poll
+
 
     socket.emit('joinPoll',this.pollId)
-    //lyssnar på frågor, kanske ta bort
+
     socket.on("newQuestion", q =>
         this.question = q
     )
@@ -103,7 +97,6 @@ export default {
         this.$router.push({ name: 'Poll', params: { id: this.pollId, lang: this.lang, isHost: this.isHost, questionNumber: this.questionNumber,myPoints:this.myPoints, myName: this.myName, nameArray: this.nameArray}})
     )
 
-    //lyssnar på description i socket.js i join poll
     socket.on("description", desc =>
         this.pollDesc = desc
     )
@@ -135,7 +128,7 @@ export default {
       socket.emit('clearNickname',{pollId:this.pollId} )
       socket.emit('clearAnswer',{pollId:this.pollId} )
     },
-    pauseplay: function(){ //Denna använder tillåten kod men startar om musiken
+    pauseplay: function(){
       this.showPlayButton=true
       if(!this.paused){
         this.songBackup = this.SONG
@@ -214,11 +207,14 @@ li{
 }
 
 #startButton {
-  height: 5em;
+  background-color: rgb(100, 155, 36);
+  color: white;
+  font-size: 1em;
+  text-transform: uppercase;
+  height: 4em;
   width: 15%;
-  background-color: #236627;
-  color: wheat;
-  margin-bottom:5%;
+  border: 0.2em navy solid;
+  margin-bottom:2%;
 }
 
 #audio {
