@@ -157,6 +157,7 @@ export default {
 }
 .ans1{
   background-color:#536CB0;
+  color: black;
 }
 .ans2{
   background-color:#CF903A;
@@ -184,7 +185,7 @@ export default {
 #quest{
   font-size: 2em;
   text-align: center;
-  padding-top:0; /*5%*/
+  padding-top:0;
   margin: 0;
   color: white;
   text-shadow: -0.05em 0 #2d4463, 0 0.05em #2d4463, 0.10em 0 #2d4463, 0 -0.05em #2d4463;

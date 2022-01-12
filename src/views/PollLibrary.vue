@@ -98,7 +98,7 @@ h2 {
   margin: 0% 0% 2% 0%;
   text-align: center;
   color: white;
-  text-shadow: -0.04em 0 #990000, 0 0.04em #990000, 0.09em 0 #990000, 0 -0.04em #990000;
+  text-shadow: -0.05em 0 #990000, 0 0.05em #990000, 0.09em 0 #990000, 0 -0.05em #990000;
   font-size: 18pt;
   line-break: auto;
 }
